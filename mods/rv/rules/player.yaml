@@ -1,0 +1,276 @@
+^BasePlayer:
+	AlwaysVisible:
+	Shroud:
+	PlayerResources:
+		ResourceValues:
+			Ore: 25
+			Gems: 50
+
+EditorPlayer:
+	Inherits: ^BasePlayer
+
+Player:
+	Inherits: ^BasePlayer
+	TechTree:
+	ClassicProductionQueue@CPAllies:
+		Type: Power.Allies
+		Group: Power
+		Factions: america, france, england, germany, korea, japan, belarus, poland, ukraine, aussie, china, turkey, canada
+	ClassicProductionQueue@CPSoviets:
+		Type: Power.Soviets
+		Group: Power
+		Factions: russia, iraq, vietnam, cuba, libya, chile, mexico, mongolia
+	ClassicProductionQueue@CPPsiCorps:
+		Type: Power.Yuri
+		Group: Power
+		Factions: psicorps, psinepal, psisouth, psitrans, psimoon
+	ClassicProductionQueue@CPBakuPact:
+		Type: Power.Baku
+		Group: Power
+		Factions: transcaucus, turkmen, tuva, russianfed, serbia
+	ClassicProductionQueue@UpgAllies:
+		Type: Upgrade.Allies
+		Group: Upgrade
+		LowPowerModifier: 200
+		ReadyAudio: UpgradeComplete
+		BlockedAudio: NoBuild
+		LimitedAudio: UpgradeInProgress
+		QueuedAudio: Building
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ClassicProductionQueue@UpgSoviets:
+		Type: Upgrade.Soviets
+		Group: Upgrade
+		LowPowerModifier: 200
+		Factions: america, france, england, germany, korea, japan, belarus, poland, ukraine, aussie, china, turkey, canada, russia, iraq, vietnam, cuba, libya, chile, mexico, mongolia, psicorps, psinepal, psisouth, psitrans, psimoon
+		ReadyAudio: UpgradeComplete
+		BlockedAudio: NoBuild
+		LimitedAudio: UpgradeInProgress
+		QueuedAudio: Building
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ClassicProductionQueue@UpgPsiCorps:
+		Type: Upgrade.Yuri
+		Group: Upgrade
+		LowPowerModifier: 200
+		ReadyAudio: UpgradeComplete
+		BlockedAudio: NoBuild
+		LimitedAudio: UpgradeInProgress
+		QueuedAudio: Building
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ClassicProductionQueue@UpgBakuPact:
+		Type: Upgrade.Baku
+		Group: Upgrade
+		LowPowerModifier: 200
+		Factions: transcaucus, turkmen, tuva, russianfed, serbia
+		ReadyAudio: UpgradeComplete
+		BlockedAudio: NoBuild
+		LimitedAudio: UpgradeInProgress
+		QueuedAudio: Building
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	Production:
+		Produces: Power.Allies, Power.Soviets, Power.Yuri, Power.Baku, Upgrade.Allies, Upgrade.Soviets, Upgrade.Yuri, Upgrade.Baku
+	PlaceBuilding:
+		ToggleVariantKey: ToggleVariant
+		NewOptionsNotification: NewOptions
+		CannotPlaceNotification: BuildingCannotPlaceAudio
+	SupportPowerManager:
+	ScriptTriggers:
+	MissionObjectives:
+		WinNotification: Win
+		LoseNotification: Lose
+		LeaveNotification: Leave
+	ConquestVictoryConditions:
+	PowerManager:
+		SpeechNotification: LowPower
+	AllyRepair:
+	Taunts:
+		CheckboxVisible: false
+	PlayerResources:
+		DefaultCashDropdownLabel: 起始资金
+		DefaultCashDropdownDescription: 更改玩家起始资金的数额
+		DefaultCash: 10000
+		SelectableCash: 2500, 5000, 7500, 10000, 20000, 50000, 100000
+		CashTickUpNotification: CashTickUp
+		CashTickDownNotification: CashTickDown
+		InsufficientFundsNotification: InsufficientFunds
+	ResourceStorageWarning:
+		Notification: InsufficientSilos
+	DeveloperMode:
+		CheckboxLabel: 调试模式
+		CheckboxDescription: 启用调试与作弊选项
+		CheckboxDisplayOrder: 18
+	GpsWatcher:
+	Shroud:
+		FogCheckboxLabel: 战争迷雾
+		FogCheckboxDescription: 开启后玩家无法得知视野范围之外的情况
+		FogCheckboxDisplayOrder: 3
+		ExploredMapCheckboxLabel: 已探索地形
+		ExploredMapCheckboxDescription: 开启后玩家在开局时获得整个战场的地形情报
+		ExploredMapCheckboxEnabled: True
+	LobbyPrerequisiteCheckbox@GLOBALFACTUNDEPLOY:
+		ID: factundeploy
+		Label: MCV重新部署
+		Description: 允许重新部署建筑工厂
+		Enabled: True
+		DisplayOrder: 5
+		Prerequisites: global-factundeploy
+	LobbyPrerequisiteCheckbox@FREEMINIMAP:
+		ID: freeradar
+		Label: 自动启用小地图
+		Description: 战术地图将永久启用
+		Enabled: True
+		DisplayOrder: 8
+		Prerequisites: global-freeminimap
+	LobbyPrerequisiteCheckbox@GLOBALSWLIMIT:
+		ID: swlimit
+		Label: 限制超级武器数量
+		Description: 每位玩家同时仅能拥有一个同种类的超级武器
+		Enabled: True
+		DisplayOrder: 9
+		Prerequisites: global-swlimit
+	LobbyPrerequisiteCheckbox@GLOBALTECHAREA:
+		ID: techbuildarea
+		Label: 在科技建筑周围建造
+		Description: 允许在占领的科技建筑周围放置建筑
+		Enabled: False
+		DisplayOrder: 10
+		Prerequisites: global-techbuildarea
+	LobbyPrerequisiteCheckbox@INSTANTCAPTURE:
+		ID: instantcapture
+		Label: 瞬时占领
+		Description: 工程师在占领建筑时无须读条等待
+		Enabled: False
+		DisplayOrder: 11
+		Prerequisites: global-instantcapture
+	LobbyPrerequisiteCheckbox@DOMINATION:
+		ID: domination
+		Label: 统治战场
+		Description: 附加胜利条件：占领旗帜以率先累积至制定分数
+		Enabled: False
+		DisplayOrder: 12
+		Prerequisites: global-domination
+	LobbyPrerequisiteCheckbox@MEGAWEALTH:
+		ID: megawealth
+		Label: 石油大亨
+		Description: 变更规则：只能通过占领油井获取资金
+		Enabled: False
+		DisplayOrder: 13
+		Prerequisites: global-megawealth
+	LobbyPrerequisiteCheckbox@SHOWOWNERNAME:
+		ID: showownername
+		Label: 显示归属
+		Description: 在单位和建筑的提示说明中显示其所属的玩家与阵营
+		Enabled: True
+		Visible: False # Too lazy to remove the setup for this.
+		DisplayOrder: 14
+		Prerequisites: global-showownername
+	LobbyPrerequisiteCheckbox@SUDDENDEATH:
+		ID: suddendeath
+		Label: 孤城死斗
+		Description: 不可建造额外的移动基地车，并在失去初始基地车后立即失败
+		Enabled: False
+		DisplayOrder: 14
+		Prerequisites: global-suddendeath
+	LobbyPrerequisiteCheckbox@KOTH:
+		ID: koth
+		Label: 占山为王
+		Description: 附加胜利条件：占领并坚守灵能信标直至指定时间
+		Enabled: False
+		DisplayOrder: 15
+		Prerequisites: global-koth
+	LobbyPrerequisiteCheckbox@REGICIDE:
+		ID: regicide
+		Label: 斩首行动
+		Description: 附加失败条件：失去本阵营首长单位后立即战败
+		Enabled: False
+		DisplayOrder: 16
+		Prerequisites: global-regicide
+	ProvidesRadar:
+		RequiresCondition: freeminimap
+	GrantConditionOnPrerequisite@FREEMINIMAP:
+		Condition: freeminimap
+		Prerequisites: global-freeminimap
+	FrozenActorLayer:
+	BaseAttackNotifier:
+		AllyNotification: OurAllyIsUnderAttack
+	BaseAttackNotifier@Warning:
+		NotifyInterval: 10000
+		Notification: BaseAttackWarning
+		AllyNotification: BaseAttackWarning
+	HarvesterAttackNotifier:
+		Notification: OreMinerUnderAttack
+	PlayerStatistics:
+	PlaceBeacon:
+		BeaconSequence: idle
+		ArrowSequence:
+		CircleSequence:
+		IsPlayerPalette: true
+		Palette: player
+	ProvidesTechPrerequisite@1:
+		Name: 1
+		Prerequisites: techlevel.1
+		Id: infantryonly
+	ProvidesTechPrerequisite@2:
+		Name: 2
+		Prerequisites: techlevel.1, techlevel.2
+		Id: low
+	ProvidesTechPrerequisite@3:
+		Name: 3
+		Prerequisites: techlevel.1, techlevel.2, techlevel.3
+		Id: medium
+	ProvidesTechPrerequisite@4:
+		Name: 4
+		Prerequisites: techlevel.1, techlevel.2, techlevel.3, techlevel.4
+		Id: nosuperweapons
+	ProvidesTechPrerequisite@5:
+		Name: 5
+		Prerequisites: techlevel.1, techlevel.2, techlevel.3, techlevel.4, techlevel.5
+		Id: unrestricted
+	GrantConditionOnPrerequisiteManager:
+	ExternalCondition@IndustrialPlant:
+		Condition: naindp
+	ProvidesPrerequisite@naindp-1:
+		Prerequisite: prerequisite.one_naindp
+		RequiresCondition: naindp
+	ProvidesPrerequisite@naindp-2:
+		Prerequisite: prerequisite.two_naindp
+		RequiresCondition: naindp > 1
+	ProvidesPrerequisite@naindp-3:
+		Prerequisite: prerequisite.three_naindp
+		RequiresCondition: naindp > 2
+	ProvidesPrerequisite@naindp-4:
+		Prerequisite: prerequisite.four_naindp
+		RequiresCondition: naindp > 3
+	ProvidesPrerequisite@naindp-5:
+		Prerequisite: prerequisite.five_naindp
+		RequiresCondition: naindp > 4
+	ExternalCondition@PadAircraft:
+		Condition: padaircraft
+	ExternalCondition@AirDock:
+		Condition: airdock
+	ProvidesPrerequisite@enoughair:
+		Prerequisite: prerequisite.enoughair
+		RequiresCondition: padaircraft >= airdock
+	ProvidesPrerequisite@aiplayer:
+		Prerequisite: prerequisite.aiplayer
+		RequiresCondition: enable-generic-ai
+	GrantConditionOnTileSet:
+		TileSets: DUNE
+		Condition: dune
+	ProvidesPrerequisite@dune:
+		Prerequisite: on_dune
+		RequiresCondition: dune
+	VeteranProductionIconOverlay:
+		Image: cameo-chevron
+		Sequence: idle
+		Palette: cameo-chevron
+	PlayerExperience:
+	GameSaveViewportManager:
+	EnemyWatcher:
+		NotificationInterval: 125
+	GpsASWatcher:
+	PlayerRadarTerrain:
+	Inherits@1: ^CommandersPowers

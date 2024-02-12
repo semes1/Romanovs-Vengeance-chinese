@@ -1,0 +1,28 @@
+concrete:
+	AlwaysVisible:
+	Interactable:
+	D2kBuilding:
+		TerrainTypes: Clear, Rough
+		ConcreteTemplate: 2500
+		BuildSounds: uplace.wav
+		AllowInvalidPlacement: true
+		Footprint: xxx xxx xxx
+		Dimensions: 3,3
+	FootprintPlaceBuildingPreview:
+		Palette: placefootprint
+	RequiresBuildableArea:
+		AreaTypes: building
+		Adjacent: 4
+	Tooltip:
+		Name: 混凝土地基
+		GenericName: Structure
+	Valued:
+		Cost: 50
+	RenderSprites:
+	KillsSelf:
+		RemoveInstead: true
+	Buildable:
+		Queue: Support.Allies, Support.France, Support.Soviets, Support.Baku, Support.Yuri, Support.Antarctica
+		BuildPaletteOrder: 990
+		Description: 即使在沙丘地表上，我们的建筑依然非常坚固\n但这些混凝土地基看起来也还挺漂亮的
+		Prerequisites: ~on_dune

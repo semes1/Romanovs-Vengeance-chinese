@@ -1,0 +1,130 @@
+commanders_power.ifv_training:
+	icon: cameo|fvuico
+
+commanders_power.harrier_training:
+	icon: bits/cameos/falcuico
+
+commanders_power.inf_training:
+	icon: cameo|e2uico
+
+commanders_power.gatling_training:
+	icon: bits/cameos/ytnkuico
+
+commanders_power.psychic_reveal:
+	icon: cameomd|psyricon
+
+commanders_power.intel_drop:
+	icon: bits/cameos/sdrpicon
+
+commanders_power.cash_bounty:
+	icon: bits/cameos/bntyicon
+
+commanders_power.sonar_pulse:
+	icon: bits/cameos/sonricon
+
+commanders_power.naval_mines:
+	icon: bits/cameos/nmineicon
+
+commanders_power.sensor_buoy:
+	icon: bits/cameos/buoyicon.png
+		AddExtension: false
+
+commanders_power.leaflet_drop:
+	icon: bits/cameos/leaficon
+
+commanders_power.cluster_mines:
+	icon: bits/cameos/mineicon
+
+commanders_power.brute_drop:
+	icon: bits/cameos/brdpicon.png
+		AddExtension: false
+
+commanders_power.emergency_repair.1:
+	icon: bits/cameos/erpr1icon
+
+commanders_power.emergency_repair.2:
+	icon: bits/cameos/erpr2icon
+
+commanders_power.emergency_repair.3:
+	icon: bits/cameos/erpr3icon
+
+commanders_power.a10_strike.1:
+	icon: bits/cameos/a101icon
+
+commanders_power.a10_strike.2:
+	icon: bits/cameos/a102icon
+
+commanders_power.a10_strike.3:
+	icon: bits/cameos/a103icon
+
+commanders_power.toxin_bombing.1:
+	icon: bits/cameos/txdrop1icon.png
+		AddExtension: false
+
+commanders_power.toxin_bombing.2:
+	icon: bits/cameos/txdrop2icon.png
+		AddExtension: false
+
+commanders_power.toxin_bombing.3:
+	icon: bits/cameos/txdrop3icon.png
+		AddExtension: false
+
+commanders_power.parabombs.1:
+	icon: bits/cameos/parb1icon
+
+commanders_power.parabombs.2:
+	icon: bits/cameos/parb2icon
+
+commanders_power.parabombs.3:
+	icon: bits/cameos/parb3icon
+
+commanders_power.chrono_boost.1:
+	icon: bits/cameos/cbst1icon
+
+commanders_power.chrono_boost.2:
+	icon: bits/cameos/cbst2icon
+
+commanders_power.chrono_boost.3:
+	icon: bits/cameos/cbst3icon
+
+commanders_power.propaganda.1:
+	icon: bits/cameos/prop1icon
+
+commanders_power.propaganda.2:
+	icon: bits/cameos/prop2icon
+
+commanders_power.propaganda.3:
+	icon: bits/cameos/prop3icon
+
+commanders_power.magnetic_beam.1:
+	icon: bits/cameos/mgnb1icon.png
+		AddExtension: false
+
+commanders_power.magnetic_beam.2:
+	icon: bits/cameos/mgnb2icon.png
+		AddExtension: false
+
+commanders_power.magnetic_beam.3:
+	icon: bits/cameos/mgnb3icon.png
+		AddExtension: false
+
+commanders_power.cruiser_strike:
+	icon: bits/cameos/caicon
+
+commanders_power.v3_storm:
+	icon: bits/cameos/v3sticon
+
+commanders_power.orbital_drop:
+	icon: bits/cameos/orbdicon.png
+		AddExtension: false
+
+commanders_power.em_pulse_strike:
+	icon: bits/cameos/empuicon
+
+commanders_power.fallout_bomb:
+	icon: bits/cameos/fallouticon.png
+		AddExtension: false
+
+commanders_power.chaos_gas_drop:
+	icon: bits/cameos/chdpicon.png
+		AddExtension: false

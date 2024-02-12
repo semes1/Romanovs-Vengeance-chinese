@@ -1,0 +1,234 @@
+bus:
+	Inherits: ^CivVehicle
+	Tooltip:
+		Name: 校车
+	Tooltip@NoRow:
+		Name: 校车
+	Cargo:
+		Types: Infantry, Garrisoner, SmallVehicle
+		MaxWeight: 5
+		AfterLoadDelay: 0
+		BeforeUnloadDelay: 0
+		AfterUnloadDelay: 0
+		UnloadVoice: Move
+	WithCargoSounds:
+		EnterSound: genter1a.wav
+		ExitSound: gexit1a.wav
+	WithCargoPipsDecoration:
+		Margin: 4, 3
+		Palette: ra
+		Position: BottomLeft
+		RequiresSelection: true
+		CustomPipSequences:
+			gray: pip-gray
+			yellow: pip-yellow
+			blue: pip-blue
+			red: pip-red
+
+limo:
+	Inherits: bus
+	Tooltip:
+		Name: 豪华轿车
+	Tooltip@NoRow:
+		Name: 豪华轿车
+
+pick:
+	Inherits: ^CivVehicle
+	Tooltip:
+		Name: 小货车
+	Tooltip@NoRow:
+		Name: 小货车
+
+car:
+	Inherits: ^CivVehicle
+	Tooltip:
+		Name: 轿车
+	Tooltip@NoRow:
+		Name: 轿车
+
+wini:
+	Inherits: ^CivVehicle
+	Tooltip:
+		Name: 露营房车
+	Tooltip@NoRow:
+		Name: 露营房车
+	RenderVoxels:
+		NormalsPalette: ts-normals
+
+propa:
+	Inherits: ^CivVehicle
+	Tooltip:
+		Name: 心战宣传车
+	Tooltip@NoRow:
+		Name: 心战宣传车
+
+cop:
+	Inherits: ^CivVehicle
+	Tooltip:
+		Name: 警车
+	Tooltip@NoRow:
+		Name: 警车
+
+euroc:
+	Inherits: ^CivVehicle
+	Tooltip:
+		Name: 轿车
+	Tooltip@NoRow:
+		Name: 轿车
+	RenderVoxels:
+		NormalsPalette: ts-normals
+
+cona:
+	Inherits: ^CivVehicle
+	Tooltip:
+		Name: 挖掘机
+	Tooltip@NoRow:
+		Name: 挖掘机
+	RenderVoxels:
+		NormalsPalette: ts-normals
+
+trucka:
+	Inherits: ^CivVehicle
+	Tooltip:
+		Name: 卡车
+	Tooltip@NoRow:
+		Name: 卡车
+
+truckb:
+	Inherits: ^CivVehicle
+	Tooltip:
+		Name: 卡车
+	Tooltip@NoRow:
+		Name: 卡车
+
+suvb:
+	Inherits: ^CivVehicle
+	Tooltip:
+		Name: 轿车
+	Tooltip@NoRow:
+		Name: 轿车
+
+suvw:
+	Inherits: ^CivVehicle
+	Tooltip:
+		Name: 轿车
+	Tooltip@NoRow:
+		Name: 轿车
+
+stang:
+	Inherits: ^CivVehicle
+	Tooltip:
+		Name: 轿车
+	Tooltip@NoRow:
+		Name: 轿车
+	RenderVoxels:
+		NormalsPalette: ts-normals
+
+ptruck:
+	Inherits: ^CivVehicle
+	Tooltip:
+		Name: 小货车
+	Tooltip@NoRow:
+		Name: 小货车
+
+taxi:
+	Inherits: ^CivVehicle
+	Tooltip:
+		Name: 出租车
+	Tooltip@NoRow:
+		Name: 出租车
+	RenderVoxels:
+		NormalsPalette: ts-normals
+
+#Yuri's Revenge Vehicles
+ambu:
+	Inherits: ^CivVehicle
+	Tooltip:
+		Name: 救护车
+	Tooltip@NoRow:
+		Name: 救护车
+
+bcab:
+	Inherits: ^CivVehicle
+	Tooltip:
+		Name: 出租车
+	Tooltip@NoRow:
+		Name: 出租车
+
+cblc:
+	Inherits: ^CivVehicle
+	Tooltip:
+		Name: 缆车
+	Tooltip@NoRow:
+		Name: 缆车
+
+ddbx:
+	Inherits: bus
+	Tooltip:
+		Name: 公交车
+	Tooltip@NoRow:
+		Name: 公交车
+
+doly:
+	Inherits: ^CivVehicle
+	Tooltip:
+		Name: 摄像机小车
+	Tooltip@NoRow:
+		Name: 摄像机小车
+
+ftrk:
+	Inherits: ^CivVehicle
+	Tooltip:
+		Name: 消防车
+	Tooltip@NoRow:
+		Name: 消防车
+
+jeep:
+	Inherits: ^CivVehicle
+	Tooltip:
+		Name: 小货车
+	Tooltip@NoRow:
+		Name: 小货车
+
+ycab:
+	Inherits: ^CivVehicle
+	Tooltip:
+		Name: 出租车
+	Tooltip@NoRow:
+		Name: 出租车
+
+civp:
+	Inherits: ^CivVehicle
+	Tooltip:
+		Name: 民航客机
+	Tooltip@NoRow:
+		Name: 民航客机
+
+# Custom Vehicles
+truckc:
+	Inherits: ^CivVehicle
+	Tooltip:
+		Name: 卡车
+	Tooltip@NoRow:
+		Name: 卡车
+
+car2:
+	Inherits: ^CivVehicle
+	Tooltip:
+		Name: 轿车
+	Tooltip@NoRow:
+		Name: 轿车
+
+car3:
+	Inherits: ^CivVehicle
+	Tooltip:
+		Name: 轿车
+	Tooltip@NoRow:
+		Name: 轿车
+
+mixer:
+	Inherits: ^CivVehicle
+	Tooltip:
+		Name: 混凝土搅拌车
+	Tooltip@NoRow:
+		Name: 混凝土搅拌车

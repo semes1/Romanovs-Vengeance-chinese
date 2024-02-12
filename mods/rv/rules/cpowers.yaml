@@ -1,0 +1,1444 @@
+^default.commanders_power:
+	Interactable:
+	AlwaysVisible:
+	Buildable:
+		Queue: Power.Allies, Power.Soviets, Power.Yuri, Power.Baku
+		BuildDurationModifier: 100
+		BuildLimit: 1
+	RenderSprites:
+	ProvidesPrerequisite@powername:
+	Valued:
+		Cost: 0
+
+commanders_power.medic:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: Medic
+	-Buildable:
+	#	Queue: Power.Allies
+	#	BuildPaletteOrder: 10
+	#	Prerequisites: ~disabled # prerequisite.has_points
+	#	Description: Enables training of Medic from Barracks.
+	ProvidesPrerequisite@powername:
+		Prerequisite: prerequisite.medic
+	RenderSprites:
+		Image: medi
+
+commanders_power.ambulance:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 战地医疗车
+	Buildable:
+		Queue: Power.Allies
+		BuildPaletteOrder: 10
+		Prerequisites: prerequisite.has_points
+		Description: 允许从盟军战车工厂生产战地医疗车\n一种可以治疗友方步兵的轻型运输车
+	ProvidesPrerequisite@powername:
+		Prerequisite: prerequisite.ambulance
+	RenderSprites:
+		Image: aambu
+
+commanders_power.mechanic:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 机械师
+	-Buildable:
+	#	Queue: Power.Soviets
+	#	BuildPaletteOrder: 10
+	#	Prerequisites: ~disabled # prerequisite.has_points
+	#	Description: 允许从苏联兵营训练机械师
+	ProvidesPrerequisite@powername:
+		Prerequisite: prerequisite.mechanic
+	RenderSprites:
+		Image: mech
+
+commanders_power.hijacker:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 劫持者
+	-Buildable:
+	#	Queue: Power.Soviets
+	#	BuildPaletteOrder: 10
+	#	Prerequisites: ~disabled # prerequisite.has_points
+	#	Description: 允许从苏联兵营训练劫持者\n一种擅长抢夺敌方载具或渗透敌方建筑的功能型步兵
+	ProvidesPrerequisite@powername:
+		Prerequisite: prerequisite.hijacker
+	RenderSprites:
+		Image: hjck
+
+commanders_power.havoc:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 浩劫降临
+	Buildable:
+		Queue: Power.Soviets
+		BuildPaletteOrder: 10
+		Prerequisites: prerequisite.has_points
+		Description: 允许从苏联机场制造浩劫反坦克直升机\n一种专用于对抗装甲部队的飞行器
+	ProvidesPrerequisite@powername:
+		Prerequisite: prerequisite.havoc
+	RenderSprites:
+		Image: havoc
+
+commanders_power.minelayer:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 布雷车
+	Buildable:
+		Queue: Power.Yuri
+		BuildPaletteOrder: 10
+		Prerequisites: prerequisite.has_points
+		Description: 允许从灵能军团战车工厂制造布雷车\n一种专用于布设地雷的功能型载具
+	ProvidesPrerequisite@powername:
+		Prerequisite: prerequisite.minelayer
+	RenderSprites:
+		Image: mlyr
+
+commanders_power.support_infantry:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: Support Infantry
+	Buildable:
+		Queue: Power.Baku
+		BuildPaletteOrder: 10
+		Prerequisites: prerequisite.has_points
+		Description: Enables training of Medic and Mechanic from Barracks.
+	ProvidesPrerequisite@medic:
+		Prerequisite: prerequisite.medic
+	ProvidesPrerequisite@mechanic:
+		Prerequisite: prerequisite.mechanic
+	RenderSprites:
+		Image: mech
+
+commanders_power.airpad:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: Airpad
+	-Buildable:
+	#	Queue: Power.Allies
+	#	BuildPaletteOrder: 20
+	#	Prerequisites: ~disabled # prerequisite.has_points
+	#	Description: Enables construction of Airpads from 建筑工厂.
+	ProvidesPrerequisite@powername:
+		Prerequisite: prerequisite.airpad
+	RenderSprites:
+		Image: gaapad
+
+commanders_power.gun_turret:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 反坦克炮塔
+	Buildable:
+		Queue: Power.Allies
+		BuildPaletteOrder: 20
+		Prerequisites: prerequisite.has_points
+		Description: 允许从盟军建筑工厂建造反坦克炮塔\n一种可以有效对抗载具但无力应对步兵与建筑的防御设施
+	ProvidesPrerequisite@powername:
+		Prerequisite: prerequisite.gun_turret
+	RenderSprites:
+		Image: gagun
+
+commanders_power.tesla_fence:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 特斯拉围栏
+	Buildable:
+		Queue: Power.Soviets, Power.Baku
+		BuildPaletteOrder: 20
+		Prerequisites: prerequisite.has_points
+		Description: 允许从苏联建筑工厂建造特斯拉围栏节点\n一种消耗电力的进阶屏障
+	ProvidesPrerequisite@powername:
+		Prerequisite: prerequisite.tesla_fence
+	RenderSprites:
+		Image: napost
+
+commanders_power.grinder:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 粉碎机
+	Buildable:
+		Queue: Power.Yuri
+		BuildPaletteOrder: 20
+		Prerequisites: prerequisite.has_points
+		Description: 允许从灵能军团建筑工厂建造粉碎机\n一种用于销毁单位并将之重新转换为资金的基础建筑
+	ProvidesPrerequisite@powername:
+		Prerequisite: prerequisite.grinder
+	RenderSprites:
+		Image: yagrnd
+
+commanders_power.ifv_training:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: IFV Training
+	-Buildable:
+	#	Queue: Power.Allies
+	#	BuildPaletteOrder: 30
+	#	Prerequisites: ~disabled # prerequisite.has_points
+	#	Description: Makes IFVs train as veteran.
+	ProvidesPrerequisite@powername:
+		Prerequisite: vetifv
+
+commanders_power.harrier_training:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 空中优势
+	Buildable:
+		Queue: Power.Allies
+		BuildPaletteOrder: 30
+		Prerequisites: prerequisite.has_points
+		Description: 所有鹞鹰战机以精英级出厂\n所有其他盟军固定翼飞行器以老兵级出厂
+	ProvidesPrerequisite@powername:
+		Prerequisite: vetair
+
+commanders_power.inf_training:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 人海战术
+	Buildable:
+		Queue: Power.Soviets, Power.Baku
+		BuildPaletteOrder: 30
+		Prerequisites: prerequisite.has_points
+		Description: 所有动员兵和防空步兵以老兵级投入战场
+	ProvidesPrerequisite@powername:
+		Prerequisite: vete2flakt
+
+commanders_power.gatling_training:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 加特林穿甲弹
+	Buildable:
+		Queue: Power.Yuri
+		BuildPaletteOrder: 30
+		Prerequisites: prerequisite.has_points
+		Description: 所有加特林防空战车、加特林防空潜艇以及加特林卫队以老兵级投入战场
+	ProvidesPrerequisite@powername:
+		Prerequisite: vetytnk
+	ProvidesPrerequisite@gtrp:
+		Prerequisite: vetgtrp
+	ProvidesPrerequisite@gatsub:
+		Prerequisite: vetgatsub
+
+commanders_power.intel_drop:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 秘密潜入
+	Buildable:
+		Queue: Power.Allies
+		BuildPaletteOrder: 40
+		Prerequisites: prerequisite.has_points, prerequisite.3_stars
+		Description: 提供 支援能力：秘密潜入\n可以在选定区域空投1名间谍
+	RenderSprites:
+		Image: commanders_power.intel_drop
+
+commanders_power.drone_drop:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 恐怖之潮
+	Buildable:
+		Queue: Power.Soviets
+		BuildPaletteOrder: 40
+		Prerequisites: prerequisite.has_points, prerequisite.3_stars
+		Description: 提供 支援能力：恐怖之潮\n可以在选定区域空投3个恐怖机器人
+	RenderSprites:
+		Image: dron
+
+commanders_power.cash_bounty:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 赏金猎人
+	Buildable:
+		Queue: Power.Yuri
+		BuildPaletteOrder: 40
+		Prerequisites: prerequisite.has_points, prerequisite.3_stars
+		Description: 提供 支援能力：赏金猎人\n击杀选定范围的单位以获取赏金
+
+commanders_power.intel_drop.baku:
+	Inherits: commanders_power.intel_drop
+	Buildable:
+		Queue: Power.Baku
+
+commanders_power.scout_drone:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 侦察无人机
+	Buildable:
+		Queue: Power.Allies
+		BuildPaletteOrder: 50
+		Prerequisites: prerequisite.has_points
+		Description: 提供 支援能力：侦察无人机\n持续侦察选定区域
+	RenderSprites:
+		Image: sdrn
+
+commanders_power.spy_plane:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 侦察机巡航
+	Buildable:
+		Queue: Power.Soviets, Power.Baku
+		BuildPaletteOrder: 50
+		Prerequisites: prerequisite.has_points
+		Description: 提供 支援能力：侦察机巡航\n一次性侦察选定区域
+	RenderSprites:
+		Image: spyp
+
+commanders_power.psychic_reveal:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 灵能窥视
+	Buildable:
+		Queue: Power.Yuri
+		BuildPaletteOrder: 50
+		Prerequisites: prerequisite.has_points
+		Description: 提供 支援能力：灵能窥视\n一次性侦察选定区域
+
+#commanders_power.sonar_pulse:
+#	Inherits: ^default.commanders_power
+#	Tooltip:
+#		Name: Sonar Pulse
+#	Buildable:
+#		Queue: Power.Allies
+#		BuildPaletteOrder: 60
+#		Prerequisites: ~disabled, prerequisite.has_points, prerequisite.3_stars
+#		Description: Enables Sonar Pulse power.
+#
+#commanders_power.naval_mines:
+#	Inherits: ^default.commanders_power
+#	Tooltip:
+#		Name: Naval Mines
+#	Buildable:
+#		Queue: Power.Soviets, Power.Baku
+#		BuildPaletteOrder: 60
+#		Prerequisites: ~disabled, prerequisite.has_points, prerequisite.3_stars
+#		Description: Enables Naval Mines power.
+#
+#commanders_power.sensor_buoy:
+#	Inherits: ^default.commanders_power
+#	Tooltip:
+#		Name: Sensor Buoy
+#	Buildable:
+#		Queue: Power.Yuri
+#		BuildPaletteOrder: 60
+#		Prerequisites: ~disabled, prerequisite.has_points, prerequisite.3_stars
+#		Description: Enables Sensor Buoy power.
+
+commanders_power.leaflet_drop:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 宣传品空投
+	Buildable:
+		Queue: Power.Allies
+		BuildPaletteOrder: 60
+		Prerequisites: prerequisite.has_points, prerequisite.3_stars
+		Description: 提供 支援能力：宣传品空投\n投放减少敌方单位移动与攻击速度的宣传品
+
+commanders_power.cluster_mines:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 集束地雷空投
+	Buildable:
+		Queue: Power.Soviets, Power.Baku
+		BuildPaletteOrder: 60
+		Prerequisites: prerequisite.has_points, prerequisite.3_stars
+		Description: 提供 支援能力：集束地雷空投\n投放13枚地雷
+
+commanders_power.brute_drop:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 天降巨兽
+	Buildable:
+		Queue: Power.Yuri
+		BuildPaletteOrder: 60
+		Prerequisites: prerequisite.has_points, prerequisite.3_stars
+		Description: 提供 支援能力：天降巨兽\n投放若干狂兽人
+
+commanders_power.emergency_repair.1:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 紧急维修 - 级别1
+	Buildable:
+		BuildPaletteOrder: 70
+		Prerequisites: prerequisite.has_points, prerequisite.3_stars
+		Description: 解锁 支援能力：紧急维修\n为友方载具和建筑回复一定生命值
+
+commanders_power.emergency_repair.2:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 紧急维修 - 级别2
+	Buildable:
+		BuildPaletteOrder: 80
+		Prerequisites: prerequisite.has_points, prerequisite.3_stars, commanders_power.emergency_repair.1
+		Description: 升级紧急维修\n回复生命值的比例进一步提升
+
+commanders_power.emergency_repair.3:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 紧急维修 - 级别3
+	Buildable:
+		BuildPaletteOrder: 90
+		Prerequisites: prerequisite.has_points, prerequisite.3_stars, commanders_power.emergency_repair.2
+		Description: 完全升级紧急维修\n修复比例升级为完全回复
+
+commanders_power.a10_strike.1:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: A-10空袭 - 级别1
+	Buildable:
+		Queue: Power.Allies
+		BuildPaletteOrder: 100
+		Prerequisites: prerequisite.has_points, prerequisite.3_stars
+		Description: 解锁 支援能力：A-10空袭\n一架攻击机袭击区域内的敌方目标
+
+commanders_power.a10_strike.2:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: A-10空袭 - 级别2
+	Buildable:
+		Queue: Power.Allies
+		BuildPaletteOrder: 110
+		Prerequisites: prerequisite.has_points, prerequisite.3_stars, commanders_power.a10_strike.1
+		Description: 升级A-10空袭\n增加一架攻击机
+
+commanders_power.a10_strike.3:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: A-10空袭 - 级别3
+	Buildable:
+		Queue: Power.Allies
+		BuildPaletteOrder: 120
+		Prerequisites: prerequisite.has_points, prerequisite.3_stars, commanders_power.a10_strike.2
+		Description: 完全升级A-10空袭\n再增加一架攻击机
+
+commanders_power.parabombs.1:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 地毯式轰炸 - 级别1
+	Buildable:
+		Queue: Power.Soviets, Power.Baku
+		BuildPaletteOrder: 100
+		Prerequisites: prerequisite.has_points, prerequisite.3_stars
+		Description: 解锁 支援能力：地毯式轰炸\n一架轰炸机袭击区域内的敌方目标
+
+commanders_power.parabombs.2:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 地毯式轰炸 - 级别2
+	Buildable:
+		Queue: Power.Soviets, Power.Baku
+		BuildPaletteOrder: 110
+		Prerequisites: prerequisite.has_points, prerequisite.3_stars, commanders_power.parabombs.1
+		Description: 升级地毯式轰炸\n增加一架轰炸机
+
+commanders_power.parabombs.3:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 地毯式轰炸 - 级别3
+	Buildable:
+		Queue: Power.Soviets, Power.Baku
+		BuildPaletteOrder: 120
+		Prerequisites: prerequisite.has_points, prerequisite.3_stars, commanders_power.parabombs.2
+		Description: 升级地毯式轰炸\n再增加一架轰炸机
+
+commanders_power.toxin_bombing.1:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 化武空袭 - 级别1
+	Buildable:
+		Queue: Power.Yuri
+		BuildPaletteOrder: 100
+		Prerequisites: prerequisite.has_points, prerequisite.3_stars
+		Description: 解锁 支援能力：化武空袭\n一架化武轰炸机袭击区域内的敌方目标
+
+commanders_power.toxin_bombing.2:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 化武空袭 - 级别2
+	Buildable:
+		Queue: Power.Yuri
+		BuildPaletteOrder: 110
+		Prerequisites: prerequisite.has_points, prerequisite.3_stars, commanders_power.toxin_bombing.1
+		Description: 升级化武空袭\n增加一架化武轰炸机
+
+commanders_power.toxin_bombing.3:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 化武空袭 - 级别3
+	Buildable:
+		Queue: Power.Yuri
+		BuildPaletteOrder: 120
+		Prerequisites: prerequisite.has_points, prerequisite.3_stars, commanders_power.toxin_bombing.2
+		Description: 完全升级化武空袭\n再增加一架化武轰炸机
+
+commanders_power.chrono_boost.1:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 超时空加速 - 级别1
+	Buildable:
+		Queue: Power.Allies
+		BuildPaletteOrder: 130
+		Prerequisites: prerequisite.has_points, prerequisite.3_stars
+		Description: 解锁 支援能力：超时空加速\n为友方单位提供移动和攻击速度增益
+
+commanders_power.chrono_boost.2:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 超时空加速 - 级别2
+	Buildable:
+		Queue: Power.Allies
+		BuildPaletteOrder: 140
+		Prerequisites: prerequisite.has_points, prerequisite.3_stars, commanders_power.chrono_boost.1
+		Description: 升级超时空加速\n移动速度增益提升为60%
+
+commanders_power.chrono_boost.3:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 超时空加速 - 级别3
+	Buildable:
+		Queue: Power.Allies
+		BuildPaletteOrder: 150
+		Prerequisites: prerequisite.has_points, prerequisite.3_stars, commanders_power.chrono_boost.2
+		Description: 完全升级超时空加速\n移动速度增益提升为100%
+
+commanders_power.propaganda.1:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 战地宣传 - 级别1
+	Buildable:
+		Queue: Power.Soviets, Power.Baku
+		BuildPaletteOrder: 130
+		Prerequisites: prerequisite.has_points, prerequisite.3_stars
+		Description: 解锁 支援能力：战地宣传\n降低友方单位的移动速度从而换取额外的攻击力和攻击速度
+
+commanders_power.propaganda.2:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 战地宣传 - 级别2
+	Buildable:
+		Queue: Power.Soviets, Power.Baku
+		BuildPaletteOrder: 140
+		Prerequisites: prerequisite.has_points, prerequisite.3_stars, commanders_power.propaganda.1
+		Description: 升级战地宣传\n攻击力增益提升为50%
+
+commanders_power.propaganda.3:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 战地宣传 - 级别3
+	Buildable:
+		Queue: Power.Soviets, Power.Baku
+		BuildPaletteOrder: 150
+		Prerequisites: prerequisite.has_points, prerequisite.3_stars, commanders_power.propaganda.2
+		Description: 完全升级战地宣传\n攻击力增益提升为75%
+
+commanders_power.magnetic_beam.1:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 磁力卫星 - 级别1
+	Buildable:
+		Queue: Power.Yuri
+		BuildPaletteOrder: 130
+		Prerequisites: prerequisite.has_points, prerequisite.3_stars
+		Description: 提供 支援能力：磁力卫星\n降低范围内敌方载具移动速度
+		IconPalette: mgnbicon
+
+commanders_power.magnetic_beam.2:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 磁力卫星 - 级别2
+	Buildable:
+		Queue: Power.Yuri
+		BuildPaletteOrder: 140
+		Prerequisites: prerequisite.has_points, prerequisite.3_stars, commanders_power.magnetic_beam.1
+		Description: 升级磁力卫星\n扩大减速范围和持续时间
+		IconPalette: mgnbicon
+
+commanders_power.magnetic_beam.3:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 磁力卫星 - 级别3
+	Buildable:
+		Queue: Power.Yuri
+		BuildPaletteOrder: 150
+		Prerequisites: prerequisite.has_points, prerequisite.3_stars, commanders_power.magnetic_beam.2
+		Description: 完全升级磁力卫星\n进一步扩大减速范围和持续时间
+		IconPalette: mgnbicon
+
+commanders_power.cruiser_strike:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 舰炮支援
+	Buildable:
+		Queue: Power.Allies
+		BuildPaletteOrder: 160
+		Prerequisites: prerequisite.has_points, prerequisite.5_stars
+		Description: 解锁 支援能力：舰炮支援\n善于对抗建筑和集群单位的定点轰炸
+
+commanders_power.v3_storm:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 火箭天袭
+	Buildable:
+		Queue: Power.Soviets, Power.Baku
+		BuildPaletteOrder: 160
+		Prerequisites: prerequisite.has_points, prerequisite.5_stars
+		Description: 解锁 支援能力：火箭天袭\n善于对抗建筑和集群单位的定点轰炸
+
+commanders_power.orbital_drop:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 空间站除役
+	Buildable:
+		Queue: Power.Yuri
+		BuildPaletteOrder: 160
+		Prerequisites: prerequisite.has_points, prerequisite.5_stars
+		Description: 解锁 支援能力：空间站除役\n善于对抗建筑和集群单位的定点轰炸
+
+commanders_power.em_pulse_strike:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 电磁脉冲轰炸
+	Buildable:
+		Queue: Power.Allies
+		BuildPaletteOrder: 170
+		Prerequisites: prerequisite.has_points, prerequisite.5_stars
+		Description: 解锁 支援能力：电磁脉冲轰炸\n发动一次瘫痪范围内的载具与部分建筑的空袭
+
+commanders_power.fallout_bomb:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 辐射脏弹空袭
+	Buildable:
+		Queue: Power.Soviets
+		BuildPaletteOrder: 170
+		Prerequisites: prerequisite.has_points, prerequisite.5_stars
+		Description: 解锁 支援能力：辐射脏弹空袭\n发动一次形成大范围核辐射的空袭
+
+commanders_power.chaos_gas_drop:
+	Inherits: ^default.commanders_power
+	Tooltip:
+		Name: 神经毒气空袭
+	Buildable:
+		Queue: Power.Yuri
+		BuildPaletteOrder: 170
+		Prerequisites: prerequisite.has_points, prerequisite.5_stars
+		Description: 解锁 支援能力：神经毒气空袭\n发动一次散布大量神经毒气的空袭
+
+hack.has_points:
+	AlwaysVisible:
+	Interactable:
+	ProvidesPrerequisite@has_points:
+		Prerequisite: prerequisite.has_points
+
+hack.rank_3:
+	AlwaysVisible:
+	Interactable:
+	ProvidesPrerequisite@rank_3:
+		Prerequisite: prerequisite.3_stars
+
+hack.rank_5:
+	AlwaysVisible:
+	Interactable:
+	ProvidesPrerequisite@rank_5:
+		Prerequisite: prerequisite.5_stars
+
+prerequisite.has_points:
+	AlwaysVisible:
+	Interactable:
+	Tooltip:
+		Name: 1指挥官技能点
+	Buildable:
+		Description: 1指挥官点数
+
+prerequisite.3_stars:
+	AlwaysVisible:
+	Interactable:
+	Tooltip:
+		Name: 少校军衔及以上
+	Buildable:
+		Description: 少校军衔及以上
+
+prerequisite.5_stars:
+	AlwaysVisible:
+	Interactable:
+	Tooltip:
+		Name: 将军军衔
+	Buildable:
+		Description: 将军
+
+^default.commanders_power_prerequisite:
+	AlwaysVisible:
+	Interactable:
+	Tooltip:
+		Name: 指挥官技能
+	Buildable:
+		Description: 指挥官技能
+
+prerequisite.medic:
+	Inherits: ^default.commanders_power_prerequisite
+
+prerequisite.ambulance:
+	Inherits: ^default.commanders_power_prerequisite
+
+prerequisite.airpad:
+	Inherits: ^default.commanders_power_prerequisite
+
+prerequisite.gun_turret:
+	Inherits: ^default.commanders_power_prerequisite
+
+prerequisite.tesla_fence:
+	Inherits: ^default.commanders_power_prerequisite
+
+prerequisite.mechanic:
+	Inherits: ^default.commanders_power_prerequisite
+
+prerequisite.hijacker:
+	Inherits: ^default.commanders_power_prerequisite
+
+prerequisite.minelayer:
+	Inherits: ^default.commanders_power_prerequisite
+
+prerequisite.grinder:
+	Inherits: ^default.commanders_power_prerequisite
+
+^CommandersPowers:
+	DetonateWeaponPower@SCOUT_DRONE:
+		OrderName: AlliedScoutDrone
+		RequiresCondition: !lost
+		Prerequisites:
+			1: commanders_power.scout_drone
+		ChargeInterval: 4500
+		Icons:
+			1: sdrn
+		Cursor: spyplane
+		StartFullyCharged: true
+		Descriptions:
+			1: 侦察无人机
+		LongDescs:
+			1: 在选定位置部署一架侦察无人机\n\n侦察无人机持续飞行直至被击毁
+		SelectTargetSpeechNotification: SelectTarget
+		Weapons:
+			1: ScoutDroneSpawner
+		ActivationSequence:
+		TargetCircleRanges:
+			1: 8c0
+	AirstrikePower@spyplane:
+		OrderName: SovietSpyPlane
+		RequiresCondition: !lost
+		Prerequisites:
+			1: commanders_power.spy_plane
+		Icons:
+			1: spyplane
+		Cursor: spyplane
+		ChargeInterval: 3000
+		StartFullyCharged: true
+		Descriptions:
+			1: 侦察机巡航
+		LongDescs:
+			1: 揭示选定的战场区域
+		SelectTargetSpeechNotification: SelectTarget
+		EndChargeSpeechNotification: SpyPlaneReady
+		UnitTypes:
+			1: spyp
+		SquadSizes:
+			1: 1
+		QuantizedFacings: 8
+		DisplayBeacon: True
+		BeaconPosters:
+			1: spypicon
+		ArrowSequence: arrow
+		ClockSequence: clock
+		UseDirectionalTarget: True
+		DirectionArrowAnimation: swdirection
+		DirectionArrowPalette: mouse
+	DetonateWeaponPower@PSYCHIC_REVEAL:
+		OrderName: PsiPsychicReveal
+		RequiresCondition: !lost
+		Prerequisites:
+			1: commanders_power.psychic_reveal
+		Icons:
+			1: psireveal
+		Cursor: reveal
+		ChargeInterval: 3750
+		StartFullyCharged: true
+		Descriptions:
+			1: 灵能窥视
+		LongDescs:
+			1: 获取15秒选定半径8格范围内的视野
+		SelectTargetSpeechNotification: SelectTarget
+		Weapons:
+			1: PsychicReveal
+		ActivationSequence:
+		TargetCircleRanges:
+			1: 8c0
+	ParatroopersPower@inteldrop:
+		OrderName: AlliedIntelDrop
+		RequiresCondition: !lost
+		Prerequisites:
+			1: commanders_power.intel_drop
+		Icons:
+			1: intel
+		ChargeInterval: 6000
+		StartFullyCharged: true
+		Descriptions:
+			1: 秘密潜入
+		LongDescs:
+			1: 在选定位置空投一名未伪装的间谍
+		SelectTargetSpeechNotification: SelectTarget
+		EndChargeSpeechNotification: ParatroopersReady
+		DropItems:
+			1: spy
+		SquadSizes:
+			1: 1
+		SquadOffset: -2048, 2048, 0
+		QuantizedFacings: 8
+		UnitTypes:
+			1: f22drop
+		CameraActor: camera
+		DisplayBeacon: True
+		BeaconPosters:
+			1: sdrpicon
+		ArrowSequence: arrow
+		ClockSequence: clock
+		UseDirectionalTarget: True
+		DirectionArrowAnimation: swdirection
+		DirectionArrowPalette: mouse
+	ParatroopersPower@dronedrop:
+		OrderName: SovietDroneDrop
+		RequiresCondition: !lost
+		Prerequisites:
+			1: commanders_power.drone_drop
+		Icons:
+			1: drondrop
+		ChargeInterval: 6000
+		StartFullyCharged: true
+		Descriptions:
+			1: 恐怖之潮
+		LongDescs:
+			1: 在选定位置空投3个恐怖机器人
+		SelectTargetSpeechNotification: SelectTarget
+		EndChargeSpeechNotification: ParatroopersReady
+		DropItems:
+			1: dron, dron, dron
+		SquadSizes:
+			1: 1
+		SquadOffset: -2048, 2048, 0
+		QuantizedFacings: 8
+		UnitTypes:
+			1: bplndrop
+		CameraActor: camera
+		DisplayBeacon: True
+		BeaconPosters:
+			1: dronicon
+		ArrowSequence: arrow
+		ClockSequence: clock
+		UseDirectionalTarget: True
+		DirectionArrowAnimation: swdirection
+		DirectionArrowPalette: mouse
+	GrantExternalConditionPower@cash_bounty:
+		OrderName: YuriCashBounty
+		RequiresCondition: !lost
+		Prerequisites:
+			1: commanders_power.cash_bounty
+		Icons:
+			1: bounty
+		ChargeInterval: 4500
+		StartFullyCharged: true
+		Descriptions:
+			1: 赏金猎人
+		LongDescs:
+			1: 在20秒内击杀选定范围内的单位以获取其造价一半的赏金
+		Durations:
+			1: 500
+		Conditions:
+			1: bounty
+		Dimensions:
+			1: 5,5
+		Footprints:
+			1: __x__ _xxx_ xxxxx _xxx_ __x__
+		Sequence:
+		OnFireSound: ubonus.wav
+		ValidRelationships: Ally, Neutral, Enemy
+		SelectTargetSpeechNotification: SelectTarget
+	ParatroopersPower@inteldropbaku:
+		OrderName: BakuIntelDrop
+		RequiresCondition: !lost
+		Prerequisites:
+			1: commanders_power.intel_drop.baku
+		Icons:
+			1: intel
+		ChargeInterval: 6000
+		StartFullyCharged: true
+		Descriptions:
+			1: Intel Drop
+		LongDescs:
+			1: A MiG paradrops a spy\nanywhere on the map.
+		SelectTargetSpeechNotification: SelectTarget
+		EndChargeSpeechNotification: ParatroopersReady
+		DropItems:
+			1: sspy
+		SquadSizes:
+			1: 1
+		SquadOffset: -2048, 2048, 0
+		QuantizedFacings: 8
+		UnitTypes:
+			1: bplndrop
+		CameraActor: camera
+		DisplayBeacon: True
+		BeaconPosters:
+			1: sdrpicon
+		ArrowSequence: arrow
+		ClockSequence: clock
+		UseDirectionalTarget: True
+		DirectionArrowAnimation: swdirection
+		DirectionArrowPalette: mouse
+	AirstrikePower@leafletdrop:
+		OrderName: AlliedLeafletDrop
+		RequiresCondition: !lost
+		Prerequisites:
+			1: commanders_power.leaflet_drop
+		Icons:
+			1: leaflet
+		ChargeInterval: 3750
+		StartFullyCharged: true
+		Descriptions:
+			1: 宣传品空投
+		LongDescs:
+			1: 一架运输机在选定位置投放心战宣传品\n降低敌方单位移动速度与攻击速度
+		SelectTargetSpeechNotification: SelectTarget
+		IncomingSpeechNotification: WarningEnemyAirstrikeInitiated
+		UnitTypes:
+			1: pdplane.leaflet
+		SquadSizes:
+			1: 1
+		QuantizedFacings: 8
+		CameraActor: CAMERA
+		CameraRemoveDelay: 100
+		DisplayBeacon: True
+		BeaconPosters:
+			1: leaficon
+		ArrowSequence: arrow
+		ClockSequence: clock
+		UseDirectionalTarget: True
+		DirectionArrowAnimation: swdirection
+		DirectionArrowPalette: mouse
+	AirstrikePowerRV@clustermines:
+		ActivationDelay: 125
+		OrderName: SovietClusterMines
+		RequiresCondition: !lost
+		Prerequisites:
+			1: commanders_power.cluster_mines
+		Icons:
+			1: cluster
+		ChargeInterval: 4500
+		StartFullyCharged: true
+		Descriptions:
+			1: 集束地雷空投
+		LongDescs:
+			1: 一架运输机在选定位置一次性投放13枚地雷
+		SelectTargetSpeechNotification: SelectTarget
+		IncomingSpeechNotification: WarningEnemyAirstrikeInitiated
+		UnitTypes:
+			1: pdplane.cluster_mines
+		SquadSizes:
+			1: 1
+		QuantizedFacings: 8
+		CameraActor: camera.5c0
+		DisplayBeacon: True
+		BeaconPosters:
+			1: mineicon
+		ArrowSequence: arrow
+		ClockSequence: clock
+		UseDirectionalTarget: True
+		DirectionArrowAnimation: swdirection
+		DirectionArrowPalette: mouse
+	DetonateWeaponPower@brutedrop:
+		OrderName: PsiCorpsBruteDrop
+		RequiresCondition: !lost
+		Prerequisites:
+			1: commanders_power.brute_drop
+		Icons:
+			1: brutedrop
+		Descriptions:
+			1: 天降巨兽
+		LongDescs:
+			1: 在选定位置空投5名狂兽人
+		Weapons:
+			1: DroppodSpawner
+		ChargeInterval: 4500
+		StartFullyCharged: true
+		ActivationSequence:
+		TargetCircleRanges:
+			1: 6c0
+		CameraRange: 7c0
+		CameraSpawnAdvance: 25
+		CameraRemoveDelay: 350
+	DetonateWeaponPower@emergencyrepair:
+		OrderName: EmergencyRepair
+		RequiresCondition: !lost
+		Prerequisites:
+			1: commanders_power.emergency_repair.1
+			2: commanders_power.emergency_repair.2
+			3: commanders_power.emergency_repair.3
+		Icons:
+			1: repair1
+			2: repair2
+			3: repair3
+		Cursor: repair
+		ChargeInterval: 3750
+		StartFullyCharged: true
+		Descriptions:
+			1: 紧急维修
+			2: 紧急维修
+			3: 紧急维修
+		LongDescs:
+			1: 在半径5格范围内回复所有友方载具与建筑30%的最大生命值
+			2: 在半径6格范围内回复所有友方载具与建筑60%的最大生命值
+			3: 在半径7格范围内回复所有友方载具与建筑100%的最大生命值
+		SelectTargetSpeechNotification: SelectTarget
+		Weapons:
+			1: EmergencyRepair1
+			2: EmergencyRepair2
+			3: EmergencyRepair3
+		ActivationSequence:
+		TargetCircleRanges:
+			1: 5c0
+			2: 6c0
+			3: 7c0
+	AirstrikePowerRV@a10strike:
+		ActivationDelay: 125
+		OrderName: AlliedA10Strike
+		RequiresCondition: !lost
+		Prerequisites:
+			1: commanders_power.a10_strike.1
+			2: commanders_power.a10_strike.2
+			3: commanders_power.a10_strike.3
+		Icons:
+			1: a101
+			2: a102
+			3: a103
+		ChargeInterval: 6000
+		StartFullyCharged: true
+		Descriptions:
+			1: A-10空袭
+			2: A-10空袭
+			3: A-10空袭
+		LongDescs:
+			1: 1架A-10雷电II型攻击机将对选定区域发动空袭
+			2: 2架A-10雷电II型攻击机将对选定区域发动空袭
+			3: 3架A-10雷电II型攻击机将对选定区域发动空袭
+		SelectTargetSpeechNotification: SelectTarget
+		IncomingSpeechNotification: WarningEnemyAirstrikeInitiated
+		UnitTypes:
+			1: a10
+			2: a10
+			3: a10
+		SquadSizes:
+			1: 1
+			2: 2
+			3: 3
+		SquadOffset: -2048, 2048, 0
+		QuantizedFacings: 8
+		CameraActor: CAMERA
+		CameraRemoveDelay: 100
+		DisplayBeacon: True
+		BeaconPosters:
+			1: a101icon
+			2: a102icon
+			3: a103icon
+		ArrowSequence: arrow
+		ClockSequence: clock
+		UseDirectionalTarget: True
+		DirectionArrowAnimation: swdirection
+		DirectionArrowPalette: mouse
+	AirstrikePowerRV@parabombs:
+		ActivationDelay: 125
+		OrderName: SovietParabombs
+		RequiresCondition: !lost
+		Prerequisites:
+			1: commanders_power.parabombs.1
+			2: commanders_power.parabombs.2
+			3: commanders_power.parabombs.3
+		Icons:
+			1: parabomb1
+			2: parabomb2
+			3: parabomb3
+		ChargeInterval: 6000
+		StartFullyCharged: true
+		Descriptions:
+			1: 地毯式轰炸
+			2: 地毯式轰炸
+			3: 地毯式轰炸
+		LongDescs:
+			1: 1架轰炸机将对选定区域发动空袭
+			2: 2架轰炸机将对选定区域发动空袭
+			3: 3架轰炸机将对选定区域发动空袭
+		SelectTargetSpeechNotification: SelectTarget
+		IncomingSpeechNotification: WarningEnemyAirstrikeInitiated
+		UnitTypes:
+			1: pdplane.parabomb
+			2: pdplane.parabomb
+			3: pdplane.parabomb
+		SquadSizes:
+			1: 1
+			2: 2
+			3: 3
+		SquadOffset: -2048, 2048, 0
+		QuantizedFacings: 8
+		CameraActor: CAMERA
+		CameraRemoveDelay: 100
+		DisplayBeacon: True
+		BeaconPosters:
+			1: parb1icon
+			2: parb2icon
+			3: parb3icon
+		ArrowSequence: arrow
+		ClockSequence: clock
+		UseDirectionalTarget: True
+		DirectionArrowAnimation: swdirection
+		DirectionArrowPalette: mouse
+	AirstrikePowerRV@toxin_bombing:
+		ActivationDelay: 125
+		OrderName: PsiCorpsToxinBombing
+		RequiresCondition: !lost
+		Prerequisites:
+			1: commanders_power.toxin_bombing.1
+			2: commanders_power.toxin_bombing.2
+			3: commanders_power.toxin_bombing.3
+		Icons:
+			1: txdrop1
+			2: txdrop2
+			3: txdrop3
+		ChargeInterval: 6000
+		StartFullyCharged: true
+		Descriptions:
+			1: 化武空袭
+			2: 化武空袭
+			3: 化武空袭
+		LongDescs:
+			1: 1架化武轰炸机将对选定区域发动空袭
+			2: 2架化武轰炸机将对选定区域发动空袭
+			3: 3架化武轰炸机将对选定区域发动空袭
+		SelectTargetSpeechNotification: SelectTarget
+		IncomingSpeechNotification: WarningEnemyAirstrikeInitiated
+		UnitTypes:
+			1: txbmb
+			2: txbmb
+			3: txbmb
+		SquadSizes:
+			1: 1
+			2: 2
+			3: 3
+		SquadOffset: -2048, 2048, 0
+		QuantizedFacings: 8
+		CameraActor: CAMERA
+		CameraRemoveDelay: 100
+		DisplayBeacon: True
+		BeaconPosters:
+			1: txdrop1icon
+			2: txdrop2icon
+			3: txdrop3icon
+		ArrowSequence: arrow
+		ClockSequence: clock
+		UseDirectionalTarget: True
+		DirectionArrowAnimation: swdirection
+		DirectionArrowPalette: mouse
+	GrantExternalConditionPower@chrono_boost:
+		OrderName: AlliedChronoBoost
+		RequiresCondition: !lost
+		Prerequisites:
+			1: commanders_power.chrono_boost.1
+			2: commanders_power.chrono_boost.2
+			3: commanders_power.chrono_boost.3
+		Icons:
+			1: boost1
+			2: boost2
+			3: boost3
+		ChargeInterval: 4500
+		StartFullyCharged: true
+		Descriptions:
+			1: 超时空加速
+			2: 超时空加速
+			3: 超时空加速
+		LongDescs:
+			1: 在20秒时间内提升4x4范围的友方单位30%移动速度和25%攻击速度
+			2: 在20秒时间内提升4x4范围的友方单位60%移动速度和25%攻击速度
+			3: 在20秒时间内提升4x4范围的友方单位100%移动速度和25%攻击速度
+		Durations:
+			1: 500
+			2: 500
+			3: 500
+		Conditions:
+			1: boost1
+			2: boost2
+			3: boost3
+		Dimensions:
+			1: 4,4
+			2: 4,4
+			3: 4,4
+		Footprints:
+			1: xxxx xxxx xxxx xxxx xxxx
+			2: xxxx xxxx xxxx xxxx xxxx
+			3: xxxx xxxx xxxx xxxx xxxx
+		Sequence:
+		OnFireSound: gcraspee.wav
+		SelectTargetSpeechNotification: SelectTarget
+	GrantExternalConditionPower@propaganda:
+		OrderName: SovietPropaganda
+		RequiresCondition: !lost
+		Prerequisites:
+			1: commanders_power.propaganda.1
+			2: commanders_power.propaganda.2
+			3: commanders_power.propaganda.3
+		Icons:
+			1: propaganda1
+			2: propaganda2
+			3: propaganda3
+		ChargeInterval: 4500
+		StartFullyCharged: true
+		Descriptions:
+			1: 战地宣传
+			2: 战地宣传
+			3: 战地宣传
+		LongDescs:
+			1: 在20秒时间内减少4x4范围的友方单位30%移动速度，提升33%攻击速度和25%攻击力
+			2: 在20秒时间内减少4x4范围的友方单位30%移动速度，提升33%攻击速度和50%攻击力
+			3: 在20秒时间内减少4x4范围的友方单位30%移动速度，提升33%攻击速度和75%攻击力
+		Durations:
+			1: 500
+			2: 500
+			3: 500
+		Conditions:
+			1: propaganda1
+			2: propaganda2
+			3: propaganda3
+		Dimensions:
+			1: 4,4
+			2: 4,4
+			3: 4,4
+		Footprints:
+			1: xxxx xxxx xxxx xxxx xxxx
+			2: xxxx xxxx xxxx xxxx xxxx
+			3: xxxx xxxx xxxx xxxx xxxx
+		Sequence:
+		OnFireSound: sfrenzya.wav
+		SelectTargetSpeechNotification: SelectTarget
+	SpawnActorPower@MANGETIC_BEAM:
+		OrderName: PsiCorpsMagneticBeam
+		RequiresCondition: !lost
+		Actors:
+			1: magnetic_beam.1
+			2: magnetic_beam.2
+			3: magnetic_beam.3
+		Prerequisites:
+			1: commanders_power.magnetic_beam.1
+			2: commanders_power.magnetic_beam.2
+			3: commanders_power.magnetic_beam.3
+		LifeTime: -1
+		ChargeInterval: 4500
+		Icons:
+			1: magnet1
+			2: magnet2
+			3: magnet3
+		IconPalette: mgnbicon
+		StartFullyCharged: true
+		Descriptions:
+			1: 磁力卫星
+			2: 磁力卫星
+			3: 磁力卫星
+		LongDescs:
+			1: 减速半径1格范围内敌方载具15秒\n可以移动磁力束
+			2: 减速半径2格范围内敌方载具25秒\n可以移动磁力束
+			3: 减速半径2格范围内敌方载具35秒\n可以移动磁力束
+		SelectTargetSpeechNotification: SelectTarget
+	DetonateWeaponPower@cruiserstrike:
+		OrderName: AlliedCruiserStrike
+		RequiresCondition: !lost
+		Prerequisites:
+			1: commanders_power.cruiser_strike
+		Icons:
+			1: cruiser
+		ChargeInterval: 9000
+		CameraRange: 8c0
+		CameraRemoveDelay: 400
+		SpawnCameraAtGround: true
+		StartFullyCharged: true
+		Descriptions:
+			1: 舰炮支援
+		LongDescs:
+			1: 对选定区域发动一轮舰炮打击
+		SelectTargetSpeechNotification: SelectTarget
+		Weapons:
+			1: CruiserStrikeInit
+		AirburstAltitude: 25c0
+		ActivationSequence:
+		TargetCircleRanges:
+			1: 6c0
+	DetonateWeaponPower@v3storm:
+		OrderName: SovietV3Storm
+		RequiresCondition: !lost
+		Prerequisites:
+			1: commanders_power.v3_storm
+		Icons:
+			1: v3storm
+		ChargeInterval: 9000
+		CameraRange: 8c0
+		CameraRemoveDelay: 400
+		SpawnCameraAtGround: true
+		StartFullyCharged: true
+		Descriptions:
+			1: 火箭天袭
+		LongDescs:
+			1: 对选定区域发动一轮V3火箭袭击
+		SelectTargetSpeechNotification: SelectTarget
+		Weapons:
+			1: V3StormInit
+		AirburstAltitude: 25c0
+		ActivationSequence:
+		TargetCircleRanges:
+			1: 6c0
+	DetonateWeaponPower@orbital_drop:
+		OrderName: PsiCorpsOrbitalDrop
+		RequiresCondition: !lost
+		Prerequisites:
+			1: commanders_power.orbital_drop
+		Icons:
+			1: orbital
+		ChargeInterval: 9000
+		CameraRange: 8c0
+		CameraRemoveDelay: 400
+		SpawnCameraAtGround: true
+		StartFullyCharged: true
+		Descriptions:
+			1: 空间站除役
+		LongDescs:
+			1: 将空间站碎片砸向选定区域
+		SelectTargetSpeechNotification: SelectTarget
+		Weapons:
+			1: OrbitalDropInit
+		AirburstAltitude: 25c0
+		ActivationSequence:
+		TargetCircleRanges:
+			1: 6c0
+	AirstrikePowerRV@empulse:
+		ActivationDelay: 125
+		OrderName: AlliedEMP
+		RequiresCondition: !lost
+		Prerequisites:
+			1: commanders_power.em_pulse_strike
+		Icons:
+			1: empulse
+		ChargeInterval: 7500
+		StartFullyCharged: true
+		Descriptions:
+			1: 电磁脉冲轰炸
+		LongDescs:
+			1: 一架轰炸机将在选定位置投放一枚电磁脉冲炸弹\n电磁脉冲炸弹将瘫痪范围内的载具与部分建筑
+		SelectTargetSpeechNotification: SelectTarget
+		IncomingSpeechNotification: WarningEnemyAirstrikeInitiated
+		UnitTypes:
+			1: pdplane.emp
+		SquadSizes:
+			1: 1
+		QuantizedFacings: 8
+		CameraActor: CAMERA
+		CameraRemoveDelay: 100
+		DisplayBeacon: True
+		BeaconPosters:
+			1: empuicon
+		ArrowSequence: arrow
+		ClockSequence: clock
+		UseDirectionalTarget: True
+		DirectionArrowAnimation: swdirection
+		DirectionArrowPalette: mouse
+	AirstrikePowerRV@falloutbomb:
+		ActivationDelay: 125
+		OrderName: SovietFalloutBomb
+		RequiresCondition: !lost
+		Prerequisites:
+			1: commanders_power.fallout_bomb
+		Icons:
+			1: fallout
+		ChargeInterval: 7500
+		StartFullyCharged: true
+		Descriptions:
+			1: 辐射脏弹空袭
+		LongDescs:
+			1: 一架轰炸机将在选定位置投放一枚辐射脏弹\n辐射脏弹将造成伤害与大范围核辐射
+		SelectTargetSpeechNotification: SelectTarget
+		IncomingSpeechNotification: WarningEnemyAirstrikeInitiated
+		UnitTypes:
+			1: pdplane.fallout_bomb
+		SquadSizes:
+			1: 1
+		QuantizedFacings: 8
+		CameraActor: camera.5c0
+		DisplayBeacon: True
+		BeaconPosters:
+			1: fallouticon
+		ArrowSequence: arrow
+		ClockSequence: clock
+		UseDirectionalTarget: True
+		DirectionArrowAnimation: swdirection
+		DirectionArrowPalette: mouse
+	AirstrikePowerRV@chaosgas:
+		ActivationDelay: 125
+		OrderName: PsiCorpsChaosDrop
+		RequiresCondition: !lost
+		Prerequisites:
+			1: commanders_power.chaos_gas_drop
+		Icons:
+			1: chaosdrop
+		ChargeInterval: 7500
+		StartFullyCharged: true
+		Descriptions:
+			1: 神经毒气空袭
+		LongDescs:
+			1: 一架轰炸机将在选定位置散播神经毒气\n受影响的单位将强制随机攻击附近目标一段时间
+		SelectTargetSpeechNotification: SelectTarget
+		IncomingSpeechNotification: WarningEnemyAirstrikeInitiated
+		UnitTypes:
+			1: pdplane.chaos
+		SquadSizes:
+			1: 1
+		QuantizedFacings: 8
+		CameraActor: CAMERA
+		CameraRemoveDelay: 100
+		DisplayBeacon: True
+		BeaconPosters:
+			1: chdpicon
+		ArrowSequence: arrow
+		ClockSequence: clock
+		UseDirectionalTarget: True
+		DirectionArrowAnimation: swdirection
+		DirectionArrowPalette: mouse
+	AirstrikePowerRV@GeneticMutator:
+		ActivationDelay: 125
+		OrderName: TransylvaniaGeneticMutator
+		RequiresCondition: !lost
+		Prerequisites:
+			1: upgrade.dna_boosters
+		Icons:
+			1: mutator
+		ChargeInterval: 4500
+		StartFullyCharged: true
+		Descriptions:
+			1: 基因炸弹空袭
+		LongDescs:
+			1: 在选定目标处空投一枚基因突变炸弹\n被爆炸影响的步兵将被转化为狂兽人
+		SelectTargetSpeechNotification: SelectTarget
+		IncomingSpeechNotification: WarningEnemyAirstrikeInitiated
+		UnitTypes:
+			1: pdplane.mutator
+		SquadSizes:
+			1: 1
+		QuantizedFacings: 8
+		CameraActor: CAMERA
+		CameraRemoveDelay: 100
+		DisplayBeacon: True
+		BeaconPosters:
+			1: muteicon
+		ArrowSequence: arrow
+		ClockSequence: clock
+		UseDirectionalTarget: True
+		DirectionArrowAnimation: swdirection
+		DirectionArrowPalette: mouse
+	GrantConditionOnOwnerLost:
+		Condition: lost
