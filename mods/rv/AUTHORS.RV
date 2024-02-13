@@ -52,6 +52,7 @@ Other contributors:
    > Building selection box adjustments
 
  * Nah
+   > Advanced Irradiators Infantry Death Animation
    > Armored Transport cameo
    > Brute Drop cameo
    > Chronobomb cameo
@@ -115,6 +116,9 @@ A more detailed list of these that shows which
 files each credit refers to can be found in
 .mods/rv/bits/AUTHORS.txt file.
 
+ * 206UE
+   > Pony voxels
+
  * 4StarGeneral
    > Additional Civ. Gates
    > Psi-Corps War Factory Rotataions
@@ -125,10 +129,16 @@ files each credit refers to can be found in
    > Grizlly Bear
    > Remappable General
    > Empty Truck
+   > Gray Barrels
 
  * Atomic_Noodles
    > Infantry Fixes
+   > Engineer Recolors and Boat
+   > G.I. with G.I. Fortifications
+   > Rocket Soldier
    > Tanya Snow Artwork
+   > Stingray cameo
+   > Missile Truck
    > Psi-Corps Structure Fixes
 
  * Augusto
@@ -136,6 +146,7 @@ files each credit refers to can be found in
 
  * Azri_Apoc
    > Devastator
+   > Sentry Drone
 
  * B.A.Znd:
    > Cement Mixer
@@ -159,8 +170,15 @@ files each credit refers to can be found in
  * Cranium
    > Mortar Tricycle
 
+ * Chriz
+   > Hydrofoil
+
+ * cxtian39
+   > Assault Destroyer
+
  * Dark Elf 2001
    > Tesla Commando
+   > Guardian G.I. with Portable Weaponary
 
  * datmax2014
    > Allied Airpad
@@ -197,6 +215,9 @@ files each credit refers to can be found in
  * Fryone
    > Lazarus Miner
 
+ * Gamemate
+   > Baku Pact Barracks artwork and cameo
+
  * Gangster
    > Tesla Fence
    > Tesla Fence Post
@@ -204,11 +225,15 @@ files each credit refers to can be found in
  * G-E
    > Snowy Civilian Buildings
    > Picnic Table
+   > Grad MLRS artwork and cameo
 
  * genobreaker
    > EMP Bomb artwork
    > Fallout Bomb artwork
    > Parabomb artwork
+
+ * HG_SCIPCION
+   > Strider Tank cameo
 
  * Lao Tze
    > Mechanic
@@ -248,37 +273,51 @@ files each credit refers to can be found in
    > Gatling Trooper Cameo
    > Gatling Trooper
 
+ * Merophage
+   > Military Academy
+
  * MiGEater
    > Airborne Cameo
    > Tank Drop Cameo
    > Cargo Planes
    > F22 Raptor
 
+ * Moder.U
+   > Annihilator Artillery
+
  * Mustafa Alperen Seki (MustaphaTR)
    > You Have Promoted notification
    > Enemy Airstrike Initiated notification
-   > Blue/Black Fire
+   > Blue/Black/Pink Fire
    > Purple Chaos Gas
    > Red Bullet Hit Animations
+   > Orange Demolition Truck Explosion
    > Toxin Explosions
    > Toxin Bomb
    > Advanced Coolants Cameo
    > Advanced Gun Systems Cameo
+   > Advanced Irradiators Cameo
    > Advanced Magnetics Cameo
    > Alligator Cameo
+   > Annihilator Artillery Cameo
    > Autoloaders Cameo
    > Black Kite Cameo
    > Boost-Gliding Systems Cameo
    > Bullet-Proof Coats Cameo
    > Camel Cameo
    > Cash Bounty Cameo
+   > Chairman Yakubov Cameo
    > Chaos Tank Compensators Cameo
    > Combat Ambulance Cameo
    > Cow Cameo
    > Cruiser Cameo
+   > Cryo Missiles Cameo
+   > Cryo Shells Cameo
+   > Cryo Warheads Cameo
    > Death Bombs Cameo
    > Devastator Cameo
    > Disc Armor Cameo
+   > Einstein Cameo
    > Emergency Repair Cameos
    > E.M. Pulse Cameo
    > EMP Munitions Cameo
@@ -286,12 +325,19 @@ files each credit refers to can be found in
    > Excavator Cameo
    > Farm Cameo
    > Flamethrower Cameo
+   > Focused Mind Cameo
+   > Fuel Air Bomb Cameos
+   > General Cameo
+   > General Vladimir Cameo
+   > G.I. Fortifications Cameo
    > Grinder Treads Cameo
+   > Grizzly Bear Cameo
    > Improved Flaks Cameo
    > Increased Payload Cameo
    > Invisibility Cameo
    > Ion Cannon Cameo
    > Iron Trooper Cameo
+   > Lazarus Prime Cameo
    > Lazarus Tank Cameo
    > Magnetic Beam Cameos
    > Mechanic Cameo
@@ -300,25 +346,37 @@ files each credit refers to can be found in
    > Laser Capacitors Cameo
    > Lethocerus Platform Cameo
    > Parabomb Cameos
+   > Polar Bear Cameo
    > Police Car Cameo
+   > President Dugan Cameo
+   > Premier Romanov Cameo
    > Propaganda Cameos
    > Psi-Corps Attack Dog Cameo
    > Radar Jammer Cameos
-   > Radioactive Bombs Cameo
+   > Radioactive Warheads Cameo
+   > Rocket Barrage Cameo
    > Sensor Buoy Cameo
+   > Sentry Drone Cameo
    > Slave Cameo
    > Smoke Grenades Cameo
    > Spy Satellite Cameo
    > Satellite Scan Cameo
    > Targeted Explosives Cameo
+   > Tech Communications Center Cameo
+   > Tech Missile Silo Cameo
    > Tesla Drop Cameo
    > Toxin Bombing Cameos
    > Iron Trooper
+   > Desolator with Advanced Irradiators
    > Colored Civilian Fences
+   > Building Water Overlays
    > Advanced Coolant
    > Allied Guard Shack
    > Naval Mine
    > Snowy CALA14
+   > Disc Pad Build Animation
+   > Yuri Statue Build Animation
+   > Nuclear Reactor with Advanced Irradiators
    > Psi-Corps Attack Dog
    > Larger Cannon
    > Leaflet
@@ -328,9 +386,20 @@ files each credit refers to can be found in
    > Black and Brown Automobile
    > Grinder Tank
    > Lasher Tank with Autoloaders
+   > Howitzer with EMP Munitions
    > Apocalypse Tank with Nuclear Engines
    > Rhino Tank with Nuclear Engines
-   > Harrier with Air-to-Air Missiles
+   > Demolition Truck with High Explosive Bombs
+   > Upgraded Harrier
+   > B2 Spirit with Increased Payload
+   > V3 Launcher with Radioactive Warheads
+   > Dreadnought with Radioactive Warheads
+   > Upgraded Kirov Airship
+   > Composite Armored Vehicles
+   > Vehicles with Advanced Gun Systems
+   > Miner Water Variants
+   > Allied MCV Water Variant
+   > Soviet MCV Water Variant
 
  * Mooman65
    > Allied Gate Cameos
@@ -338,6 +407,14 @@ files each credit refers to can be found in
    > Soviet Gates
    > Tech Communications Center
    > Terrain Expansion
+
+ * MPL
+   > Tu-16 Badger
+
+ * Nooze
+   > Barbed Wire Fence
+   > Baku Pact Airfield artwork and cameo
+   > Mortar Turret
 
  * Nyknck (https://kvsr.itch.io/)
    > Hijacker Smoke Bomb
@@ -349,9 +426,11 @@ files each credit refers to can be found in
 
  * OverWatch
    > Toxin Bomber
+   > Strider Tank
 
  * Paul Chote (PChote)
    > Howitzer
+   > Psi-Corps Hover MCV
 
  * Prime
    > Tech Reinforments Pad
@@ -368,7 +447,10 @@ files each credit refers to can be found in
  * Rommel
    > Chaos Trooper
 
- * SaneDisruption:
+ * Salted Old
+   > Stingray
+
+ * SaneDisruption
    > Combat Ambulance
 
  * Shepherd Moons
@@ -391,8 +473,12 @@ files each credit refers to can be found in
  * Sydro
    > B2 Spirit Cameo
 
- * TAK02:
-   > Demolation Truck
+ * TAK02
+   > Demolition Truck
+
+ * The I Man
+   > Special Operations Center
+   > Special Operations Center Cameo
 
  * tomsons26
    > Soviet Engineer Cameo
@@ -410,6 +496,9 @@ files each credit refers to can be found in
  * TX1138
    > Apocalypse Tank Base
    > Gatling Submarine
+
+ * unknown_men
+   > Dog Swim Animations
 
  * Viktor Hahn
    > Lazarus Shield Activation Animation

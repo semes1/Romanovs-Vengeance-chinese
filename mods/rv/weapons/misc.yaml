@@ -31,15 +31,10 @@ Flamer:
 FlamerE:
 	Inherits: Flamer
 	Burst: 10
-	Projectile: BulletAS
-		Image: fireballblue
-		TrailImage: fireballblue
 	Warhead@1Dam: SpreadDamage
 		Damage: 1400
 	Warhead@1Gar: OpenToppedDamage
 		Damage: 1400
-	Warhead@3Eff: CreateEffect
-		Explosions: largefireblue
 
 UCFlamer:
 	Inherits: Flamer
@@ -66,16 +61,16 @@ FlamerBlack:
 		Explosions: largefireblue
 
 FlamerBlackE:
-	Inherits: Flamer
+	Inherits: FlamerE
 	Projectile: BulletAS
-		Image: fireballblack
-		TrailImage: fireballblack
+		Image: fireballblue
+		TrailImage: fireballblue
 	Warhead@1Dam: SpreadDamage
 		Damage: 2800
 	Warhead@1Gar: OpenToppedDamage
 		Damage: 2800
 	Warhead@3Eff: CreateEffect
-		Explosions: largefireblack
+		Explosions: largefireblue
 
 UCFlamerBlack:
 	Inherits: FlamerBlack
@@ -121,6 +116,20 @@ UCMolotovCocktailE:
 	Projectile: BulletAS
 		Blockable: false
 
+MobCocktail:
+	Inherits: MolotovCocktail
+	ReloadDelay: 75
+	ValidTargets: Ground, Water
+	Warhead@1Dam: SpreadDamage
+		ValidTargets: Ground, Water
+
+MobCocktailE:
+	Inherits: MolotovCocktailE
+	ReloadDelay: 60
+	ValidTargets: Ground, Water
+	Warhead@1Dam: SpreadDamage
+		ValidTargets: Ground, Water
+
 SmokeGrenade:
 	Inherits: MolotovCocktail
 	ValidTargets: Ground, Water
@@ -139,9 +148,10 @@ SmokeGrenade:
 		ValidRelationships: Neutral, Enemy
 	Warhead@1Gar: OpenToppedDamage
 		DamageTypes: BulletDeath, NonTemporal
-	-Warhead@2Smu: LeaveSmudge
-	-Warhead@3Eff: CreateEffect
-		Explosions: largesmoke
+	-Warhead@2Smu:
+	Warhead@3Eff: CreateEffect
+		Image: largesmoke
+		Explosions: idle
 		-ImpactSounds:
 
 SmokeGrenadeE:
@@ -181,17 +191,12 @@ TankFlamer:
 TankFlamerE:
 	Inherits: TankFlamer
 	Burst: 20
-	Projectile: BulletAS
-		Image: fireballblue
-		TrailImage: fireballblue
 	Warhead@1Dam: SpreadDamage
 		Damage: 1400
 		Spread: 0c768
 	Warhead@1Gar: OpenToppedDamage
 		Damage: 1400
 		Spread: 0c768
-	Warhead@3Eff: CreateEffect
-		Explosions: largefireblue
 
 TankFlamerBlack:
 	Inherits: TankFlamer
@@ -208,14 +213,14 @@ TankFlamerBlack:
 TankFlamerBlackE:
 	Inherits: TankFlamerE
 	Projectile: BulletAS
-		Image: fireballblack
-		TrailImage: fireballblack
+		Image: fireballblue
+		TrailImage: fireballblue
 	Warhead@1Dam: SpreadDamage
 		Damage: 2800
 	Warhead@1Gar: OpenToppedDamage
 		Damage: 2800
 	Warhead@3Eff: CreateEffect
-		Explosions: largefireblack
+		Explosions: largefireblue
 
 ToxinSprayer:
 	Inherits: Flamer
@@ -294,29 +299,27 @@ UCToxinSprayerE:
 
 ToxinSprayerTruck:
 	Inherits: ToxinSprayer
-	ReloadDelay: 40
-	Burst: 8
-	BurstDelays: 2
+	ReloadDelay: 60
+	Burst: 4
+	BurstDelays: 0
 	Warhead@1Dam: SpreadDamage
 		Damage: 800
 
 ToxinSprayerTruckE:
 	Inherits: ToxinSprayerTruck
-	Burst: 20
-	Warhead@1Dam: SpreadDamage
-		Damage: 1600
+	Burst: 10
 
 EmergencyRepair1:
 	ReloadDelay: 80
 	Range: 1c819
-	ValidTargets: Repair, Structure, Barrel, Mine, Wall
+	ValidTargets: Repair, Structure, WaterStructure, Barrel, Mine, Wall
 	Projectile: InstantExplode
 	Warhead@1Dam: HealthPercentageDamage
 		Spread: 5c0
 		Damage: -30
 		AffectsParent: true
 		ValidRelationships: Neutral, Ally
-		ValidTargets: Repair, Structure, Barrel, Mine, Wall
+		ValidTargets: Repair, Structure, WaterStructure, Barrel, Mine, Wall
 		DamageTypes: KillsDrone, NonTemporal
 	Warhead@2Eff: CreateEffect
 		Explosions: wrench
@@ -368,6 +371,7 @@ RedStarCurtain:
 
 IronTrooperCurtain:
 	Inherits: RedStarCurtain
+	ReloadDelay: 50
 	Report: siroon.wav
 	Warhead@1Dam: SpreadDamage
 		Spread: 1c384
@@ -427,6 +431,32 @@ MasterMindControl:
 	Inherits: MindControl
 	ReloadDelay: 100
 
+DogBark:
+	ReloadDelay: 100
+	Range: 2c0
+	Report: idogbaa.wav, idogbab.wav
+	ValidTargets: DogStun
+	Projectile: InstantExplode
+	Warhead@1Con: GrantExternalCondition
+		ValidTargets: DogStun
+		ValidRelationships: Enemy, Neutral
+		Condition: dogstun
+		Range: 3c0
+		Duration: 125
+	Warhead@2Eff: CreateEffect
+		Explosions: barkflash
+		ExplosionPalette: jascredalpha
+		ValidTargets: Ground, Water, Air
+		ImpactActors: false
+
+ChitzBark:
+	Inherits: DogBark
+	Warhead@1Con: GrantExternalCondition
+		Range: 3c512
+		Duration: 175
+	Warhead@2Eff: CreateEffect
+		Explosions: barkflashchitz
+
 PsiWave:
 	ReloadDelay: 110
 	Range: 1c819
@@ -460,7 +490,7 @@ PsiWaveMastery:
 			Light: 10
 			Medium: 10
 			Heavy: 10
-	-Warhead@2Dam: SpreadDamage
+	-Warhead@2Dam:
 
 SuperPsiWave:
 	Inherits: PsiWave
@@ -531,15 +561,33 @@ CruiseLauncher:
 	Inherits: DredLauncher
 	MinRange: 7c0
 	ValidTargets: Ground
-	InvalidTargets: Water
+	InvalidTargets: Ship, SeaAnimal, Underwater, WaterTerrain
 	Warhead@1Dam: TargetDamage
 		ValidTargets: Ground
-		InvalidTargets: Water
+		InvalidTargets: Ship, SeaAnimal, Underwater, WaterTerrain
+
+RepairDroneSpawn:
+	ReloadDelay: 25
+	Range: 6c0
+	ValidTargets: Repair, AirRepair, SeaAnimalRepair
+	Projectile: InstantExplode
+	Warhead@1Dam: TargetDamage
+		Damage: 0
+		ValidTargets: Repair, AirRepair, SeaAnimalRepair
+		ValidRelationships: Ally
+
+AngryMobTargeter:
+	ReloadDelay: 25
+	Range: 4c0
+	ValidTargets: Ground, Water
+	Projectile: InstantExplode
+	Warhead@1Dam: TargetDamage
+		ValidTargets: Ground, Water
 
 Flare:
 	ReloadDelay: 1
 	Range: 12c0
-	ValidTargets: Structure
+	ValidTargets: Structure, WaterStructure
 	InvalidTargets: Barrel, Mine
 	TargetActorCenter: true
 	Projectile: LaserZap
@@ -549,9 +597,9 @@ Flare:
 		SecondaryBeamWidth: 94
 		SecondaryBeamColor: FF000030
 	Warhead@1Dam: TargetDamage
-		ValidTargets: Structure
+		ValidTargets: Structure, WaterStructure
 	Warhead@2Con: GrantExternalCondition
-		ValidTargets: Structure
+		ValidTargets: Structure, WaterStructure
 		Range: 0c32
 		Duration: 8
 		Condition: flare
@@ -580,7 +628,7 @@ ScoutDroneSpawner:
 	Warhead@1Spa: SpawnActor
 		Actors: sdrn.spawner
 		Range: 1
-		ValidTargets: Ground, OreDrill, Water, Air
+		ValidTargets: Ground, OreDrill, Rubble, Water, Air
 	Warhead@2Eff: CreateEffect
 		Delay: 1
 		ImpactSounds: vdr2crea.wav
@@ -588,14 +636,14 @@ ScoutDroneSpawner:
 		ValidTargets: Ground, Water, Air
 
 SpyCameraWeapon:
-	Range: 20c0
+	Range: 30c0
 	ReloadDelay: 25
 	Report: vspysnap.wav
 	Projectile: InstantExplode
 	Warhead@1Spa: SpawnActor
 		Actors: camera.spyplane
 		Range: 1
-		ValidTargets: Ground, OreDrill, Water, Air
+		ValidTargets: Ground, OreDrill, Rubble, Water, Air
 		ForceGround: true
 
 PsychicReveal:
@@ -604,7 +652,7 @@ PsychicReveal:
 	Warhead@1Spa: SpawnActor
 		Actors: camera.psychicreveal
 		Range: 1
-		ValidTargets: Ground, OreDrill, Water, Air
+		ValidTargets: Ground, OreDrill, Rubble, Water, Air
 	Warhead@2Eff: CreateEffect
 		Explosions: scananim
 		ExplosionPalette: tseffect
@@ -624,6 +672,13 @@ RadEruptionWeapon:
 		Amount: 6
 		AffectsParent: true
 
+RadEruptionWeaponOrange:
+	Inherits: RadEruptionWeapon
+	Warhead@1Radiation: CreateTintedCells
+		LayerName: radioactivityorange
+	Warhead@2RadiationUmbrella: FireRadius
+		Weapon: RadiationUmbrellaOrange
+
 RadiationUmbrella:
 	ReloadDelay: 1
 	Range: 6c0
@@ -633,6 +688,11 @@ RadiationUmbrella:
 		Color: 00FF00
 	ValidTargets: Ground, Water, Air
 	Warhead@TargetValidation: SpreadDamage
+
+RadiationUmbrellaOrange:
+	Inherits: RadiationUmbrella
+	Projectile: ArcLaserZap
+		Color: FF7F00
 
 WeatherStormInit:
 	Projectile: InstantExplode
@@ -803,7 +863,7 @@ BunkerSpawner:
 	Warhead@1Spa: SpawnBuilding
 		Buildings: nabnkr
 		Sounds: uplace.wav
-		ValidTargets: Ground, OreDrill, Water, Air
+		ValidTargets: Ground, OreDrill, Rubble, Water, Air
 
 BarrelSpawner:
 	Warhead@1Spa: SpawnBuilding
@@ -811,7 +871,7 @@ BarrelSpawner:
 		Delay: 15
 		Range: 3
 		Sounds: uplace.wav
-		ValidTargets: Ground, OreDrill, Water, Air
+		ValidTargets: Ground, OreDrill, Rubble, Water, Air
 	Warhead@2Eff: CreateEffect
 		Explosions: chronofd
 		ImpactSounds: schrmov.wav
@@ -821,12 +881,12 @@ BarrelSpawner:
 AmbushSpawner:
 	Warhead@1Sha: FireShrapnel
 		Weapon: AmbushSpawnerE2
-		Amount: 9
-		ValidTargets: Ground, OreDrill, Water, Air
+		Amount: 8
+		ValidTargets: Ground, OreDrill, Rubble, Water, Air
 	Warhead@2Sha: FireShrapnel
 		Weapon: AmbushSpawnerFlakt
-		Amount: 6
-		ValidTargets: Ground, OreDrill, Water, Air
+		Amount: 4
+		ValidTargets: Ground, OreDrill, Rubble, Water, Air
 	Warhead@TargetValidation: TargetDamage
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: sambusha.aud
@@ -851,23 +911,23 @@ HologramSpawner:
 	Warhead@1Sha: FireShrapnel
 		Weapon: HologramSpawnerInit
 		Amount: 6
-		ValidTargets: Ground, OreDrill, Water, Air
+		ValidTargets: Ground, OreDrill, Rubble, Water, Air
 	Warhead@2Sha: FireShrapnel
 		Weapon: HologramSpawnerBrute
 		Amount: 2
-		ValidTargets: Ground, OreDrill, Water, Air
+		ValidTargets: Ground, OreDrill, Rubble, Water, Air
 	Warhead@3Sha: FireShrapnel
 		Weapon: HologramSpawnerGtrp
 		Amount: 2
-		ValidTargets: Ground, OreDrill, Water, Air
+		ValidTargets: Ground, OreDrill, Rubble, Water, Air
 	Warhead@4Sha: FireShrapnel
 		Weapon: HologramSpawnerLtnk
 		Amount: 1
-		ValidTargets: Ground, OreDrill, Water, Air
+		ValidTargets: Ground, OreDrill, Rubble, Water, Air
 	Warhead@5Sha: FireShrapnel
 		Weapon: HologramSpawnerYtnk
 		Amount: 1
-		ValidTargets: Ground, OreDrill, Water, Air
+		ValidTargets: Ground, OreDrill, Rubble, Water, Air
 	Warhead@TargetValidation: TargetDamage
 	Warhead@6Eff: CreateEffect
 		ImpactSounds: holoinit.aud
@@ -880,7 +940,7 @@ HologramSpawner:
 	Warhead@2Eff: CreateEffect
 		Explosions: holosmoke1, holosmoke2, holosmoke3, holosmoke4
 		ExplosionPalette: cyanjascpal
-		ValidTargets: Ground, OreDrill, Water, Air
+		ValidTargets: Ground, OreDrill, Rubble, Water, Air
 
 HologramSpawnerInit:
 	Inherits: ^HologramSpawnerDefault
@@ -911,7 +971,7 @@ LethocerusSpawnerSpawnerSpawner:
 	Warhead@1Sha: FireShrapnel
 		Weapon: LethocerusSpawnerSpawner
 		Amount: 3
-		ValidTargets: Ground, OreDrill, Water, Air
+		ValidTargets: Ground, OreDrill, Rubble, Water, Air
 	Warhead@TargetValidation: TargetDamage
 
 LethocerusSpawnerSpawner:
@@ -919,14 +979,14 @@ LethocerusSpawnerSpawner:
 	Projectile: InstantHit
 	Warhead@1Spa: SpawnActor
 		Actors: txdx.spawner
-		ValidTargets: Ground, OreDrill, Water, Air
+		ValidTargets: Ground, OreDrill, Rubble, Water, Air
 
 GrizzlySpawner:
 	Warhead@1Spa: SpawnActor
 		Actors: mtnk,mtnk,mtnk
 		Delay: 15
 		Range: 3
-		ValidTargets: Ground, OreDrill, Water, Air
+		ValidTargets: Ground, OreDrill, Rubble, Water, Air
 	Warhead@2Eff: CreateEffect
 		Explosions: chronofd
 		ImpactSounds: schrmov.wav
@@ -1008,7 +1068,7 @@ PsychicJabE:
 	Warhead@1Dam: SpreadDamage
 		Damage: 2000
 	Warhead@2Eff: CreateEffect
-		Explosions: largefireblue
+		Explosions: largefirepink
 
 UCPsychicJab:
 	Inherits: PsychicJab
@@ -1021,6 +1081,16 @@ UCPsychicJabE:
 	Range: 7c0
 	Projectile: InstantHit
 		Blockable: false
+
+PsychicJabHolo:
+	Inherits: PsychicJab
+	Warhead@1Dam: SpreadDamage
+		Damage: 0
+
+PsychicJabHoloE:
+	Inherits: PsychicJabE
+	Warhead@1Dam: SpreadDamage
+		Damage: 0
 
 ChaosAttack:
 	Range: 3c0
@@ -1129,7 +1199,7 @@ DiskDrain:
 	TargetActorCenter: true
 	ValidTargets: DiskDrain
 	Projectile: InstantHit
-	Warhead@1Dam: GrantExternalCondition
+	Warhead@1Con: GrantExternalCondition
 		Condition: diskdrain
 		Duration: 6
 		Range: 0c256
@@ -1151,6 +1221,65 @@ DiskSteal:
 		ValidRelationships: Neutral, Enemy
 	Warhead@2Dam: TargetDamage
 		ValidTargets: DiskSteal
+		ValidRelationships: Neutral, Enemy
+
+DiskInfiltrateAllied:
+	ReloadDelay: 5
+	Range: 0c256
+	MinRange: 0c1
+	TargetActorCenter: true
+	ValidTargets: DiskInfiltrateAllied
+	Projectile: InstantHit
+	Warhead@2Dam: TargetDamage
+		ValidTargets: DiskInfiltrateAllied
+		ValidRelationships: Neutral, Enemy
+
+DiskInfiltrateAlliedComplete:
+	Inherits: DiskInfiltrateAllied
+	Warhead@1Spa: SpawnActor
+		Actors: allies.tech.infiltrated.immobile
+		ValidTargets: DiskInfiltrateAllied
+		ValidRelationships: Neutral, Enemy
+	Warhead@2Con: GrantExternalCondition
+		Condition: diskinfiltrate
+		Duration: 6
+		Range: 0c256
+		ValidRelationships: Neutral, Enemy
+
+DiskInfiltrateSoviet:
+	Inherits: DiskInfiltrateAllied
+	ValidTargets: DiskInfiltrateSoviet
+	Warhead@2Dam: TargetDamage
+		ValidTargets: DiskInfiltrateSoviet
+
+DiskInfiltrateSovietComplete:
+	Inherits: DiskInfiltrateSoviet
+	Warhead@1Spa: SpawnActor
+		Actors: soviets.tech.infiltrated.immobile
+		ValidTargets: DiskInfiltrateSoviet
+		ValidRelationships: Neutral, Enemy
+	Warhead@2Con: GrantExternalCondition
+		Condition: diskinfiltrate
+		Duration: 6
+		Range: 0c256
+		ValidRelationships: Neutral, Enemy
+
+DiskInfiltrateYuri:
+	Inherits: DiskInfiltrateAllied
+	ValidTargets: DiskInfiltrateYuri
+	Warhead@2Dam: TargetDamage
+		ValidTargets: DiskInfiltrateYuri
+
+DiskInfiltrateYuriComplete:
+	Inherits: DiskInfiltrateYuri
+	Warhead@1Spa: SpawnActor
+		Actors: yuri.tech.infiltrated.immobile
+		ValidTargets: DiskInfiltrateYuri
+		ValidRelationships: Neutral, Enemy
+	Warhead@2Con: GrantExternalCondition
+		Condition: diskinfiltrate
+		Duration: 6
+		Range: 0c256
 		ValidRelationships: Neutral, Enemy
 
 MagneBeamSpawner:
@@ -1262,6 +1391,7 @@ DroppodElevator:
 	ReloadDelay: 6
 	Range: 3c0
 	MinRange: 1c0
+	Report: meteor1.aud, meteor2.aud
 	Projectile: AthenaProjectile
 		Altitude: 8000
 	Warhead@op: FireShrapnel
@@ -1301,7 +1431,7 @@ droppod:
 	Warhead@5Effect: SpawnActor
 		Actors: brute
 		Range: 3
-		ValidTargets: Ground, OreDrill, Water, Air
+		ValidTargets: Ground, OreDrill, Rubble, Water, Air
 
 AirDummyAim:
 	Range: 8c0

@@ -1,6 +1,6 @@
 #region Copyright & License Information
 /*
- * Copyright 2007-2020 The OpenRA Developers (see AUTHORS)
+ * Copyright (c) The OpenRA Developers and Contributors
  * This file is part of OpenRA, which is free software. It is made
  * available to you under the terms of the GNU General Public License
  * as published by the Free Software Foundation, either version 3 of
@@ -16,11 +16,17 @@ using OpenRA.Traits;
 namespace OpenRA.Mods.RA2.Traits.Sound
 {
 	public class CaptureSoundInfo : TraitInfo
-    {
-        [Desc("Sound to play when actor is captured.")]
-        public readonly string Sound = null;
+	{
+		[Desc("Sound to play when actor is captured.")]
+		public readonly string Sound = null;
 
-        public override object Create(ActorInitializer init) { return new CaptureSound(this); }
+		[Desc("Do the sounds play under shroud or fog.")]
+		public readonly bool AudibleThroughFog = false;
+
+		[Desc("Volume the sounds played at.")]
+		public readonly float SoundVolume = 1f;
+
+		public override object Create(ActorInitializer init) { return new CaptureSound(this); }
 	}
 
 	public class CaptureSound : INotifyCapture
@@ -32,8 +38,10 @@ namespace OpenRA.Mods.RA2.Traits.Sound
 		}
 
 		void INotifyCapture.OnCapture(Actor self, Actor captor, Player oldOwner, Player newOwner, BitSet<CaptureType> captureTypes)
-        {
-            Game.Sound.Play(SoundType.World, info.Sound, self.CenterPosition);
-        }
+		{
+			var pos = self.CenterPosition;
+			if (info.AudibleThroughFog || (!self.World.ShroudObscures(pos) && !self.World.FogObscures(pos)))
+				Game.Sound.Play(SoundType.World, info.Sound, pos, info.SoundVolume);
+		}
 	}
 }

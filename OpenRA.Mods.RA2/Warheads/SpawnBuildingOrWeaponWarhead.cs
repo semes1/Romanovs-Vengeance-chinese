@@ -1,6 +1,6 @@
 ﻿#region Copyright & License Information
 /*
- * Copyright 2007-2021 The OpenRA Developers (see AUTHORS)
+ * Copyright (c) The OpenRA Developers and Contributors
  * This file is part of OpenRA, which is free software. It is made
  * available to you under the terms of the GNU General Public License
  * as published by the Free Software Foundation, either version 3 of
@@ -9,6 +9,7 @@
  */
 #endregion
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenRA.GameRules;
@@ -27,7 +28,7 @@ namespace OpenRA.Mods.RA2.Warheads
 		public readonly int Range = 10;
 
 		[Desc("Actors to spawn.")]
-		public readonly string[] Buildings = { };
+		public readonly string[] Buildings = Array.Empty<string>();
 
 		public readonly bool SkipMakeAnims = false;
 
@@ -51,7 +52,7 @@ namespace OpenRA.Mods.RA2.Warheads
 		public readonly string Palette = "effect";
 
 		[Desc("List of sounds that can be played at the spawning location.")]
-		public readonly string[] Sounds = new string[0];
+		public readonly string[] Sounds = Array.Empty<string>();
 
 		public readonly bool UsePlayerPalette = false;
 
@@ -60,7 +61,7 @@ namespace OpenRA.Mods.RA2.Warheads
 		public void RulesetLoaded(Ruleset rules, WeaponInfo info)
 		{
 			if (!rules.Weapons.TryGetValue(Weapon.ToLowerInvariant(), out weapon))
-				throw new YamlException("Weapons Ruleset does not contain an entry '{0}'".F(Weapon.ToLowerInvariant()));
+				throw new YamlException($"Weapons Ruleset does not contain an entry '{Weapon.ToLowerInvariant()}'");
 
 			foreach (var b in Buildings)
 			{
@@ -68,7 +69,7 @@ namespace OpenRA.Mods.RA2.Warheads
 				var buildingInfo = actorInfo.TraitInfoOrDefault<BuildingInfo>();
 
 				if (buildingInfo == null)
-					throw new YamlException("SpawnBuildingWarhead cannot be used to spawn nonbuilding actor '{0}'".F(b));
+					throw new YamlException($"SpawnBuildingWarhead cannot be used to spawn nonbuilding actor '{b}'");
 			}
 		}
 

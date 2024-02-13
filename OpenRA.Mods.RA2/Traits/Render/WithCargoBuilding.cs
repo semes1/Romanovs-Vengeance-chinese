@@ -1,6 +1,6 @@
 #region Copyright & License Information
 /*
- * Copyright 2007-2020 The OpenRA Developers (see AUTHORS)
+ * Copyright (c) The OpenRA Developers and Contributors
  * This file is part of OpenRA, which is free software. It is made
  * available to you under the terms of the GNU General Public License
  * as published by the Free Software Foundation, either version 3 of
@@ -30,7 +30,7 @@ namespace OpenRA.Mods.Cnc.Traits.Render
 		public readonly WAngle Facing = WAngle.Zero;
 
 		[Desc("Passenger CargoType to display.")]
-		public readonly HashSet<string> DisplayTypes = new HashSet<string>();
+		public readonly HashSet<string> DisplayTypes = new();
 
 		public override object Create(ActorInitializer init) { return new WithCargoBuilding(init.Self, this); }
 	}
@@ -41,7 +41,7 @@ namespace OpenRA.Mods.Cnc.Traits.Render
 		readonly Cargo cargo;
 		readonly BodyOrientation body;
 
-		Dictionary<Actor, IActorPreview[]> previews = new Dictionary<Actor, IActorPreview[]>();
+		readonly Dictionary<Actor, IActorPreview[]> previews = new();
 
 		public WithCargoBuilding(Actor self, WithCargoBuildingInfo info)
 		{
@@ -61,7 +61,7 @@ namespace OpenRA.Mods.Cnc.Traits.Render
 
 		IEnumerable<IRenderable> IRender.Render(Actor self, WorldRenderer wr)
 		{
-			var bodyOrientation = body.QuantizeOrientation(self, self.Orientation);
+			var bodyOrientation = body.QuantizeOrientation(self.Orientation);
 			var pos = self.CenterPosition;
 			var i = 0;
 

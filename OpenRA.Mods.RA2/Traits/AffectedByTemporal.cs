@@ -1,6 +1,6 @@
 ﻿#region Copyright & License Information
 /*
- * Copyright 2007-2019 The OpenRA Developers (see AUTHORS)
+ * Copyright (c) The OpenRA Developers and Contributors
  * This file is part of OpenRA, which is free software. It is made
  * available to you under the terms of the GNU General Public License
  * as published by the Free Software Foundation, either version 3 of
@@ -9,7 +9,7 @@
  */
 #endregion
 
-using System.Linq;
+using System;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Primitives;
 using OpenRA.Traits;
@@ -31,7 +31,13 @@ namespace OpenRA.Mods.RA2.Traits
 		public readonly int EraseDamage = -1;
 
 		[Desc("List of sound which one randomly played after erasing is done.")]
-		public readonly string[] EraseSounds = { };
+		public readonly string[] EraseSounds = Array.Empty<string>();
+
+		[Desc("Do the sounds play under shroud or fog.")]
+		public readonly bool AudibleThroughFog = false;
+
+		[Desc("Volume the sounds played at.")]
+		public readonly float SoundVolume = 1f;
 
 		[Desc("If erase delay is calculated from health, multipile the cost with this to get the time.")]
 		public readonly int EraseDamageMultiplier = 100;
@@ -47,11 +53,12 @@ namespace OpenRA.Mods.RA2.Traits
 
 	public class AffectedByTemporal : ConditionalTrait<AffectedByTemporalInfo>, ISync, ITick, ISelectionBar
 	{
-		Actor self;
+		readonly Actor self;
+
+		readonly int requiredDamage;
+		int recievedDamage;
 
 		int token = Actor.InvalidConditionToken;
-		int requiredDamage;
-		int recievedDamage;
 
 		[Sync]
 		int tick;
@@ -69,7 +76,7 @@ namespace OpenRA.Mods.RA2.Traits
 			if (IsTraitDisabled)
 				return;
 
-			recievedDamage = recievedDamage + damage;
+			recievedDamage += damage;
 			tick = Info.RevokeDelay;
 
 			if (recievedDamage >= requiredDamage)
@@ -79,10 +86,14 @@ namespace OpenRA.Mods.RA2.Traits
 				else
 					self.Kill(damager, damageTypes);
 
-				if (Info.EraseSounds.Any())
+				if (Info.EraseSounds.Length > 0)
 				{
-					var sound = Info.EraseSounds.Random(self.World.LocalRandom);
-					Game.Sound.Play(SoundType.World, sound, self.CenterPosition);
+					var pos = self.CenterPosition;
+					if (Info.AudibleThroughFog || (!self.World.ShroudObscures(pos) && !self.World.FogObscures(pos)))
+					{
+						var sound = Info.EraseSounds.Random(self.World.LocalRandom);
+						Game.Sound.Play(SoundType.World, sound, pos, Info.SoundVolume);
+					}
 				}
 			}
 

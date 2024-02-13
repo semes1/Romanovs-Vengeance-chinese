@@ -79,6 +79,8 @@ CRAKM:
 CRAKME:
 	Inherits: CRAKM
 	Range: 9c0
+	Warhead@1Dam: SpreadDamage
+		Damage: 9000
 	Warhead@2Eff: CreateEffect
 		Explosions: piffred
 
@@ -130,18 +132,11 @@ CRGrenadeE:
 	Inherits: CRGrenade
 	Range: 6c0
 	Warhead@1Dam: SpreadDamage
+		Spread: 0c512
 		Damage: 15000
 	Warhead@1Gar: OpenToppedDamage
+		Spread: 0c512
 		Damage: 15000
-	Warhead@1Dis: GrantExternalCondition
-		Range: 0c768
-		Duration: 40
-		Condition: emp
-		ValidTargets: EMPulse
-	Warhead@2Eff: CreateEffect
-		Explosions: empulse30p
-		ExplosionPalette: tseffect
-		ImpactSounds: sempexpl.wav
 
 CRGrenadeEMP:
 	Inherits: CRGrenade
@@ -150,10 +145,40 @@ CRGrenadeEMP:
 		Duration: 30
 		Condition: emp
 		ValidTargets: EMPulse
+		InvalidTargets: IronCurtained, ForceShielded
 	Warhead@2Eff: CreateEffect
 		Explosions: empulse30p
 		ExplosionPalette: tseffect
 		ImpactSounds: sempexpl.wav
+
+CRGrenadeEMPE:
+	Inherits: CRGrenadeE
+	Warhead@1Dis: GrantExternalCondition
+		Range: 1c512
+		Duration: 30
+		Condition: emp
+		ValidTargets: EMPulse
+		InvalidTargets: IronCurtained, ForceShielded
+	Warhead@2Eff: CreateEffect
+		Explosions: empulse30p
+		ExplosionPalette: tseffect
+		ImpactSounds: sempexpl.wav
+
+CRTrooperMortar:
+	Inherits: TrooperMortar
+	ReloadDelay: 65
+	Warhead@1Dam: SpreadDamage
+		Spread: 0c384
+	Warhead@1Gar: OpenToppedDamage
+		Spread: 0c384
+
+CRTrooperMortarE:
+	Inherits: TrooperMortarE
+	ReloadDelay: 65
+	Warhead@1Dam: SpreadDamage
+		Spread: 0c512
+	Warhead@1Gar: OpenToppedDamage
+		Spread: 0c512
 
 CRNuke:
 	Inherits: IvanBomber
@@ -237,6 +262,22 @@ CRRadBeamWeaponE:
 	Inherits: CRRadBeamWeapon
 	Range: 8c0
 	ReloadDelay: 60
+	Warhead@1Dam: SpreadDamage
+		Damage: 25000
+
+CRRadBeamWeaponOrange:
+	Inherits: CRRadBeamWeapon
+	Projectile: RadBeam
+		Color: FF7F0080
+	Warhead@1Dam: SpreadDamage
+		Damage: 26250
+
+CRRadBeamWeaponOrangeE:
+	Inherits: CRRadBeamWeaponOrange
+	Range: 8c0
+	ReloadDelay: 60
+	Warhead@1Dam: SpreadDamage
+		Damage: 25000
 
 CRNeutronRifle:
 	Inherits: NeutronRifle
@@ -305,8 +346,6 @@ CRFlamerE:
 		Damage: 1400
 	Warhead@1Gar: OpenToppedDamage
 		Damage: 1400
-	Warhead@3Eff: CreateEffect
-		Explosions: largefireblue
 
 CRFlamerBlack:
 	Inherits: FlamerBlack
@@ -316,22 +355,17 @@ CRFlamerBlack:
 CRFlamerBlackE:
 	Inherits: CRFlamerBlack
 	Burst: 16
-	Projectile: BulletAS
-		Image: fireballblack
-		TrailImage: fireballblack
 	Warhead@1Dam: SpreadDamage
 		Damage: 1750
 	Warhead@1Gar: OpenToppedDamage
 		Damage: 1750
-	Warhead@3Eff: CreateEffect
-		Explosions: largefireblack
 
 CRToxinSprayer:
 	Inherits: ToxinSprayer
 	Range: 6c0
 	ReloadDelay: 25
 	Burst: 15
-    
+	
 CRToxinSprayerE:
 	Inherits: CRToxinSprayer
 	ReloadDelay: 20
@@ -389,10 +423,15 @@ CRMagneRifle:
 	Inherits: MagneRifle
 	Range: 6c0
 	Burst: 3
-        
+		
 CRMagneRifleE:
 	Inherits: CRMagneRifle
-	Range: 8c0
+	ReloadDelay: 60
+	Range: 7c0
+	Warhead@1Dam: SpreadDamage
+		Damage: 9000
+	Warhead@2Eff: CreateEffect
+		Explosions: piffred
 
 CRMissileLauncher:
 	Inherits: MissileLauncher
@@ -408,7 +447,7 @@ CRMissileLauncherE:
 	Inherits: CRMissileLauncher
 	Burst: 6
 	Projectile: Missile
-		ContrailColor: EA0000
+		ContrailStartColor: EA0000
 	Warhead@2Eff: CreateEffect
 		Explosions: medium_grey_explosion
 		ImpactSounds: gexp15a.wav
@@ -425,7 +464,7 @@ CRMissileLauncherAAE:
 	Inherits: CRMissileLauncherAA
 	Burst: 6
 	Projectile: Missile
-		ContrailColor: EA0000
+		ContrailStartColor: EA0000
 	Warhead@2Eff: CreateEffect
 		Explosions: medium_grey_explosion
 		ImpactSounds: gexp15a.wav
@@ -434,33 +473,33 @@ CRMissileLauncherBoosted:
 	Inherits: CRMissileLauncher
 	Projectile: Missile
 		Speed: 640
-		ContrailColor: 158888
+		ContrailStartColor: 00b6ff
 	Warhead@1Dam: SpreadDamage
-		Damage: 5000
+		Damage: 6000
 
 CRMissileLauncherBoostedE:
 	Inherits: CRMissileLauncherE
 	Projectile: Missile
 		Speed: 640
-		ContrailColor: FF8888
+		ContrailStartColor: FF8888
 	Warhead@1Dam: SpreadDamage
-		Damage: 5000
+		Damage: 6000
 
 CRMissileLauncherAABoosted:
 	Inherits: CRMissileLauncherAA
 	Projectile: Missile
 		Speed: 640
-		ContrailColor: 158888
+		ContrailStartColor: 00b6ff
 	Warhead@1Dam: SpreadDamage
-		Damage: 5000
+		Damage: 6000
 
 CRMissileLauncherAABoostedE:
 	Inherits: CRMissileLauncherAAE
 	Projectile: Missile
 		Speed: 640
-		ContrailColor: FF8888
+		ContrailStartColor: FF8888
 	Warhead@1Dam: SpreadDamage
-		Damage: 5000
+		Damage: 6000
 
 CRChaosRocket:
 	Inherits: ChaosRocket

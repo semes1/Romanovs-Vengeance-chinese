@@ -1,5 +1,5 @@
 --[[
-   Copyright 2007-2020 The OpenRA Developers (see AUTHORS)
+   Copyright (c) The OpenRA Developers and Contributors
    This file is part of OpenRA, which is free software. It is made
    available to you under the terms of the GNU General Public License
    as published by the Free Software Foundation, either version 3 of
@@ -17,7 +17,7 @@ local players = {}
 local in_play = false
 
 EachKotHInterval = function()
-	KotHText = "\n\n无人控制心灵信标"
+	KotHText = "\n\nPsychic Beacon is offline."
 
 	if beacon_owner ~= beacon.Owner then
 		timer = target_time
@@ -28,7 +28,7 @@ EachKotHInterval = function()
 	if beacon_owner ~= neutral then
 		timer = timer - 1
 
-		KotHText = "\n\n距" .. beacon_owner.Name .. "激活心灵信标并取胜" .. "还有: " .. Utils.FormatTime(timer)
+		KotHText = "\n\nPsychic Beacon is held by: " .. beacon_owner.Name .. "\nIt'll activate in: " .. Utils.FormatTime(timer)
 	end
 
 	local localPlayerIsNull = true
@@ -65,7 +65,7 @@ EachKotHInterval = function()
 	if timer <= 0 then
 		Lighting.Red = Lighting.Red * 2
 
-		KotHText = "\n\n" .. beacon_owner.Name .. "已经激活心灵信标！"
+		KotHText = "\n\nPsychic Beacon is activated by " .. beacon_owner.Name
 		for i,player in pairs(players) do
 			local actors = player.object.GetActors()
 			Utils.Do(actors, function(actor)
@@ -122,7 +122,7 @@ WorldLoadedKotH = function()
 				if not player.IsNonCombatant then
 					players[player.InternalName] = {
 						object = player,
-						objective = player.AddPrimaryObjective("控制并坚守心灵信标" .. Utils.FormatTime(target_time) .. "或消灭所有敌人。"),
+						objective = player.AddPrimaryObjective("Hold the Psychic Beacon for " .. Utils.FormatTime(target_time) .. " or destroy all enemy forces."),
 						alive = true
 					}
 				end
@@ -132,20 +132,3 @@ WorldLoadedKotH = function()
 		end
 	end
 end
-
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          

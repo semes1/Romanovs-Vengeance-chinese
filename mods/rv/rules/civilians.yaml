@@ -62,9 +62,9 @@ civstm:
 vladimir:
 	Inherits: ^CivilianInfantry
 	Tooltip:
-		Name: 弗拉基米尔将军
+		Name: actor-vladimir.name
 	Tooltip@NoRow:
-		Name: 弗拉基米尔将军
+		Name: actor-vladimir.name
 	WithInfantryBody:
 		IdleSequences: idle1, idle2
 	-ScaredyCat:
@@ -73,9 +73,9 @@ vladimir:
 pentgen:
 	Inherits: ^CivilianInfantry
 	Tooltip:
-		Name: 将官
+		Name: actor-pentgen.name
 	Tooltip@NoRow:
-		Name: 将官
+		Name: actor-pentgen.name
 	Voiced:
 		VoiceSet: GIVoice
 	-ScaredyCat:
@@ -84,9 +84,9 @@ pentgen:
 ssrv:
 	Inherits: ^CivilianInfantry
 	Tooltip:
-		Name: 特工保镖
+		Name: actor-ssrv.name
 	Tooltip@NoRow:
-		Name: 特工保镖
+		Name: actor-ssrv.name
 	Voiced:
 		VoiceSet: SecretServiceVoice
 	-ScaredyCat:
@@ -95,9 +95,9 @@ ssrv:
 pres:
 	Inherits: ^CivilianInfantry
 	Tooltip:
-		Name: 迈克尔·杜根总统
+		Name: actor-pres.name
 	Tooltip@NoRow:
-		Name: 迈克尔·杜根总统
+		Name: actor-pres.name
 	-Wanders:
 	WithInfantryBody:
 		-DefaultAttackSequence:
@@ -106,9 +106,9 @@ pres:
 rmnv:
 	Inherits: ^CivilianInfantry
 	Tooltip:
-		Name: 亚历山大·罗曼诺夫总理
+		Name: actor-rmnv.name
 	Tooltip@NoRow:
-		Name: 亚历山大·罗曼诺夫总理
+		Name: actor-rmnv.name
 	Voiced:
 		VoiceSet: RomanovVoice
 	-ScaredyCat:
@@ -119,9 +119,9 @@ rmnv:
 eins:
 	Inherits: ^CivilianInfantry
 	Tooltip:
-		Name: 阿尔伯特·爱因斯坦教授
+		Name: actor-eins.name
 	Tooltip@NoRow:
-		Name: 阿尔伯特·爱因斯坦教授
+		Name: actor-eins.name
 	Voiced:
 		VoiceSet: EinsteinVoice
 	-Wanders:
@@ -131,9 +131,9 @@ eins:
 mumy:
 	Inherits: ^CivilianInfantry
 	Tooltip:
-		Name: 木乃伊
+		Name: actor-mumy.name
 	Tooltip@NoRow:
-		Name: 木乃伊
+		Name: actor-mumy.name
 	Health:
 		HP: 40000
 	Armor:
@@ -148,6 +148,8 @@ mumy:
 		VoiceSet: MummyVoice
 	-ScaredyCat:
 	-Wanders:
+	ActorStatValues:
+		Damage: 100
 
 # Custom Civilians
 pentgen2:
@@ -156,48 +158,130 @@ pentgen2:
 myak:
 	Inherits: ssrv
 	Tooltip:
-		Name: 穆斯塔法·雅库波夫主席
+		Name: actor-myak.name
 	Tooltip@NoRow:
-		Name: 穆斯塔法·雅库波夫主席
+		Name: actor-myak.name
+
+rainbow_dash:
+	Inherits: ^Pegasus
+	Tooltip:
+		Name: actor-rainbow-dash.name
+	Tooltip@NoRow:
+		Name: actor-rainbow-dash.name
+	Aircraft:
+		Speed: 640
+	Contrail@R:
+		Offset: -100,-70,25
+		StartColor: DD302A80
+		StartColorAlpha: 128
+		StartColorUsePlayerColor: false
+		StartWidth: 40
+	Contrail@O:
+		Offset: -100,-50,25
+		StartColor: E2611F80
+		StartColorAlpha: 128
+		StartColorUsePlayerColor: false
+		StartWidth: 40
+	Contrail@Y:
+		Offset: -100,-10,25
+		StartColor: FECC4480
+		StartColorAlpha: 128
+		StartColorUsePlayerColor: false
+		StartWidth: 40
+	Contrail@G:
+		Offset: -100,10,25
+		StartColor: 7AB93480
+		StartColorAlpha: 128
+		StartColorUsePlayerColor: false
+		StartWidth: 40
+	Contrail@B:
+		Offset: -100,50,25
+		StartColor: 008ECA80
+		StartColorAlpha: 128
+		StartColorUsePlayerColor: false
+		StartWidth: 40
+	Contrail@P:
+		Offset: -100,70,25
+		StartColor: 69328580
+		StartColorAlpha: 128
+		StartColorUsePlayerColor: false
+		StartWidth: 40
+
+derpy_hooves:
+	Inherits: ^Pegasus
+	Tooltip:
+		Name: actor-derpy-hooves.name
+	Tooltip@NoRow:
+		Name: actor-derpy-hooves.name
+	Contrail@1:
+		Offset: -100,-50,25
+		StartColor: C2C5D580
+		StartColorAlpha: 128
+		StartColorUsePlayerColor: false
+		StartWidth: 80
+	Contrail@2:
+		Offset: -100,0,25
+		StartColor: FFFAAD80
+		StartColorAlpha: 128
+		StartColorUsePlayerColor: false
+		StartWidth: 80
+	Contrail@3:
+		Offset: -100,50,25
+		StartColor: C2C5D580
+		StartColorAlpha: 128
+		StartColorUsePlayerColor: false
+		StartWidth: 80
 
 pres.regicide:
 	Inherits: ^RegicideLeader
 	Tooltip:
-		Name: 迈克尔·杜根总统
+		Name: actor-pres.name
 	Tooltip@NoRow:
-		Name: 迈克尔·杜根总统
+		Name: actor-pres.name
 	RenderSprites:
 		Image: pres
+	ActorStatValues:
+		Icon: icon
+		IconPalette: chrome
 
 rmnv.regicide:
 	Inherits: ^RegicideLeader
 	Tooltip:
-		Name: 亚历山大·罗曼诺夫总理
+		Name: actor-rmnv.name
 	Tooltip@NoRow:
-		Name: 亚历山大·罗曼诺夫总理
+		Name: actor-rmnv.name
 	Voiced:
 		VoiceSet: RomanovVoice
 	RenderSprites:
 		Image: rmnv
+	ActorStatValues:
+		Icon: icon
+		IconPalette: chrome
 
 yuripr.regicide:
 	Inherits: ^RegicideLeader
 	Tooltip:
-		Name: 尤里大师
+		Name: actor-yuripr-regicide.name
 	Tooltip@NoRow:
-		Name: 尤里大师
+		Name: actor-yuripr-regicide.name
 	Voiced:
 		VoiceSet: YuriPrimeVoice
 	RenderSprites:
 		Image: yuripr
+	ActorStatValues:
+		Icon: icon
+		IconPalette: chrome
 
 myak.regicide:
 	Inherits: ^RegicideLeader
 	Tooltip:
-		Name: 穆斯塔法·雅库波夫主席
+		Name: actor-myak.name
 	Tooltip@NoRow:
-		Name: 穆斯塔法·雅库波夫主席
+		Name: actor-myak.name
 	Voiced:
 		VoiceSet: SecretServiceVoice
 	RenderSprites:
 		Image: myak
+	ActorStatValues:
+		Icon: icon
+		IconPalette: chrome

@@ -1,5 +1,5 @@
 --[[
-   Copyright 2007-2021 The OpenRA Developers (see AUTHORS)
+   Copyright (c) The OpenRA Developers and Contributors
    This file is part of OpenRA, which is free software. It is made
    available to you under the terms of the GNU General Public License
    as published by the Free Software Foundation, either version 3 of
@@ -34,32 +34,37 @@ TextColors ={ }
 
 Ranks =
 {
-	america = { "中尉", "上尉", "少校", "上校", "将军" },
-	england = { "中尉", "上尉", "少校", "上校", "将军" },
-	france = { "中尉", "上尉", "少校", "上校", "将军" },
-	germany = { "中尉", "上尉", "少校", "上校", "将军" },
-	korea = { "中尉", "上尉", "少校", "上校", "将军" },
-	japan = { "中尉", "上尉", "少校", "上校", "将军" },
-	belarus = { "中尉", "上尉", "少校", "上校", "将军" },
-	poland = { "中尉", "上尉", "少校", "上校", "将军" },
-	ukraine = { "中尉", "上尉", "少校", "上校", "将军" },
-	aussie = { "中尉", "上尉", "少校", "上校", "将军" },
-	china = { "中尉", "上尉", "少校", "上校", "将军" },
-	turkey = { "中尉", "上尉", "少校", "上校", "将军" },
-	canada = { "中尉", "上尉", "少校", "上校", "将军" },
-	russia = { "中尉", "上尉", "少校", "上校", "将军" },
-	iraq = { "中尉", "上尉", "少校", "上校", "将军" },
-	vietnam = { "中尉", "上尉", "少校", "上校", "将军" },
-	cuba = { "中尉", "上尉", "少校", "上校", "将军" },
-	libya = { "中尉", "上尉", "少校", "上校", "将军" },
-	chile = { "中尉", "上尉", "少校", "上校", "将军" },
-	mexico = { "中尉", "上尉", "少校", "上校", "将军" },
-	mongolia = { "中尉", "上尉", "少校", "上校", "将军" },
-	psicorps = { "使徒", "执事", "司铎", "主教", "枢机主教" },
-	psinepal = { "使徒", "执事", "司铎", "主教", "枢机主教" },
-	psitrans = { "使徒", "执事", "司铎", "主教", "枢机主教" },
-	psisouth = { "使徒", "执事", "司铎", "主教", "枢机主教" },
-	psimoon = { "使徒", "执事", "司铎", "主教", "枢机主教" },
+	america = { "Lieutenant", "Captain", "Major", "Colonel", "General" },
+	england = { "Lieutenant", "Captain", "Major", "Colonel", "General" },
+	france = { "Lieutenant", "Captain", "Major", "Colonel", "General" },
+	germany = { "Lieutenant", "Captain", "Major", "Colonel", "General" },
+	korea = { "Lieutenant", "Captain", "Major", "Colonel", "General" },
+	japan = { "Lieutenant", "Captain", "Major", "Colonel", "General" },
+	belarus = { "Lieutenant", "Captain", "Major", "Colonel", "General" },
+	poland = { "Lieutenant", "Captain", "Major", "Colonel", "General" },
+	ukraine = { "Lieutenant", "Captain", "Major", "Colonel", "General" },
+	aussie = { "Lieutenant", "Captain", "Major", "Colonel", "General" },
+	china = { "Lieutenant", "Captain", "Major", "Colonel", "General" },
+	turkey = { "Lieutenant", "Captain", "Major", "Colonel", "General" },
+	canada = { "Lieutenant", "Captain", "Major", "Colonel", "General" },
+	russia = { "Leytenant", "Kapitan", "Mayor", "Polkovnik", "General" },
+	iraq = { "Leytenant", "Kapitan", "Mayor", "Polkovnik", "General" },
+	vietnam = { "Leytenant", "Kapitan", "Mayor", "Polkovnik", "General" },
+	cuba = { "Leytenant", "Kapitan", "Mayor", "Polkovnik", "General" },
+	libya = { "Leytenant", "Kapitan", "Mayor", "Polkovnik", "General" },
+	chile = { "Leytenant", "Kapitan", "Mayor", "Polkovnik", "General" },
+	mexico = { "Leytenant", "Kapitan", "Mayor", "Polkovnik", "General" },
+	mongolia = { "Leytenant", "Kapitan", "Mayor", "Polkovnik", "General" },
+	psicorps = { "Consultant", "Adept", "Overseer", "Elite", "Mastermind" },
+	psinepal = { "Consultant", "Adept", "Overseer", "Elite", "Mastermind" },
+	psitrans = { "Consultant", "Adept", "Overseer", "Elite", "Mastermind" },
+	psisouth = { "Consultant", "Adept", "Overseer", "Elite", "Mastermind" },
+	psimoon = { "Consultant", "Adept", "Overseer", "Elite", "Mastermind" },
+	transcaucus = { "Leytenant", "Kapitan", "Mayor", "Polkovnik", "General" },
+	turkmen = { "Leytenant", "Kapitan", "Mayor", "Polkovnik", "General" },
+	tuva = { "Leytenant", "Kapitan", "Mayor", "Polkovnik", "General" },
+	russianfed = { "Leytenant", "Kapitan", "Mayor", "Polkovnik", "General" },
+	serbia = { "Leytenant", "Kapitan", "Mayor", "Polkovnik", "General" }
 }
 RankXPs = { 0, 300, 1300, 2500, 5000 }
 
@@ -77,9 +82,9 @@ TickCommandersPowers = function()
 		if player.IsLocalPlayer then
 			localPlayerIsNull = false
 			if Levels[player.InternalName] < 4 then
-				CommandersPowerText = "您的军衔: " .. Ranks[player.Faction][Levels[player.InternalName] + 1] .. "\n指挥官点数: " .. Points[player.InternalName] .. "\n晋升进度: " .. player.Experience - RankXPs[Levels[player.InternalName] + 1] .. "/" .. RankXPs[Levels[player.InternalName] + 2] - RankXPs[Levels[player.InternalName] + 1] .. "\n\n"
+				CommandersPowerText = "Current Rank: " .. Ranks[player.Faction][Levels[player.InternalName] + 1] .. "\nCommander's Points: " .. Points[player.InternalName] .. "\nProgress to Next Rank: " .. player.Experience - RankXPs[Levels[player.InternalName] + 1] .. "/" .. RankXPs[Levels[player.InternalName] + 2] - RankXPs[Levels[player.InternalName] + 1] .. "\n\n"
 			else
-				CommandersPowerText = "您的军衔: " .. Ranks[player.Faction][Levels[player.InternalName] + 1] .. "\n指挥官点数: " .. Points[player.InternalName] .. "\n\n"
+				CommandersPowerText = "Current Rank: " .. Ranks[player.Faction][Levels[player.InternalName] + 1] .. "\nCommander's Points: " .. Points[player.InternalName] .. "\n\n"
 			end
 			UserInterface.SetMissionText(CommandersPowerText .. DominationText .. KotHText, TextColors[player.InternalName])
 		end
@@ -166,26 +171,10 @@ WorldLoadedCommandersPowers = function()
 	if CPModifier ~= "disabled" then
 		for _,player in pairs(players) do
 			ReducePoints(player)
+
+			player.GetActorsByType("player")[1].GrantCondition("cps_enabled")
 		end
 
 		Second()
 	end
 end
-
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          

@@ -1,59 +1,84 @@
 ProductionTypeBuilding: E
-	Description: 建筑页面
-	Types: Production, Player
+	Description: Building Tab
+	Types: Production
+	Contexts: Player
 
 ProductionTypeDefense: R
-	Description: 防御页面
-	Types: Production, Player
+	Description: Defense Tab
+	Types: Production
+	Contexts: Player
 
 ProductionTypeInfantry: T
-	Description: 步兵页面
-	Types: Production, Player
+	Description: Infantry Tab
+	Types: Production
+	Contexts: Player
 
 ProductionTypeVehicle: Y
-	Description: 载具页面
-	Types: Production, Player
+	Description: Vehicle Tab
+	Types: Production
+	Contexts: Player
 
 ProductionTypeAircraft: U
-	Description: 飞行器页面
-	Types: Production, Player
+	Description: Aircraft Tab
+	Types: Production
+	Contexts: Player
 
 ProductionTypeNaval: I
-	Description: 海军页面
-	Types: Production, Player
+	Description: Naval Tab
+	Types: Production
+	Contexts: Player
 
 ProductionTypePower: O
-	Description: 支援能力页面
-	Types: Production, Player
+	Description: Commander's Power Tab
+	Types: Production
+	Contexts: Player
 
 ProductionTypeUpgrade: P
-	Description: 升级页面
-	Types: Production, Player
+	Description: Upgrade Tab
+	Types: Production
+	Contexts: Player
 
 ToggleVariant: V
-	Description: 旋转建筑
-	Types: Production, Player
+	Description: Rotate Building
+	Types: Production
+	Contexts: Player
 
 PowerDown: X
-	Description: 切断电源
-	Types: OrderGenerator, Player
+	Description: Power-down mode
+	Types: OrderGenerator
+	Contexts: Player
 
 DecreaseDepthPreviewContrast: LEFTBRACKET SHIFT
-	Description: 降低对比度
+	Description: Decrease Contrast
 	Types: DepthDebug
+	Contexts: Player
 
 IncreaseDepthPreviewContrast: RIGHTBRACKET SHIFT
-	Description: 增加对比度
+	Description: Increase Contrast
 	Types: DepthDebug
+	Contexts: Player
 
 DecreaseDepthPreviewOffset: SEMICOLON SHIFT
-	Description: 降低基准
+	Description: Decrease Offset
 	Types: DepthDebug
+	Contexts: Player
 
 IncreaseDepthPreviewOffset: QUOTE SHIFT
-	Description: 升高基准
+	Description: Increase Offset
 	Types: DepthDebug
+	Contexts: Player
 
 ToggleDepthPreview: BACKSLASH SHIFT
-	Description: 切换预览
+	Description: Toggle Preview
 	Types: DepthDebug
+	Contexts: Player
+
+StatisticsMinimal: BACKQUOTE
+	Description: Minimal statistics
+	Types: Observer
+	Contexts: Spectator
+
+StatisticsUpgrades: F8
+	Description: CP and Upgrade statistics
+	Types: Observer
+	Contexts: Spectator

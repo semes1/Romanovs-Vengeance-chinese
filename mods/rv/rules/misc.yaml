@@ -29,209 +29,211 @@ oreclearer:
 
 ^ambient:
 	Inherits: ^SystemActor
+	-Immobile:
 	Aircraft:
 		CruiseAltitude: 0c1
 		VTOL: true
 	RejectsOrders:
 	Interactable:
-	AmbientSound:
-		AudibleThroughFog: true
+	# AmbientSound:
+	#	AudibleThroughFog: true
+	-MapEditorData:
 	RenderSpritesEditorOnly:
 		Image: ambient
 
 ambient_bird_jungle_1:
 	Inherits: ^ambient
 	EditorOnlyTooltip:
-		Name: Jungle Bird Ambient Sound 1
-	AmbientSound:
-		SoundFiles: abirj01a.wav, abirj01b.wav, abirj01c.wav, abirj01d.wav, abirj01e.wav, abirj01f.wav
-		Interval: 125, 200
-		Volume: 0.35
+		Name: actor-ambient-bird-jungle-1-name
+	# AmbientSound:
+	#	SoundFiles: abirj01a.wav, abirj01b.wav, abirj01c.wav, abirj01d.wav, abirj01e.wav, abirj01f.wav
+	#	Interval: 125, 200
+	#	Volume: 0.35
 
 ambient_bird_jungle_2:
 	Inherits: ^ambient
 	EditorOnlyTooltip:
-		Name: Jungle Bird Ambient Sound 2
-	AmbientSound:
-		SoundFiles: abirj02a.wav, abirj02b.wav, abirj02c.wav, abirj02d.wav, abirj02e.wav, abirj02f.wav, abirj02g.wav
-		Interval: 125, 200
-		Volume: 0.30
+		Name: actor-ambient-bird-jungle-2-name
+	# AmbientSound:
+	#	SoundFiles: abirj02a.wav, abirj02b.wav, abirj02c.wav, abirj02d.wav, abirj02e.wav, abirj02f.wav, abirj02g.wav
+	#	Interval: 125, 200
+	#	Volume: 0.30
 
 ambient_bird_morning:
 	Inherits: ^ambient
 	EditorOnlyTooltip:
-		Name: Morning Bird Ambient Sound
-	AmbientSound:
-		SoundFiles: abirm01a.wav, abirm01b.wav, abirm01c.wav
-		Interval: 175, 300
-		Volume: 0.40
+		Name: actor-ambient-bird-morning-name
+	# AmbientSound:
+	#	SoundFiles: abirm01a.wav, abirm01b.wav, abirm01c.wav
+	#	Interval: 175, 300
+	#	Volume: 0.40
 
 ambient_bird_park:
 	Inherits: ^ambient
 	EditorOnlyTooltip:
-		Name: Park Bird Ambient Sound
-	AmbientSound:
-		SoundFiles: abirp01a.wav, abirp01b.wav, abirp01c.wav, abirp01d.wav, abirp01e.wav
-		Interval: 125, 200
-		Volume: 0.35
+		Name: actor-ambient-bird-park-name
+	# AmbientSound:
+	#	SoundFiles: abirp01a.wav, abirp01b.wav, abirp01c.wav, abirp01d.wav, abirp01e.wav
+	#	Interval: 125, 200
+	#	Volume: 0.35
 
 ambient_bird_temperate_1:
 	Inherits: ^ambient
 	EditorOnlyTooltip:
-		Name: Temperate Bird Ambient Sound 1
-	AmbientSound:
-		SoundFiles: abirt01a.wav, abirt01b.wav, abirt01c.wav, abirt01d.wav, abirt01e.wav, abirt01f.wav, abirt01g.wav
-		Interval: 125, 200
-		Volume: 0.35
+		Name: actor-ambient-bird-temperate-1-name
+	# AmbientSound:
+	#	SoundFiles: abirt01a.wav, abirt01b.wav, abirt01c.wav, abirt01d.wav, abirt01e.wav, abirt01f.wav, abirt01g.wav
+	#	Interval: 125, 200
+	#	Volume: 0.35
 
 ambient_bird_temperate_2:
 	Inherits: ^ambient
 	EditorOnlyTooltip:
-		Name: Temperate Bird Ambient Sound 2
-	AmbientSound:
-		SoundFiles: abirt02a.wav, abirt02b.wav
-		Interval: 125, 200
-		Volume: 0.35
+		Name: actor-ambient-bird-temperate-2-name
+	# AmbientSound:
+	#	SoundFiles: abirt02a.wav, abirt02b.wav
+	#	Interval: 125, 200
+	#	Volume: 0.35
 
 ambient_cricket_1:
 	Inherits: ^ambient
 	EditorOnlyTooltip:
-		Name: Cricket Ambient Sound 1
-	AmbientSound:
-		SoundFiles: acri01a.wav, acri01b.wav, acri01c.wav
-		Interval: 200, 400
-		Volume: 0.25
+		Name: actor-ambient-cricket-1-name
+	# AmbientSound:
+	#	SoundFiles: acri01a.wav, acri01b.wav, acri01c.wav
+	#	Interval: 200, 400
+	#	Volume: 0.25
 
 ambient_cricket_2:
 	Inherits: ^ambient
 	EditorOnlyTooltip:
-		Name: Cricket Ambient Sound 2
-	AmbientSound:
-		SoundFiles: acri02a.wav, acri02b.wav, acri02c.wav, acri02d.wav, acri02e.wav, acri02f.wav
-		Interval: 200, 400
-		Volume: 0.35
+		Name: actor-ambient-cricket-2-name
+	# AmbientSound:
+	#	SoundFiles: acri02a.wav, acri02b.wav, acri02c.wav, acri02d.wav, acri02e.wav, acri02f.wav
+	#	Interval: 200, 400
+	#	Volume: 0.35
 
 ambient_cricket_3:
 	Inherits: ^ambient
 	EditorOnlyTooltip:
-		Name: Cricket Ambient Sound 3
-	AmbientSound:
-		SoundFiles: acric03a.wav, acric03b.wav, acric03c.wav
-		Interval: 200, 400
-		Volume: 0.70
+		Name: actor-ambient-cricket-3-name
+	# AmbientSound:
+	#	SoundFiles: acric03a.wav, acric03b.wav, acric03c.wav
+	#	Interval: 200, 400
+	#	Volume: 0.70
 
 ambient_hawk:
 	Inherits: ^ambient
 	EditorOnlyTooltip:
-		Name: Hawk Ambient Sound
-	AmbientSound:
-		SoundFiles: ades01a.wav
-		Interval: 500, 750
-		Volume: 0.40
+		Name: actor-ambient-hawk-name
+	# AmbientSound:
+	#	SoundFiles: ades01a.wav
+	#	Interval: 500, 750
+	#	Volume: 0.40
 
 ambient_seagull_1:
 	Inherits: ^ambient
 	EditorOnlyTooltip:
-		Name: Seagull Ambient Sound 1
-	AmbientSound:
-		SoundFiles: agul01a.wav, agul01b.wav, agul01c.wav, agul01d.wav, agul01e.wav
-		Volume: 0.35
+		Name: actor-ambient-seagull-1-name
+	# AmbientSound:
+	#	SoundFiles: agul01a.wav, agul01b.wav, agul01c.wav, agul01d.wav, agul01e.wav
+	#	Volume: 0.35
 
 ambient_seagull_2:
 	Inherits: ^ambient
 	EditorOnlyTooltip:
-		Name: Seagull Ambient Sound 2
-	AmbientSound:
-		SoundFiles: agul02a.wav, agul02b.wav, agul02c.wav, agul02d.wav, agul02e.wav, agul02f.wav, agul02g.wav, agul02h.wav, agul02i.wav, agul02j.wav
-		Interval: 200, 400
-		Volume: 0.30
+		Name: actor-ambient-seagull-2-name
+	# AmbientSound:
+	#	SoundFiles: agul02a.wav, agul02b.wav, agul02c.wav, agul02d.wav, agul02e.wav, agul02f.wav, agul02g.wav, agul02h.wav, agul02i.wav, agul02j.wav
+	#	Interval: 200, 400
+	#	Volume: 0.30
 
 ambient_owl:
 	Inherits: ^ambient
 	EditorOnlyTooltip:
-		Name: Owl Ambient Sound
-	AmbientSound:
-		SoundFiles: aowl01a.wav, aowl01b.wav, aowl01c.wav, aowl01d.wav, aowl01e.wav, aowl01f.wav
-		Interval: 250, 500
-		Volume: 0.45
+		Name: actor-ambient-owl-name
+	# AmbientSound:
+	#	SoundFiles: aowl01a.wav, aowl01b.wav, aowl01c.wav, aowl01d.wav, aowl01e.wav, aowl01f.wav
+	#	Interval: 250, 500
+	#	Volume: 0.45
 
 ambient_river:
 	Inherits: ^ambient
 	EditorOnlyTooltip:
-		Name: River Ambient Sound
-	AmbientSound:
-		SoundFiles: ariv01a.wav, ariv01b.wav, ariv01c.wav
-		Volume: 0.40
+		Name: actor-ambient-river-name
+	# AmbientSound:
+	#	SoundFiles: ariv01a.wav, ariv01b.wav, ariv01c.wav
+	#	Volume: 0.40
 
 ambient_traffic:
 	Inherits: ^ambient
 	EditorOnlyTooltip:
-		Name: Traffic Ambient Sound
-	AmbientSound:
-		SoundFiles: atra01a.wav, atra01b.wav, atra01c.wav, atra01d.wav, atra01e.wav, atra01f.wav
-		Interval: 300, 500
-		Volume: 0.40
+		Name: actor-ambient-traffic-name
+	# AmbientSound:
+	#	SoundFiles: atra01a.wav, atra01b.wav, atra01c.wav, atra01d.wav, atra01e.wav, atra01f.wav
+	#	Interval: 300, 500
+	#	Volume: 0.40
 
 ambient_urban_1:
 	Inherits: ^ambient
 	EditorOnlyTooltip:
-		Name: Urban Ambient Sound 1
-	AmbientSound:
-		SoundFiles: aurb01a.wav, aurb01b.wav, aurb01c.wav, aurb01d.wav, aurb01e.wav, aurb01f.wav
-		Volume: 0.35
+		Name: actor-ambient-urban-1-name
+	# AmbientSound:
+	#	SoundFiles: aurb01a.wav, aurb01b.wav, aurb01c.wav, aurb01d.wav, aurb01e.wav, aurb01f.wav
+	#	Volume: 0.35
 
 ambient_urban_2:
 	Inherits: ^ambient
 	EditorOnlyTooltip:
-		Name: Urban Ambient Sound 2
-	AmbientSound:
-		SoundFiles: aurb02a.wav, aurb02b.wav, aurb02c.wav, aurb02d.wav
-		Volume: 0.30
+		Name: actor-ambient-urban-2-name
+	# AmbientSound:
+	#	SoundFiles: aurb02a.wav, aurb02b.wav, aurb02c.wav, aurb02d.wav
+	#	Volume: 0.30
 
 ambient_wave_1:
 	Inherits: ^ambient
 	EditorOnlyTooltip:
-		Name: Wave Ambient Sound 1
-	AmbientSound:
-		SoundFiles: awav01a.wav, awav01b.wav, awav01c.wav, awav01d.wav
-		Interval: 100, 250
-		Volume: 0.45
+		Name: actor-ambient-wave-1-name
+	# AmbientSound:
+	#	SoundFiles: awav01a.wav, awav01b.wav, awav01c.wav, awav01d.wav
+	#	Interval: 100, 250
+	#	Volume: 0.45
 
 ambient_wave_2:
 	Inherits: ^ambient
 	EditorOnlyTooltip:
-		Name: Wave Ambient Sound 2
-	AmbientSound:
-		SoundFiles: awav02a.wav, awav02b.wav, awav02c.wav, awav02d.wav
-		Interval: 100, 200
-		Volume: 0.55
+		Name: actor-ambient-wave-2-name
+	# AmbientSound:
+	#	SoundFiles: awav02a.wav, awav02b.wav, awav02c.wav, awav02d.wav
+	#	Interval: 100, 200
+	#	Volume: 0.55
 
 ambient_wave_3:
 	Inherits: ^ambient
 	EditorOnlyTooltip:
-		Name: Wave Ambient Sound 3
-	AmbientSound:
-		SoundFiles: awav03a.wav, awav03b.wav, awav03c.wav, awav03d.wav, awav03e.wav
-		Interval: 150, 250
-		Volume: 0.45
+		Name: actor-ambient-wave-3-name
+	# AmbientSound:
+	#	SoundFiles: awav03a.wav, awav03b.wav, awav03c.wav, awav03d.wav, awav03e.wav
+	#	Interval: 150, 250
+	#	Volume: 0.45
 
 ambient_wind_1:
 	Inherits: ^ambient
 	EditorOnlyTooltip:
-		Name: Wind Ambient Sound 1
-	AmbientSound:
-		SoundFiles: awin01a.wav, awin01b.wav, awin01c.wav, awin01d.wav
-		Interval: 250, 500
-		Volume: 0.45
+		Name: actor-ambient-wind-1-name
+	# AmbientSound:
+	#	SoundFiles: awin01a.wav, awin01b.wav, awin01c.wav, awin01d.wav
+	#	Interval: 250, 500
+	#	Volume: 0.45
 
 ambient_wind_2:
 	Inherits: ^ambient
 	EditorOnlyTooltip:
-		Name: Wind Ambient Sound 2
-	AmbientSound:
-		SoundFiles: awin02a.wav, awin02b.wav, awin02c.wav, awin02d.wav
-		Interval: 250, 500
-		Volume: 0.55
+		Name: actor-ambient-wind-2-name
+	# AmbientSound:
+	#	SoundFiles: awin02a.wav, awin02b.wav, awin02c.wav, awin02d.wav
+	#	Interval: 250, 500
+	#	Volume: 0.55
 
 crate:
 	Inherits: ^Crate
@@ -343,21 +345,21 @@ crate:
 	GiveUnitCrateAction@engineer:
 		SelectionShares: 1
 		Units: engineer
-	GiveMcvCrateAction@allied:
+	GiveBaseBuilderCrateAction@allied:
 		SelectionShares: 0
 		NoBaseSelectionShares: 1000
 		Prerequisites: !hack.no_bases
 		ValidFactions: america, england, france, germany, korea, japan, belarus, poland, ukraine, aussie, china, turkey, canada
 		Units: amcv
 		Sound: gcrafree.wav
-	GiveMcvCrateAction@soviets:
+	GiveBaseBuilderCrateAction@soviets:
 		SelectionShares: 0
 		NoBaseSelectionShares: 1000
 		Prerequisites: !hack.no_bases
 		ValidFactions: russia, iraq, vietnam, cuba, libya, chile, mexico, mongolia, transcaucus, turkmen, tuva, russianfed, serbia
 		Units: smcv
 		Sound: gcrafree.wav
-	GiveMcvCrateAction@psicorps:
+	GiveBaseBuilderCrateAction@psicorps:
 		SelectionShares: 0
 		NoBaseSelectionShares: 1000
 		Prerequisites: !hack.no_bases
@@ -408,6 +410,7 @@ amcv.colorpicker:
 	-MapEditorData:
 	WithVoxelBody:
 		ShowShadow: false
+	-WithVoxelBody@Water:
 	RenderSprites:
 		Image: amcv
 		Palette: colorpicker
@@ -423,6 +426,7 @@ smcv.colorpicker:
 	-MapEditorData:
 	WithVoxelBody:
 		ShowShadow: false
+	-WithVoxelBody@Water:
 	RenderSprites:
 		Image: smcv
 		Palette: colorpicker
@@ -438,6 +442,7 @@ pcv.colorpicker:
 	-MapEditorData:
 	WithVoxelBody:
 		ShowShadow: false
+	-WithVoxelBody@Water:
 	RenderSprites:
 		Image: pcv
 		Palette: colorpicker
@@ -489,18 +494,18 @@ CAMERA:
 	RenderSpritesEditorOnly:
 		Image: camera
 	EditorOnlyTooltip:
-		Name: (reveals area to owner)
+		Name: actor-camera-name
 	MapEditorData:
 		Categories: System
 
 SONAR:
 	Inherits: CAMERA
 	EditorOnlyTooltip:
-		Name: (support power proxy camera)
+		Name: actor-sonar-name
 	-RevealsShroud:
 	DetectCloaked:
 		Range: 25c0
-		CloakTypes: Underwater
+		DetectionTypes: Underwater
 
 camera.satscan:
 	Inherits: CAMERA
@@ -508,7 +513,7 @@ camera.satscan:
 	Buildable:
 		Queue: SpySatellite
 	Tooltip:
-		Name: Satellite Scan
+		Name: actor-camera-satscan-name
 	#GivesIntelligence:
 	#	Types: SatelliteScan
 	#	RequiresCondition: uplinkavailable
@@ -548,10 +553,16 @@ camera.8c0:
 		Range: 8c0
 		Type: CenterPosition
 
+camera.10c0:
+	Inherits: CAMERA
+	RevealsShroud:
+		Range: 10c0
+		Type: CenterPosition
+
 camera.spyplane:
-	Inherits: camera.8c0
+	Inherits: camera.10c0
 	DetectCloaked:
-		Range: 8c0
+		Range: 10c0
 	KillsSelf:
 		RemoveInstead: true
 		Delay: 250
@@ -602,7 +613,7 @@ magnetic_beam.1:
 		Bounds: 603, 7240, 0, -3620
 	SelectionDecorations:
 	Tooltip:
-		Name: Magnetic Beam
+		Name: actor-magnetic-beam-1-name
 	RevealsShroud:
 		Range: 3c0
 		Type: CenterPosition
@@ -631,10 +642,8 @@ magnetic_beam.1:
 		LocalOffset: 0,0,2c0
 	PeriodicExplosion@Freeze:
 		Weapon: MagneBeamFreeze1
-	AmbientSound@start:
+	SoundAnnouncement@start:
 		SoundFiles: vmagat2a.wav
-		Delay: 0
-		Interval: 900 # play this only once
 	AmbientSound@loop:
 		SoundFiles: vmagatta.wav
 		Delay: 50
@@ -729,7 +738,7 @@ txgasg:
 ^LampPost:
 	Interactable:
 	EditorOnlyTooltip:
-		Name: (Invisible Light Post)
+		Name: meta-lamppost-name
 	AlwaysVisible:
 	Immobile:
 		OccupiesSpace: false
@@ -753,7 +762,7 @@ txgasg:
 galite.white:
 	Inherits: ^LampPost
 	EditorOnlyTooltip:
-		Name: (Invisible Light Post)
+		Name: actor-galite-white-name
 	TerrainLightSource:
 		Range: 19c544
 		Intensity: 0.2
@@ -764,7 +773,7 @@ galite.white:
 galite.black:
 	Inherits: ^LampPost
 	EditorOnlyTooltip:
-		Name: (Invisible Negative Light Post)
+		Name: actor-galite-black-name
 	TerrainLightSource:
 		Range: 13c688
 		Intensity: -0.15
@@ -775,7 +784,7 @@ galite.black:
 galite.red:
 	Inherits: ^LampPost
 	EditorOnlyTooltip:
-		Name: (Invisible Red Light Post)
+		Name: actor-galite-red-name
 	TerrainLightSource:
 		Range: 15c640
 		Intensity: 0.01
@@ -786,7 +795,7 @@ galite.red:
 galite.cyan:
 	Inherits: ^LampPost
 	EditorOnlyTooltip:
-		Name: (Invisible Negative Red Light Post)
+		Name: actor-galite-cyan-name
 	TerrainLightSource:
 		Range: 15c640
 		Intensity: -0.05
@@ -797,7 +806,7 @@ galite.cyan:
 galite.green:
 	Inherits: ^LampPost
 	EditorOnlyTooltip:
-		Name: (Invisible Green Light Post)
+		Name: actor-galite-green-name
 	TerrainLightSource:
 		Range: 15c640
 		Intensity: 0.01
@@ -808,7 +817,7 @@ galite.green:
 galite.blue:
 	Inherits: ^LampPost
 	EditorOnlyTooltip:
-		Name: (Invisible Blue Light Post)
+		Name: actor-galite-blue-name
 	TerrainLightSource:
 		Range: 15c640
 		Intensity: 0.01
@@ -819,7 +828,7 @@ galite.blue:
 galite.yellow:
 	Inherits: ^LampPost
 	EditorOnlyTooltip:
-		Name: (Invisible Yellow Light Post)
+		Name: actor-galite-yellow-name
 	TerrainLightSource:
 		Range: 15c640
 		Intensity: 0.01
@@ -830,7 +839,7 @@ galite.yellow:
 galite.orange:
 	Inherits: ^LampPost
 	EditorOnlyTooltip:
-		Name: (Invisible Orange Light Post)
+		Name: actor-galite-orange-name
 	TerrainLightSource:
 		Range: 11c736
 		Intensity: 0.01
@@ -841,7 +850,7 @@ galite.orange:
 galite.purple:
 	Inherits: ^LampPost
 	EditorOnlyTooltip:
-		Name: (Invisible Purple Light Post)
+		Name: actor-galite-purple-name
 	TerrainLightSource:
 		Range: 11c736
 		Intensity: 0.01
@@ -852,7 +861,7 @@ galite.purple:
 galite.morning.temp:
 	Inherits: ^LampPost
 	EditorOnlyTooltip:
-		Name: (Invisible Temperate Morning Light Post)
+		Name: actor-galite-morning-temp-name
 	TerrainLightSource:
 		Range: 11c736
 		Intensity: 0.01
@@ -863,7 +872,7 @@ galite.morning.temp:
 galite.day.temp:
 	Inherits: ^LampPost
 	EditorOnlyTooltip:
-		Name: (Invisible Temperate Day Light Post)
+		Name: actor-galite-day-temp-name
 	TerrainLightSource:
 		Range: 11c736
 		Intensity: 0.01
@@ -874,7 +883,7 @@ galite.day.temp:
 galite.dusk.temp:
 	Inherits: ^LampPost
 	EditorOnlyTooltip:
-		Name: (Invisible Temperate Dusk Light Post)
+		Name: actor-galite-dusk-temp-name
 	TerrainLightSource:
 		Range: 11c736
 		Intensity: 0.01
@@ -885,7 +894,7 @@ galite.dusk.temp:
 galite.night.temp:
 	Inherits: ^LampPost
 	EditorOnlyTooltip:
-		Name: (Invisible Temperate Night Light Post)
+		Name: actor-galite-night-temp-name
 	TerrainLightSource:
 		Range: 11c736
 		Intensity: 0.01
@@ -896,7 +905,7 @@ galite.night.temp:
 galite.morning.snow:
 	Inherits: ^LampPost
 	EditorOnlyTooltip:
-		Name: (Invisible Snow Morning Light Post)
+		Name: actor-galite-morning-snow-name
 	TerrainLightSource:
 		Range: 13c688
 		Intensity: 0.01
@@ -907,7 +916,7 @@ galite.morning.snow:
 galite.day.snow:
 	Inherits: ^LampPost
 	EditorOnlyTooltip:
-		Name: (Invisible Snow Day Light Post)
+		Name: actor-galite-day-snow-name
 	TerrainLightSource:
 		Range: 13c688
 		Intensity: 0.005
@@ -918,7 +927,7 @@ galite.day.snow:
 galite.dusk.snow:
 	Inherits: ^LampPost
 	EditorOnlyTooltip:
-		Name: (Invisible Snow Dusk Light Post)
+		Name: actor-galite-dusk-snow-name
 	TerrainLightSource:
 		Range: 13c688
 		Intensity: 0.005
@@ -929,7 +938,7 @@ galite.dusk.snow:
 galite.dusk.night:
 	Inherits: ^LampPost
 	EditorOnlyTooltip:
-		Name: (Invisible Snow Night Light Post)
+		Name: actor-galite-dusk-night-name
 	TerrainLightSource:
 		Range: 11c736
 		Intensity: 0.01

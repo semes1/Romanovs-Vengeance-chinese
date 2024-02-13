@@ -375,6 +375,52 @@ TankBoltChargedE:
 	Warhead@2Shr: FireShrapnel
 		Weapon: TeslaFragmentCharged
 
+BoatBolt:
+	Inherits: ^TeslaZap
+	Range: 5c0
+	ReloadDelay: 75
+	Report: vtesatta.wav, vtesattb.wav
+	Warhead@1Dam: SpreadDamage
+		Damage: 14000
+		Versus:
+			None: 1000
+			Flak: 1000
+			Plate: 1000
+			Heavy: 75
+	Warhead@3Smu: LeaveSmudge
+		SmudgeType: SmallScorch
+
+BoatBoltE:
+	Inherits: BoatBolt
+	Range: 6c0
+	ReloadDelay: 60
+	Warhead@2Shr: FireShrapnel
+		Weapon: TeslaFragment
+		Amount: 2
+		AimChance: 100
+		AimTargetStances: Enemy, Neutral
+		ValidTargets: Infantry, Vehicle, TerrorDrone, Ship, Tree
+
+BoatBoltCharged:
+	Inherits: BoatBolt
+	Warhead@1Dis: GrantExternalCondition
+		Range: 0c512
+		Duration: 30
+		Condition: emp
+		ValidTargets: EMPulse
+		InvalidTargets: Structure
+
+BoatBoltChargedE:
+	Inherits: BoatBoltE
+	Warhead@1Dis: GrantExternalCondition
+		Range: 0c512
+		Duration: 45
+		Condition: emp
+		ValidTargets: EMPulse
+		InvalidTargets: Structure
+	Warhead@2Shr: FireShrapnel
+		Weapon: TeslaFragmentCharged
+
 TeslaFragment:
 	Inherits: TankBolt
 	Range: 3c0
@@ -411,8 +457,8 @@ TeslaFragmentCommandoCharged:
 
 SonicZap:
 	Inherits@1: ^BreakPointDefenseDrones
-	ReloadDelay: 90
-	Range: 6c0
+	ReloadDelay: 40
+	Range: 5c0
 	Report: vdolatta.wav
 	ValidTargets: Water, Underwater
 	Projectile: AreaBeam
@@ -428,22 +474,20 @@ SonicZap:
 	Warhead@1Dam: SpreadDamage
 		Range: 0, 32
 		Falloff: 100, 100
-		Damage: 750
+		Damage: 350
 		AffectsParent: false
 		ValidRelationships: Neutral, Enemy
 		Versus:
-			Heavy: 80
 			Concrete: 60
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SuppressTerrorDrone, RemovesSquid, NonTemporal
 		ValidTargets: Water, Underwater
 	Warhead@2Dam: SpreadDamage
 		Range: 0, 32
 		Falloff: 50, 50
-		Damage: 750
+		Damage: 350
 		AffectsParent: false
 		ValidRelationships: Ally
 		Versus:
-			Heavy: 80
 			Concrete: 60
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SuppressTerrorDrone, RemovesSquid, NonTemporal
 		ValidTargets: Water, Underwater
@@ -451,9 +495,8 @@ SonicZap:
 
 SonicZapE:
 	Inherits: SonicZap
-	ReloadDelay: 60
 	Warhead@1Dam: SpreadDamage
-		Damage: 1250
+		Damage: 500
 
 PrismShot:
 	Inherits@1: ^BreakPointDefenseDrones
@@ -590,9 +633,9 @@ RadBeamWeapon:
 			None: 100
 			Flak: 100
 			Plate: 100
-			Light: 20
+			Light: 70
 			Medium: 15
-			Heavy: 10
+			Heavy: 15
 			Wood: 0
 			Steel: 0
 			Concrete: 0
@@ -613,6 +656,29 @@ UCRadBeamWeapon:
 
 UCRadBeamWeaponE:
 	Inherits: RadBeamWeaponE
+
+RadBeamWeaponOrange:
+	Inherits: RadBeamWeapon
+	Projectile: RadBeam
+		Color: FF7F0080
+	Warhead@1Dam: SpreadDamage
+		Damage: 18750
+		DamageTypes: OrangeRadiationDeath, NonTemporal
+
+RadBeamWeaponOrangeE:
+	Inherits: RadBeamWeaponE
+	Projectile: RadBeam
+		Color: FF7F0080
+	Warhead@1Dam: SpreadDamage
+		Damage: 30000
+		DamageTypes: OrangeRadiationDeath, NonTemporal
+
+UCRadBeamWeaponOrange:
+	Inherits: RadBeamWeaponOrange
+	Range: 7c0
+
+UCRadBeamWeaponOrangeE:
+	Inherits: RadBeamWeaponOrangeE
 
 NeutronRifle:
 	ReloadDelay: 1
@@ -699,7 +765,7 @@ CurtainRifleAP:
 				Heavy: 25
 		ValidTargets: Infantry
 		InvalidTargets: IronCurtainImmune
-		DamageTypes: FlameDeath, NonTemporal
+		DamageTypes: Prone70Percent, TriggerProne, FlameDeath, NonTemporal
 	Warhead@Stars: CreateEffect
 		Explosions: iron_fx
 		ValidTargets: Ground, Water
@@ -764,7 +830,7 @@ MagneShake:
 MagneShakeE:
 	Inherits: MagneShake
 	Warhead@1Dam: SpreadDamage
-		Damage: 9000
+		Damage: 12000
 
 MagneFreeze:
 	ReloadDelay: 110
@@ -788,6 +854,7 @@ MagneFreeze:
 
 MagneShakeAdv:
 	Inherits: MagneShake
+	Range: 12c0
 	Projectile: LaserZap
 		Width: 320
 		Color: FF50F545
@@ -800,10 +867,11 @@ MagneShakeAdv:
 MagneShakeAdvE:
 	Inherits: MagneShakeAdv
 	Warhead@1Dam: SpreadDamage
-		Damage: 11250
+		Damage: 15000
 
 MagneFreezeAdv:
 	Inherits: MagneFreeze
+	Range: 12c0
 	Projectile: LaserZap
 		Width: 320
 		Color: FF50F545
@@ -822,7 +890,7 @@ MagneFreezeAdv:
 MagneFreezeAdvE:
 	Inherits: MagneFreezeAdv
 	Warhead@1Dam: SpreadDamage
-		Damage: 5625
+		Damage: 7500
 
 DiskMagneShake:
 	Inherits: MagneShake
@@ -848,9 +916,9 @@ DiskMagneFreeze:
 DiskLaser:
 	Inherits: Comet
 	ReloadDelay: 80
-	Range: 7c0
+	Range: 6c0
 	Report: vfloatta.wav
-	InvalidTargets: DiskDrain, DiskSteal
+	InvalidTargets: DiskDrain, DiskSteal, DiskInfiltrateAllied, DiskInfiltrateSoviet, DiskInfiltrateYuri
 	Projectile: LaserZap
 		Width: 75
 		Duration: 15
@@ -861,24 +929,24 @@ DiskLaser:
 		SecondaryBeamColor: FFFFFF80
 		UsePlayerColor: false
 	Warhead@1Dam: SpreadDamage
-		Damage: 9000
+		Damage: 7500
 		InvalidTargets: LoadedTankBunker
 		DamageTypes: RadiationDeath, SuppressTerrorDrone, NonTemporal
 	Warhead@1Gar: OpenToppedDamage
 		ValidTargets: LoadedTankBunker
 		InvalidTargets: IronCurtained, ForceShielded
 		Spread: 0c128
-		Damage: 9000
+		Damage: 7500
 		Versus:
 			None: 100
 			Flak: 100
 			Plate: 100
-			Light: 75
-			Medium: 35
-			Heavy: 35
+			Light: 100
+			Medium: 100
+			Heavy: 100
 			Wood: 100
 			Steel: 100
-			Concrete: 90
+			Concrete: 100
 			Drone: 100
 			Rocket: 100
 		DamageTypes: Prone50Percent, TriggerProne, ElectroDeath, SuppressTerrorDrone, NonTemporal
@@ -890,13 +958,13 @@ DiskLaser:
 
 DiskLaserE:
 	Inherits: DiskLaser
-	Range: 9c0
+	Range: 8c0
 	Projectile: LaserZap
 		Color: FF000080
 	Warhead@1Dam: SpreadDamage
-		Damage: 15000
+		Damage: 10000
 	Warhead@1Gar: OpenToppedDamage
-		Damage: 15000
+		Damage: 10000
 	Warhead@2Eff: CreateEffect
 		Explosions: laser_explosion_red
 		ExplosionPalette: player
@@ -950,7 +1018,7 @@ DiskLaserAAUpgE:
 DoomLaser:
 	Inherits: Comet
 	ReloadDelay: 80
-	Range: 7c0
+	Range: 7c512
 	Report: vlazatta.aud
 	Projectile: LaserZap
 		Duration: 15
@@ -964,20 +1032,20 @@ DoomLaser:
 		UsePlayerColor: false
 	Warhead@1Dam: SpreadDamage
 		Spread: 0c48
-		Damage: 12000
+		Damage: 10000
 		Versus:
-			None: 40
-			Flak: 40
-			Plate: 30
+			None: 100
+			Flak: 100
+			Plate: 100
 			Light: 100
 			Medium: 100
-			Heavy: 75
-			Wood: 55
-			Steel: 65
-			Concrete: 50
+			Heavy: 100
+			Wood: 100
+			Steel: 100
+			Concrete: 100
 			Drone: 100
 			Rocket: 100
-		DamageTypes: RadiationDeath, SuppressTerrorDrone, NonTemporal
+		DamageTypes: Prone50Percent, TriggerProne, RadiationDeath, SuppressTerrorDrone, NonTemporal
 	-Warhead@2Shr:
 	Warhead@2Eff: CreateEffect
 		Explosions: laser_explosion
@@ -986,17 +1054,17 @@ DoomLaser:
 
 DoomLaserE:
 	Inherits: DoomLaser
-	Range: 8c0
+	Range: 8c512
 	Projectile: LaserZap
 		Color: FF000080
 	Warhead@1Dam: SpreadDamage
-		Damage: 20000
+		Damage: 15000
 	Warhead@2Eff: CreateEffect
 		Explosions: laser_explosion_red
 		ExplosionPalette: player
 
 DoomLaserUpg:
-	Inherits: DiskLaser
+	Inherits: DoomLaser
 	Projectile: LaserZap
 		Width: 125
 		Color: DD666680
@@ -1004,7 +1072,7 @@ DoomLaserUpg:
 		SecondaryBeamColor: AA799080
 
 DoomLaserUpgE:
-	Inherits: DiskLaserE
+	Inherits: DoomLaserE
 	Projectile: LaserZap
 		Width: 125
 		Color: FFDD0080
@@ -1027,16 +1095,22 @@ ATLASER:
 		UsePlayerColor: false
 	Warhead@1Dam: SpreadDamage
 		Versus:
-			None: 40
-			Flak: 40
-			Plate: 30
+			None: 100
+			Flak: 100
+			Plate: 100
+			Heavy: 100
+			Wood: 100
+			Steel: 100
+			Concrete: 100
+			Drone: 100
+		DamageTypes: Prone50Percent, TriggerProne, RadiationDeath, SuppressTerrorDrone, NonTemporal
 	Warhead@2Eff: CreateEffect
 		Explosions: laser_explosion
 		ExplosionPalette: effect
 		UsePlayerPalette: false
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
-	-Warhead@3EffWater: CreateEffect
+	-Warhead@3EffWater:
 	Warhead@4Smu: LeaveSmudge
 		SmudgeType: SmallScorch
 
@@ -1056,16 +1130,22 @@ ATLASERE:
 		UsePlayerColor: false
 	Warhead@1Dam: SpreadDamage
 		Versus:
-			None: 120
-			Flak: 120
-			Plate: 115
+			None: 100
+			Flak: 100
+			Plate: 100
+			Heavy: 100
+			Wood: 100
+			Steel: 100
+			Concrete: 100
+			Drone: 100
+		DamageTypes: RadiationDeath, SuppressTerrorDrone, NonTemporal
 	Warhead@2Eff: CreateEffect
 		Explosions: laser_explosion_red
 		ExplosionPalette: player
 		-ImpactSounds:
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
-	-Warhead@3EffWater: CreateEffect
+	-Warhead@3EffWater:
 	Warhead@4Smu: LeaveSmudge
 		SmudgeType: MediumScorch
 
@@ -1077,10 +1157,86 @@ ATLASERAutoE:
 	Inherits: ATLASERE
 	Burst: 4
 
+ATLASERHolo:
+	Inherits: ATLASER
+	Warhead@1Dam: SpreadDamage
+		Damage: 0
+
+ATLASERHoloE:
+	Inherits: ATLASERE
+	Warhead@1Dam: SpreadDamage
+		Damage: 0
+
+ATLASERHoloAuto:
+	Inherits: ATLASERAuto
+	Warhead@1Dam: SpreadDamage
+		Damage: 0
+
+ATLASERHoloAutoE:
+	Inherits: ATLASERAutoE
+	Warhead@1Dam: SpreadDamage
+		Damage: 0
+
+AnniLaserCharge:
+	ReloadDelay: 51
+	Range: 11c0
+	Report: annicharge01.aud
+	ValidTargets: Ground, Water
+	Projectile: InstantExplode
+	Warhead@1Dam: TargetDamage
+		ValidTargets: Ground, Water
+
+AnniLaserChargeE:
+	Inherits: AnniLaserCharge
+	Range: 12c0
+
+AnniLaser:
+	Inherits: DoomLaser
+	ReloadDelay: 100
+	Range: 11c0
+	MinRange: 1c768
+	Report: obelray1.aud
+	SoundVolume: 2
+	Projectile: LaserZap
+		Duration: 45
+		Width: 300
+		SecondaryBeam: true
+		SecondaryBeamWidth: 60
+	Warhead@1Dam: SpreadDamage
+		Spread: 0c768
+		Damage: 15000
+
+AnniLaserE:
+	Inherits: AnniLaser
+	Range: 12c0
+	Projectile: LaserZap
+		Color: FF000080
+	Warhead@1Dam: SpreadDamage
+		Damage: 20000
+	Warhead@2Eff: CreateEffect
+		Explosions: laser_explosion_red
+		ExplosionPalette: player
+
+AnniLaserUpg:
+	Inherits: AnniLaser
+	Projectile: LaserZap
+		Width: 375
+		Color: DD666680
+		SecondaryBeamWidth: 150
+		SecondaryBeamColor: AA799080
+
+AnniLaserUpgE:
+	Inherits: AnniLaserE
+	Projectile: LaserZap
+		Width: 375
+		Color: FFDD0080
+		SecondaryBeamWidth: 150
+		SecondaryBeamColor: FF000080
+
 LunarLaser:
 	Inherits: Comet
-	ReloadDelay: 20
-	Range: 7c0
+	ReloadDelay: 30
+	Range: 4c0
 	Report: ilasatta.wav
 	Projectile: LaserZap
 		Duration: 15
@@ -1094,20 +1250,20 @@ LunarLaser:
 		UsePlayerColor: false
 	Warhead@1Dam: SpreadDamage
 		Spread: 0c48
-		Damage: 3000
+		Damage: 2000
 		Versus:
 			None: 100
 			Flak: 100
 			Plate: 100
-			Light: 75
-			Medium: 50
-			Heavy: 50
-			Wood: 75
-			Steel: 50
-			Concrete: 65
+			Light: 100
+			Medium: 100
+			Heavy: 100
+			Wood: 100
+			Steel: 100
+			Concrete: 100
 			Drone: 100
 			Rocket: 100
-		DamageTypes: RadiationDeath, SuppressTerrorDrone, NonTemporal
+		DamageTypes: Prone50Percent, TriggerProne, RadiationDeath, SuppressTerrorDrone, NonTemporal
 	-Warhead@2Shr:
 	Warhead@2Eff: CreateEffect
 		Explosions: laser_explosion
@@ -1116,23 +1272,23 @@ LunarLaser:
 
 LunarLaserE:
 	Inherits: LunarLaser
-	Range: 9c0
 	Projectile: LaserZap
 		Color: FF000080
-	Warhead@1Dam: SpreadDamage
-		Damage: 3500
+	Burst: 2
 	Warhead@2Eff: CreateEffect
 		Explosions: laser_explosion_red
 		ExplosionPalette: player
 
 LunarLaserAA:
 	Inherits: LunarLaser
+	Range: 5c0
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Air
 
 LunarLaserAAE:
 	Inherits: LunarLaserE
+	Range: 5c0
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Air
@@ -1273,7 +1429,7 @@ BloodSuck:
 	Warhead@materialback: BackFireShrapnel
 		Weapon: MaterialBack
 		ValidTargets: Vehicle, Structure, WaterStructure, Defence, Ship
-	-Warhead@2Eff: 
+	-Warhead@2Eff:
 
 BloodSuckE:
 	Inherits: BloodSuck
@@ -1294,7 +1450,6 @@ BloodBack:
 		Palette: player
 		HorizontalRateOfTurn: 60
 		RangeLimit: 15c0
-		Arm: 0
 		Speed: 300
 		Inaccuracy: 0c0
 		Blockable: false
@@ -1304,17 +1459,17 @@ BloodBack:
 		RangeLimit: 40c0
 		Gravity: 0
 		ContrailDelay: 0
-		ContrailColor: CC000060
+		ContrailStartColor: CC000060
 		ContrailLength: 3
-		ContrailWidth: 32
+		ContrailStartWidth: 32
 	Warhead@charge: GrantExternalCondition
-		Range: 1
+		Range: 299
 		Duration: 1
 		Condition: bloodsucked
 		ValidRelationships: Ally
 		AffectsParent: true
 		ValidTargets: Air
-
+		AirThreshold: 9c0
 
 MaterialBack:
 	TargetActorCenter: true
@@ -1324,12 +1479,11 @@ MaterialBack:
 		MinimumLaunchAngle: 200
 		MaximumLaunchAngle: 200
 		Image: debris
-		Sequences: small1, small2, small3, small4, small5, small6, small7, small8, small9, large1, large2, large3, large4, large5, large6, large7, large8, large9, large10 
+		Sequences: small1, small2, small3, small4, small5, small6, small7, small8, small9, large1, large2, large3, large4, large5, large6, large7, large8, large9, large10
 		Shadow: true
 		Palette: effect
 		HorizontalRateOfTurn: 60
 		RangeLimit: 15c0
-		Arm: 0
 		Speed: 300
 		Inaccuracy: 0c0
 		Blockable: false
@@ -1344,3 +1498,4 @@ MaterialBack:
 		ValidRelationships: Ally
 		AffectsParent: true
 		ValidTargets: Air
+		AirThreshold: 9c0

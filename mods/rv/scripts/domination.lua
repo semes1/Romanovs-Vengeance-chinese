@@ -1,5 +1,5 @@
 --[[
-   Copyright 2007-2020 The OpenRA Developers (see AUTHORS)
+   Copyright (c) The OpenRA Developers and Contributors
    This file is part of OpenRA, which is free software. It is made
    available to you under the terms of the GNU General Public License
    as published by the Free Software Foundation, either version 3 of
@@ -34,7 +34,7 @@ GetFlagHolder = function(flag)
 end
 
 EachInterval = function()
-	local buffer = "战略点："
+	local buffer = "Flags: "
 	local first = true
 	for i,flag in pairs(flags) do
 		local holder = GetFlagHolder(flag)
@@ -44,7 +44,7 @@ EachInterval = function()
 			name = holder.Name
 			players[holder.InternalName].points = players[holder.InternalName].points + points_per_interval
 		else
-			name = '无人控制'
+			name = 'Neutral'
 			flag.Owner = neutral
 		end
 		if first then
@@ -58,7 +58,7 @@ EachInterval = function()
 	local winner = nil
 	local players_still_in = 0
 	local localPlayerIsNull = true
-	buffer = buffer .. "\n\n目标积分：" .. target_points
+	buffer = buffer .. "\n\nFirst to " .. target_points
 	for i,player in pairs(players) do
 		buffer = buffer .. " | " .. player.object.Name .. ": " .. player.points
 		if player.alive == true then
@@ -124,7 +124,7 @@ WorldLoadedDomination = function()
 					players[player.InternalName] = {
 						object = player,
 						points = 0,
-						objective = player.AddPrimaryObjective("率先累积" .. target_points .. "分或消灭所有敌人"),
+						objective = player.AddPrimaryObjective("Get " .. target_points .. " points or destroy all enemy forces."),
 						alive = true
 					}
 				end
@@ -134,21 +134,3 @@ WorldLoadedDomination = function()
 		end
 	end
 end
-
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          

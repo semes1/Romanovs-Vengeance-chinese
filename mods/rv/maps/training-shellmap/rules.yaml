@@ -31,15 +31,14 @@ gapowr:
 garefn:
 	-FreeActor:
 
-gaairb:
-	-LaysMinefield:
-	Building:
-		Footprint: xx xx xx
-
 gaairc:
-	-LaysMinefield:
-	Building:
-		Footprint: xxx xxx
+	DroneSpawnerMaster:
+		SpawnOffset: -1024,1024,0, 0,0,0, 1024,1024,0
+		GatherCell: 2,1, 1,1, 1,2
+
+orca:
+	Aircraft:
+		LandableTerrainTypes: Clear, Rough, Road, DirtRoad, Ore, Gems
 
 camsc12:
 	Targetable:

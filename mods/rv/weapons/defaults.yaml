@@ -5,6 +5,21 @@
 		Duration: 500
 		ValidTargets: Ground, Water, Air
 
+^LineProjectile:
+	ValidTargets: Ground, Water, Air
+	Projectile: BulletAS
+		Speed: 0c800
+		Inaccuracy: 0c512
+		Palette: effect
+		Blockable: true
+		ContrailDelay: 0
+		ContrailStartColor: FFDD00
+		ContrailEndColor: EEEE00
+		ContrailLength: 3
+		ContrailStartWidth: 26
+	Warhead@Line: TargetDamage
+		ValidTargets: Ground, Water, Air
+
 ^Flak:
 	Inherits@1: ^BreakPointDefenseDrones
 	ReloadDelay: 25
@@ -104,7 +119,8 @@
 		Image: DRAGON
 		Palette: ra
 		ContrailLength: 8
-		ContrailWidth: 24
+		ContrailStartWidth: 38
+		ContrailEndColorUsePlayerColor: true
 		CruiseAltitude: 4352
 		VerticalRateOfTurn: 220
 		HorizontalRateOfTurn: 220

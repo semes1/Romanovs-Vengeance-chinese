@@ -50,6 +50,8 @@ BlimpBombE:
 
 BlimpBombRad:
 	Inherits: BlimpBomb
+	Projectile: GravityBomb
+		Image: zbombu
 	Warhead@4Radiation: CreateTintedCells
 		Spread: 2c0
 		Falloff: 100, 100
@@ -60,11 +62,53 @@ BlimpBombRad:
 
 BlimpBombRadE:
 	Inherits: BlimpBombE
+	Projectile: GravityBomb
+		Image: zbombu
 	Warhead@4Radiation: CreateTintedCells
 		Spread: 3c0
 		Falloff: 100, 100
 		Level: 750
 		MaxLevel: 750
+
+BlimpBombRadOrange:
+	Inherits: BlimpBombRad
+	Projectile: GravityBomb
+		Image: zbombuo
+	Warhead@2Eff: CreateEffect
+		Explosions: demotruck_explosion_orange
+	Warhead@4Radiation: CreateTintedCells
+		LayerName: radioactivityorange
+
+BlimpBombRadOrangeE:
+	Inherits: BlimpBombRadE
+	Projectile: GravityBomb
+		Image: zbombuo
+	Warhead@4Radiation: CreateTintedCells
+		LayerName: radioactivityorange
+
+BlimpBombCryo:
+	Inherits: BlimpBomb
+	Projectile: GravityBomb
+		Image: zbombuc
+	Warhead@2Eff: CreateEffect
+		Explosions: kirovtesla
+	Warhead@5Con: GrantExternalCondition
+		Range: 2c0
+		Duration: 250
+		Condition: cryo
+		ValidTargets: Ground, Water
+		InvalidTargets: IronCurtained, ForceShielded
+
+BlimpBombCryoE:
+	Inherits: BlimpBombE
+	Projectile: GravityBomb
+		Image: zbombuc
+	Warhead@5Con: GrantExternalCondition
+		Range: 3c0
+		Duration: 375
+		Condition: cryo
+		ValidTargets: Ground, Water
+		InvalidTargets: IronCurtained, ForceShielded
 
 NapalmBomb:
 	Inherits@1: ^BreakPointDefenseDrones
@@ -182,22 +226,15 @@ NapalmBombE:
 	Warhead@1Gar: OpenToppedDamage
 		Spread: 0c512
 		Damage: 20000
-	Warhead@2Eff: CreateEffect
-		Explosions: napalm_large_blue
 	Warhead@5Par: SpawnSmokeParticle
-		Image: mediumfireblue
 		Weapon: FireDamageE
 	Warhead@6Par: SpawnSmokeParticle
-		Image: mediumfireblue
 		Weapon: FireDamageE
 	Warhead@7Par: SpawnSmokeParticle
-		Image: largefireblue
 		Weapon: FireDamageE
 	Warhead@8Par: SpawnSmokeParticle
-		Image: smallfireblue
 		Weapon: FireDamageE
 	Warhead@9Par: SpawnSmokeParticle
-		Image: smallfireblue
 		Weapon: FireDamageE
 
 NapalmBombBlack:
@@ -231,21 +268,21 @@ NapalmBombBlackE:
 	Warhead@1Gar: OpenToppedDamage
 		Damage: 40000
 	Warhead@2Eff: CreateEffect
-		Explosions: napalm_large_black
+		Explosions: napalm_large_blue
 	Warhead@5Par: SpawnSmokeParticle
-		Image: mediumfireblack
+		Image: mediumfireblue
 		Weapon: FireDamageBlackE
 	Warhead@6Par: SpawnSmokeParticle
-		Image: mediumfireblack
+		Image: mediumfireblue
 		Weapon: FireDamageBlackE
 	Warhead@7Par: SpawnSmokeParticle
-		Image: largefireblack
+		Image: largefireblue
 		Weapon: FireDamageBlackE
 	Warhead@8Par: SpawnSmokeParticle
-		Image: smallfireblack
+		Image: smallfireblue
 		Weapon: FireDamageBlackE
 	Warhead@9Par: SpawnSmokeParticle
-		Image: smallfireblack
+		Image: smallfireblue
 		Weapon: FireDamageBlackE
 
 ChaosGasDrop:
@@ -285,6 +322,7 @@ EMPulse:
 		Duration: 375
 		Condition: emp
 		ValidTargets: EMPulse
+		InvalidTargets: IronCurtained, ForceShielded
 	Warhead@2Eff: CreateEffect
 		Explosions: empulse
 		ExplosionPalette: tseffect
@@ -370,7 +408,7 @@ ParaBomb:
 			Concrete: 50
 			Drone: 100
 			Rocket: 100
-		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, NonTemporal
+		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SuppressTerrorDrone, NonTemporal
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, TerrorDrone, Structure, Barrel, Mine, Wall, Husk, Trees
@@ -422,6 +460,91 @@ FalloutBomb:
 	Warhead@5Smu: LeaveSmudge
 		SmudgeType: MediumCrater, MediumScorch
 
+FalloutBombOrange:
+	Inherits: FalloutBomb
+	Warhead@1Dam: SpreadDamage
+		DamageTypes: Prone70Percent, TriggerProne, OrangeRadiationDeath, SuppressTerrorDrone, NonTemporal
+	Warhead@2Eff: CreateEffect
+		Explosions: demotruck_explosion_orange
+	Warhead@4Radiation: CreateTintedCells
+		LayerName: radioactivityorange
+
+BadgerBomb:
+	Inherits@1: ^BreakPointDefenseDrones
+	ReloadDelay: 10
+	Range: 1c0
+	Report: vkiratta.wav
+	Projectile: GravityBomb
+		Velocity: 0, 0, -50
+		Acceleration: 0, 0, -10
+		Image: parabomb
+		Palette: player
+		IsPlayerPalette: true
+	Warhead@1Dam: SpreadDamage
+		Spread: 2c512
+		Falloff: 100, 37, 14, 0
+		Damage: 75000
+		Versus:
+			None: 125
+			Flak: 125
+			Plate: 125
+			Light: 100
+			Medium: 80
+			Heavy: 80
+			Wood: 50
+			Steel: 100
+			Concrete: 50
+			Drone: 100
+			Rocket: 100
+		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SuppressTerrorDrone, NonTemporal
+	Warhead@2Eff: CreateEffect
+		Explosions: nuke_explosion_small
+		ImpactSounds: snukexpl.wav
+		ImpactActors: false
+		ValidTargets: Ground, Water, Air
+	Warhead@5Smu: LeaveSmudge
+		SmudgeType: MediumCrater, MediumScorch
+
+BadgerBombE:
+	Inherits: BadgerBomb
+	Warhead@1Dam: SpreadDamage
+		Damage: 100000
+
+CryoBomb:
+	Inherits: FalloutBomb
+	Projectile: GravityBomb
+		Image: parabomb
+	Warhead@1Dam: SpreadDamage
+		DamageTypes: Prone70Percent, TriggerProne, BulletDeath, SuppressTerrorDrone, NonTemporal
+	Warhead@2Eff: CreateEffect
+		Explosions: kirovtesla
+		ImpactSounds: gexp14a.wav
+	-Warhead@4Radiation:
+	Warhead@4Con: GrantExternalCondition
+		Range: 10c0
+		Duration: 500
+		Condition: cryo
+		ValidTargets: Ground, Water
+		InvalidTargets: IronCurtained, ForceShielded
+	Warhead@5Con: GrantExternalCondition
+		Range: 10c0
+		Duration: 500
+		Condition: cryo
+		ValidTargets: Ground, Water
+		InvalidTargets: IronCurtained, ForceShielded
+	Warhead@6Con: GrantExternalCondition
+		Range: 10c0
+		Duration: 500
+		Condition: cryo
+		ValidTargets: Ground, Water
+		InvalidTargets: IronCurtained, ForceShielded
+	Warhead@7Con: GrantExternalCondition
+		Range: 10c0
+		Duration: 500
+		Condition: cryo
+		ValidTargets: Ground, Water
+		InvalidTargets: IronCurtained, ForceShielded
+
 MutatorBomb:
 	ReloadDelay: 10
 	Range: 1c0
@@ -433,7 +556,7 @@ MutatorBomb:
 		Palette: player
 		IsPlayerPalette: true
 	Warhead@1Dam: SpreadDamage
-		Spread: 4c0
+		Spread: 3c0
 		Damage: 50000
 		ValidTargets: Infantry, SeaAnimal
 		DamageTypes: Prone100Percent, TriggerProne, MutationDeath, NonTemporal

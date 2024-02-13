@@ -1,6 +1,6 @@
 #region Copyright & License Information
 /*
- * Copyright 2007-2019 The OpenRA Developers (see AUTHORS)
+ * Copyright (c) The OpenRA Developers and Contributors
  * This file is part of OpenRA, which is free software. It is made
  * available to you under the terms of the GNU General Public License
  * as published by the Free Software Foundation, either version 3 of
@@ -40,7 +40,7 @@ namespace OpenRA.Mods.RA2.Activities
 			if (!aircraft.CanLand(w.Map.CellContaining(self.CenterPosition)))
 			{
 				var cells = w.Map.AllCells.Where(c => aircraft.CanLand(c)).Select(c => w.Map.CenterOfCell(c));
-				var cell = w.Map.CellContaining(WorldUtils.PositionClosestTo(cells, self.CenterPosition));
+				var cell = w.Map.CellContaining(cells.ClosestToIgnoringPath(self.CenterPosition));
 
 				QueueChild(new Fly(self, Target.FromCell(w, cell)));
 			}

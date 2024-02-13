@@ -1,169 +1,165 @@
 Container@HOTKEYS_PANEL:
 	Logic: HotkeysSettingsLogic
 		HotkeyGroups:
-			游戏指令:
-				Template: TWO_COLUMN
+			Game Commands:
 				Types: OrderGenerator, World, Menu
-			视角指令:
-				Template: TWO_COLUMN
+			Viewport Commands:
 				Types: Viewport
-			观战 / 回放指令:
-				Template: TWO_COLUMN
+			Observer / Replay Commands:
 				Types: Observer, Replay
-			单位指令:
-				Template: THREE_COLUMN
+			Unit Commands:
 				Types: Unit
-			单位姿态指令:
-				Template: TWO_COLUMN
+			Unit Stance Commands:
 				Types: Stance
-			生产指令:
-				Template: TWO_COLUMN
+			Production Commands:
 				Types: Production, ProductionSlot
-			支援能力指令:
-				Template: THREE_COLUMN
+			Support Power Commands:
 				Types: SupportPower
-			音乐指令:
-				Template: TWO_COLUMN
+			Music Commands:
 				Types: Music
-			聊天频道指令:
-				Template: TWO_COLUMN
+			Chat Commands:
 				Types: Chat
-			深度调试指令:
-				Template: TWO_COLUMN
+			Control Groups:
+				Types: ControlGroups
+			Editor Commands:
+				Types: Editor
+			Depth Preview Debug:
 				Types: DepthDebug
-	Width: PARENT_RIGHT - 10
+	Width: PARENT_RIGHT
 	Height: PARENT_BOTTOM
 	Children:
+		Label@FILTER_INPUT_LABEL:
+			Width: 100
+			Height: 25
+			Font: Bold
+			Text: label-hotkeys-panel-filter-input
+		TextField@FILTER_INPUT:
+			X: 108
+			Width: 180
+			Height: 25
+		Label@CONTEXT_DROPDOWN_LABEL:
+			X: PARENT_RIGHT - WIDTH - 195 - 5
+			Width: 100
+			Height: 25
+			Font: Bold
+			Text: label-hotkeys-panel-context-dropdown
+			Align: Right
+		DropDownButton@CONTEXT_DROPDOWN:
+			X: PARENT_RIGHT - WIDTH
+			Width: 195
+			Height: 25
+			Font: Bold
 		ScrollPanel@HOTKEY_LIST:
-			X: 15
-			Y: 40
-			Width: PARENT_RIGHT - 30
-			TopBottomSpacing: 4
-			ItemSpacing: 4
-			Height: 190
+			Y: 35
+			Width: PARENT_RIGHT
+			Height: PARENT_BOTTOM - 65
+			TopBottomSpacing: 5
+			ItemSpacing: 5
 			Children:
-				ScrollItem@HEADER:
-					BaseName: scrollheader
-					Width: 528
-					Height: 13
+				Container@HEADER:
+					Width: PARENT_RIGHT - 24 - 10
+					Height: 18
+					Children:
+						Background@BACKGROUND:
+							Width: PARENT_RIGHT
+							Height: 13
+							Background: separator
+							ClickThrough: True
+						Label@LABEL:
+							Width: PARENT_RIGHT
+							Height: 13
+							Font: TinyBold
+							Align: Center
+				Container@TEMPLATE:
+					Width: (PARENT_RIGHT - 24) / 2 - 10
+					Height: 30
 					Visible: false
 					Children:
-						Label@LABEL:
-							Font: TinyBold
-							Width: PARENT_RIGHT
-							Height: 10
-							Align: Center
-						ScrollItem@HEADER:
-							Width: 528
-							Height: 13
-							Visible: false
-							Children:
-								Label@LABEL:
-									Font: TinyBold
-									Width: PARENT_RIGHT
-									Height: 10
-									Align: Center
-						Container@TEMPLATES:
-							Children:
-								Container@TWO_COLUMN:
-									Width: 262
-									Height: 25
-									Visible: false
-									Children:
-										Label@FUNCTION:
-											Y: 0 - 1
-											Width: PARENT_RIGHT - 85
-											Height: 25
-											Align: Right
-										Button@HOTKEY:
-											X: PARENT_RIGHT - WIDTH
-											Width: 80
-											Height: 25
-											Align: Left
-											TooltipContainer: SETTINGS_TOOLTIP_CONTAINER
-								Container@THREE_COLUMN:
-									Width: 173
-									Height: 25
-									Visible: false
-									Children:
-										Label@FUNCTION:
-											Y: 0 - 1
-											Width: PARENT_RIGHT - 84
-											Height: 25
-											Align: Right
-										Button@HOTKEY:
-											X: PARENT_RIGHT - WIDTH + 1
-											Width: 80
-											Height: 25
-											Align: Left
-											TooltipContainer: SETTINGS_TOOLTIP_CONTAINER
-		Background@HOTKEY_DIALOG_ROOT:
-			X: 15
-			Y: 230
-			Width: PARENT_RIGHT - 30
+						Label@FUNCTION:
+							Y: 0 - 1
+							Width: PARENT_RIGHT - 120 - 5
+							Height: 25
+							Align: Right
+						Button@HOTKEY:
+							X: PARENT_RIGHT - WIDTH
+							Width: 120
+							Height: 25
+							TooltipContainer: SETTINGS_TOOLTIP_CONTAINER
+		Container@HOTKEY_EMPTY_LIST:
+			Width: PARENT_RIGHT
+			Height: PARENT_BOTTOM
+			Visible: false
+			Children:
+				Label@HOTKEY_EMPTY_LIST_MESSAGE:
+					Width: PARENT_RIGHT
+					Height: PARENT_BOTTOM
+					Align: Center
+					Text: label-hotkey-empty-list-message
+		Background@HOTKEY_REMAP_BGND:
+			Y: PARENT_BOTTOM - HEIGHT
+			Width: PARENT_RIGHT
 			Height: 65
 			Background: dialog3
 			Children:
-				Label@HOTKEY_LABEL:
-					X: 15
-					Y: 19
-					Width: 219 - 15 - 10
-					Height: 25
-					Font: Bold
-					Align: Right
-				HotkeyEntry@HOTKEY_ENTRY:
-					X: 219
-					Y: 20
-					Width: 170
-					Height: 25
-				Container@NOTICES:
-					X: 219
-					Y: 42
-					Width: 170
-					Height: 25
+				Container@HOTKEY_REMAP_DIALOG:
+					Width: PARENT_RIGHT
+					Height: PARENT_BOTTOM
 					Children:
-						Label@DEFAULT_NOTICE:
-							Width: PARENT_RIGHT
-							Height: PARENT_BOTTOM
-							Font: Tiny
-							Align: Left
-							Text: 这是默认快捷键
-						Label@ORIGINAL_NOTICE:
-							Width: PARENT_RIGHT
-							Height: PARENT_BOTTOM
-							Font: Tiny
-							Align: Left
-							Text: 默认快捷键是 "{0}"
-						Label@DUPLICATE_NOTICE:
-							Width: PARENT_RIGHT
-							Height: PARENT_BOTTOM
-							Font: Tiny
-							Align: Left
-							Text: 该按键已被设置于 "{0}"
-				Button@OVERRIDE_HOTKEY_BUTTON:
-					X: PARENT_RIGHT - 3 * WIDTH - 30
-					Y: 20
-					Width: 70
-					Height: 25
-					Text: 覆盖
-					Font: Bold
-				Button@CLEAR_HOTKEY_BUTTON:
-					X: PARENT_RIGHT - 2 * WIDTH - 30
-					Y: 20
-					Width: 65
-					Height: 25
-					Text: 清除
-					Font: Bold
-					TooltipText: 不设置快捷键
-					TooltipContainer: SETTINGS_TOOLTIP_CONTAINER
-					TooltipTemplate: SIMPLE_TOOLTIP
-				Button@RESET_HOTKEY_BUTTON:
-					X: PARENT_RIGHT - WIDTH - 20
-					Y: 20
-					Width: 65
-					Height: 25
-					Text: 重置
-					Font: Bold
-					TooltipText: 还原为默认快捷键
-					TooltipContainer: SETTINGS_TOOLTIP_CONTAINER
-					TooltipTemplate: SIMPLE_TOOLTIP
+						Label@HOTKEY_LABEL:
+							X: 15
+							Y: 19
+							Width: 200
+							Height: 25
+							Font: Bold
+							Align: Right
+						HotkeyEntry@HOTKEY_ENTRY:
+							X: 15 + 200 + 5
+							Y: 20
+							Width: 300
+							Height: 25
+						Container@NOTICES:
+							X: 15 + 200 + 5
+							Y: 42
+							Width: 300
+							Height: 25
+							Children:
+								Label@ORIGINAL_NOTICE:
+									Width: PARENT_RIGHT
+									Height: PARENT_BOTTOM
+									Font: Tiny
+								Label@DUPLICATE_NOTICE:
+									Width: PARENT_RIGHT
+									Height: PARENT_BOTTOM
+									Font: Tiny
+								Label@READONLY_NOTICE:
+									Width: PARENT_RIGHT
+									Height: PARENT_BOTTOM
+									Font: Tiny
+									Text: label-notices-readonly-notice
+						Button@OVERRIDE_HOTKEY_BUTTON:
+							X: PARENT_RIGHT - 3 * WIDTH - 30
+							Y: 20
+							Width: 70
+							Height: 25
+							Text: button-hotkey-remap-dialog-override
+							Font: Bold
+						Button@CLEAR_HOTKEY_BUTTON:
+							X: PARENT_RIGHT - 2 * WIDTH - 30
+							Y: 20
+							Width: 65
+							Height: 25
+							Text: button-hotkey-remap-dialog-clear.label
+							Font: Bold
+							TooltipText: button-hotkey-remap-dialog-clear.tooltip
+							TooltipContainer: SETTINGS_TOOLTIP_CONTAINER
+							TooltipTemplate: SIMPLE_TOOLTIP
+						Button@RESET_HOTKEY_BUTTON:
+							X: PARENT_RIGHT - WIDTH - 20
+							Y: 20
+							Width: 65
+							Height: 25
+							Text: button-hotkey-remap-dialog-reset.label
+							Font: Bold
+							TooltipText: button-hotkey-remap-dialog-reset.tooltip
+							TooltipContainer: SETTINGS_TOOLTIP_CONTAINER
+							TooltipTemplate: SIMPLE_TOOLTIP

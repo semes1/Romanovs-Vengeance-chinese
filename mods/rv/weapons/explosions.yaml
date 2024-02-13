@@ -170,7 +170,13 @@ BuildingExplode:
 ReactorExplode:
 	Inherits: BuildingExplode
 	Warhead@1Eff: CreateEffect
+		Explosions: powerplant_explosion
 		ImpactSounds: bpowdiea.wav, bpowdieb.wav
+
+TeslaReactorExplode:
+	Inherits: ReactorExplode
+	Warhead@1Eff: CreateEffect
+		Explosions: tesla_explosion
 
 KirovExplode:
 	Inherits: UnitExplode
@@ -222,11 +228,20 @@ NuclearEngineExplode:
 		ImpactSounds: vdemdiea.wav
 	Warhead@2Dam: SpreadDamage
 		Damage: 12500
+			Medium: 20
+			Heavy: 20
 	-Warhead@2Eff:
-	Warhead@4Radiation: CreateTintedCells
+	Warhead@3Radiation: CreateTintedCells
 		Spread: 2c0
 		Falloff: 100, 100
 		Level: 100
+
+NuclearEngineExplodeOrange:
+	Inherits: NuclearEngineExplode
+	Warhead@1Eff: CreateEffect
+		Explosions: demotruck_explosion_orange
+	Warhead@3Radiation: CreateTintedCells
+		LayerName: radioactivityorange
 
 PlaneExplode:
 	Inherits: KirovExplode
@@ -463,6 +478,7 @@ TerrorBomb:
 TargetedTerrorBomb:
 	Inherits: TerrorBomb
 	Warhead@1Dam: SpreadDamage
+		Spread: 0c768
 		ValidRelationships: Enemy, Neutral
 
 DeathBombExplode:
@@ -486,6 +502,11 @@ DevastatorExplosion:
 		Level: 250
 	Warhead@3Smu: LeaveSmudge
 		SmudgeType: MediumCrater, MediumScorch
+
+DevastatorExplosionOrange:
+	Inherits: DevastatorExplosion
+	Warhead@4Radiation: CreateTintedCells
+		LayerName: radioactivityorange
 
 NukePayload:
 	Inherits@1: ^BreakPointDefenseDrones
@@ -521,6 +542,13 @@ NukePayload:
 	Warhead@4Smu: LeaveSmudge
 		SmudgeType: LargeCrater, LargeScorch
 
+NukePayloadOrange:
+	Inherits: NukePayload
+	Warhead@1Dam_impact: SpreadDamage
+		DamageTypes: Prone50Percent, TriggerProne, OrangeRadiationDeath, SuppressTerrorDrone, NonTemporal
+	Warhead@3Radiation: CreateTintedCells
+		LayerName: radioactivityorange
+
 atomic:
 	Inherits: NukePayload
 	ValidTargets: Ground, Water, Air
@@ -546,6 +574,13 @@ atomic:
 		Intensity: 5
 		Multiplier: 1,1
 
+atomicOrange:
+	Inherits: atomic
+	Warhead@1Dam_impact: SpreadDamage
+		DamageTypes: OrangeRadiationDeath, SuppressTerrorDrone, NonTemporal
+	Warhead@3Radiation: CreateTintedCells
+		LayerName: radioactivityorange
+
 demobomb:
 	Inherits: NukePayload
 	ValidTargets: Ground, Water
@@ -569,6 +604,15 @@ demobomb:
 		Level: 100
 	Warhead@4Smu: LeaveSmudge
 		SmudgeType: MediumCrater, MediumScorch
+
+demobombOrange:
+	Inherits: demobomb
+	Warhead@1Dam_impact: SpreadDamage
+		DamageTypes: OrangeRadiationDeath, SuppressTerrorDrone, NonTemporal
+	Warhead@2Eff_impact: CreateEffect
+		Explosions: demotruck_explosion_orange
+	Warhead@3Radiation: CreateTintedCells
+		LayerName: radioactivityorange
 
 ClusterMissile:
 	Warhead@Cluster: FireCluster
@@ -684,6 +728,38 @@ V3WeaponRadE:
 		Level: 750
 		MaxLevel: 750
 
+V3WeaponRadOrange:
+	Inherits: V3WeaponRad
+	Warhead@2Eff: CreateEffect
+		Explosions: demotruck_explosion_orange
+	Warhead@4Radiation: CreateTintedCells
+		LayerName: radioactivityorange
+
+V3WeaponRadOrangeE:
+	Inherits: V3WeaponRadE
+	Warhead@4Radiation: CreateTintedCells
+		LayerName: radioactivityorange
+
+V3WeaponCryo:
+	Inherits: V3Weapon
+	Warhead@5Con: GrantExternalCondition
+		Range: 2c0
+		Duration: 250
+		Condition: cryo
+		ValidTargets: Ground, Water
+		InvalidTargets: IronCurtained, ForceShielded
+	Warhead@2Eff: CreateEffect
+		Explosions: kirovtesla
+
+V3WeaponCryoE:
+	Inherits: V3WeaponE
+	Warhead@5Con: GrantExternalCondition
+		Range: 3c0
+		Duration: 375
+		Condition: cryo
+		ValidTargets: Ground, Water
+		InvalidTargets: IronCurtained, ForceShielded
+
 DredWeapon:
 	Inherits: V3Weapon
 	Warhead@1Dam: SpreadDamage
@@ -713,6 +789,38 @@ DredWeaponRadE:
 		Falloff: 100, 100
 		Level: 750
 		MaxLevel: 750
+
+DredWeaponRadOrange:
+	Inherits: DredWeaponRad
+	Warhead@2Eff: CreateEffect
+		Explosions: demotruck_explosion_orange
+	Warhead@4Radiation: CreateTintedCells
+		LayerName: radioactivityorange
+
+DredWeaponRadOrangeE:
+	Inherits: DredWeaponRadE
+	Warhead@4Radiation: CreateTintedCells
+		LayerName: radioactivityorange
+
+DredWeaponCryo:
+	Inherits: DredWeapon
+	Warhead@5Con: GrantExternalCondition
+		Range: 2c0
+		Duration: 250
+		Condition: cryo
+		ValidTargets: Ground, Water
+		InvalidTargets: IronCurtained, ForceShielded
+	Warhead@2Eff: CreateEffect
+		Explosions: kirovtesla
+
+DredWeaponCryoE:
+	Inherits: DredWeaponE
+	Warhead@5Con: GrantExternalCondition
+		Range: 3c0
+		Duration: 375
+		Condition: cryo
+		ValidTargets: Ground, Water
+		InvalidTargets: IronCurtained, ForceShielded
 
 CruiseWeapon:
 	Inherits: DredWeapon
@@ -747,13 +855,22 @@ RadiationMissile:
 	Warhead@2Eff: CreateEffect
 		Explosions: demotruck_explosion
 		ImpactSounds: vdemdiea.wav
-	Warhead@4Radiation: CreateTintedCells
+	Warhead@3Radiation: CreateTintedCells
 		Spread: 4c0
 		Falloff: 100, 100
 		Level: 1500
 		MaxLevel: 1500
-	Warhead@5Smu: LeaveSmudge
+	Warhead@4Smu: LeaveSmudge
 		SmudgeType: MediumCrater, MediumScorch
+
+RadiationMissileOrange:
+	Inherits: RadiationMissile
+		DamageTypes: Prone70Percent, TriggerProne, OrangeRadiationDeath, SuppressTerrorDrone, NonTemporal
+	Warhead@1Dam: SpreadDamage
+	Warhead@2Eff: CreateEffect
+		Explosions: demotruck_explosion_orange
+	Warhead@3Radiation: CreateTintedCells
+		LayerName: radioactivityorange
 
 MineExplosion:
 	Inherits@1: ^BreakPointDefenseDrones

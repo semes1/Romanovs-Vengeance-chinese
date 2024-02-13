@@ -1,9 +1,9 @@
 cafncb:
 	Inherits: ^Fence
 	Tooltip:
-		Name: 栅栏
+		Name: actor-cafncb.name
 	Tooltip@NoRow:
-		Name: 栅栏
+		Name: actor-cafncb.name
 	LineBuild:
 		NodeTypes: cafncb
 	LineBuildNode:
@@ -14,9 +14,9 @@ cafncb:
 cafncw:
 	Inherits: ^Fence
 	Tooltip:
-		Name: 栅栏
+		Name: actor-cafncw.name
 	Tooltip@NoRow:
-		Name: 栅栏
+		Name: actor-cafncw.name
 	LineBuild:
 		NodeTypes: cafncw
 	LineBuildNode:
@@ -27,9 +27,9 @@ cafncw:
 cafnck:
 	Inherits: ^Fence
 	Tooltip:
-		Name: 栅栏
+		Name: actor-cafnck.name
 	Tooltip@NoRow:
-		Name: 栅栏
+		Name: actor-cafnck.name
 	LineBuild:
 		NodeTypes: cafnck
 	LineBuildNode:
@@ -40,9 +40,9 @@ cafnck:
 cafncy:
 	Inherits: ^Fence
 	Tooltip:
-		Name: 栅栏
+		Name: actor-cafncy.name
 	Tooltip@NoRow:
-		Name: 栅栏
+		Name: actor-cafncy.name
 	LineBuild:
 		NodeTypes: cafncy
 	LineBuildNode:
@@ -53,9 +53,9 @@ cafncy:
 cafncg:
 	Inherits: ^Fence
 	Tooltip:
-		Name: 栅栏
+		Name: actor-cafncg.name
 	Tooltip@NoRow:
-		Name: 栅栏
+		Name: actor-cafncg.name
 	LineBuild:
 		NodeTypes: cafncg
 	LineBuildNode:
@@ -66,9 +66,9 @@ cafncg:
 cafncm:
 	Inherits: ^Fence
 	Tooltip:
-		Name: 栅栏
+		Name: actor-cafncm.name
 	Tooltip@NoRow:
-		Name: 栅栏
+		Name: actor-cafncm.name
 	LineBuild:
 		NodeTypes: cafncm
 	LineBuildNode:
@@ -76,12 +76,25 @@ cafncm:
 	WithWallSpriteBody:
 		Type: cafncm
 
+cabarb:
+	Inherits: ^Fence
+	Tooltip:
+		Name: actor-cabarb.name
+	Tooltip@NoRow:
+		Name: actor-cabarb.name
+	LineBuild:
+		NodeTypes: cabarb
+	LineBuildNode:
+		Types: cabarb
+	WithWallSpriteBody:
+		Type: cabarb
+
 gasand:
 	Inherits: ^Fence
 	Tooltip:
-		Name: 沙包
+		Name: actor-gasand.name
 	Tooltip@NoRow:
-		Name: 沙包
+		Name: actor-gasand.name
 	SoundOnDamageTransition:
 		DamagedSounds: gsancrua.wav, gsancrub.wav
 		DestroyedSounds: gsancrua.wav, gsancrub.wav
@@ -95,9 +108,9 @@ gasand:
 cafncp:
 	Inherits: ^Fence
 	Tooltip:
-		Name: 铁丝网
+		Name: actor-cafncp.name
 	Tooltip@NoRow:
-		Name: 铁丝网
+		Name: actor-cafncp.name
 	BlocksProjectiles:
 	LineBuild:
 		NodeTypes: cafncp
@@ -114,6 +127,10 @@ cahse01:
 		Footprint: xxx xxx
 	Garrisonable:
 		MaxWeight: 5
+	WithIdleOverlay@flag:
+		Sequence: garrisoned-flag
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: cahse01.rubble
@@ -139,6 +156,10 @@ cahse02:
 		Footprint: xxx xxx
 	Garrisonable:
 		MaxWeight: 5
+	WithIdleOverlay@flag:
+		Sequence: garrisoned-flag
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: cahse02.rubble
@@ -164,6 +185,10 @@ cahse03:
 		Footprint: xxx xxx xxx xxx
 	Garrisonable:
 		MaxWeight: 5
+	WithIdleOverlay@flag:
+		Sequence: garrisoned-flag
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: cahse03.rubble
@@ -189,6 +214,10 @@ cahse04:
 		Footprint: xxx xxx
 	Garrisonable:
 		MaxWeight: 5
+	WithIdleOverlay@flag:
+		Sequence: garrisoned-flag
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: cahse04.rubble
@@ -214,6 +243,10 @@ cahse05:
 		Footprint: x x
 	Garrisonable:
 		MaxWeight: 5
+	WithIdleOverlay@flag:
+		Sequence: garrisoned-flag
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: cahse05.rubble
@@ -237,6 +270,10 @@ cahse06:
 		Footprint: xx
 	Garrisonable:
 		MaxWeight: 5
+	WithIdleOverlay@flag:
+		Sequence: garrisoned-flag
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: cahse06.rubble
@@ -260,6 +297,10 @@ cahse07:
 		Footprint: xx xx xx
 	Garrisonable:
 		MaxWeight: 5
+	WithIdleOverlay@flag:
+		Sequence: garrisoned-flag
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: cahse07.rubble
@@ -278,9 +319,9 @@ cahse07.rubble:
 cawt01:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 水塔
+		Name: actor-cawt01.name
 	Tooltip@NoRow:
-		Name: 水塔
+		Name: actor-cawt01.name
 	Armor:
 		Type: Concrete
 	RevealsShroud:
@@ -294,9 +335,9 @@ cats01:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^2x2Shape
 	Tooltip:
-		Name: 筒仓
+		Name: actor-cats01.name
 	Tooltip@NoRow:
-		Name: 筒仓
+		Name: actor-cats01.name
 	Armor:
 		Type: Concrete
 	RevealsShroud:
@@ -313,9 +354,9 @@ cabarn02:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^2x2Shape
 	Tooltip:
-		Name: 谷仓
+		Name: actor-cabarn02.name
 	Tooltip@NoRow:
-		Name: 谷仓
+		Name: actor-cabarn02.name
 	Health:
 		HP: 50000
 	Building:
@@ -323,6 +364,10 @@ cabarn02:
 		Footprint: xx xx
 	Garrisonable:
 		MaxWeight: 5
+	WithIdleOverlay@flag:
+		Sequence: garrisoned-flag
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: cabarn02.rubble
@@ -345,9 +390,9 @@ cawash01:
 		Footprint: xxxx xxxx xxxx xxxx
 		Dimensions: 4, 4
 	Tooltip:
-		Name: 白宫
+		Name: actor-cawash01.name
 	Tooltip@NoRow:
-		Name: 白宫
+		Name: actor-cawash01.name
 	Health:
 		HP: 150000
 	Armor:
@@ -462,6 +507,10 @@ cawash07:
 	Building:
 		Footprint: xxx xxx xxx
 		Dimensions: 3, 3
+	WithIdleOverlay@flag:
+		Sequence: garrisoned-flag
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: cawash07.rubble
@@ -525,6 +574,10 @@ cawash10:
 	Building:
 		Footprint: xxxx xxxx xxxx xxxx
 		Dimensions: 4, 4
+	WithIdleOverlay@flag:
+		Sequence: garrisoned-flag
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: cawash10.rubble
@@ -568,9 +621,9 @@ cawsh12:
 		Footprint: xxx xxx xxx
 		Dimensions: 3, 3
 	Tooltip:
-		Name: 华盛顿纪念碑
+		Name: actor-cawsh12.name
 	Tooltip@NoRow:
-		Name: 华盛顿纪念碑
+		Name: actor-cawsh12.name
 	Health:
 		HP: 150000
 	Armor:
@@ -620,9 +673,9 @@ cawash14:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^3x3Shape
 	Tooltip:
-		Name: 杰斐逊纪念堂
+		Name: actor-cawash14.name
 	Tooltip@NoRow:
-		Name: 杰斐逊纪念堂
+		Name: actor-cawash14.name
 	Armor:
 		Type: Concrete
 	Health:
@@ -650,9 +703,9 @@ cawash15:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^3x4Shape
 	Tooltip:
-		Name: 林肯纪念堂
+		Name: actor-cawash15.name
 	Tooltip@NoRow:
-		Name: 林肯纪念堂
+		Name: actor-cawash15.name
 	Armor:
 		Type: Concrete
 	Health:
@@ -680,9 +733,9 @@ cawash16:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^5x3Shape
 	Tooltip:
-		Name: 史密森尼城堡
+		Name: actor-cawash16.name
 	Tooltip@NoRow:
-		Name: 史密森尼城堡
+		Name: actor-cawash16.name
 	Armor:
 		Type: Concrete
 	RevealsShroud:
@@ -711,9 +764,9 @@ cawash17:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^6x4Shape
 	Tooltip:
-		Name: 史密森尼自然历史博物馆
+		Name: actor-cawash17.name
 	Tooltip@NoRow:
-		Name: 史密森尼自然历史博物馆
+		Name: actor-cawash17.name
 	Building:
 		Dimensions: 6,4
 		Footprint: xxxxxx xxxxxx xxxxxx xxxxxx
@@ -736,9 +789,9 @@ cawash18:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^2x2Shape
 	Tooltip:
-		Name: 喷泉
+		Name: actor-cawash18.name
 	Tooltip@NoRow:
-		Name: 喷泉
+		Name: actor-cawash18.name
 	Armor:
 		Type: Concrete
 	RevealsShroud:
@@ -751,9 +804,9 @@ cawash18:
 	WithIdleOverlay@water:
 		Sequence: idle-water
 		PauseOnCondition: chronodisable
-	AmbientSound@Ambient:
-		SoundFiles: gfoulo1a.wav, gfoulo1b.wav, gfoulo1c.wav
-		Volume: 0.1
+	# AmbientSound@Ambient:
+	#	SoundFiles: gfoulo1a.wav, gfoulo1b.wav, gfoulo1c.wav
+	#	Volume: 0.1
 	MapEditorData:
 		Categories: Decoration
 	IsometricSelectable:
@@ -763,9 +816,9 @@ cawash19:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^4x4Shape
 	Tooltip:
-		Name: 硫磺岛纪念碑
+		Name: actor-cawash19.name
 	Tooltip@NoRow:
-		Name: 硫磺岛纪念碑
+		Name: actor-cawash19.name
 	Armor:
 		Type: Concrete
 	RevealsShroud:
@@ -818,9 +871,9 @@ canewy04:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^3x3Shape
 	Tooltip:
-		Name: 自由女神像
+		Name: actor-canewy04.name
 	Tooltip@NoRow:
-		Name: 自由女神像
+		Name: actor-canewy04.name
 	Armor:
 		Type: Concrete
 	RevealsShroud:
@@ -852,9 +905,9 @@ canewy05:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^2x2Shape
 	Tooltip:
-		Name: 世贸中心
+		Name: actor-canewy05.name
 	Tooltip@NoRow:
-		Name: 世贸中心
+		Name: actor-canewy05.name
 	Armor:
 		Type: Concrete
 	RevealsShroud:
@@ -1126,12 +1179,16 @@ canewy20:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^3x5Shape
 	Tooltip:
-		Name: 仓库
+		Name: actor-canewy20.name
 	Tooltip@NoRow:
-		Name: 仓库
+		Name: actor-canewy20.name
 	Building:
 		Dimensions: 3,5
 		Footprint: xxx xxx xxx xxx xxx
+	WithIdleOverlay@flag:
+		Sequence: garrisoned-flag
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: canewy20.rubble
@@ -1151,12 +1208,16 @@ canewy21:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^5x3Shape
 	Tooltip:
-		Name: 仓库
+		Name: actor-canewy21.name
 	Tooltip@NoRow:
-		Name: 仓库
+		Name: actor-canewy21.name
 	Building:
 		Dimensions: 5,3
 		Footprint: xxxxx xxxxx xxxxx
+	WithIdleOverlay@flag:
+		Sequence: garrisoned-flag
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: canewy21.rubble
@@ -1200,46 +1261,62 @@ caarmy01:
 		Footprint: xxx xxx
 		Dimensions: 3, 2
 	Tooltip:
-		Name: 军用帐篷
+		Name: actor-caarmy01.name
 	Tooltip@NoRow:
-		Name: 军用帐篷
+		Name: actor-caarmy01.name
 	Health:
 		HP: 40000
 	Garrisonable:
 		MaxWeight: 8
+	WithIdleOverlay@flag:
+		Sequence: garrisoned-flag
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded
 
 caarmy02:
 	Inherits: ^GarrisonableBuilding
 	Tooltip:
-		Name: 军用帐篷
+		Name: actor-caarmy02.name
 	Tooltip@NoRow:
-		Name: 军用帐篷
+		Name: actor-caarmy02.name
 	Health:
 		HP: 40000
 	Garrisonable:
 		MaxWeight: 4
+	WithIdleOverlay@flag:
+		Sequence: garrisoned-flag
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded
 
 caarmy03:
 	Inherits: ^GarrisonableBuilding
 	Tooltip:
-		Name: 军用帐篷
+		Name: actor-caarmy03.name
 	Tooltip@NoRow:
-		Name: 军用帐篷
+		Name: actor-caarmy03.name
 	Health:
 		HP: 40000
 	Garrisonable:
 		MaxWeight: 4
+	WithIdleOverlay@flag:
+		Sequence: garrisoned-flag
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded
 
 caarmy04:
 	Inherits: ^GarrisonableBuilding
 	Tooltip:
-		Name: 军用帐篷
+		Name: actor-caarmy04.name
 	Tooltip@NoRow:
-		Name: 军用帐篷
+		Name: actor-caarmy04.name
 	Health:
 		HP: 40000
 	Garrisonable:
 		MaxWeight: 4
+	WithIdleOverlay@flag:
+		Sequence: garrisoned-flag
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded
 
 cawa2a:
 	Inherits: ^GarrisonableBuilding
@@ -1324,9 +1401,9 @@ cafarm01:
 		Footprint: xx xx
 		Dimensions: 2, 2
 	Tooltip:
-		Name: 农场
+		Name: actor-cafarm01.name
 	Tooltip@NoRow:
-		Name: 农场
+		Name: actor-cafarm01.name
 	Health:
 		HP: 80000
 	Garrisonable:
@@ -1340,9 +1417,9 @@ cafarm02:
 		Footprint: x
 		Dimensions: 1, 1
 	Tooltip:
-		Name: 农场筒仓
+		Name: actor-cafarm02.name
 	Tooltip@NoRow:
-		Name: 农场筒仓
+		Name: actor-cafarm02.name
 	Health:
 		HP: 40000
 	SpawnActorOnDeath:
@@ -1362,9 +1439,9 @@ cafarm06:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^2x2Shape
 	Tooltip:
-		Name: 灯塔
+		Name: actor-cafarm06.name
 	Tooltip@NoRow:
-		Name: 灯塔
+		Name: actor-cafarm06.name
 	Health:
 		HP: 100000
 	Building:
@@ -1372,6 +1449,10 @@ cafarm06:
 		Footprint: xx xx
 	Garrisonable:
 		MaxWeight: 5
+	WithIdleOverlay@flag:
+		Sequence: garrisoned-flag
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: cafarm06.rubble
@@ -1387,667 +1468,6 @@ cafarm06.rubble:
 	RenderSprites:
 		Image: cafarm06
 
-cadmfgl:
-	Inherits: ^Flag
-	-Buildable:
-	Tooltip:
-		Name: 旗帜
-	Tooltip@NoRow:
-		Name: 旗帜
-	-WithIdleOverlay@flag:
-	WithIdleOverlay@flag:
-		Sequence: flag
-	GrantConditionOnPrerequisite@domination:
-		Condition: domination
-		Prerequisites: global-domination
-	-Targetable:
-	-Targetable@Water:
-	-Targetable@ChronoDisable:
-	DamageMultiplier@domination:
-		Modifier: 0
-	KillsSelf:
-		RemoveInstead: true
-		RequiresCondition: !domination
-
-causfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 美国国旗
-	Tooltip@NoRow:
-		Name: 美国国旗
-	WithIdleOverlay@flag:
-		Palette: america
-
-carufgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 苏俄国旗
-	Tooltip@NoRow:
-		Name: 苏俄国旗
-	WithIdleOverlay@flag:
-		Palette: ussr
-
-cairfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 伊拉克国旗
-	Tooltip@NoRow:
-		Name: 伊拉克国旗
-	WithIdleOverlay@flag:
-		Palette: iraq
-
-capofgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 波兰国旗
-	Tooltip@NoRow:
-		Name: 波兰国旗
-	WithIdleOverlay@flag:
-		Palette: poland
-
-caskfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 韩国国旗
-	Tooltip@NoRow:
-		Name: 韩国国旗
-	WithIdleOverlay@flag:
-		Palette: korea
-
-calbfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 利比亚国旗
-	Tooltip@NoRow:
-		Name: 利比亚国旗
-	WithIdleOverlay@flag:
-		Palette: libya
-
-cafrfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 法国国旗
-	Tooltip@NoRow:
-		Name: 法国国旗
-	WithIdleOverlay@flag:
-		Palette: france
-
-cagefgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 德国国旗
-	Tooltip@NoRow:
-		Name: 德国国旗
-	WithIdleOverlay@flag:
-		Palette: germany
-
-cacufgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 古巴国旗
-	Tooltip@NoRow:
-		Name: 古巴国旗
-	WithIdleOverlay@flag:
-		Palette: cuba
-
-caukfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 英国国旗
-	Tooltip@NoRow:
-		Name: 英国国旗
-	WithIdleOverlay@flag:
-		Palette: britain
-
-cavnfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 越南国旗
-	Tooltip@NoRow:
-		Name: 越南国旗
-	WithIdleOverlay@flag:
-		Palette: vietnam
-
-caicfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 冰岛国旗
-	Tooltip@NoRow:
-		Name: 冰岛国旗
-	WithIdleOverlay@flag:
-		Palette: iceland
-
-canwfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 挪威国旗
-	Tooltip@NoRow:
-		Name: 挪威国旗
-	WithIdleOverlay@flag:
-		Palette: norway
-
-caswfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 瑞典国旗
-	Tooltip@NoRow:
-		Name: 瑞典国旗
-	WithIdleOverlay@flag:
-		Palette: sweden
-
-cafifgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 芬兰国旗
-	Tooltip@NoRow:
-		Name: 芬兰国旗
-	WithIdleOverlay@flag:
-		Palette: finland
-
-caesfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 爱沙尼亚国旗
-	Tooltip@NoRow:
-		Name: 爱沙尼亚国旗
-	WithIdleOverlay@flag:
-		Palette: estonia
-
-calafgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 拉脱维亚国旗
-	Tooltip@NoRow:
-		Name: 拉脱维亚国旗
-	WithIdleOverlay@flag:
-		Palette: latvia
-
-califgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 立陶宛国旗
-	Tooltip@NoRow:
-		Name: 立陶宛国旗
-	WithIdleOverlay@flag:
-		Palette: lithuania
-
-caeifgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 爱尔兰国旗
-	Tooltip@NoRow:
-		Name: 爱尔兰国旗
-	WithIdleOverlay@flag:
-		Palette: ireland
-
-canlfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 荷兰国旗
-	Tooltip@NoRow:
-		Name: 荷兰国旗
-	WithIdleOverlay@flag:
-		Palette: netherlands
-
-caspfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 西班牙国旗
-	Tooltip@NoRow:
-		Name: 西班牙国旗
-	WithIdleOverlay@flag:
-		Palette: spain
-
-cajpfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 日本国旗
-	Tooltip@NoRow:
-		Name: 日本国旗
-	WithIdleOverlay@flag:
-		Palette: japan
-
-cangfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 尼日利亚国旗
-	Tooltip@NoRow:
-		Name: 尼日利亚国旗
-	WithIdleOverlay@flag:
-		Palette: nigeria
-
-caalfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 阿尔巴尼亚国旗
-	Tooltip@NoRow:
-		Name: 阿尔巴尼亚国旗
-	WithIdleOverlay@flag:
-		Palette: albania
-
-caarfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 亚美尼亚苏维埃共和国国旗
-	Tooltip@NoRow:
-		Name: 亚美尼亚苏维埃共和国国旗
-	WithIdleOverlay@flag:
-		Palette: armenia
-
-caazfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 阿塞拜疆苏维埃共和国国旗
-	Tooltip@NoRow:
-		Name: 阿塞拜疆苏维埃共和国国旗
-	WithIdleOverlay@flag:
-		Palette: azerbaijan
-
-caclfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 智利国旗
-	Tooltip@NoRow:
-		Name: 智利国旗
-	WithIdleOverlay@flag:
-		Palette: chile
-
-cacgfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 刚果国旗
-	Tooltip@NoRow:
-		Name: 刚果国旗
-	WithIdleOverlay@flag:
-		Palette: congo
-
-cagofgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 格鲁吉亚苏维埃共和国国旗
-	Tooltip@NoRow:
-		Name: 格鲁吉亚苏维埃共和国国旗
-	WithIdleOverlay@flag:
-		Palette: georgia
-
-cakzfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 哈萨克苏维埃共和国国旗
-	Tooltip@NoRow:
-		Name: 哈萨克苏维埃共和国国旗
-	WithIdleOverlay@flag:
-		Palette: kazakhstan
-
-cakyfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 吉尔吉斯苏维埃共和国国旗
-	Tooltip@NoRow:
-		Name: 吉尔吉斯苏维埃共和国国旗
-	WithIdleOverlay@flag:
-		Palette: kyrgyzstan
-
-calofgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 老挝国旗
-	Tooltip@NoRow:
-		Name: 老挝国旗
-	WithIdleOverlay@flag:
-		Palette: laos
-
-camxfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 墨西哥国旗
-	Tooltip@NoRow:
-		Name: 墨西哥国旗
-	WithIdleOverlay@flag:
-		Palette: mexico
-
-camofgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 蒙古国旗
-	Tooltip@NoRow:
-		Name: 蒙古国旗
-	WithIdleOverlay@flag:
-		Palette: mongolia
-
-cancfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 尼加拉瓜国旗
-	Tooltip@NoRow:
-		Name: 尼加拉瓜
-	WithIdleOverlay@flag:
-		Palette: nicaragua
-
-caprfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 秘鲁国旗
-	Tooltip@NoRow:
-		Name: 秘鲁国旗
-	WithIdleOverlay@flag:
-		Palette: peru
-
-carsfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 俄罗斯苏维埃共和国国旗
-	Tooltip@NoRow:
-		Name: 俄罗斯苏维埃共和国国旗
-	WithIdleOverlay@flag:
-		Palette: russianssr
-
-casofgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 索马里国旗
-	Tooltip@NoRow:
-		Name: 索马里国旗
-	WithIdleOverlay@flag:
-		Palette: somalia
-
-catjfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 塔吉克苏维埃共和国国旗
-	Tooltip@NoRow:
-		Name: 塔吉克苏维埃共和国国旗
-	WithIdleOverlay@flag:
-		Palette: tajikistan
-
-cauzfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 乌兹别克苏维埃共和国国旗
-	Tooltip@NoRow:
-		Name: 乌兹别克苏维埃共和国国旗
-	WithIdleOverlay@flag:
-		Palette: uzbekistan
-
-caymfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 也门国旗
-	Tooltip@NoRow:
-		Name: 也门国旗
-	WithIdleOverlay@flag:
-		Palette: yemen
-
-cabrfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 巴西国旗
-	Tooltip@NoRow:
-		Name: 巴西国旗
-	WithIdleOverlay@flag:
-		Palette: brazil
-
-cabufgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 保加利亚国旗
-	Tooltip@NoRow:
-		Name: 保加利亚国旗
-	WithIdleOverlay@flag:
-		Palette: bulgaria
-
-cabunfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 保加利亚海军旗
-	Tooltip@NoRow:
-		Name: 保加利亚海军旗
-	WithIdleOverlay@flag:
-		Palette: bulgaria-naval
-
-cainfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 印度尼西亚国旗
-	Tooltip@NoRow:
-		Name: 印度尼西亚国旗
-	WithIdleOverlay@flag:
-		Palette: indonesia
-
-capgfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 葡萄牙国旗
-	Tooltip@NoRow:
-		Name: 葡萄牙国旗
-	WithIdleOverlay@flag:
-		Palette: portugal
-
-caaufgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 奥地利国旗
-	Tooltip@NoRow:
-		Name: 奥地利国旗
-	WithIdleOverlay@flag:
-		Palette: australia
-
-cablfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 白罗斯国旗
-	Tooltip@NoRow:
-		Name: 白罗斯国旗
-	WithIdleOverlay@flag:
-		Palette: belarus
-
-cacnfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 加拿大国旗
-	Tooltip@NoRow:
-		Name: 加拿大国旗
-	WithIdleOverlay@flag:
-		Palette: canada
-
-cachfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 中华民国国旗
-	Tooltip@NoRow:
-		Name: 中华民国国旗
-	WithIdleOverlay@flag:
-		Palette: china
-
-caczfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 捷克斯洛伐克国旗
-	Tooltip@NoRow:
-		Name: 捷克斯洛伐克国旗
-	WithIdleOverlay@flag:
-		Palette: czechoslovakia
-
-cadnfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 丹麦国旗
-	Tooltip@NoRow:
-		Name: 丹麦国旗
-	WithIdleOverlay@flag:
-		Palette: denmark
-
-cagrfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 希腊国旗
-	Tooltip@NoRow:
-		Name: 希腊国旗
-	WithIdleOverlay@flag:
-		Palette: greece
-
-cahufgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 匈牙利国旗
-	Tooltip@NoRow:
-		Name: 匈牙利国旗
-	WithIdleOverlay@flag:
-		Palette: hungary
-
-caitfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 意大利国旗
-	Tooltip@NoRow:
-		Name: 意大利国旗
-	WithIdleOverlay@flag:
-		Palette: italy
-
-canzfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 新西兰国旗
-	Tooltip@NoRow:
-		Name: 新西兰国旗
-	WithIdleOverlay@flag:
-		Palette: newzealand
-
-catrfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 土耳其国旗
-	Tooltip@NoRow:
-		Name: 土耳其国旗
-	WithIdleOverlay@flag:
-		Palette: turkey
-
-cauafgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 乌克兰国旗
-	Tooltip@NoRow:
-		Name: 乌克兰国旗
-	WithIdleOverlay@flag:
-		Palette: ukraine
-
-cazafgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 扎伊尔国旗
-	Tooltip@NoRow:
-		Name: 扎伊尔国旗
-	WithIdleOverlay@flag:
-		Palette: zaire
-
-capafgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 澳大利亚灵能军团军旗
-	Tooltip@NoRow:
-		Name: 澳大利亚灵能军团军旗
-	WithIdleOverlay@flag:
-		Palette: psiaussie
-
-capcfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 尤里格勒军旗
-	Tooltip@NoRow:
-		Name: 尤里格勒军旗
-	WithIdleOverlay@flag:
-		Palette: psicorps
-
-caplfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 绝地教团军旗
-	Tooltip@NoRow:
-		Name: 绝地教团军旗
-	WithIdleOverlay@flag:
-		Palette: psinepal
-
-capsfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 极地守卫军旗
-	Tooltip@NoRow:
-		Name: 极地守卫军旗
-	WithIdleOverlay@flag:
-		Palette: antarctica
-
-capmfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 月影军团军旗
-	Tooltip@NoRow:
-		Name: 月影军团军旗
-	WithIdleOverlay@flag:
-		Palette: psimoon
-
-captfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 特堡要塞军旗
-	Tooltip@NoRow:
-		Name: 特堡要塞军旗
-	WithIdleOverlay@flag:
-		Palette: transylvania
-
-catcfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 外高加索国旗
-	Tooltip@NoRow:
-		Name: 外高加索国旗
-	WithIdleOverlay@flag:
-		Palette: transcaucasia
-
-catmfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 土库曼国旗
-	Tooltip@NoRow:
-		Name: 土库曼国旗
-	WithIdleOverlay@flag:
-		Palette: turkmenistan
-
-catvfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 图瓦国旗
-	Tooltip@NoRow:
-		Name: 图瓦国旗
-	WithIdleOverlay@flag:
-		Palette: tuva
-
-carffgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 俄罗斯国旗
-	Tooltip@NoRow:
-		Name: 俄罗斯国旗
-	WithIdleOverlay@flag:
-		Palette: russia
-
-casmfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 塞尔维亚与黑山国旗
-	Tooltip@NoRow:
-		Name: 塞尔维亚与黑山国旗
-	WithIdleOverlay@flag:
-		Palette: serbia
-
-cahlfgl:
-	Inherits: ^Flag
-	Tooltip:
-		Name: 赫尔兹兰国旗
-	Tooltip@NoRow:
-		Name: 赫尔兹兰国旗
-	WithIdleOverlay@flag:
-		Palette: herzland
-
 cacolo01:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^5x3Shape
@@ -2055,9 +1475,9 @@ cacolo01:
 		Footprint: xxxxx xxxxx xxxxx
 		Dimensions: 5, 3
 	Tooltip:
-		Name: 美国空军学院礼拜堂
+		Name: actor-cacolo01.name
 	Tooltip@NoRow:
-		Name: 美国空军学院礼拜堂
+		Name: actor-cacolo01.name
 	Health:
 		HP: 150000
 	Armor:
@@ -2086,9 +1506,9 @@ caind01:
 		Footprint: xxxx xxxx xxxx xxxx
 		Dimensions: 4, 4
 	Tooltip:
-		Name: 工厂
+		Name: actor-caind01.name
 	Tooltip@NoRow:
-		Name: 工厂
+		Name: actor-caind01.name
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: caind01.rubble
@@ -2111,9 +1531,9 @@ calab:
 		Footprint: xxx xxx xxx xxx
 		Dimensions: 3, 4
 	Tooltip:
-		Name: 爱因斯坦实验室
+		Name: actor-calab.name
 	Tooltip@NoRow:
-		Name: 爱因斯坦实验室
+		Name: actor-calab.name
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: calab.rubble
@@ -2136,9 +1556,9 @@ cagas01:
 		Footprint: xxx xxx xxx
 		Dimensions: 3, 3
 	Tooltip:
-		Name: 储气站
+		Name: actor-cagas01.name
 	Tooltip@NoRow:
-		Name: 储气站
+		Name: actor-cagas01.name
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: cagas01.rubble
@@ -2157,9 +1577,9 @@ cagas01.rubble:
 galite:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 路灯
+		Name: actor-galite.name
 	Tooltip@NoRow:
-		Name: 路灯
+		Name: actor-galite.name
 	Valued:
 		Cost: 200
 	RevealsShroud:
@@ -2252,9 +1672,9 @@ city05:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^4x4Shape
 	Tooltip:
-		Name: 民用发电站
+		Name: actor-city05.name
 	Tooltip@NoRow:
-		Name: 民用发电站
+		Name: actor-city05.name
 	Armor:
 		Type: Concrete
 	RevealsShroud:
@@ -2274,9 +1694,9 @@ catech01:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^3x3Shape
 	Tooltip:
-		Name: 民用通讯中心
+		Name: actor-catech01.name
 	Tooltip@NoRow:
-		Name: 民用通讯中心
+		Name: actor-catech01.name
 	Health:
 		HP: 80000
 	Building:
@@ -2322,9 +1742,9 @@ catexs02:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^4x4Shape
 	Tooltip:
-		Name: 阿拉莫要塞
+		Name: actor-catexs02.name
 	Tooltip@NoRow:
-		Name: 阿拉莫要塞
+		Name: actor-catexs02.name
 	Armor:
 		Type: Concrete
 	Health:
@@ -2477,9 +1897,9 @@ capars01:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^4x4Shape
 	Tooltip:
-		Name: 埃菲尔铁塔
+		Name: actor-capars01.name
 	Tooltip@NoRow:
-		Name: 埃菲尔铁塔
+		Name: actor-capars01.name
 	Armor:
 		Type: Concrete
 	Health:
@@ -2604,9 +2024,9 @@ capars06.rubble:
 capars07:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 电话亭
+		Name: actor-capars07.name
 	Tooltip@NoRow:
-		Name: 电话亭
+		Name: actor-capars07.name
 	RevealsShroud:
 		Range: 10c0
 	Health:
@@ -2660,9 +2080,9 @@ capars10:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^4x3Shape
 	Tooltip:
-		Name: 小酒馆
+		Name: actor-capars10.name
 	Tooltip@NoRow:
-		Name: 小酒馆
+		Name: actor-capars10.name
 	Building:
 		Dimensions: 4,3
 		Footprint: xxxx xxxx xxxx
@@ -2685,9 +2105,9 @@ capars11:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^3x4Shape
 	Tooltip:
-		Name: 凯旋门
+		Name: actor-capars11.name
 	Tooltip@NoRow:
-		Name: 凯旋门
+		Name: actor-capars11.name
 	Armor:
 		Type: Concrete
 	RevealsShroud:
@@ -2717,9 +2137,9 @@ capars12:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^3x5Shape
 	Tooltip:
-		Name: 巴黎圣母院
+		Name: actor-capars12.name
 	Tooltip@NoRow:
-		Name: 巴黎圣母院
+		Name: actor-capars12.name
 	Health:
 		HP: 150000
 	Building:
@@ -2744,9 +2164,9 @@ capars13:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^3x4Shape
 	Tooltip:
-		Name: 小酒馆
+		Name: actor-capars13.name
 	Tooltip@NoRow:
-		Name: 小酒馆
+		Name: actor-capars13.name
 	Building:
 		Dimensions: 3,4
 		Footprint: xxx xxx xxx xxx
@@ -2769,9 +2189,9 @@ capars14:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^4x3Shape
 	Tooltip:
-		Name: 小酒馆
+		Name: actor-capars14.name
 	Tooltip@NoRow:
-		Name: 小酒馆
+		Name: actor-capars14.name
 	Building:
 		Dimensions: 4,3
 		Footprint: xxxx xxxx xxxx
@@ -2794,9 +2214,9 @@ cafrma:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^2x2Shape
 	Tooltip:
-		Name: 农场
+		Name: actor-cafrma.name
 	Tooltip@NoRow:
-		Name: 农场
+		Name: actor-cafrma.name
 	Health:
 		HP: 80000
 	Building:
@@ -2808,9 +2228,9 @@ cafrma:
 cafrmb:
 	Inherits: ^GarrisonableBuilding
 	Tooltip:
-		Name: 厕所
+		Name: actor-cafrmb.name
 	Tooltip@NoRow:
-		Name: 厕所
+		Name: actor-cafrmb.name
 	RevealsShroud:
 		Range: 10c0
 	Health:
@@ -2824,9 +2244,9 @@ caprs03:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^6x4Shape
 	Tooltip:
-		Name: 卢浮宫
+		Name: actor-caprs03.name
 	Tooltip@NoRow:
-		Name: 卢浮宫
+		Name: actor-caprs03.name
 	Health:
 		HP: 160000
 	Building:
@@ -2850,9 +2270,9 @@ caprs03.rubble:
 cagard01:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 警卫室
+		Name: actor-cagard01.name
 	Tooltip@NoRow:
-		Name: 警卫室
+		Name: actor-cagard01.name
 	Armor:
 		Type: Concrete
 	RevealsShroud:
@@ -2870,9 +2290,9 @@ cagard01:
 cagard02:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 警卫室
+		Name: actor-cagard02.name
 	Tooltip@NoRow:
-		Name: 警卫室
+		Name: actor-cagard02.name
 	Armor:
 		Type: Concrete
 	RevealsShroud:
@@ -2891,9 +2311,9 @@ carus01:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^4x4Shape
 	Tooltip:
-		Name: 圣巴兹尔大教堂
+		Name: actor-carus01.name
 	Tooltip@NoRow:
-		Name: 圣巴兹尔大教堂
+		Name: actor-carus01.name
 	Health:
 		HP: 150000
 	Building:
@@ -2918,9 +2338,9 @@ carus01.rubble:
 carus02a:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 克里姆林宫墙
+		Name: actor-carus02a.name
 	Tooltip@NoRow:
-		Name: 克里姆林宫墙
+		Name: actor-carus02a.name
 	Armor:
 		Type: Concrete
 	Health:
@@ -2943,9 +2363,9 @@ carus02a.rubble:
 carus02b:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 克里姆林宫墙
+		Name: actor-carus02b.name
 	Tooltip@NoRow:
-		Name: 克里姆林宫墙
+		Name: actor-carus02b.name
 	Armor:
 		Type: Concrete
 	Health:
@@ -2968,9 +2388,9 @@ carus02b.rubble:
 carus02g:
 	Inherits: ^GarrisonableBuilding
 	Tooltip:
-		Name: 克里姆林钟楼
+		Name: actor-carus02g.name
 	Tooltip@NoRow:
-		Name: 克里姆林钟楼
+		Name: actor-carus02g.name
 	Health:
 		HP: 150000
 	SpawnActorOnDeath:
@@ -2989,9 +2409,9 @@ carus03:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^2x5Shape
 	Tooltip:
-		Name: 克里姆林宫
+		Name: actor-carus03.name
 	Tooltip@NoRow:
-		Name: 克里姆林宫
+		Name: actor-carus03.name
 	Health:
 		HP: 150000
 	Building:
@@ -3171,6 +2591,10 @@ camiam01:
 	Building:
 		Dimensions: 4,2
 		Footprint: xxxx xxxx
+	WithIdleOverlay@flag:
+		Sequence: garrisoned-flag
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: camiam01.rubble
@@ -3192,6 +2616,10 @@ camiam02:
 	Building:
 		Dimensions: 4,2
 		Footprint: xxxx xxxx
+	WithIdleOverlay@flag:
+		Sequence: garrisoned-flag
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: camiam02.rubble
@@ -3213,6 +2641,10 @@ camiam03:
 	Building:
 		Dimensions: 2,3
 		Footprint: xx xx xx
+	WithIdleOverlay@flag:
+		Sequence: garrisoned-flag
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: camiam03.rubble
@@ -3231,15 +2663,19 @@ camiam03.rubble:
 camiam04:
 	Inherits: ^GarrisonableBuilding
 	Tooltip:
-		Name: 救生员小屋
+		Name: actor-camiam04.name
 	Tooltip@NoRow:
-		Name: 救生员小屋
+		Name: actor-camiam04.name
 	Health:
 		HP: 40000
 	MapEditorData:
 		Categories: Decoration
 	Garrisonable:
 		MaxWeight: 3
+	WithIdleOverlay@flag:
+		Sequence: garrisoned-flag
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded
 	IsometricSelectable:
 		DecorationHeight: 30
 
@@ -3309,9 +2745,9 @@ camiam08:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^3x1Shape
 	Tooltip:
-		Name: 亚利桑那纪念馆
+		Name: actor-camiam08.name
 	Tooltip@NoRow:
-		Name: 亚利桑那纪念馆
+		Name: actor-camiam08.name
 	Armor:
 		Type: Concrete
 	RevealsShroud:
@@ -3499,9 +2935,9 @@ camex01:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^3x2Shape
 	Tooltip:
-		Name: 玛雅金字塔
+		Name: actor-camex01.name
 	Tooltip@NoRow:
-		Name: 玛雅金字塔
+		Name: actor-camex01.name
 	Armor:
 		Type: Concrete
 	RevealsShroud:
@@ -3530,9 +2966,9 @@ camex02:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^6x4Shape
 	Tooltip:
-		Name: 玛雅城堡
+		Name: actor-camex02.name
 	Tooltip@NoRow:
-		Name: 玛雅城堡
+		Name: actor-camex02.name
 	Building:
 		Dimensions: 6,4
 		Footprint: xxxxxx xxxxxx xxxxxx xxxxxx
@@ -3555,9 +2991,9 @@ camex03:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^3x3Shape
 	Tooltip:
-		Name: 玛雅小型神殿
+		Name: actor-camex03.name
 	Tooltip@NoRow:
-		Name: 玛雅小型神殿
+		Name: actor-camex03.name
 	Armor:
 		Type: Concrete
 	RevealsShroud:
@@ -3586,9 +3022,9 @@ camex04:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^4x4Shape
 	Tooltip:
-		Name: 玛雅神殿
+		Name: actor-camex04.name
 	Tooltip@NoRow:
-		Name: 玛雅神殿
+		Name: actor-camex04.name
 	Armor:
 		Type: Concrete
 	RevealsShroud:
@@ -3617,9 +3053,9 @@ camex05:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^2x2Shape
 	Tooltip:
-		Name: 玛雅遗址
+		Name: actor-camex05.name
 	Tooltip@NoRow:
-		Name: 玛雅遗址
+		Name: actor-camex05.name
 	Armor:
 		Type: Concrete
 	RevealsShroud:
@@ -3648,9 +3084,9 @@ caeur1:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^2x2Shape
 	Tooltip:
-		Name: 村舍
+		Name: actor-caeur1.name
 	Tooltip@NoRow:
-		Name: 村舍
+		Name: actor-caeur1.name
 	Health:
 		HP: 60000
 	Building:
@@ -3658,6 +3094,10 @@ caeur1:
 		Footprint: xx xx
 	Garrisonable:
 		MaxWeight: 3
+	WithIdleOverlay@flag:
+		Sequence: garrisoned-flag
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: caeur1.rubble
@@ -3677,9 +3117,9 @@ caeur2:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^2x2Shape
 	Tooltip:
-		Name: 村舍
+		Name: actor-caeur2.name
 	Tooltip@NoRow:
-		Name: 村舍
+		Name: actor-caeur2.name
 	Health:
 		HP: 60000
 	Building:
@@ -3687,6 +3127,10 @@ caeur2:
 		Footprint: xx xx
 	Garrisonable:
 		MaxWeight: 3
+	WithIdleOverlay@flag:
+		Sequence: garrisoned-flag
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: caeur2.rubble
@@ -3792,9 +3236,9 @@ cachig04:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^2x2Shape
 	Tooltip:
-		Name: 联络中心
+		Name: actor-cachig04.name
 	Tooltip@NoRow:
-		Name: 联络中心
+		Name: actor-cachig04.name
 	Building:
 		Dimensions: 2,2
 		Footprint: xx xx
@@ -3818,9 +3262,9 @@ cachig05:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^4x4Shape
 	Tooltip:
-		Name: 西尔斯大厦
+		Name: actor-cachig05.name
 	Tooltip@NoRow:
-		Name: 西尔斯大厦
+		Name: actor-cachig05.name
 	RevealsShroud:
 		Range: 10c0
 	Health:
@@ -3847,9 +3291,9 @@ cachig06:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^2x2Shape
 	Tooltip:
-		Name: 水塔
+		Name: actor-cachig06.name
 	Tooltip@NoRow:
-		Name: 水塔
+		Name: actor-cachig06.name
 	Armor:
 		Type: Concrete
 	Health:
@@ -3962,9 +3406,9 @@ castl05a:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^4x4Shape
 	Tooltip:
-		Name: 体育场
+		Name: actor-castl05a.name
 	Tooltip@NoRow:
-		Name: 体育场
+		Name: actor-castl05a.name
 	Health:
 		HP: 60000
 	Building:
@@ -3989,9 +3433,9 @@ castl05b:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^4x4Shape
 	Tooltip:
-		Name: 体育场
+		Name: actor-castl05b.name
 	Tooltip@NoRow:
-		Name: 体育场
+		Name: actor-castl05b.name
 	Health:
 		HP: 60000
 	Building:
@@ -4016,9 +3460,9 @@ castl05c:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^4x4Shape
 	Tooltip:
-		Name: 体育场
+		Name: actor-castl05c.name
 	Tooltip@NoRow:
-		Name: 体育场
+		Name: actor-castl05c.name
 	Health:
 		HP: 60000
 	Building:
@@ -4043,9 +3487,9 @@ castl05d:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^4x4Shape
 	Tooltip:
-		Name: 体育场
+		Name: actor-castl05d.name
 	Tooltip@NoRow:
-		Name: 体育场
+		Name: actor-castl05d.name
 	Health:
 		HP: 60000
 	Building:
@@ -4070,9 +3514,9 @@ castl05e:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^4x4Shape
 	Tooltip:
-		Name: 体育场
+		Name: actor-castl05e.name
 	Tooltip@NoRow:
-		Name: 体育场
+		Name: actor-castl05e.name
 	Health:
 		HP: 60000
 	Building:
@@ -4097,9 +3541,9 @@ castl05f:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^4x4Shape
 	Tooltip:
-		Name: 体育场
+		Name: actor-castl05f.name
 	Tooltip@NoRow:
-		Name: 体育场
+		Name: actor-castl05f.name
 	Health:
 		HP: 60000
 	Building:
@@ -4124,9 +3568,9 @@ castl05g:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^4x4Shape
 	Tooltip:
-		Name: 体育场
+		Name: actor-castl05g.name
 	Tooltip@NoRow:
-		Name: 体育场
+		Name: actor-castl05g.name
 	Health:
 		HP: 60000
 	Building:
@@ -4151,9 +3595,9 @@ castl05h:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^4x4Shape
 	Tooltip:
-		Name: 体育场
+		Name: actor-castl05h.name
 	Tooltip@NoRow:
-		Name: 体育场
+		Name: actor-castl05h.name
 	Health:
 		HP: 60000
 	Building:
@@ -4178,9 +3622,9 @@ camsc07:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^2x2Shape
 	Tooltip:
-		Name: 小屋
+		Name: actor-camsc07.name
 	Tooltip@NoRow:
-		Name: 小屋
+		Name: actor-camsc07.name
 	Health:
 		HP: 120000
 	Building:
@@ -4188,6 +3632,10 @@ camsc07:
 		Footprint: xx xx
 	Garrisonable:
 		MaxWeight: 6
+	WithIdleOverlay@flag:
+		Sequence: garrisoned-flag
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded
 	IsometricSelectable:
 		DecorationHeight: 45
 
@@ -4195,13 +3643,17 @@ camsc08:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^2x2Shape
 	Tooltip:
-		Name: 小屋
+		Name: actor-camsc08.name
 	Tooltip@NoRow:
-		Name: 小屋
+		Name: actor-camsc08.name
 	Health:
 		HP: 40000
 	Garrisonable:
 		MaxWeight: 6
+	WithIdleOverlay@flag:
+		Sequence: garrisoned-flag
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded
 	IsometricSelectable:
 		DecorationHeight: 45
 
@@ -4209,13 +3661,17 @@ camsc09:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^2x2Shape
 	Tooltip:
-		Name: 小屋
+		Name: actor-camsc09.name
 	Tooltip@NoRow:
-		Name: 小屋
+		Name: actor-camsc09.name
 	Health:
 		HP: 40000
 	Garrisonable:
 		MaxWeight: 6
+	WithIdleOverlay@flag:
+		Sequence: garrisoned-flag
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded
 	IsometricSelectable:
 		DecorationHeight: 45
 
@@ -4223,12 +3679,16 @@ camsc10:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^4x4Shape
 	Tooltip:
-		Name: 猩堡王
+		Name: actor-camsc10.name
 	Tooltip@NoRow:
-		Name: 猩堡王
+		Name: actor-camsc10.name
 	Building:
 		Dimensions: 4,4
 		Footprint: xxxx xxxx xxxx xxxx
+	WithIdleOverlay@flag:
+		Sequence: garrisoned-flag
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: camsc10.rubble
@@ -4248,9 +3708,9 @@ cabunk01:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^2x2Shape
 	Tooltip:
-		Name: 混凝土地堡
+		Name: actor-cabunk01.name
 	Tooltip@NoRow:
-		Name: 混凝土地堡
+		Name: actor-cabunk01.name
 	Armor:
 		Type: Concrete
 	Building:
@@ -4258,6 +3718,10 @@ cabunk01:
 		Footprint: xx xx
 	Garrisonable:
 		MaxWeight: 8
+	WithIdleOverlay@flag:
+		Sequence: garrisoned-flag
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: cabunk01.rubble
@@ -4277,9 +3741,9 @@ cabunk02:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^2x2Shape
 	Tooltip:
-		Name: 混凝土地堡
+		Name: actor-cabunk02.name
 	Tooltip@NoRow:
-		Name: 混凝土地堡
+		Name: actor-cabunk02.name
 	Armor:
 		Type: Concrete
 	Building:
@@ -4287,6 +3751,10 @@ cabunk02:
 		Footprint: xx xx
 	Garrisonable:
 		MaxWeight: 8
+	WithIdleOverlay@flag:
+		Sequence: garrisoned-flag
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: cabunk02.rubble
@@ -4307,9 +3775,9 @@ cabunk03:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^2x2Shape
 	Tooltip:
-		Name: 混凝土地堡
+		Name: actor-cabunk03.name
 	Tooltip@NoRow:
-		Name: 混凝土地堡
+		Name: actor-cabunk03.name
 	Armor:
 		Type: Concrete
 	Building:
@@ -4317,6 +3785,10 @@ cabunk03:
 		Footprint: xx xx
 	Garrisonable:
 		MaxWeight: 8
+	WithIdleOverlay@flag:
+		Sequence: garrisoned-flag
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: cabunk03.rubble
@@ -4336,9 +3808,9 @@ cabunk04:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^2x2Shape
 	Tooltip:
-		Name: 混凝土地堡
+		Name: actor-cabunk04.name
 	Tooltip@NoRow:
-		Name: 混凝土地堡
+		Name: actor-cabunk04.name
 	Armor:
 		Type: Concrete
 	Building:
@@ -4346,6 +3818,10 @@ cabunk04:
 		Footprint: xx xx
 	Garrisonable:
 		MaxWeight: 8
+	WithIdleOverlay@flag:
+		Sequence: garrisoned-flag
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: cabunk04.rubble
@@ -4606,9 +4082,9 @@ cala03:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^3x1Shape
 	Tooltip:
-		Name: 好莱坞
+		Name: actor-cala03.name
 	Tooltip@NoRow:
-		Name: 好莱坞
+		Name: actor-cala03.name
 	Building:
 		Dimensions: 3,1
 		Footprint: xxx
@@ -4631,9 +4107,9 @@ cala04:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^4x4Shape
 	Tooltip:
-		Name: 好莱坞露天音乐厅
+		Name: actor-cala04.name
 	Tooltip@NoRow:
-		Name: 好莱坞露天音乐厅
+		Name: actor-cala04.name
 	Building:
 		Dimensions: 4,4
 		Footprint: xxxx xxxx xxxx xxxx
@@ -4656,9 +4132,9 @@ cala05:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^4x4Shape
 	Tooltip:
-		Name: 洛杉矶国际机场
+		Name: actor-cala05.name
 	Tooltip@NoRow:
-		Name: 洛杉矶国际机场
+		Name: actor-cala05.name
 	Building:
 		Dimensions: 4,4
 		Footprint: xxxx xxxx xxxx xxxx
@@ -4681,9 +4157,9 @@ cala06:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^2x3Shape
 	Tooltip:
-		Name: 洛杉矶国际机场塔台
+		Name: actor-cala06.name
 	Tooltip@NoRow:
-		Name: 洛杉矶国际机场塔台
+		Name: actor-cala06.name
 	Building:
 		Dimensions: 2,3
 		Footprint: xx xx xx
@@ -4706,9 +4182,9 @@ cala07:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^3x3Shape
 	Tooltip:
-		Name: 电影院
+		Name: actor-cala07.name
 	Tooltip@NoRow:
-		Name: 电影院
+		Name: actor-cala07.name
 	Building:
 		Dimensions: 3,3
 		Footprint: xxx xxx xxx
@@ -4731,9 +4207,9 @@ cala08:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^4x2Shape
 	Tooltip:
-		Name: 汽车经销商
+		Name: actor-cala08.name
 	Tooltip@NoRow:
-		Name: 汽车经销商
+		Name: actor-cala08.name
 	Building:
 		Dimensions: 4,2
 		Footprint: xxxx xxxx
@@ -4756,9 +4232,9 @@ cala09:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^3x3Shape
 	Tooltip:
-		Name: 高档便利店
+		Name: actor-cala09.name
 	Tooltip@NoRow:
-		Name: 高档便利店
+		Name: actor-cala09.name
 	Building:
 		Dimensions: 3,3
 		Footprint: xxx xxx xxx
@@ -4781,9 +4257,9 @@ cala10:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^1x3Shape
 	Tooltip:
-		Name: 广告牌
+		Name: actor-cala10.name
 	Tooltip@NoRow:
-		Name: 广告牌
+		Name: actor-cala10.name
 	Armor:
 		Type: Wood
 	RevealsShroud:
@@ -4812,9 +4288,9 @@ cala11:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^3x4Shape
 	Tooltip:
-		Name: 好莱坞露天音乐厅
+		Name: actor-cala11.name
 	Tooltip@NoRow:
-		Name: 好莱坞露天音乐厅
+		Name: actor-cala11.name
 	Armor:
 		Type: Wood
 	RevealsShroud:
@@ -4843,9 +4319,9 @@ cala12:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^3x4Shape
 	Tooltip:
-		Name: 好莱坞露天音乐厅
+		Name: actor-cala12.name
 	Tooltip@NoRow:
-		Name: 好莱坞露天音乐厅
+		Name: actor-cala12.name
 	Armor:
 		Type: Wood
 	RevealsShroud:
@@ -4874,9 +4350,9 @@ cala13:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^3x1Shape
 	Tooltip:
-		Name: 好莱坞
+		Name: actor-cala13.name
 	Tooltip@NoRow:
-		Name: 好莱坞
+		Name: actor-cala13.name
 	Armor:
 		Type: Wood
 	RevealsShroud:
@@ -4905,9 +4381,9 @@ cala14:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^3x3Shape
 	Tooltip:
-		Name: 迷你购物中心
+		Name: actor-cala14.name
 	Tooltip@NoRow:
-		Name: 迷你购物中心
+		Name: actor-cala14.name
 	Building:
 		Dimensions: 3,3
 		Footprint: xxx xxx xxx
@@ -4930,9 +4406,9 @@ cala15:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^3x3Shape
 	Tooltip:
-		Name: 迷你购物中心
+		Name: actor-cala15.name
 	Tooltip@NoRow:
-		Name: 迷你购物中心
+		Name: actor-cala15.name
 	Building:
 		Dimensions: 3,3
 		Footprint: xxx xxx xxx
@@ -4955,9 +4431,9 @@ caegyp01:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^4x4Shape
 	Tooltip:
-		Name: 金字塔
+		Name: actor-caegyp01.name
 	Tooltip@NoRow:
-		Name: 金字塔
+		Name: actor-caegyp01.name
 	Armor:
 		Type: Wood
 	RevealsShroud:
@@ -4987,9 +4463,9 @@ caegyp02:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^4x4Shape
 	Tooltip:
-		Name: 金字塔
+		Name: actor-caegyp02.name
 	Tooltip@NoRow:
-		Name: 金字塔
+		Name: actor-caegyp02.name
 	Building:
 		Dimensions: 4,4
 		Footprint: xxxx xxxx xxxx xxxx
@@ -5013,9 +4489,9 @@ caegyp03:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^4x2Shape
 	Tooltip:
-		Name: 狮身人面像
+		Name: actor-caegyp03.name
 	Tooltip@NoRow:
-		Name: 狮身人面像
+		Name: actor-caegyp03.name
 	Armor:
 		Type: Wood
 	RevealsShroud:
@@ -5045,9 +4521,9 @@ caegyp04:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^4x4Shape
 	Tooltip:
-		Name: 金字塔
+		Name: actor-caegyp04.name
 	Tooltip@NoRow:
-		Name: 金字塔
+		Name: actor-caegyp04.name
 	Armor:
 		Type: Wood
 	RevealsShroud:
@@ -5077,9 +4553,9 @@ caegyp05:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^4x4Shape
 	Tooltip:
-		Name: 金字塔
+		Name: actor-caegyp05.name
 	Tooltip@NoRow:
-		Name: 金字塔
+		Name: actor-caegyp05.name
 	Armor:
 		Type: Wood
 	RevealsShroud:
@@ -5109,9 +4585,9 @@ caegyp06:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^4x4Shape
 	Tooltip:
-		Name: 金字塔
+		Name: actor-caegyp06.name
 	Tooltip@NoRow:
-		Name: 金字塔
+		Name: actor-caegyp06.name
 	Armor:
 		Type: Wood
 	RevealsShroud:
@@ -5185,9 +4661,9 @@ calond04:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^6x4Shape
 	Tooltip:
-		Name: 英国议会
+		Name: actor-calond04.name
 	Tooltip@NoRow:
-		Name: 英国议会
+		Name: actor-calond04.name
 	Building:
 		Dimensions: 6,4
 		Footprint: xxxxxx xxxxxx xxxxxx xxxxxx
@@ -5210,9 +4686,9 @@ calond04.rubble:
 calond05:
 	Inherits: ^GarrisonableBuilding
 	Tooltip:
-		Name: 大本钟
+		Name: actor-calond05.name
 	Tooltip@NoRow:
-		Name: 大本钟
+		Name: actor-calond05.name
 	RevealsShroud:
 		Range: 10c0
 	Health:
@@ -5236,9 +4712,9 @@ calond06:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^4x4Shape
 	Tooltip:
-		Name: 伦敦塔
+		Name: actor-calond06.name
 	Tooltip@NoRow:
-		Name: 伦敦塔
+		Name: actor-calond06.name
 	Health:
 		HP: 150000
 	Building:
@@ -5333,9 +4809,9 @@ casanf04:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^3x5Shape
 	Tooltip:
-		Name: 金门大桥
+		Name: actor-casanf04.name
 	Tooltip@NoRow:
-		Name: 金门大桥
+		Name: actor-casanf04.name
 	Building:
 		Dimensions: 3,5
 		Footprint: xxx xxx xxx xxx xxx
@@ -5347,9 +4823,9 @@ casanf05:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^6x4Shape
 	Tooltip:
-		Name: 鹈鹕岛管委会
+		Name: actor-casanf05.name
 	Tooltip@NoRow:
-		Name: 鹈鹕岛管委会
+		Name: actor-casanf05.name
 	Health:
 		HP: 150000
 	Building:
@@ -5440,9 +4916,9 @@ casanf09:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^3x5Shape
 	Tooltip:
-		Name: 金门大桥
+		Name: actor-casanf09.name
 	Tooltip@NoRow:
-		Name: 金门大桥
+		Name: actor-casanf09.name
 	Building:
 		Dimensions: 3,5
 		Footprint: xxx xxx xxx xxx xxx
@@ -5454,9 +4930,9 @@ casanf10:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^3x5Shape
 	Tooltip:
-		Name: 金门大桥
+		Name: actor-casanf10.name
 	Tooltip@NoRow:
-		Name: 金门大桥
+		Name: actor-casanf10.name
 	Building:
 		Dimensions: 3,5
 		Footprint: xxx xxx xxx xxx xxx
@@ -5468,9 +4944,9 @@ casanf11:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^3x5Shape
 	Tooltip:
-		Name: 金门大桥
+		Name: actor-casanf11.name
 	Tooltip@NoRow:
-		Name: 金门大桥
+		Name: actor-casanf11.name
 	Building:
 		Dimensions: 3,5
 		Footprint: xxx xxx xxx xxx xxx
@@ -5482,9 +4958,9 @@ casanf12:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^3x5Shape
 	Tooltip:
-		Name: 金门大桥
+		Name: actor-casanf12.name
 	Tooltip@NoRow:
-		Name: 金门大桥
+		Name: actor-casanf12.name
 	Building:
 		Dimensions: 3,5
 		Footprint: xxx xxx xxx xxx xxx
@@ -5496,9 +4972,9 @@ casanf13:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^3x5Shape
 	Tooltip:
-		Name: 金门大桥
+		Name: actor-casanf13.name
 	Tooltip@NoRow:
-		Name: 金门大桥
+		Name: actor-casanf13.name
 	Building:
 		Dimensions: 3,5
 		Footprint: xxx xxx xxx xxx xxx
@@ -5510,9 +4986,9 @@ casanf14:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^3x5Shape
 	Tooltip:
-		Name: 金门大桥
+		Name: actor-casanf14.name
 	Tooltip@NoRow:
-		Name: 金门大桥
+		Name: actor-casanf14.name
 	Building:
 		Dimensions: 3,5
 		Footprint: xxx xxx xxx xxx xxx
@@ -5523,9 +4999,9 @@ casanf14:
 casanf15:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 鹈鹕岛水塔
+		Name: actor-casanf15.name
 	Tooltip@NoRow:
-		Name: 鹈鹕岛水塔
+		Name: actor-casanf15.name
 	Armor:
 		Type: Wood
 	RevealsShroud:
@@ -5549,9 +5025,9 @@ casanf15.rubble:
 casanf16:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 灯塔
+		Name: actor-casanf16.name
 	Tooltip@NoRow:
-		Name: 灯塔
+		Name: actor-casanf16.name
 	Armor:
 		Type: Wood
 	RevealsShroud:
@@ -5617,12 +5093,16 @@ casydn02:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^3x3Shape
 	Tooltip:
-		Name: 鼠堡王
+		Name: actor-casydn02.name
 	Tooltip@NoRow:
-		Name: 鼠堡王
+		Name: actor-casydn02.name
 	Building:
 		Dimensions: 3,3
 		Footprint: xxx xxx xxx
+	WithIdleOverlay@flag:
+		Sequence: garrisoned-flag
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: casydn02.rubble
@@ -5641,9 +5121,9 @@ casydn03:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^6x4Shape
 	Tooltip:
-		Name: 悉尼歌剧院
+		Name: actor-casydn03.name
 	Tooltip@NoRow:
-		Name: 悉尼歌剧院
+		Name: actor-casydn03.name
 	Health:
 		HP: 150000
 	Building:
@@ -5667,18 +5147,18 @@ calunr01:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^2x2Shape
 	Tooltip:
-		Name: Lunar Lander
+		Name: actor-calunr01.name
 		RequiresCondition: showownername && !dune
 	Tooltip@NoRow:
-		Name: Lunar Lander
+		Name: actor-calunr01.name
 		RequiresCondition: !showownername && !dune
 	Tooltip@Dune:
-		Name: Dunar Lander
-		GenericName: Structure
+		Name: actor-calunr01.dune-name
+		GenericName: meta-building.name
 		RequiresCondition: showownername && dune
 	Tooltip@DuneNoRow:
-		Name: Dunar Lander
-		GenericName: Structure
+		Name: actor-calunr01.dune-name
+		GenericName: meta-building.name
 		ShowOwnerRow: false
 		RequiresCondition: !showownername && dune
 	Armor:
@@ -5699,9 +5179,9 @@ calunr01:
 calunr02:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 美国国旗
+		Name: actor-calunr02.name
 	Tooltip@NoRow:
-		Name: 美国国旗
+		Name: actor-calunr02.name
 	Armor:
 		Type: Wood
 	RevealsShroud:
@@ -5715,9 +5195,9 @@ caseat01:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^2x2Shape
 	Tooltip:
-		Name: 西雅图太空针塔
+		Name: actor-caseat01.name
 	Tooltip@NoRow:
-		Name: 西雅图太空针塔
+		Name: actor-caseat01.name
 	RevealsShroud:
 		Range: 10c0
 	Health:
@@ -5743,9 +5223,9 @@ caseat02:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^4x4Shape
 	Tooltip:
-		Name: 巨软科技园区
+		Name: actor-caseat02.name
 	Tooltip@NoRow:
-		Name: 巨软科技园区
+		Name: actor-caseat02.name
 	Building:
 		Dimensions: 4,4
 		Footprint: xxxx xxxx xxxx xxxx
@@ -5770,9 +5250,9 @@ catran01:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^2x2Shape
 	Tooltip:
-		Name: 地窖入口
+		Name: actor-catran01.name
 	Tooltip@NoRow:
-		Name: 地窖入口
+		Name: actor-catran01.name
 	Building:
 		Dimensions: 2,2
 		Footprint: xx xx
@@ -5794,9 +5274,9 @@ catran02:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^2x2Shape
 	Tooltip:
-		Name: 地窖入口
+		Name: actor-catran02.name
 	Tooltip@NoRow:
-		Name: 地窖入口
+		Name: actor-catran02.name
 	Building:
 		Dimensions: 2,2
 		Footprint: xx xx
@@ -5818,9 +5298,9 @@ catran03:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^4x4Shape
 	Tooltip:
-		Name: 尤里特兰斯瓦尼亚要塞
+		Name: actor-catran03.name
 	Tooltip@NoRow:
-		Name: 尤里特兰斯瓦尼亚要塞
+		Name: actor-catran03.name
 	Armor:
 		Type: Wood
 	RevealsShroud:
@@ -5848,9 +5328,9 @@ catime01:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^4x3Shape
 	Tooltip:
-		Name: 时间机器
+		Name: actor-catime01.name
 	Tooltip@NoRow:
-		Name: 时间机器
+		Name: actor-catime01.name
 	Armor:
 		Type: Steel
 	RevealsShroud:
@@ -5867,9 +5347,9 @@ catime02:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^4x3Shape
 	Tooltip:
-		Name: 时间机器
+		Name: actor-catime02.name
 	Tooltip@NoRow:
-		Name: 时间机器
+		Name: actor-catime02.name
 	Armor:
 		Type: Steel
 	RevealsShroud:
@@ -5886,9 +5366,9 @@ caeast01:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^2x2Shape
 	Tooltip:
-		Name: 复活节岛石像
+		Name: actor-caeast01.name
 	Tooltip@NoRow:
-		Name: 复活节岛石像
+		Name: actor-caeast01.name
 	Armor:
 		Type: Steel
 	Health:

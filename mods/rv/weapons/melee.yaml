@@ -2,7 +2,7 @@ DogJaw:
 	ValidTargets: Infantry
 	InvalidTargets: DogImmune
 	ReloadDelay: 40
-	Range: 1c768
+	Range: 1c256
 	Report: idogatta.wav, idogatca.wav
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
@@ -48,7 +48,7 @@ DroneJump:
 			Concrete: 0
 			Drone: 0
 			Rocket: 0
-		DamageTypes: BulletDeath, NonTemporal
+		DamageTypes: BulletDeath, NonTemporal, DroneInfection
 
 DroneJumpE:
 	Inherits: DroneJump
@@ -85,17 +85,17 @@ CrabPunch:
 	Inherits@1: ^BreakPointDefenseDrones
 	Inherits: AlligatorBite
 	ReloadDelay: 40
-	Range: 1c856
+	Range: 2c128
 	Report: vsquat1a.wav
 	ValidTargets: Ground, Water
 	Warhead@1Dam: SpreadDamage
 		Damage: 6000
 		ValidTargets: Ground, Water
 		Versus:
-			Heavy: 90
-			Wood: 75
-			Steel: 65
-			Concrete: 50
+			Heavy: 100
+			Wood: 100
+			Steel: 100
+			Concrete: 90
 		DamageTypes: Prone100Percent, TriggerProne, BulletDeath, SuppressTerrorDrone, RemovesSquid, NonTemporal
 
 SquidPunch:
@@ -180,6 +180,16 @@ PunchE:
 	Burst: 2
 	BurstDelays: 10
 
+PunchHolo:
+	Inherits: Punch
+	Warhead@1Dam: SpreadDamage
+		Damage: 0
+
+PunchHoloE:
+	Inherits: PunchE
+	Warhead@1Dam: SpreadDamage
+		Damage: 0
+
 MummyPunch:
 	Inherits: Punch
 	Report: gmumatta.wav, gmumattb.wav, gmumattc.wav
@@ -213,6 +223,16 @@ SmashE:
 	Warhead@1Dam: SpreadDamage
 		Damage: 15000
 
+SmashHolo:
+	Inherits: Smash
+	Warhead@1Dam: SpreadDamage
+		Damage: 0
+
+SmashHoloE:
+	Inherits: SmashE
+	Warhead@1Dam: SpreadDamage
+		Damage: 0
+
 MummySmash:
 	Inherits: Smash
 	Report: gmumatta.wav, gmumattb.wav, gmumattc.wav
@@ -227,6 +247,10 @@ Heal:
 		Spread: 213
 		Damage: -5000
 		ValidTargets: Heal
+	Warhead@2Eff: FlashTargetsInRadius
+		Radius: 213
+		ValidRelationships: Ally
+		ValidTargets: Heal
 
 RepairBullet:
 	ReloadDelay: 80
@@ -239,6 +263,10 @@ RepairBullet:
 		Damage: -5000
 		ValidTargets: Repair
 		DamageTypes: KillsDrone, NonTemporal
+	Warhead@2Eff: FlashTargetsInRadius
+		Radius: 213
+		ValidRelationships: Ally
+		ValidTargets: Repair
 
 RepairBulletE:
 	Inherits: RepairBullet
@@ -252,6 +280,25 @@ MechRepair:
 	Report: fixit1.aud
 	Warhead@1Dam: SpreadDamage
 		Damage: -4000
+
+DroneRepair:
+	Inherits: RepairBullet
+	Range: 2c512
+	Report: vifvrepa.wav
+	ValidTargets: Repair, AirRepair, SeaAnimalRepair
+	-Projectile:
+	Projectile: LaserZap
+		ZOffset: 4000
+		Color: FFFF70
+		Width: 16
+		Duration: 5
+		HitAnim: explosion
+		HitAnimSequence: repairsparks
+		HitAnimPalette: player
+		SecondaryBeam: false
+	Warhead@1Dam: SpreadDamage
+		Damage: -1500
+		ValidTargets: Repair, AirRepair, SeaAnimalRepair
 
 TankGrind:
 	Inherits@1: ^BreakPointDefenseDrones
@@ -311,4 +358,3 @@ SlimeAttackE:
 	ReloadDelay: 30
 	Warhead@1Dam: SpreadDamage
 		Damage: 7500
-

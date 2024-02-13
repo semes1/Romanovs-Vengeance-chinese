@@ -2,141 +2,90 @@ Background@MAINMENU_PRERELEASE_NOTIFICATION:
 	Logic: PreReleaseWarningPrompt
 	X: (WINDOW_RIGHT - WIDTH) / 2
 	Y: (WINDOW_BOTTOM - HEIGHT) / 2
-	Width: 720
-	Height: 500
+	Width: 520
+	Height: 315
 	Children:
 		Label@PROMPT_TITLE:
 			Width: PARENT_RIGHT
-			Y: 60
+			Y: 20
 			Height: 25
-			Font: MediumBold
+			Font: Bold
 			Align: Center
-			Text: “OpenRA-罗曼诺夫的复仇”开发组声明
-		Container@CONTENT_BOX:
-			X: (PARENT_RIGHT - WIDTH) / 2
-			Y: 120
-			Width: PARENT_RIGHT - 60
-			Height: PARENT_BOTTOM - 60 - 50
-			Children:
-				Container@d9b15a3984bd407988484b8e9daa1e05:
-					X: 0
-					Y: 0
-					Width: PARENT_RIGHT
-					Height: 60
-					Children:
-						Label@a:
-							X: 0
-							Y: 0
-							Width: PARENT_RIGHT
-							Height: 16
-							Align: Center
-							Text: “罗曼诺夫的复仇”基于尚不完善的“OpenRA红色警戒2”制作。
-						Label@b:
-							X: 0
-							Y: 20
-							Width: PARENT_RIGHT
-							Height: 16
-							Align: Center
-							Text: 即使本游戏尚存在一些bug，但我们有自信为大家提供良好的游戏体验。
-						Label@c:
-							X: 0
-							Y: 40
-							Width: PARENT_RIGHT
-							Height: 16
-							Align: Center
-							Text: 特别地，“罗曼诺夫的复仇”并非OpenRA官方模组。
-				Container@d019595c1c6a43b9818e5cd60f168da5:
-					X: 0
-					Y: 75
-					Width: PARENT_RIGHT
-					Height: 80
-					Children:
-						Label@a:
-							X: 0
-							Y: 0
-							Width: PARENT_RIGHT
-							Height: 16
-							Align: Center
-							Text: “罗曼诺夫的复仇”不受来自EA的技术支持
-						Label@b:
-							X: 0
-							Y: 20
-							Width: PARENT_RIGHT
-							Height: 16
-							Align: Center
-							Text: 本程序的源码以GPLv3协议发布在以下地址：
-						Label@c:
-							X: 0
-							Y: 40
-							Width: PARENT_RIGHT
-							Height: 16
-							Align: Center
-							Text: Mod本体仓库：https://gitee.com/CastleJing/rvsc
-						Label@d:
-							X: 0
-							Y: 60
-							Width: PARENT_RIGHT
-							Height: 16
-							Align: Center
-							Text: 所使用的OpenRA引擎：https://gitee.com/CastleJing/rv_engine_sc
-				Container@3952adbd87e14521a267202d7a272772:
-					X: 0
-					Y: 170
-					Width: PARENT_RIGHT
-					Height: 80
-					Children:
-						Label@a:
-							X: 0
-							Y: 0
-							Width: PARENT_RIGHT
-							Height: 16
-							Align: Center
-							Text: 此外，这些提示有助于各位新玩家更快上手
-						Label@b:
-							X: 0
-							Y: 20
-							Width: PARENT_RIGHT
-							Height: 16
-							Align: Center
-							Text: 变更建筑朝向的默认快捷键为[V]
-						Label@c:
-							X: 0
-							Y: 40
-							Width: PARENT_RIGHT
-							Height: 16
-							Align: Center
-							Text: 指挥官技能和科技升级的默认快捷键是[O]和[P]
-						Label@d:
-							X: 0
-							Y: 60
-							Width: PARENT_RIGHT
-							Height: 16
-							Align: Center
-							Text: 注意：只有非正方形地基的建筑可以旋转
-				Container@5c8cf8e6574c4b8d89d5a3cad8692899:
-					X: 0
-					Y: 265
-					Width: PARENT_RIGHT
-					Height: 40
-					Children:
-						Label@a:
-							X: 0
-							Y: 0
-							Width: PARENT_RIGHT
-							Height: 16
-							Align: Center
-							Text: “罗曼诺夫的复仇”是OpenRA汉化组为“Romanov's Vengeance”所取的译名。
-						Label@b:
-							X: 0
-							Y: 20
-							Width: PARENT_RIGHT
-							Height: 16
-							Align: Center
-							Text: OpenRA与“罗曼诺夫的复仇”均为免费内容，欢迎加入玩家社群：qq群742982428。
+			Text: label-mainmenu-prerelease-notification-prompt-title
+		Label@PROMPT_TEXT_A:
+			X: 15
+			Y: 50
+			Width: PARENT_RIGHT - 30
+			Height: 16
+			Align: Center
+			Text: label-mainmenu-prerelease-notification-prompt-text-a
+		Label@PROMPT_TEXT_B:
+			X: 15
+			Y: 68
+			Width: PARENT_RIGHT - 30
+			Height: 16
+			Align: Center
+			Text: label-mainmenu-prerelease-notification-prompt-text-b
+		Label@PROMPT_TEXT_C:
+			X: 15
+			Y: 104
+			Width: PARENT_RIGHT - 30
+			Height: 16
+			Align: Center
+			Text: label-mainmenu-prerelease-notification-prompt-text-c
+		Label@PROMPT_TEXT_D:
+			X: 15
+			Y: 122
+			Width: PARENT_RIGHT - 30
+			Height: 16
+			Align: Center
+			Text: label-mainmenu-prerelease-notification-prompt-text-d
+		Label@PROMPT_TEXT_E:
+			X: 15
+			Y: 140
+			Width: PARENT_RIGHT - 30
+			Height: 16
+			Align: Center
+			Text: label-mainmenu-prerelease-notification-prompt-text-e
+		Label@PROMPT_TEXT_F:
+			X: 15
+			Y: 176
+			Width: PARENT_RIGHT - 30
+			Height: 16
+			Align: Center
+			Text: label-mainmenu-prerelease-notification-prompt-text-f
+		Label@PROMPT_TEXT_G:
+			X: 15
+			Y: 194
+			Width: PARENT_RIGHT - 30
+			Height: 16
+			Align: Center
+			Text: label-mainmenu-prerelease-notification-prompt-text-g
+		Label@PROMPT_TEXT_H:
+			X: 15
+			Y: 212
+			Width: PARENT_RIGHT - 30
+			Height: 16
+			Align: Center
+			Text: label-mainmenu-prerelease-notification-prompt-text-h
+		Label@PROMPT_TEXT_I:
+			X: 15
+			Y: 230
+			Width: PARENT_RIGHT - 30
+			Height: 16
+			Align: Center
+			Text: label-mainmenu-prerelease-notification-prompt-text-i
+		Label@PROMPT_TEXT_J:
+			X: 15
+			Y: 248
+			Width: PARENT_RIGHT - 30
+			Height: 16
+			Align: Center
+			Text: label-mainmenu-prerelease-notification-prompt-text-j
 		Button@CONTINUE_BUTTON:
 			X: PARENT_RIGHT - WIDTH - 20
 			Y: PARENT_BOTTOM - 45
 			Width: 120
 			Height: 25
-			Text: 我已知晓
+			Text: button-mainmenu-prerelease-notification-continue
 			Font: Bold

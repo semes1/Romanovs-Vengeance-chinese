@@ -1,16 +1,18 @@
 shad:
 	Inherits: ^Helicopter
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@CHAOS: ^BerserkableVoxel
+	Inherits@CHAOS: ^BerserkableVoxelArmed
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@MC: ^MindControllable
 	Inherits@RADIATON: ^DamagedByRadiation50Percent
 	DamagedByTintedCells:
 		RequiresCondition: !airborne
+	DamagedByTintedCells@ORANGE:
+		RequiresCondition: !airborne
 	Tooltip:
-		Name: 夜鹰武装直升机
+		Name: actor-shad.name
 	Tooltip@NoRow:
-		Name: 夜鹰武装直升机
+		Name: actor-shad.name
 	Selectable:
 		Class: shad
 		Bounds: 1689, 2896, 0, -965
@@ -20,6 +22,7 @@ shad:
 		Type: Light
 	Armament@primary:
 		Weapon: BlackHawkCannon
+		Damage: 35
 		LocalOffset: 928,0,128
 		MuzzleSequence: muzzle
 		ReloadingCondition: reload-ground
@@ -34,6 +37,7 @@ shad:
 		RequiresCondition: !rank-elite
 	Armament@elite:
 		Weapon: BlackHawkCannonE
+		Damage: 50
 		LocalOffset: 928,0,128
 		MuzzleSequence: muzzle
 		ReloadingCondition: reload-ground
@@ -56,18 +60,18 @@ shad:
 		Voice: Build
 		ValidRelationships: None
 	Buildable:
-		Queue: Aircraft.Allies, Aircraft.USA, Aircraft.UK, Aircraft.Korea
+		Queue: Aircraft.Shared, Aircraft.Allies, Aircraft.USA, Aircraft.UK, Aircraft.Korea
 		BuildPaletteOrder: 20
-		Prerequisites: gapile, ~techlevel.2
-		Description: 专用于运送步兵的武装直升机\n\n侦测隐形\n\n·强势对抗：步兵\n·弱势对抗：载具、飞行器\n\n·特殊能力：不会在战术地图上显示
-		BuildDuration: 375
+		Prerequisites: ~aircraft.allies, gapile, ~techlevel.2
+		Description: actor-shad.description
+		BuildDuration: 250
 		BuildDurationModifier: 100
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Valued:
-		Cost: 800
+		Cost: 500
 	DeliversCash:
-		Payload: 800
+		Payload: 500
 		Voice: Move
 	RevealsShroud:
 		Range: 8c0
@@ -84,11 +88,11 @@ shad:
 	-AppearsOnRadar:
 	AttackAircraft:
 		Voice: Attack
-		FacingTolerance: 2
 		AttackType: Hover
+		FacingTolerance: 2
 		PauseOnCondition: emp || magnefreeze || chronodisable
 	Aircraft:
-		LandableTerrainTypes: Clear, Rough, Road, DirtRoad, Ore, Gems
+		LandableTerrainTypes: Clear, Sand, Rough, Road, DirtRoad, Ore, Gems
 		Crushes: crate
 		CrushDamageTypes: NonTemporal
 		TurnSpeed: 40
@@ -98,7 +102,11 @@ shad:
 		PauseOnCondition: emp || magnefreeze || chronodisable
 	Repairable:
 		Voice: Move
-		RepairActors: gadept, nadept, nadepb, yadept, yadepb, caoutp
+		RepairActors: gadept, nadept, nadepb, yadept, yadepb, caoutp, caoutb
+	RepairableNear:
+		Voice: Move
+		CloseEnough: 3c0
+		RepairActors: gaweap, gaweab, gaweac, gawead, naweap, naweab, naweac, nawead, yaweap, yaweab, yaweac, yawead, gayard, nayard, yayard, gaairc, gaairb, baairf, baairb, naheli, yadisk
 	RenderSprites:
 	Targetable@MC:
 		RequiresCondition: !controlled && !permamc && !airborne
@@ -115,14 +123,14 @@ shad:
 		BobDistance: -45
 	Cargo:
 		Types: Infantry, Garrisoner, SmallVehicle
-		MaxWeight: 10
+		MaxWeight: 5
 		AfterLoadDelay: 0
 		BeforeUnloadDelay: 0
 		AfterUnloadDelay: 0
 		UnloadVoice: Move
 	WithCargoSounds:
-		EnterSound: genter1a.wav
-		ExitSound: gexit1a.wav
+		EnterSounds: genter1a.wav
+		ExitSounds: gexit1a.wav
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: shadhusk
@@ -131,16 +139,16 @@ shad:
 		DeathTypes: NonTemporal
 		Weapon: UnitExplode
 		RequiresCondition: !airborne
-	AmbientSound@Move:
-		SoundFiles: vblhlo2a.wav, vblhlo2b.wav, vblhlo2c.wav
-		Volume: 0.5
-		RequiresCondition: moving
-	SoundAnnouncement@end:
-		SoundFiles: vblhlo3.wav
-		Volume: 0.5
-		RequiresCondition: !moving
-	GrantConditionOnMovement:
-		Condition: moving
+	# AmbientSound@Move:
+	#	SoundFiles: vblhlo2a.wav, vblhlo2b.wav, vblhlo2c.wav
+	#	Volume: 0.5
+	#	RequiresCondition: moving
+	# SoundAnnouncement@end:
+	#	SoundFiles: vblhlo3.wav
+	#	Volume: 0.5
+	#	RequiresCondition: !moving
+	# GrantConditionOnMovement:
+	#	Condition: moving
 	HitShape:
 	WithCargoPipsDecoration:
 		Margin: 4, 3
@@ -152,13 +160,15 @@ shad:
 			yellow: pip-yellow
 			blue: pip-blue
 			red: pip-red
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MinRange, Cargo, MaxRange
 
 shadhusk:
 	Inherits: ^HelicopterHusk
 	Tooltip:
-		Name: 夜鹰武装直升机
+		Name: actor-shad.name
 	Tooltip@NoRow:
-		Name: 夜鹰武装直升机
+		Name: actor-shad.name
 	Aircraft:
 		TurnSpeed: 40
 		Speed: 180
@@ -172,8 +182,8 @@ shadhusk:
 	#	Types: SatelliteScan
 	#	Type: GroundPosition
 	RevealOnDeath:
-		Radius: 4c0
-		Duration: 50
+		Radius: 8c0
+		Duration: 125
 	RenderSprites:
 		Image: shad
 	RenderVoxels:
@@ -190,9 +200,10 @@ shadhusk:
 
 zep:
 	Inherits: ^Helicopter
+	Inherits@ADVIRRAD: ^AffectedByAdvancedIrradiators
 	Inherits@AIRPROP: ^AffectedByAerialPropaganda
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@CHAOS: ^BerserkableVoxel
+	Inherits@CHAOS: ^BerserkableVoxelArmed
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@RADBOMBS: ^AffectedByRadioactiveBombs
 	Inherits@AI: ^AIMicroManagable
@@ -202,14 +213,14 @@ zep:
 		Payload: 2000
 		Voice: Move
 	Tooltip:
-		Name: 基洛夫飞艇
+		Name: actor-zep.name
 	Tooltip@NoRow:
-		Name: 基洛夫飞艇
+		Name: actor-zep.name
 	Buildable:
-		Queue: Aircraft.Soviets, Aircraft.USSR, Aircraft.Vietnam, Aircraft.Cuba, Aircraft.Libya, Aircraft.Baku
+		Queue: Aircraft.Shared, Aircraft.Soviets, Aircraft.USSR, Aircraft.Vietnam, Aircraft.Cuba, Aircraft.Libya
 		BuildPaletteOrder: 50
-		Prerequisites: natech, ~techlevel.4
-		Description: 装备大量高爆炸弹与自我修复能力的重型飞艇\n\n必须在目标正上方才能投弹\n\n·强势对抗：建筑\n·弱势对抗：步兵、载具、飞行器\n\n·特殊能力：自我回复至最大生命值的100%
+		Prerequisites: ~aircraft.soviets, natech, ~techlevel.4
+		Description: actor-zep.description
 		BuildDuration: 1000
 		BuildDurationModifier: 100
 	UpdatesPlayerStatistics:
@@ -226,11 +237,15 @@ zep:
 		AirborneCondition: airborne
 	Repairable:
 		Voice: Move
-		RepairActors: gadept, nadept, nadepb, yadept, yadepb, caoutp
+		RepairActors: gadept, nadept, nadepb, yadept, yadepb, caoutp, caoutb
+	RepairableNear:
+		Voice: Move
+		CloseEnough: 3c0
+		RepairActors: gaweap, gaweab, gaweac, gawead, naweap, naweab, naweac, nawead, yaweap, yaweab, yaweac, yawead, gayard, nayard, yayard, gaairc, gaairb, baairf, baairb, naheli, yadisk
 	Health:
-		HP: 200000
+		HP: 400000
 	Armor:
-		Type: Medium
+		Type: Light
 	ChangesHealth:
 		PercentageStep: 1
 		Step: 0
@@ -247,30 +262,58 @@ zep:
 	#	Type: GroundPosition
 	Armament:
 		Weapon: BlimpBomb
+		Damage: 750
 		RequiresCondition: !rank-elite && !radbombs
 	Armament@elite:
 		Weapon: BlimpBombE
+		Damage: 825
 		RequiresCondition: rank-elite && !radbombs
 	Armament@rad:
 		Weapon: BlimpBombRad
-		RequiresCondition: !rank-elite && radbombs
+		Damage: 750
+		RequiresCondition: !rank-elite && radbombs && !advirrad
 	Armament@eliterad:
 		Weapon: BlimpBombRadE
-		RequiresCondition: rank-elite && radbombs
+		Damage: 825
+		RequiresCondition: rank-elite && radbombs && !advirrad
+	Armament@rad-orange:
+		Weapon: BlimpBombRadOrange
+		Damage: 750
+		RequiresCondition: !rank-elite && radbombs && advirrad
+	Armament@eliterad-orange:
+		Weapon: BlimpBombRadOrangeE
+		Damage: 825
+		RequiresCondition: rank-elite && radbombs && advirrad
 	AttackAircraft:
 		Voice: Attack
 		AttackType: Hover
-		FacingTolerance: 128
+		FacingTolerance: 512
 	AutoTarget:
 	RenderSprites:
 	RenderVoxels:
 	WithVoxelBody:
 		ShowShadow: false
-		RequiresCondition: !airprop
+		RequiresCondition: !airprop && !radbombs
 	WithVoxelBody@propaganda:
 		ShowShadow: false
 		Sequence: idle-propaganda
-		RequiresCondition: airprop
+		RequiresCondition: airprop && !radbombs
+	WithVoxelBody@rad:
+		ShowShadow: false
+		Sequence: idle-rad
+		RequiresCondition: !airprop && radbombs && !advirrad
+	WithVoxelBody@rad-orange:
+		ShowShadow: false
+		Sequence: idle-rad-orange
+		RequiresCondition: !airprop && radbombs && advirrad
+	WithVoxelBody@propaganda-rad:
+		ShowShadow: false
+		Sequence: idle-propaganda-rad
+		RequiresCondition: airprop && radbombs && !advirrad
+	WithVoxelBody@propaganda-rad-orange:
+		ShowShadow: false
+		Sequence: idle-propaganda-rad-orange
+		RequiresCondition: airprop && radbombs && advirrad
 	WithFacingSpriteBody:
 		Sequence: shadow
 		ForceToGround: true
@@ -285,21 +328,21 @@ zep:
 		InitialStance: ReturnFire
 	ExternalCondition@PRODUCED:
 		Condition: produced
-	VoiceAnnouncement:
+	NotificationAnnouncement:
 		RequiresCondition: produced
-		Voice: Build
+		Notification: KirovReporting
 	Voiced:
 		VoiceSet: KirovVoice
-	AmbientSound@Move:
-		SoundFiles: vkirlo2a.wav, vkirlo2b.wav, vkirlo2c.wav
-		Volume: 0.40
-		RequiresCondition: moving
-	SoundAnnouncement@end:
-		SoundFiles: vkirlo3.wav
-		Volume: 0.40
-		RequiresCondition: !moving
-	GrantConditionOnMovement:
-		Condition: moving
+	# AmbientSound@Move:
+	#	SoundFiles: vkirlo2a.wav, vkirlo2b.wav, vkirlo2c.wav
+	#	Volume: 0.40
+	#	RequiresCondition: moving
+	# SoundAnnouncement@end:
+	#	SoundFiles: vkirlo3.wav
+	#	Volume: 0.40
+	#	RequiresCondition: !moving
+	# GrantConditionOnMovement:
+	#	Condition: moving
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: zephusk
@@ -309,13 +352,19 @@ zep:
 	RejectsOrders@AI: ## Make AI zep more offensive when attack
 		Reject: Move, Attack, ReturnToBase
 		RequiresCondition: ai-control && AIattack
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange
+		Upgrades: upgrade.advanced_irradiators, upgrade.aerial_propaganda, upgrade.radioactive_bombs
 
 zephusk:
 	Inherits: ^HelicopterHusk
+	Inherits@ADVIRRAD: ^AffectedByAdvancedIrradiators
+	Inherits@AIRPROP: ^AffectedByAerialPropaganda
+	Inherits@RADBOMBS: ^AffectedByRadioactiveBombs
 	Tooltip:
-		Name: 基洛夫飞艇
+		Name: actor-zep.name
 	Tooltip@NoRow:
-		Name: 基洛夫飞艇
+		Name: actor-zep.name
 	Aircraft:
 		TurnSpeed: 20
 		Speed: 30
@@ -331,10 +380,39 @@ zephusk:
 	#	Types: SatelliteScan
 	#	Type: GroundPosition
 	RevealOnDeath:
-		Radius: 5c0
-		Duration: 50
+		Radius: 10c0
+		Duration: 125
+	-ProximityExternalCondition@AIRPROP:
+	WithVoxelBody:
+		ShowShadow: false
+		RequiresCondition: !airprop && !radbombs
+	WithVoxelBody@propaganda:
+		ShowShadow: false
+		Sequence: idle-propaganda
+		RequiresCondition: airprop && !radbombs
+	WithVoxelBody@rad:
+		ShowShadow: false
+		Sequence: idle-rad
+		RequiresCondition: !airprop && radbombs && !advirrad
+	WithVoxelBody@rad-orange:
+		ShowShadow: false
+		Sequence: idle-rad-orange
+		RequiresCondition: !airprop && radbombs && advirrad
+	WithVoxelBody@propaganda-rad:
+		ShowShadow: false
+		Sequence: idle-propaganda-rad
+		RequiresCondition: airprop && radbombs && !advirrad
+	WithVoxelBody@propaganda-rad-orange:
+		ShowShadow: false
+		Sequence: idle-propaganda-rad-orange
+		RequiresCondition: airprop && radbombs && advirrad
 	RenderVoxels:
 		Image: zep
+	RenderSprites:
+		Image: zep
+	WithFacingSpriteBody:
+		Sequence: shadow
+		ForceToGround: true
 	BodyOrientation:
 		UseClassicPerspectiveFudge: false
 
@@ -343,26 +421,29 @@ orca:
 	Inherits@A2A: ^AffectedByA2AMissiles
 	Inherits@AI: ^AIMicroManagable
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@CHAOS: ^BerserkableVoxel
+	Inherits@CHAOS: ^BerserkableVoxelArmed
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@MC: ^MindControllable
+	Inherits@PREDATOR: ^AffectedByPredatorMissiles
 	Inherits@RADIATON: ^DamagedByRadiation50Percent
 	DamagedByTintedCells:
 		RequiresCondition: !airborne
+	DamagedByTintedCells@ORANGE:
+		RequiresCondition: !airborne
 	Valued:
-		Cost: 1000
+		Cost: 1200
 	DeliversCash:
-		Payload: 1000
+		Payload: 1200
 		Voice: Move
 	Tooltip:
-		Name: 鹞鹰战机
+		Name: actor-orca.name
 	Tooltip@NoRow:
-		Name: 鹞鹰战机
+		Name: actor-orca.name
 	Buildable:
-		Queue: Aircraft.Allies, Aircraft.USA, Aircraft.UK, Aircraft.Korea
-		Prerequisites: !prerequisite.enoughair, ~techlevel.3
+		Queue: Aircraft.Shared, Aircraft.Allies, Aircraft.USA, Aircraft.UK, Aircraft.Korea
+		Prerequisites: ~aircraft.allies, !prerequisite.enoughair, ~techlevel.3
 		BuildPaletteOrder: 10
-		Description: 高速对地攻击机\n\n有建造数量限制\n所有盟军固定翼飞行器的总数不得超过所有着陆整备区域的总和\n必须回到整备区装填弹药\n\n·强势对抗：建筑、载具\n·弱势对抗：步兵、飞行器
+		Description: actor-orca.description
 		BuildDuration: 500
 		BuildDurationModifier: 100
 	UpdatesPlayerStatistics:
@@ -395,10 +476,12 @@ orca:
 	#	Type: GroundPosition
 	Armament:
 		Weapon: Maverick
+		Damage: 100
 		PauseOnCondition: !ammo
 		RequiresCondition: !rank-elite
 	Armament@Elite:
 		Weapon: MaverickE
+		Damage: 150
 		PauseOnCondition: !ammo
 		RequiresCondition: rank-elite
 	Armament@AA:
@@ -410,15 +493,21 @@ orca:
 		PauseOnCondition: !ammo
 		RequiresCondition: a2amissiles && rank-elite
 	AttackAircraft:
-		FacingTolerance: 20
 		Voice: Attack
+		FacingTolerance: 20
 		TargetFrozenActors: True
 		PauseOnCondition: emp || magnefreeze || chronodisable
 	WithVoxelBody:
-		RequiresCondition: !a2amissiles
+		RequiresCondition: !a2amissiles && !predator_missiles
 	WithVoxelBody@A2A:
 		Sequence: idle-a2a
-		RequiresCondition: a2amissiles
+		RequiresCondition: a2amissiles && !predator_missiles
+	WithVoxelBody@PREDATOR:
+		Sequence: idle-predator
+		RequiresCondition: !a2amissiles && predator_missiles
+	WithVoxelBody@A2A_PREDATOR:
+		Sequence: idle-a2a-predator
+		RequiresCondition: a2amissiles && predator_missiles
 	Voiced:
 		VoiceSet: HarrierVoice
 	ExternalCondition@PRODUCED:
@@ -429,9 +518,13 @@ orca:
 		ValidRelationships: None
 	Repairable:
 		Voice: Move
-		RepairActors: gadept, nadept, nadepb, yadept, yadepb, caoutp
+		RepairActors: gadept, nadept, nadepb, yadept, yadepb, caoutp, caoutb
+	RepairableNear:
+		Voice: Move
+		CloseEnough: 3c0
+		RepairActors: gaweap, gaweab, gaweac, gawead, naweap, naweab, naweac, nawead, yaweap, yaweab, yaweac, yawead, gayard, nayard, yayard, naheli, yadisk
 	Rearmable:
-		RearmActors: gaairc, gaairb, gaapad, gadock
+		RearmActors: gaairc, gaairb, gaapad, gadock, baairf, baairb, badock, badocb
 	Targetable@MC:
 		RequiresCondition: !controlled && !permamc && !airborne
 	Targetable@CHAOS:
@@ -464,12 +557,27 @@ orca:
 		DeathTypes: NonTemporal
 		Weapon: UnitExplode
 		RequiresCondition: !airborne
+	ProvidesPrerequisite@actorname:
 	GrantExternalConditionToOwner:
 		Condition: padaircraft
 	HitShape:
-	ProducibleWithLevel:
-		Prerequisites: vetair
+	ProducibleWithLevel@1:
+		Prerequisites: baacdm, !vetair
+	WithProductionIconOverlay@1:
+		Prerequisites: baacdm, !vetair
+		Types: chevron-veteran
+	ProducibleWithLevel@2:
+		Prerequisites: !baacdm, vetair
 		InitialLevels: 2
+	WithProductionIconOverlay@2:
+		Prerequisites: !baacdm, vetair
+		Types: chevron-elite
+	ProducibleWithLevel@3:
+		Prerequisites: baacdm, vetair
+		InitialLevels: 3
+	WithProductionIconOverlay@3:
+		Prerequisites: baacdm, vetair
+		Types: chevron-heroic
 	WithAmmoPipsDecoration:
 		Margin: 4, 3
 		FullSequence: pip-ammo
@@ -477,36 +585,50 @@ orca:
 		Palette: ra
 		Position: BottomLeft
 		RequiresSelection: true
-	AmbientSound@Ambient:
-		SoundFiles: vintlo2a.wav, vintlo2b.wav, vintlo2c.wav
-		Volume: 0.20
-		RequiresCondition: airborne
+	# AmbientSound@Ambient:
+	#	SoundFiles: vintlo2a.wav, vintlo2b.wav, vintlo2c.wav
+	#	Volume: 0.20
+	#	RequiresCondition: airborne
 	Contrail@1:
 		Offset: -100,-500,100
-		Color: 55555580
-		UsePlayerColor: false
-		TrailWidth: 32
+		StartColor: 88888880
+		StartColorAlpha: 128
+		StartColorUsePlayerColor: false
+		EndColorUsePlayerColor: true
+		StartWidth: 32
 	Contrail@2:
 		Offset: -100,500,100
-		Color: 55555580
-		UsePlayerColor: false
-		TrailWidth: 32
+		StartColor: 88888880
+		StartColorAlpha: 128
+		StartColorUsePlayerColor: false
+		EndColorUsePlayerColor: true
+		StartWidth: 32
 	Contrail@FlameTrail:
 		Offset: -500,0,50
-		Color: FFEA0080
-		UsePlayerColor: false
-		TrailWidth: 96
+		StartColor: FFEA0080
+		StartColorAlpha: 128
+		StartColorUsePlayerColor: false
+		StartWidth: 96
+		EndWidth: 76
 		TrailLength: 7
 	ProductionCostMultiplier@AI:
 		Prerequisites: prerequisite.aiplayer
 		Multiplier: 40
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange
+		Upgrades: upgrade.a2a_missiles, upgrade.predator_missiles
+	ActorStatOverride@a2amissiles:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MinRange, None, MaxRange
+		RequiresCondition: a2amissiles
 
 orcahusk:
 	Inherits: ^PlaneHusk
+	Inherits@A2A: ^AffectedByA2AMissiles
+	Inherits@PREDATOR: ^AffectedByPredatorMissiles
 	Tooltip:
-		Name: Harrier
+		Name: actor-orca.name
 	Tooltip@NoRow:
-		Name: Harrier
+		Name: actor-orca.name
 	FallsToEarth:
 		Explosion: PlaneExplode
 	Aircraft:
@@ -521,17 +643,30 @@ orcahusk:
 	#	Types: SatelliteScan
 	#	Type: GroundPosition
 	RevealOnDeath:
-		Radius: 6c0
-		Duration: 50
+		Radius: 12c0
+		Duration: 125
+	WithVoxelBody:
+		RequiresCondition: !a2amissiles && !predator_missiles
+	WithVoxelBody@A2A:
+		Sequence: idle-a2a
+		RequiresCondition: a2amissiles && !predator_missiles
+	WithVoxelBody@PREDATOR:
+		Sequence: idle-predator
+		RequiresCondition: !a2amissiles && predator_missiles
+	WithVoxelBody@A2A_PREDATOR:
+		Sequence: idle-a2a-predator
+		RequiresCondition: a2amissiles && predator_missiles
 	RenderVoxels:
 		Image: falc
 
 orcahusk.VTOL:
 	Inherits: ^HelicopterHusk
+	Inherits@A2A: ^AffectedByA2AMissiles
+	Inherits@PREDATOR: ^AffectedByPredatorMissiles
 	Tooltip:
-		Name: 鹞鹰战机
+		Name: actor-orca.name
 	Tooltip@NoRow:
-		Name: 鹞鹰战机
+		Name: actor-orca.name
 	FallsToEarth:
 		Explosion: PlaneExplode
 	Aircraft:
@@ -546,8 +681,19 @@ orcahusk.VTOL:
 	#	Types: SatelliteScan
 	#	Type: GroundPosition
 	RevealOnDeath:
-		Radius: 6c0
-		Duration: 50
+		Radius: 12c0
+		Duration: 125
+	WithVoxelBody:
+		RequiresCondition: !a2amissiles && !predator_missiles
+	WithVoxelBody@A2A:
+		Sequence: idle-a2a
+		RequiresCondition: a2amissiles && !predator_missiles
+	WithVoxelBody@PREDATOR:
+		Sequence: idle-predator
+		RequiresCondition: !a2amissiles && predator_missiles
+	WithVoxelBody@A2A_PREDATOR:
+		Sequence: idle-a2a-predator
+		RequiresCondition: a2amissiles && predator_missiles
 	RenderVoxels:
 		Image: falc
 
@@ -558,14 +704,14 @@ beag:
 	DeliversCash:
 		Payload: 1500
 	Tooltip:
-		Name: 黑鹰轰炸机
+		Name: actor-beag.name
 	Tooltip@NoRow:
-		Name: 黑鹰轰炸机
+		Name: actor-beag.name
 	Buildable:
-		Queue: Aircraft.Korea
+		Queue: Aircraft.Shared, Aircraft.Korea
 		BuildPaletteOrder: 30
-		Prerequisites: !prerequisite.enoughair, ~techlevel.3
-		Description: 装备有电磁脉冲炸弹的韩国轰炸机\n\n电磁脉冲炸弹可以瘫痪载具和部分建筑\n有建造数量限制\n所有盟军固定翼飞行器的总数不得超过所有着陆整备区域的总和\n必须回到整备区装填弹药\n\n·强势对抗：载具、建筑\n·弱势对抗：步兵、飞行器
+		Prerequisites: ~aircraft.korea, !prerequisite.enoughair, ~techlevel.3
+		Description: actor-beag.description
 		BuildDuration: 750
 		BuildDurationModifier: 100
 	SpawnActorOnDeath:
@@ -575,14 +721,20 @@ beag:
 		Actor: beaghusk.VTOL
 	Armament:
 		Weapon: EMPulseBEagle
+		Damage: 150
 	Armament@Elite:
 		Weapon: EMPulseBEagleE
+		Damage: 200
 	-Armament@AA:
 	-Armament@EliteAA:
 	-GrantConditionOnPrerequisite@A2AMISSILES:
+	-FirepowerMultiplier@PREDATOR_MISSILES:
+	-GrantConditionOnPrerequisite@PREDATOR_MISSILES:
 	WithVoxelBody:
 		-RequiresCondition:
 	-WithVoxelBody@A2A:
+	-WithVoxelBody@PREDATOR:
+	-WithVoxelBody@A2A_PREDATOR:
 	AmmoPool:
 		Ammo: 1
 		ReloadDelay: 200
@@ -602,21 +754,36 @@ beag:
 		Image: beag
 		NormalsPalette: ts-normals
 	HitShape:
-	ProducibleWithLevel:
+	ProducibleWithLevel@1:
+		Prerequisites: vetairorbaacdm
+	WithProductionIconOverlay@1:
+		Prerequisites: vetairorbaacdm
+		Types: chevron-veteran
+	ProducibleWithLevel@2:
 		InitialLevels: 1
+		Prerequisites: vetair, baacdm
+	WithProductionIconOverlay@2:
+		Prerequisites: vetair, baacdm
+		Types: chevron-elite
+	-ProducibleWithLevel@3:
+	-WithProductionIconOverlay@3:
 	Contrail@1:
 		Offset: 0,-500,100
 	Contrail@2:
 		Offset: 0,500,100
 	Contrail@FlameTrail:
 		Offset: -700,0,50
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange
+		-Upgrades:
+	-ActorStatOverride@a2amissiles:
 
 beaghusk:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: 黑鹰轰炸机
+		Name: actor-beag.name
 	Tooltip@NoRow:
-		Name: 黑鹰轰炸机
+		Name: actor-beag.name
 	FallsToEarth:
 		Explosion: PlaneExplode
 	Aircraft:
@@ -631,17 +798,18 @@ beaghusk:
 	#	Types: SatelliteScan
 	#	Type: GroundPosition
 	RevealOnDeath:
-		Radius: 6c0
-		Duration: 50
+		Radius: 12c0
+		Duration: 125
 	RenderVoxels:
 		Image: beag
+		NormalsPalette: ts-normals
 
 beaghusk.VTOL:
 	Inherits: ^HelicopterHusk
 	Tooltip:
-		Name: 黑鹰轰炸机
+		Name: actor-beag.name
 	Tooltip@NoRow:
-		Name: 黑鹰轰炸机
+		Name: actor-beag.name
 	FallsToEarth:
 		Explosion: PlaneExplode
 	Aircraft:
@@ -656,10 +824,11 @@ beaghusk.VTOL:
 	#	Types: SatelliteScan
 	#	Type: GroundPosition
 	RevealOnDeath:
-		Radius: 6c0
-		Duration: 50
+		Radius: 12c0
+		Duration: 125
 	RenderVoxels:
 		Image: beag
+		NormalsPalette: ts-normals
 
 pdplane:
 	Inherits: ^NeutralAircraft
@@ -671,9 +840,9 @@ pdplane:
 		Bounds: 2413, 3861
 	RejectsOrders:
 	Tooltip:
-		Name: 运输机
+		Name: actor-pdplane.name
 	Tooltip@NoRow:
-		Name: 运输机
+		Name: actor-pdplane.name
 	Aircraft:
 		CruiseAltitude: 5c852
 		Repulsable: false
@@ -699,10 +868,10 @@ pdplane:
 	HitShape:
 	RenderVoxels:
 		Image: pdplane
-	AmbientSound@Ambient:
-		SoundFiles: sparlo2a.wav, sparlo2b.wav, sparlo2c.wav
-		Volume: 0.35
-		RequiresCondition: airborne
+	# AmbientSound@Ambient:
+	#	SoundFiles: sparlo2a.wav, sparlo2b.wav, sparlo2c.wav
+	#	Volume: 0.35
+	#	RequiresCondition: airborne
 	Voiced:
 		VoiceSet: CargoPlaneVoice
 		Volume: 0.45
@@ -711,18 +880,24 @@ pdplane:
 	Contrail@1:
 		Offset: -50,1200,400
 		TrailLength: 15
-		UsePlayerColor: False
+		StartColor: 88888880
+		StartColorAlpha: 128
+		StartColorUsePlayerColor: False
+		EndColorUsePlayerColor: true
 	Contrail@2:
 		Offset: -50,-1200,400
 		TrailLength: 15
-		UsePlayerColor: False
+		StartColor: 88888880
+		StartColorAlpha: 128
+		StartColorUsePlayerColor: False
+		EndColorUsePlayerColor: true
 
 pdplanehusk:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: 运输机
+		Name: actor-pdplane.name
 	Tooltip@NoRow:
-		Name: 运输机
+		Name: actor-pdplane.name
 	Aircraft:
 		TurnSpeed: 20
 		Speed: 270
@@ -732,9 +907,9 @@ pdplanehusk:
 bplndrop:
 	Inherits: pdplane
 	Tooltip:
-		Name: 米格战机
+		Name: actor-bpln.name
 	Tooltip@NoRow:
-		Name: 米格战机
+		Name: actor-bpln.name
 	-Targetable@Airborne:
 	Aircraft:
 		Repulsable: false
@@ -743,27 +918,31 @@ bplndrop:
 		DropRange: 3c0
 		DropInterval: 1
 	SpawnActorOnDeath:
-		DeathType: NonTemporal
 		Actor: bplnhusk
 	RenderVoxels:
 		Image: bpln
-	AmbientSound@Ambient:
-		SoundFiles: vblelo2a.wav, vblelo2b.wav, vblelo2c.wav
+	# AmbientSound@Ambient:
+	#	SoundFiles: vblelo2a.wav, vblelo2b.wav, vblelo2c.wav
 	-Voiced:
 	-DeathSounds:
 	Contrail@1:
 		Offset: -600,100,100
 		TrailLength: 15
-		UsePlayerColor: False
+		StartColor: 88888880
+		StartColorAlpha: 128
+		StartColorUsePlayerColor: False
+		EndColorUsePlayerColor: true
 	Contrail@2:
 		Offset: -600,-100,100
 		TrailLength: 15
-		UsePlayerColor: False
+		StartColor: 88888880
+		StartColorAlpha: 128
+		StartColorUsePlayerColor: False
+		EndColorUsePlayerColor: true
 
 alplane:
 	Inherits: pdplane
 	SpawnActorOnDeath:
-		DeathType: NonTemporal
 		Actor: alplanehusk
 	RenderVoxels:
 		Image: alplane
@@ -780,7 +959,6 @@ alplanehusk:
 pcplane:
 	Inherits: pdplane
 	SpawnActorOnDeath:
-		DeathType: NonTemporal
 		Actor: pcplanehusk
 	RenderVoxels:
 		Image: pcplane
@@ -805,9 +983,9 @@ pdplane.parabomb:
 a10:
 	Inherits: alplane
 	Tooltip:
-		Name: A-10雷电II型攻击机
+		Name: actor-a10.name
 	Tooltip@NoRow:
-		Name: A-10雷电II型攻击机
+		Name: actor-a10.name
 	Armament:
 		Weapon: A10Missile
 		LocalOffset: 0,-512,0
@@ -818,46 +996,84 @@ a10:
 		PauseOnCondition: !ammo
 	AttackBomber:
 	SpawnActorOnDeath:
-		DeathType: NonTemporal
 		Actor: a10husk
 	AmmoPool:
 		Ammo: 6
 		AmmoCondition: ammo
 	RenderVoxels:
 		Image: a10
-	AmbientSound@Ambient:
-		SoundFiles: vintlo2a.wav, vintlo2b.wav, vintlo2c.wav
-		Volume: 0.20
+	# AmbientSound@Ambient:
+	#	SoundFiles: vintlo2a.wav, vintlo2b.wav, vintlo2c.wav
+	#	Volume: 0.20
 	-Voiced:
 	-DeathSounds:
 	Contrail@1:
 		Offset: -900,171,250
 		TrailLength: 15
-		UsePlayerColor: False
+		StartColor: 88888880
+		StartColorAlpha: 128
+		StartColorUsePlayerColor: False
+		EndColorUsePlayerColor: true
 	Contrail@2:
 		Offset: -900,-171,250
 		TrailLength: 15
-		UsePlayerColor: False
+		StartColor: 88888880
+		StartColorAlpha: 128
+		StartColorUsePlayerColor: False
+		EndColorUsePlayerColor: true
 	Aircraft:
 		Speed: 300
 
 a10husk:
 	Inherits: pdplanehusk
 	Tooltip:
-		Name: A-10雷电II型攻击机
+		Name: actor-a10.name
 	Tooltip@NoRow:
-		Name: A-10雷电II型攻击机
-	RenderVoxels:
-		Image: a10
+		Name: actor-a10.name
 	Aircraft:
 		Speed: 300
+	RenderVoxels:
+		Image: a10
+
+badgr.airstrike:
+	Inherits: pdplane
+	Tooltip:
+		Name: actor-badgr.name
+	Tooltip@NoRow:
+		Name: actor-badgr.name
+	Armament:
+		Weapon: BadgerBomb
+		PauseOnCondition: !ammo
+	AmmoPool:
+		Ammo: 1
+		AmmoCondition: ammo
+	AttackBomber:
+	SpawnActorOnDeath:
+		Actor: badgr.airstrikehusk
+	Aircraft:
+		Speed: 300
+	-Contrail@1:
+	-Contrail@2:
+	RenderVoxels:
+		Image: badgr
+
+badgr.airstrikehusk:
+	Inherits: pdplanehusk
+	Tooltip:
+		Name: actor-badgr.name
+	Tooltip@NoRow:
+		Name: actor-badgr.name
+	Aircraft:
+		Speed: 300
+	RenderVoxels:
+		Image: badgr
 
 txbmb:
 	Inherits: pcplane
 	Tooltip:
-		Name: 化武轰炸机
+		Name: actor-txbmb.name
 	Tooltip@NoRow:
-		Name: 化武轰炸机
+		Name: actor-txbmb.name
 	Armament:
 		Weapon: ToxinBomb
 		LocalOffset: 0,-512,0
@@ -868,22 +1084,24 @@ txbmb:
 		PauseOnCondition: !ammo
 	AttackBomber:
 	SpawnActorOnDeath:
-		DeathType: NonTemporal
 		Actor: txbmbhusk
 	AmmoPool:
 		Ammo: 6
 		AmmoCondition: ammo
 	RenderVoxels:
 		Image: txbmb
-	AmbientSound@Ambient:
-		SoundFiles: vintlo2a.wav, vintlo2b.wav, vintlo2c.wav
-		Volume: 0.20
+	# AmbientSound@Ambient:
+	#	SoundFiles: vintlo2a.wav, vintlo2b.wav, vintlo2c.wav
+	#	Volume: 0.20
 	-Voiced:
 	-DeathSounds:
 	Contrail@1:
 		Offset: -600,0,100
 		TrailLength: 15
-		UsePlayerColor: False
+		StartColor: 66DD0080
+		StartColorAlpha: 128
+		StartColorUsePlayerColor: False
+		EndColorUsePlayerColor: true
 	-Contrail@2:
 	Aircraft:
 		Speed: 300
@@ -891,20 +1109,20 @@ txbmb:
 txbmbhusk:
 	Inherits: pdplanehusk
 	Tooltip:
-		Name: 化武轰炸机
+		Name: actor-txbmb.name
 	Tooltip@NoRow:
-		Name: 化武轰炸机
-	RenderVoxels:
-		Image: txbmb
+		Name: actor-txbmb.name
 	Aircraft:
 		Speed: 300
+	RenderVoxels:
+		Image: txbmb
 
 f22drop:
 	Inherits: alplane
 	Tooltip:
-		Name: F-22猛禽战斗机
+		Name: actor-f22drop.name
 	Tooltip@NoRow:
-		Name: F-22猛禽战斗机
+		Name: actor-f22drop.name
 	-Targetable@Airborne:
 	Aircraft:
 		Repulsable: false
@@ -913,14 +1131,17 @@ f22drop:
 		DropRange: 3c0
 	RenderVoxels:
 		Image: f22
-	AmbientSound@Ambient:
-		SoundFiles: vblelo2a.wav, vblelo2b.wav, vblelo2c.wav
+	# AmbientSound@Ambient:
+	#	SoundFiles: vblelo2a.wav, vblelo2b.wav, vblelo2c.wav
 	-Voiced:
 	-DeathSounds:
 	Contrail@1:
 		Offset: -600,0,100
 		TrailLength: 15
-		UsePlayerColor: False
+		StartColor: 88888880
+		StartColorAlpha: 128
+		StartColorUsePlayerColor: False
+		EndColorUsePlayerColor: true
 	-Contrail@2:
 
 txbmbdrop:
@@ -953,9 +1174,9 @@ pdplane.emp:
 b52:
 	Inherits: alplane
 	Tooltip:
-		Name: B-52同温层堡垒重型轰炸机
+		Name: actor-b52.name
 	Tooltip@NoRow:
-		Name: B-52同温层堡垒重型轰炸机
+		Name: actor-b52.name
 	Armament:
 		Weapon: CarpetBomb
 		PauseOnCondition: !ammo
@@ -963,10 +1184,23 @@ b52:
 		Ammo: 11
 		AmmoCondition: ammo
 	AttackBomber:
+	SpawnActorOnDeath:
+		Actor: b52husk
 	Aircraft:
 		Speed: 240
 	RenderVoxels:
 		Image: b52
+
+b52husk:
+	Inherits: alplanehusk
+	Tooltip:
+		Name: actor-b52.name
+	Tooltip@NoRow:
+		Name: actor-b52.name
+	RenderVoxels:
+		Image: b52
+	Aircraft:
+		Speed: 240
 
 pdplane.leaflet:
 	Inherits: alplane
@@ -1018,8 +1252,26 @@ pdplane.cluster_mines:
 
 pdplane.fallout_bomb:
 	Inherits: pdplane
+	Inherits@ADVIRRAD: ^AffectedByAdvancedIrradiators
 	Armament:
 		Weapon: FalloutBomb
+		PauseOnCondition: !ammo
+		RequiresCondition: !advirrad
+	Armament@Orange:
+		Weapon: FalloutBombOrange
+		PauseOnCondition: !ammo
+		RequiresCondition: advirrad
+	AmmoPool:
+		Ammo: 1
+		AmmoCondition: ammo
+	AttackBomber:
+	Aircraft:
+		Speed: 270
+
+pdplane.cryo_bomb:
+	Inherits: pdplane
+	Armament:
+		Weapon: CryoBomb
 		PauseOnCondition: !ammo
 	AmmoPool:
 		Ammo: 1
@@ -1030,6 +1282,7 @@ pdplane.fallout_bomb:
 
 pdplane.chaos:
 	Inherits: pcplane
+	Inherits@NOCHAOS: ^NotBerserkTarget
 	Armament@1:
 		Weapon: ChaosGasDrop
 		LocalOffset: 0,-640,0
@@ -1063,14 +1316,15 @@ pdplane.crate:
 	-Targetable@Airborne:
 	-Targetable@Ground:
 	-Targetable@REPAIR:
+	-Targetable@REPAIRAirborne:
 	-GrantConditionOnDamageState@DAMAGED:
 	Interactable:
 		Bounds: 2413, 3861
 	RejectsOrders:
 	Tooltip:
-		Name: 运输机
+		Name: actor-pdplane.name
 	Tooltip@NoRow:
-		Name: 运输机
+		Name: actor-pdplane.name
 	Aircraft:
 		CruiseAltitude: 5c852
 		-AirborneCondition:
@@ -1111,9 +1365,9 @@ hornet:
 	Valued:
 		Cost: 200
 	Tooltip:
-		Name: 黄蜂无人攻击机
+		Name: actor-hornet.name
 	Tooltip@NoRow:
-		Name: 黄蜂无人攻击机
+		Name: actor-hornet.name
 	Health:
 		HP: 7500
 	Armor:
@@ -1144,6 +1398,7 @@ hornet:
 		TakeoffSounds: vhortaka.wav, vhortakb.wav
 		LandingSounds: vhorlana.wav, vhorlanb.wav
 		SoundVolume: 0.45
+		TakeUpCellWhenLand: false
 	AmmoPool:
 		Ammo: 3
 		AmmoCondition: ammo
@@ -1170,8 +1425,6 @@ hornet:
 	RenderVoxels:
 		NormalsPalette: ts-normals
 	RenderSprites:
-	Rearmable:
-		RearmActors: carrier
 	WithAmmoPipsDecoration:
 		Margin: 4, 3
 		Palette: ra
@@ -1181,9 +1434,9 @@ hornet:
 hornethusk:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: 黄蜂无人攻击机
+		Name: actor-hornet.name
 	Tooltip@NoRow:
-		Name: 黄蜂无人攻击机
+		Name: actor-hornet.name
 	Aircraft:
 		TurnSpeed: 20
 		Speed: 210
@@ -1197,9 +1450,9 @@ hornethusk:
 hornethusk.VTOL:
 	Inherits: ^HelicopterHusk
 	Tooltip:
-		Name: 黄蜂无人攻击机
+		Name: actor-hornet.name
 	Tooltip@NoRow:
-		Name: 黄蜂无人攻击机
+		Name: actor-hornet.name
 	Aircraft:
 		TurnSpeed: 20
 		Speed: 210
@@ -1217,9 +1470,9 @@ asw:
 	Valued:
 		Cost: 200
 	Tooltip:
-		Name: 鱼鹰反潜直升机
+		Name: actor-asw.name
 	Tooltip@NoRow:
-		Name: 鱼鹰反潜直升机
+		Name: actor-asw.name
 	Health:
 		HP: 13500
 	Armor:
@@ -1250,6 +1503,7 @@ asw:
 		TakeoffSounds: vospstaa.wav
 		LandingSounds: vosplana.wav
 		SoundVolume: 0.35
+		TakeUpCellWhenLand: false
 	AmmoPool:
 		Ammo: 5
 		AmmoCondition: ammo
@@ -1276,8 +1530,8 @@ asw:
 	RenderVoxels:
 		NormalsPalette: ts-normals
 	RenderSprites:
-	Rearmable:
-		RearmActors: dest, cdest
+	#Rearmable:
+	#	RearmActors: dest, cdest
 	WithAmmoPipsDecoration:
 		Margin: 4, 3
 		Palette: ra
@@ -1287,9 +1541,9 @@ asw:
 aswhusk:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: 鱼鹰反潜直升机
+		Name: actor-asw.name
 	Tooltip@NoRow:
-		Name: 鱼鹰反潜直升机
+		Name: actor-asw.name
 	Aircraft:
 		TurnSpeed: 20
 		Speed: 180
@@ -1303,9 +1557,9 @@ aswhusk:
 aswhusk.VTOL:
 	Inherits: ^HelicopterHusk
 	Tooltip:
-		Name: 鱼鹰反潜直升机
+		Name: actor-asw.name
 	Tooltip@NoRow:
-		Name: 鱼鹰反潜直升机
+		Name: actor-asw.name
 	Aircraft:
 		TurnSpeed: 20
 		Speed: 180
@@ -1327,9 +1581,9 @@ spyp:
 		Bounds: 2413, 3861
 	RejectsOrders:
 	Tooltip:
-		Name: 苏联侦察机
+		Name: actor-spyp.name
 	Tooltip@NoRow:
-		Name: 苏联侦察机
+		Name: actor-spyp.name
 	Aircraft:
 		CruiseAltitude: 5c852
 		Repulsable: false
@@ -1346,10 +1600,10 @@ spyp:
 	RenderSprites:
 	WithVoxelWalkerBody:
 		TickRate: 1
-	AmbientSound@Ambient:
-		SoundFiles: vspylo2a.wav, vspylo2b.wav, vspylo2c.wav
-		Volume: 0.60
-		RequiresCondition: airborne
+	# AmbientSound@Ambient:
+	#	SoundFiles: vspylo2a.wav, vspylo2b.wav, vspylo2c.wav
+	#	Volume: 0.60
+	#	RequiresCondition: airborne
 	Voiced:
 		VoiceSet: SpyPlaneVoice
 		Volume: 0.45
@@ -1363,9 +1617,9 @@ spyp:
 spyphusk:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: 苏联侦察机
+		Name: actor-spyp.name
 	Tooltip@NoRow:
-		Name: 苏联侦察机
+		Name: actor-spyp.name
 	Aircraft:
 		TurnSpeed: 20
 		Speed: 225
@@ -1378,7 +1632,7 @@ schp:
 	Inherits: ^Helicopter
 	Inherits@APBULLETS: ^AffectedByAPBullets
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@CHAOS: ^BerserkableVoxel
+	Inherits@CHAOS: ^BerserkableVoxelArmed
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@MC: ^MindControllable
 	Inherits@RADIATON: ^DamagedByRadiation50Percent
@@ -1397,10 +1651,12 @@ schp:
 		InvalidTargets: NoAutoTarget
 	DamagedByTintedCells:
 		RequiresCondition: !airborne
+	DamagedByTintedCells@ORANGE:
+		RequiresCondition: !airborne
 	Tooltip:
-		Name: 武装攻城直升机
+		Name: actor-schp.name
 	Tooltip@NoRow:
-		Name: 武装攻城直升机
+		Name: actor-schp.name
 	Selectable:
 		Class: schp
 		Bounds: 1689, 2896, 0, -965
@@ -1411,53 +1667,91 @@ schp:
 	-FirepowerMultiplier@APBULLETS:
 	Armament@primary:
 		Weapon: SiegeChopperCannon
+		Damage: 60
+		LocalOffset: 640,-256,0, 640,256,0
 		ReloadingCondition: reload-ground
-		PauseOnCondition: !undeployed || reload-air
-		RequiresCondition: !rank-elite && !apbullets
+		PauseOnCondition: deployed || reload-air
+		RequiresCondition: !rank-elite && undeployed && !apbullets
 	Armament@primary-aa:
 		Weapon: SiegeChopperCannonAA
+		LocalOffset: 640,-256,0, 640,256,0
 		ReloadingCondition: reload-air
-		PauseOnCondition: !undeployed || reload-ground
-		RequiresCondition: !rank-elite && !apbullets
+		PauseOnCondition: deployed || reload-ground
+		RequiresCondition: !rank-elite && undeployed && !apbullets
 	Armament@elite:
 		Weapon: SiegeChopperCannonE
+		Damage: 90
+		LocalOffset: 640,-256,0, 640,256,0
 		ReloadingCondition: reload-ground
-		PauseOnCondition: !undeployed || reload-air
-		RequiresCondition: rank-elite && !apbullets
+		PauseOnCondition: deployed || reload-air
+		RequiresCondition: rank-elite && undeployed && !apbullets
 	Armament@elite-aa:
 		Weapon: SiegeChopperCannonAAE
+		LocalOffset: 640,-256,0, 640,256,0
 		ReloadingCondition: reload-air
-		PauseOnCondition: !undeployed || reload-ground
-		RequiresCondition: rank-elite && !apbullets
+		PauseOnCondition: deployed || reload-ground
+		RequiresCondition: rank-elite && undeployed && !apbullets
 	Armament@primary-ap:
 		Weapon: SiegeChopperCannonAP
+		Damage: 75
+		LocalOffset: 640,-256,0, 640,256,0
 		ReloadingCondition: reload-ground
-		PauseOnCondition: !undeployed || reload-air
-		RequiresCondition: !rank-elite && apbullets
+		PauseOnCondition: deployed || reload-air
+		RequiresCondition: !rank-elite && undeployed && apbullets
 	Armament@primary-aa-ap:
 		Weapon: SiegeChopperCannonAAAP
+		LocalOffset: 640,-256,0, 640,256,0
 		ReloadingCondition: reload-air
-		PauseOnCondition: !undeployed || reload-ground
-		RequiresCondition: !rank-elite && apbullets
+		PauseOnCondition: deployed || reload-ground
+		RequiresCondition: !rank-elite && undeployed && apbullets
 	Armament@elite-ap:
 		Weapon: SiegeChopperCannonAPE
+		Damage: 112
+		LocalOffset: 640,-256,0, 640,256,0
 		ReloadingCondition: reload-ground
-		PauseOnCondition: !undeployed || reload-air
-		RequiresCondition: rank-elite && apbullets
+		PauseOnCondition: deployed || reload-air
+		RequiresCondition: rank-elite && undeployed && apbullets
 	Armament@elite-aa-ap:
 		Weapon: SiegeChopperCannonAAAPE
+		LocalOffset: 640,-256,0, 640,256,0
 		ReloadingCondition: reload-air
-		PauseOnCondition: !undeployed || reload-ground
-		RequiresCondition: rank-elite && apbullets
+		PauseOnCondition: deployed || reload-ground
+		RequiresCondition: rank-elite && undeployed && apbullets
+	Armament@primary-line:
+		Weapon: SiegeChopperCannonLine
+		LocalOffset: 640,-256,0, 640,256,0
+		ReloadingCondition: reload-ground
+		PauseOnCondition: deployed || reload-air
+		RequiresCondition: !rank-elite && undeployed && apbullets
+	Armament@primary-aa-line:
+		Weapon: SiegeChopperCannonAALine
+		LocalOffset: 640,-256,0, 640,256,0
+		ReloadingCondition: reload-air
+		PauseOnCondition: deployed || reload-ground
+		RequiresCondition: !rank-elite && undeployed && apbullets
+	Armament@elite-line:
+		Weapon: SiegeChopperCannonLineE
+		LocalOffset: 640,-256,0, 640,256,0
+		ReloadingCondition: reload-ground
+		PauseOnCondition: deployed || reload-air
+		RequiresCondition: rank-elite && undeployed && apbullets
+	Armament@elite-aa-line:
+		Weapon: SiegeChopperCannonAALineE
+		LocalOffset: 640,-256,0, 640,256,0
+		ReloadingCondition: reload-air
+		PauseOnCondition: deployed || reload-ground
+		RequiresCondition: rank-elite && undeployed && apbullets
 	Armament@deployed:
-		Weapon: 160mm
 		Name: deployed
+		Weapon: 160mm
+		Damage: 90
 		MuzzleSequence: muzzle
 		LocalOffset: 768,0,2048
 		RequiresCondition: !rank-elite && deployed
 	Armament@elite-deployed:
-		Weapon: 160mmE
 		Name: deployed
+		Weapon: 160mmE
+		Damage: 180
 		MuzzleSequence: muzzle
 		LocalOffset: 768,0,2048
 		RequiresCondition: rank-elite && deployed
@@ -1473,18 +1767,18 @@ schp:
 		Voice: Build
 		ValidRelationships: None
 	Buildable:
-		Queue: Aircraft.Soviets, Aircraft.USSR, Aircraft.Vietnam, Aircraft.Cuba, Aircraft.Libya, Aircraft.Baku
+		Queue: Aircraft.Shared, Aircraft.Soviets, Aircraft.USSR, Aircraft.Vietnam, Aircraft.Cuba, Aircraft.Libya
 		BuildPaletteOrder: 10
-		Prerequisites: ~techlevel.3
-		Description: 可以切换为攻城火炮的武装直升机\n\n侦测隐形\n攻城模式下无法移动\n\n直升机模式：\n·强势对抗：步兵\n·弱势对抗：载具\n\n攻城模式：\n·强势对抗：建筑、载具\n·弱势对抗：飞行器\n\n·特殊能力：切换模式（部署）
+		Prerequisites: ~aircraft.soviets, ~techlevel.3
+		Description: actor-schp.description
 		BuildDuration: 625
 		BuildDurationModifier: 100
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Valued:
-		Cost: 1200
+		Cost: 1400
 	DeliversCash:
-		Payload: 1200
+		Payload: 1400
 		Voice: Move
 	RevealsShroud:
 		Range: 10c0
@@ -1504,7 +1798,7 @@ schp:
 		PauseOnCondition: (!deployed && !undeployed) || (undeployed && !cruising) || emp || chronodisable
 	Aircraft:
 		CanForceLand: false
-		LandableTerrainTypes: Clear, Rough, Road, DirtRoad, Ore, Gems
+		LandableTerrainTypes: Clear, Sand, Rough, Road, DirtRoad, Ore, Gems
 		Crushes: crate
 		CrushDamageTypes: NonTemporal
 		TurnSpeed: 40
@@ -1534,7 +1828,11 @@ schp:
 		Image: schp
 	Repairable:
 		Voice: Move
-		RepairActors: gadept, nadept, nadepb, yadept, yadepb, caoutp
+		RepairActors: gadept, nadept, nadepb, yadept, yadepb, caoutp, caoutb
+	RepairableNear:
+		Voice: Move
+		CloseEnough: 3c0
+		RepairActors: gaweap, gaweab, gaweac, gawead, naweap, naweab, naweac, nawead, yaweap, yaweab, yaweac, yawead, gayard, nayard, yayard, gaairc, gaairb, baairf, baairb, naheli, yadisk
 	Targetable@MC:
 		RequiresCondition: !controlled && !permamc && !airborne
 	Targetable@CHAOS:
@@ -1571,33 +1869,37 @@ schp:
 		DeathTypes: NonTemporal
 		Weapon: UnitExplode
 		RequiresCondition: !airborne
-	AmbientSound@Move:
-		SoundFiles: vcholo2a.wav, vcholo2b.wav, vcholo2c.wav
-		Volume: 0.45
-		RequiresCondition: moving
-	SoundAnnouncement@end:
-		SoundFiles: vcholo3a.wav
-		Volume: 0.45
-		RequiresCondition: !moving
-	GrantConditionOnMovement:
-		Condition: moving
+	# AmbientSound@Move:
+	#	SoundFiles: vcholo2a.wav, vcholo2b.wav, vcholo2c.wav
+	#	Volume: 0.45
+	#	RequiresCondition: moving
+	# SoundAnnouncement@end:
+	#	SoundFiles: vcholo3a.wav
+	#	Volume: 0.45
+	#	RequiresCondition: !moving
+	# GrantConditionOnMovement:
+	#	Condition: moving
 	HitShape:
-	AutoDeployer@AI:
-		RequiresCondition: ai-control
-		DeployChance: 50
-		DeployTicks: 300
-		UndeployTicks: 200
-		DeployTrigger: Periodically
+	IssueOrderToBot@AI:
+		OrderName: HeliGrantConditionOnDeploy
+		OrderChance: 50
+		OrderInterval: 500
+		OrderTrigger: Periodically
 	RejectsOrders@deploymentAI:
 		Reject: AttackMove, AssaultMove, Attack #HACK: Deployed Siege Chopper will try to aim orignal target set by squad if not block the Attack order
 		RequiresCondition: ai-control && !undeployed
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange
+	ActorStatOverride@deployed:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MinRange, None, MaxRange
+		RequiresCondition: undeployed
 
 schphusk:
 	Inherits: ^HelicopterHusk
 	Tooltip:
-		Name: 武装攻城直升机
+		Name: actor-schp.name
 	Tooltip@NoRow:
-		Name: 武装攻城直升机
+		Name: actor-schp.name
 	Aircraft:
 		TurnSpeed: 40
 		Speed: 165
@@ -1611,8 +1913,8 @@ schphusk:
 	#	Types: SatelliteScan
 	#	Type: GroundPosition
 	RevealOnDeath:
-		Radius: 5c0
-		Duration: 50
+		Radius: 10c0
+		Duration: 125
 	RenderSprites:
 		Image: schp
 	RenderVoxels:
@@ -1629,17 +1931,29 @@ schphusk:
 
 bpln:
 	Inherits: orca
+	Valued:
+		Cost: 1250
+	DeliversCash:
+		Payload: 1250
 	Tooltip:
-		Name: 米格战机
+		Name: actor-bpln.name
 	Tooltip@NoRow:
-		Name: 米格战机
+		Name: actor-bpln.name
 	-Buildable:
 	-RevealsShroud:
 	-RevealsShroud@Ground:
 	# -RevealsShroudToIntelligenceOwner:
 	-Selectable:
 	-SelectionDecorations:
-	-ProducibleWithLevel:
+	ProducibleWithLevel@1:
+		Prerequisites: baacdm
+	WithProductionIconOverlay@1:
+		Prerequisites: baacdm
+		Types: chevron-veteran
+	-ProducibleWithLevel@2:
+	-WithProductionIconOverlay@2:
+	-ProducibleWithLevel@3:
+	-WithProductionIconOverlay@3:
 	-ExternalCondition@PRODUCED:
 	-GrantExternalConditionToOwner:
 	-DeliversCash:
@@ -1661,14 +1975,20 @@ bpln:
 		Actor: bplnhusk.VTOL
 	Armament:
 		Weapon: Maverick3
+		Damage: 300
 	Armament@Elite:
 		Weapon: Maverick3E
+		Damage: 1000
 	-Armament@AA:
 	-Armament@EliteAA:
 	-GrantConditionOnPrerequisite@A2AMISSILES:
+	-FirepowerMultiplier@PREDATOR_MISSILES:
+	-GrantConditionOnPrerequisite@PREDATOR_MISSILES:
 	WithVoxelBody:
 		-RequiresCondition:
 	-WithVoxelBody@A2A:
+	-WithVoxelBody@PREDATOR:
+	-WithVoxelBody@A2A_PREDATOR:
 	AttackAircraft:
 		RequiresCondition: ammo
 	Health:
@@ -1684,26 +2004,138 @@ bpln:
 	RenderVoxels:
 		Image: bpln
 	HitShape:
-	AmbientSound@Ambient:
-		SoundFiles: vblelo2a.wav, vblelo2b.wav, vblelo2c.wav
-		Volume: 0.35
+	# AmbientSound@Ambient:
+	#	SoundFiles: vblelo2a.wav, vblelo2b.wav, vblelo2c.wav
+	#	Volume: 0.35
 	Contrail@1:
 		Offset: -600,100,100
 		TrailLength: 15
-		UsePlayerColor: False
+		StartColor: 88888880
+		StartColorAlpha: 128
+		StartColorUsePlayerColor: False
+		EndColorUsePlayerColor: true
 	Contrail@2:
 		Offset: -600,-100,100
 		TrailLength: 15
-		UsePlayerColor: False
+		StartColor: 88888880
+		StartColorAlpha: 128
+		StartColorUsePlayerColor: False
+		EndColorUsePlayerColor: true
 	Rearmable:
 		RearmActors: boris
+	ActorStatValues:
+		-Upgrades:
+	-ActorStatOverride@a2amissiles:
+
+bpln.buildable:
+	Inherits: orca
+	Inherits@CRYO: ^AffectedByCryoWarheads
+	Tooltip:
+		Name: actor-bpln.name
+	Tooltip@NoRow:
+		Name: actor-bpln.name
+	Buildable:
+		Queue: Aircraft.Shared, Aircraft.Baku
+		Description: actor-bpln.description
+		Prerequisites: ~aircraft.baku, !prerequisite.enoughair, ~techlevel.3
+	VoiceAnnouncement:
+		Voice: Attack
+	Aircraft:
+		VTOL: false
+		Speed: 240
+		-TakeoffSounds:
+		-LandingSounds:
+	SpawnActorOnDeath:
+		DeathType: NonTemporal
+		Actor: bpln.buildablehusk
+	SpawnActorOnDeath@VTOL:
+		Actor: bpln.buildablehusk.VTOL
+	Armament:
+		Weapon: Maverick2
+		Damage: 225
+		RequiresCondition: !rank-elite && !cryowarheads
+	Armament@Elite:
+		Weapon: Maverick2E
+		Damage: 350
+		RequiresCondition: rank-elite && !cryowarheads
+	Armament@AA:
+		Weapon: Maverick2AA
+		RequiresCondition: !rank-elite && !cryowarheads
+	Armament@EliteAA:
+		Weapon: Maverick2AAE
+		RequiresCondition: rank-elite && !cryowarheads
+	Armament@Cryo:
+		Weapon: Maverick2Cryo
+		Damage: 225
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite && cryowarheads
+	Armament@CryoE:
+		Weapon: Maverick2CryoE
+		Damage: 350
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite && cryowarheads
+	Armament@CryoAA:
+		Weapon: Maverick2AACryo
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite && cryowarheads
+	Armament@CryoAAE:
+		Weapon: Maverick2AACryoE
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite && cryowarheads
+	-GrantConditionOnPrerequisite@A2AMISSILES:
+	-FirepowerMultiplier@PREDATOR_MISSILES:
+	-GrantConditionOnPrerequisite@PREDATOR_MISSILES:
+	WithVoxelBody:
+		-RequiresCondition:
+	-WithVoxelBody@A2A:
+	-WithVoxelBody@PREDATOR:
+	-WithVoxelBody@A2A_PREDATOR:
+	Health:
+		HP: 10000
+	AmmoPool:
+		Ammo: 2
+	Voiced:
+		VoiceSet: MiGVoice
+	RenderSprites:
+		Image: bpln
+	RenderVoxels:
+		Image: bpln
+	ProducibleWithLevel@1:
+		Prerequisites: baacdm
+	WithProductionIconOverlay@1:
+		Prerequisites: baacdm
+		Types: chevron-veteran
+	-ProducibleWithLevel@2:
+	-WithProductionIconOverlay@2:
+	-ProducibleWithLevel@3:
+	-WithProductionIconOverlay@3:
+	# AmbientSound@Ambient:
+	#	SoundFiles: vblelo2a.wav, vblelo2b.wav, vblelo2c.wav
+	#	Volume: 0.35
+	Contrail@1:
+		Offset: -600,100,100
+		TrailLength: 15
+		StartColor: 88888880
+		StartColorAlpha: 128
+		StartColorUsePlayerColor: False
+		EndColorUsePlayerColor: true
+	Contrail@2:
+		Offset: -600,-100,100
+		TrailLength: 15
+		StartColor: 88888880
+		StartColorAlpha: 128
+		StartColorUsePlayerColor: False
+		EndColorUsePlayerColor: true
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MinRange, None, MaxRange
+	-ActorStatOverride@a2amissiles:
 
 bplnhusk:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: MiG
+		Name: actor-bpln.name
 	Tooltip@NoRow:
-		Name: MiG
+		Name: actor-bpln.name
 	Aircraft:
 		TurnSpeed: 20
 		Speed: 240
@@ -1716,9 +2148,9 @@ bplnhusk:
 bplnhusk.VTOL:
 	Inherits: ^HelicopterHusk
 	Tooltip:
-		Name: 米格战机
+		Name: actor-bpln.name
 	Tooltip@NoRow:
-		Name: 米格战机
+		Name: actor-bpln.name
 	Aircraft:
 		TurnSpeed: 20
 		Speed: 240
@@ -1727,6 +2159,32 @@ bplnhusk.VTOL:
 		Image: bpln
 	FallsToEarth:
 		Explosion: UnitExplode
+
+bpln.buildablehusk:
+	Inherits: bplnhusk
+	RevealsShroud:
+		Range: 12c0
+		Type: GroundPosition
+	# RevealsShroudToIntelligenceOwner:
+	#	Range: 12c0
+	#	Types: SatelliteScan
+	#	Type: GroundPosition
+	RevealOnDeath:
+		Radius: 12c0
+		Duration: 125
+
+bpln.buildablehusk.VTOL:
+	Inherits: bplnhusk.VTOL
+	RevealsShroud:
+		Range: 12c0
+		Type: GroundPosition
+	# RevealsShroudToIntelligenceOwner:
+	#	Range: 12c0
+	#	Types: SatelliteScan
+	#	Type: GroundPosition
+	RevealOnDeath:
+		Radius: 12c0
+		Duration: 125
 
 disk:
 	Inherits: ^Helicopter
@@ -1739,6 +2197,8 @@ disk:
 		QuantizedFacings: 1
 	DamagedByTintedCells:
 		RequiresCondition: !airborne
+	DamagedByTintedCells@ORANGE:
+		RequiresCondition: !airborne
 	Valued:
 		Cost: 1750
 	DeliversCash:
@@ -1746,14 +2206,14 @@ disk:
 		PlayerExperience: 88
 		Voice: Move
 	Tooltip:
-		Name: 水蛭幽浮
+		Name: actor-disk.name
 	Tooltip@NoRow:
-		Name: 水蛭幽浮
+		Name: actor-disk.name
 	Buildable:
-		Queue: Aircraft.Yuri, Aircraft.Lazarus
+		Queue: Aircraft.Shared, Aircraft.Yuri, Aircraft.Lazarus
 		BuildPaletteOrder: 40
-		Prerequisites: yatech, ~techlevel.4
-		Description: 装备灵能激光与能量抽取器的先进攻城飞行器\n\n抽取发电厂与高级防御建筑的能量\n抽取矿石精炼厂的资金\n\n·强势对抗：步兵、飞行器\n·弱势对抗：载具
+		Prerequisites: ~aircraft.yuri, yatech, ~techlevel.4
+		Description: actor-disk.description
 		BuildDuration: 1000
 		BuildDurationModifier: 100
 	UpdatesPlayerStatistics:
@@ -1778,11 +2238,13 @@ disk:
 	#	Type: GroundPosition
 	Armament@primary:
 		Weapon: DiskLaser
+		Damage: 75
 		ReloadingCondition: reload-ground
 		PauseOnCondition: reload-air
 		RequiresCondition: !rank-elite && !capacitors
 	Armament@elite:
 		Weapon: DiskLaserE
+		Damage: 100
 		ReloadingCondition: reload-ground
 		PauseOnCondition: reload-air
 		RequiresCondition: rank-elite && !capacitors
@@ -1798,11 +2260,13 @@ disk:
 		RequiresCondition: rank-elite && !capacitors
 	Armament@primary-capacitors:
 		Weapon: DiskLaserUpg
+		Damage: 75
 		ReloadingCondition: reload-ground
 		PauseOnCondition: reload-air
 		RequiresCondition: !rank-elite && capacitors
 	Armament@elite-capacitors:
 		Weapon: DiskLaserUpgE
+		Damage: 100
 		ReloadingCondition: reload-ground
 		PauseOnCondition: reload-air
 		RequiresCondition: rank-elite && capacitors
@@ -1824,10 +2288,63 @@ disk:
 		Name: secondary
 		Weapon: DiskSteal
 		MuzzleSequence: muzzle
+	Armament@infiltrateAllied:
+		Name: infiltrate
+		Weapon: DiskInfiltrateAllied
+		MuzzleSequence: muzzle
+		ReloadingCondition: reload-infiltrate
+		PauseOnCondition: reload-infiltrated
+		RequiresCondition: !infiltrated
+	Armament@infiltrateAlliedC:
+		Name: secondary
+		Weapon: DiskInfiltrateAlliedComplete
+		MuzzleSequence: muzzle
+		ReloadingCondition: reload-infiltrated
+		PauseOnCondition: reload-infiltrate
+		RequiresCondition: infiltrated
+	Armament@infiltrateSoviet:
+		Name: infiltrate
+		Weapon: DiskInfiltrateSoviet
+		MuzzleSequence: muzzle
+		ReloadingCondition: reload-infiltrate
+		PauseOnCondition: reload-infiltrated
+		RequiresCondition: !infiltrated
+	Armament@infiltrateSovietC:
+		Name: secondary
+		Weapon: DiskInfiltrateSovietComplete
+		MuzzleSequence: muzzle
+		ReloadingCondition: reload-infiltrated
+		PauseOnCondition: reload-infiltrate
+		RequiresCondition: infiltrated
+	Armament@infiltrateYuri:
+		Name: infiltrate
+		Weapon: DiskInfiltrateYuri
+		MuzzleSequence: muzzle
+		ReloadingCondition: reload-infiltrate
+		PauseOnCondition: reload-infiltrated
+		RequiresCondition: !infiltrated
+	Armament@infiltrateYuriC:
+		Name: secondary
+		Weapon: DiskInfiltrateYuriComplete
+		MuzzleSequence: muzzle
+		ReloadingCondition: reload-infiltrated
+		PauseOnCondition: reload-infiltrate
+		RequiresCondition: infiltrated
+	GrantConditionOnAttack@infiltrated:
+		Condition: infiltrated
+		ArmamentNames: infiltrate
+		RequiredShotsPerInstance: 100
+		MaximumInstances: 1
+		RevokeDelay: 6
+		RevokeAll: true
+		IsCyclic: false
+		RevokeOnNewTarget: true
+		ShowSelectionBar: true
 	AttackAircraft:
 		Voice: Attack
 		AttackType: Hover
-		FacingTolerance: 128
+		FacingTolerance: 512
+		Armaments: primary, secondary, infiltrate
 	Voiced:
 		VoiceSet: FloatingDiskVoice
 	WithMuzzleOverlay:
@@ -1846,48 +2363,56 @@ disk:
 		RequiresCondition: discarmor
 	ExternalCondition@PRODUCED:
 		Condition: produced
-	VoiceAnnouncement:
+	NotificationAnnouncement:
 		RequiresCondition: produced
-		Voice: Build
+		Notification: DiscInFlight
 	DeathSounds:
 		DeathTypes: NonTemporal
 	AmbientSound@Steal:
 		SoundFiles: vflolo5a.wav, vflolo5b.wav
 		Volume: 0.65
 		RequiresCondition: stealing
-	SoundAnnouncement@end:
+	SoundAnnouncement@StealEnd:
 		SoundFiles: vflolo6a.wav
 		Volume: 0.65
 		RequiresCondition: !stealing
 	GrantConditionOnAttack:
 		Condition: stealing
 		RevokeDelay: 6
-		ArmamentNames: secondary
-	AmbientSound@Move:
-		SoundFiles: vflolo2a.wav, vflolo2b.wav
-		Volume: 0.40
-		RequiresCondition: moving
-	SoundAnnouncement@end:
-		SoundFiles: vflolo3a.wav
-		Volume: 0.40
-		RequiresCondition: !moving
-	GrantConditionOnMovement:
-		Condition: moving
+		ArmamentNames: secondary, infiltrate
+	# AmbientSound@Move:
+	#	SoundFiles: vflolo2a.wav, vflolo2b.wav
+	#	Volume: 0.40
+	#	RequiresCondition: moving
+	# SoundAnnouncement@end:
+	#	SoundFiles: vflolo3a.wav
+	#	Volume: 0.40
+	#	RequiresCondition: !moving
+	# GrantConditionOnMovement:
+	#	Condition: moving
 	HitShape:
 	Repairable:
 		Voice: Move
-		RepairActors: gadept, nadept, nadepb, yadept, yadepb, caoutp
+		RepairActors: gadept, nadept, nadepb, yadept, yadepb, caoutp, caoutb
+	RepairableNear:
+		Voice: Move
+		CloseEnough: 3c0
+		RepairActors: gaweap, gaweab, gaweac, gawead, naweap, naweab, naweac, nawead, yaweap, yaweab, yaweac, yawead, gayard, nayard, yayard, gaairc, gaairb, baairf, baairb, naheli, yadisk
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: diskhusk
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MinRange, None, MaxRange
+		Armaments: primary
+		Upgrades: upgrade.disc_armor, upgrade.laser_capacitors
 
 diskhusk:
 	Inherits: ^HelicopterHusk
 	Inherits@DISCARMOR: ^AffectedByDiscArmor
 	Tooltip:
-		Name: 水蛭幽浮
+		Name: actor-disk.name
 	Tooltip@NoRow:
-		Name: 水蛭幽浮
+		Name: actor-disk.name
 	Aircraft:
 		TurnSpeed: 40
 		Speed: 165
@@ -1901,8 +2426,8 @@ diskhusk:
 	#	Types: SatelliteScan
 	#	Type: GroundPosition
 	RevealOnDeath:
-		Radius: 5c0
-		Duration: 50
+		Radius: 10c0
+		Duration: 125
 	RenderVoxels:
 		Image: disk
 	-WithVoxelBody:
@@ -1927,10 +2452,12 @@ hind:
 	Inherits@RADIATON: ^DamagedByRadiation50Percent
 	DamagedByTintedCells:
 		RequiresCondition: !airborne
+	DamagedByTintedCells@ORANGE:
+		RequiresCondition: !airborne
 	Tooltip:
-		Name: 雌鹿运输机
+		Name: actor-hind.name
 	Tooltip@NoRow:
-		Name: 雌鹿运输机
+		Name: actor-hind.name
 	Selectable:
 		Class: hind
 		Bounds: 1689, 2896, 0, -965
@@ -1948,10 +2475,10 @@ hind:
 		Voice: Build
 		ValidRelationships: None
 	Buildable:
-		Queue: Aircraft.Soviets, Aircraft.USSR, Aircraft.Vietnam, Aircraft.Cuba, Aircraft.Libya, Aircraft.Baku
+		Queue: Aircraft.Shared, Aircraft.Soviets, Aircraft.USSR, Aircraft.Vietnam, Aircraft.Cuba, Aircraft.Libya, Aircraft.Baku
 		BuildPaletteOrder: 20
-		Prerequisites: naweap, ~techlevel.2
-		Description: 用于运送载具的运输机\n\n·无武装
+		Prerequisites: ~aircraft.sovietsorbaku, naweap, ~techlevel.2
+		Description: actor-hind.description
 		IconPalette: ts-chrome
 		BuildDuration: 250
 		BuildDurationModifier: 100
@@ -1972,7 +2499,7 @@ hind:
 	#	Types: SatelliteScan
 	#	Type: GroundPosition
 	Aircraft:
-		LandableTerrainTypes: Clear, Rough, Road, DirtRoad, Ore, Gems
+		LandableTerrainTypes: Clear, Sand, Rough, Road, DirtRoad, Ore, Gems
 		Crushes: crate
 		CrushDamageTypes: NonTemporal
 		TurnSpeed: 40
@@ -1982,7 +2509,11 @@ hind:
 		PauseOnCondition: emp || magnefreeze || chronodisable
 	Repairable:
 		Voice: Move
-		RepairActors: gadept, nadept, nadepb, yadept, yadepb, caoutp
+		RepairActors: gadept, nadept, nadepb, yadept, yadepb, caoutp, caoutb
+	RepairableNear:
+		Voice: Move
+		CloseEnough: 3c0
+		RepairActors: gaweap, gaweab, gaweac, gawead, naweap, naweab, naweac, nawead, yaweap, yaweab, yaweac, yawead, gayard, nayard, yayard, gaairc, gaairb, baairf, baairb, naheli, yadisk
 	Targetable@MC:
 		RequiresCondition: !controlled && !permamc && !airborne
 	Targetable@CHAOS:
@@ -2011,24 +2542,26 @@ hind:
 		DeathTypes: NonTemporal
 		Weapon: UnitExplode
 		RequiresCondition: !airborne
-	AmbientSound@Move:
-		SoundFiles: vblhlo2a.wav, vblhlo2b.wav, vblhlo2c.wav
-		Volume: 0.5
-		RequiresCondition: moving
-	SoundAnnouncement@end:
-		SoundFiles: vblhlo3.wav
-		Volume: 0.5
-		RequiresCondition: !moving
-	GrantConditionOnMovement:
-		Condition: moving
+	# AmbientSound@Move:
+	#	SoundFiles: vblhlo2a.wav, vblhlo2b.wav, vblhlo2c.wav
+	#	Volume: 0.5
+	#	RequiresCondition: moving
+	# SoundAnnouncement@end:
+	#	SoundFiles: vblhlo3.wav
+	#	Volume: 0.5
+	#	RequiresCondition: !moving
+	# GrantConditionOnMovement:
+	#	Condition: moving
 	HitShape:
+	ActorStatValues:
+		Stats: Armor, Sight, Speed
 
 hindhusk:
 	Inherits: ^HelicopterHusk
 	Tooltip:
-		Name: 雌鹿运输机
+		Name: actor-hind.name
 	Tooltip@NoRow:
-		Name: 雌鹿运输机
+		Name: actor-hind.name
 	Aircraft:
 		TurnSpeed: 40
 		Speed: 180
@@ -2042,8 +2575,8 @@ hindhusk:
 	#	Types: SatelliteScan
 	#	Type: GroundPosition
 	RevealOnDeath:
-		Radius: 4c0
-		Duration: 50
+		Radius: 8c0
+		Duration: 125
 	RenderSprites:
 		Image: hind
 	RenderVoxels:
@@ -2064,12 +2597,14 @@ fortress:
 	Inherits: ^Plane
 	Inherits@AI: ^AIMicroManagable
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@CHAOS: ^BerserkableVoxel
+	Inherits@CHAOS: ^BerserkableVoxelArmed
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@MC: ^MindControllable
 	Inherits@PAYLOAD: ^AffectedByIncreasedPayload
 	Inherits@RADIATON: ^DamagedByRadiation50Percent
 	DamagedByTintedCells:
+		RequiresCondition: !airborne
+	DamagedByTintedCells@ORANGE:
 		RequiresCondition: !airborne
 	Valued:
 		Cost: 2500
@@ -2078,14 +2613,14 @@ fortress:
 		PlayerExperience: 125
 		Voice: Move
 	Tooltip:
-		Name: B2幽灵轰炸机
+		Name: actor-fortress.name
 	Tooltip@NoRow:
-		Name: B2幽灵轰炸机
+		Name: actor-fortress.name
 	Buildable:
-		Queue: Aircraft.Allies, Aircraft.USA, Aircraft.UK, Aircraft.Korea
+		Queue: Aircraft.Shared, Aircraft.Allies, Aircraft.USA, Aircraft.UK, Aircraft.Korea
 		BuildPaletteOrder: 40
-		Description: 具备地毯式轰炸能力的战略轰炸机\n\n有建造数量限制\n所有盟军固定翼飞行器的总数不得超过所有着陆整备区域的总和\n必须回到整备区装填弹药\n\n·强势对抗：建筑、载具、步兵\n·弱势对抗：飞行器\n\n·特殊能力：不会在战术地图上显示
-		Prerequisites: gatech, !prerequisite.enoughair, ~techlevel.4
+		Description: actor-fortress.description
+		Prerequisites: ~aircraft.allies, gatech, !prerequisite.enoughair, ~techlevel.4
 		BuildDuration: 1250
 		BuildDurationModifier: 100
 	UpdatesPlayerStatistics:
@@ -2095,7 +2630,7 @@ fortress:
 		IdleTurnSpeed: 10
 		IdleSpeed: 90
 		TurnSpeed: 20
-		Speed: 180
+		Speed: 165
 		TakeoffSounds: vintupa.wav
 		LandingSounds: vintdna.wav
 		SoundVolume: 0.3
@@ -2105,7 +2640,7 @@ fortress:
 	Selectable:
 		Bounds: 1158, 1158
 	Health:
-		HP: 40000
+		HP: 35000
 	Armor:
 		Type: Light
 	RevealsShroud:
@@ -2119,20 +2654,24 @@ fortress:
 	-AppearsOnRadar:
 	Armament:
 		Weapon: SpiritBomb
+		Damage: 500
 		PauseOnCondition: !ammo || increased_payload
 		RequiresCondition: !increased_payload && !rank-elite
 	Armament@Elite:
 		Weapon: SpiritBombE
+		Damage: 750
 		PauseOnCondition: !ammo || increased_payload
 		RequiresCondition: !increased_payload && rank-elite
 	Armament@2:
 		Name: secondary
 		Weapon: SpiritBomb10
+		Damage: 1000
 		PauseOnCondition: !ammo2 || !increased_payload
 		RequiresCondition: increased_payload && !rank-elite
 	Armament@2Elite:
 		Name: secondary
 		Weapon: SpiritBomb10E
+		Damage: 1500
 		PauseOnCondition: !ammo2 || !increased_payload
 		RequiresCondition: increased_payload && rank-elite
 	AttackAircraft:
@@ -2140,6 +2679,11 @@ fortress:
 		Voice: Attack
 		TargetFrozenActors: True
 		PauseOnCondition: emp || magnefreeze || chronodisable
+	WithVoxelBody:
+		RequiresCondition: !increased_payload
+	WithVoxelBody@2:
+		Sequence: idle-payload
+		RequiresCondition: increased_payload
 	Voiced:
 		VoiceSet: B2Voice
 	ExternalCondition@PRODUCED:
@@ -2150,10 +2694,14 @@ fortress:
 		ValidRelationships: None
 	Repairable:
 		Voice: Move
-		RepairActors: gadept, nadept, nadepb, yadept, yadepb, caoutp
+		RepairActors: gadept, nadept, nadepb, yadept, yadepb, caoutp, caoutb
+	RepairableNear:
+		Voice: Move
+		CloseEnough: 3c0
+		RepairActors: gaweap, gaweab, gaweac, gawead, naweap, naweab, naweac, nawead, yaweap, yaweab, yaweac, yawead, gayard, nayard, yayard, naheli, yadisk
 	Rearmable:
 		AmmoPools: primary, secondary
-		RearmActors: gaairc, gaairb, gaapad, gadock
+		RearmActors: gaairc, gaairb, gaapad, gadock, baairf, baairb, badock, badocb
 	Targetable@MC:
 		RequiresCondition: !controlled && !permamc && !airborne
 	Targetable@CHAOS:
@@ -2192,11 +2740,20 @@ fortress:
 		DeathTypes: NonTemporal
 		Weapon: UnitExplode
 		RequiresCondition: !airborne
+	ProvidesPrerequisite@actorname:
 	GrantExternalConditionToOwner:
 		Condition: padaircraft
 	HitShape:
-	ProducibleWithLevel:
-		Prerequisites: vetair
+	ProducibleWithLevel@1:
+		Prerequisites: vetairorbaacdm
+	WithProductionIconOverlay@1:
+		Prerequisites: vetairorbaacdm
+		Types: chevron-veteran
+	ProducibleWithLevel@2:
+		Prerequisites: vetair, baacdm
+	WithProductionIconOverlay@2:
+		Prerequisites: vetair, baacdm
+		Types: chevron-elite
 	WithAmmoPipsDecoration:
 		AmmoPools: primary
 		Margin: 4, 3
@@ -2215,57 +2772,72 @@ fortress:
 		Position: BottomLeft
 		RequiresSelection: true
 		RequiresCondition: increased_payload
-	AmbientSound@Ambient:
-		SoundFiles: vintlo2a.wav, vintlo2b.wav, vintlo2c.wav
-		Volume: 0.20
-		RequiresCondition: airborne
+	# AmbientSound@Ambient:
+	#	SoundFiles: vintlo2a.wav, vintlo2b.wav, vintlo2c.wav
+	#	Volume: 0.20
+	#	RequiresCondition: airborne
 	Contrail@1:
 		Offset: -400,-700,300
-		Color: 55555580
-		UsePlayerColor: false
-		TrailWidth: 32
+		StartColor: 88888880
+		StartColorAlpha: 128
+		StartColorUsePlayerColor: False
+		EndColorUsePlayerColor: true
+		StartWidth: 32
 	Contrail@2:
 		Offset: -400,700,300
-		Color: 55555580
-		UsePlayerColor: false
-		TrailWidth: 32
+		StartColor: 88888880
+		StartColorAlpha: 128
+		StartColorUsePlayerColor: False
+		EndColorUsePlayerColor: true
+		StartWidth: 32
 	Contrail@3:
 		Offset: -200,-400,300
-		Color: 55555580
-		UsePlayerColor: false
-		TrailWidth: 32
+		StartColor: 88888880
+		StartColorAlpha: 128
+		StartColorUsePlayerColor: False
+		EndColorUsePlayerColor: true
+		StartWidth: 32
 	Contrail@4:
 		Offset: -200,400,300
-		Color: 55555580
-		UsePlayerColor: false
-		TrailWidth: 32
+		StartColor: 88888880
+		StartColorAlpha: 128
+		StartColorUsePlayerColor: False
+		EndColorUsePlayerColor: true
+		StartWidth: 32
 	Contrail@FlameTrail1:
 		Offset: -500,-100,200
-		Color: FFEA0080
-		UsePlayerColor: false
-		TrailWidth: 96
+		StartColor: FFEA0080
+		StartColorAlpha: 128
+		StartColorUsePlayerColor: false
+		StartWidth: 96
+		EndWidth: 76
 		TrailLength: 7
 	Contrail@FlameTrail2:
 		Offset: -500,100,200
-		Color: FFEA0080
-		UsePlayerColor: false
-		TrailWidth: 96
+		StartColor: FFEA0080
+		StartColorAlpha: 128
+		StartColorUsePlayerColor: false
+		StartWidth: 96
+		EndWidth: 76
 		TrailLength: 7
 	ProductionCostMultiplier@AI:
 		Prerequisites: prerequisite.aiplayer
 		Multiplier: 20
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange
 
 fortresshusk:
 	Inherits: ^PlaneHusk
+	Inherits@PAYLOAD: ^AffectedByIncreasedPayload
 	Tooltip:
-		Name: B2幽灵轰炸机
+		Name: actor-fortress.name
 	Tooltip@NoRow:
-		Name: B2幽灵轰炸机
+		Name: actor-fortress.name
 	FallsToEarth:
 		Explosion: B2Explode
 	Aircraft:
 		TurnSpeed: 20
-		Speed: 180
+		Speed: 165
 		AltitudeVelocity: 240
 	RevealsShroud:
 		Range: 10c0
@@ -2275,23 +2847,29 @@ fortresshusk:
 	#	Types: SatelliteScan
 	#	Type: GroundPosition
 	RevealOnDeath:
-		Radius: 5c0
-		Duration: 50
+		Radius: 10c0
+		Duration: 125
+	WithVoxelBody:
+		RequiresCondition: !increased_payload
+	WithVoxelBody@2:
+		Sequence: idle-payload
+		RequiresCondition: increased_payload
 	RenderVoxels:
 		Image: fortress
 		NormalsPalette: ts-normals
 
 fortresshusk.VTOL:
 	Inherits: ^HelicopterHusk
+	Inherits@PAYLOAD: ^AffectedByIncreasedPayload
 	Tooltip:
-		Name: B2幽灵轰炸机
+		Name: actor-fortress.name
 	Tooltip@NoRow:
-		Name: B2幽灵轰炸机
+		Name: actor-fortress.name
 	FallsToEarth:
 		Explosion: B2Explode
 	Aircraft:
 		TurnSpeed: 20
-		Speed: 180
+		Speed: 165
 		AltitudeVelocity: 240
 	RevealsShroud:
 		Range: 10c0
@@ -2301,8 +2879,13 @@ fortresshusk.VTOL:
 	#	Types: SatelliteScan
 	#	Type: GroundPosition
 	RevealOnDeath:
-		Radius: 5c0
-		Duration: 50
+		Radius: 10c0
+		Duration: 125
+	WithVoxelBody:
+		RequiresCondition: !increased_payload
+	WithVoxelBody@2:
+		Sequence: idle-payload
+		RequiresCondition: increased_payload
 	RenderVoxels:
 		Image: fortress
 		NormalsPalette: ts-normals
@@ -2316,9 +2899,9 @@ sdrn:
 		Bounds: 1544, 3089
 	RejectsOrders:
 	Tooltip:
-		Name: 侦察无人机
+		Name: actor-sdrn.name
 	Tooltip@NoRow:
-		Name: 侦察无人机
+		Name: actor-sdrn.name
 	Aircraft:
 		CruiseAltitude: 3c852
 		Repulsable: false
@@ -2327,17 +2910,17 @@ sdrn:
 		MaximumPitch: 255
 		VTOL: false
 	RevealsShroud:
-		Range: 8c0
+		Range: 10c0
 		Type: GroundPosition
 	# RevealsShroudToIntelligenceOwner:
-	#	Range: 8c0
+	#	Range: 10c0
 	#	Types: SatelliteScan
 	#	Type: GroundPosition
 	RevealOnDeath:
-		Radius: 4c0
-		Duration: 50
+		Radius: 10c0
+		Duration: 125
 	DetectCloaked:
-		Range: 6c0
+		Range: 10c0
 	RenderDetectionCircle:
 		RenderOnGround: true
 	AutoTakesOff:
@@ -2361,31 +2944,34 @@ txdx:
 	Inherits: ^Helicopter
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@DISCARMOR: ^AffectedByDiscArmor
-	Inherits@RADIATON: ^DamagedByRadiation50Percent
 	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@RADIATON: ^DamagedByRadiation50Percent
+	Inherits@ROCKETBARRAGE: ^AffectedByRocketBarrage
 	BodyOrientation:
 		QuantizedFacings: 1
 	DamagedByTintedCells:
 		RequiresCondition: !airborne
+	DamagedByTintedCells@ORANGE:
+		RequiresCondition: !airborne
 	Valued:
-		Cost: 900
+		Cost: 1000
 	DeliversCash:
-		Payload: 900
-		PlayerExperience: 45
+		Payload: 1000
+		PlayerExperience: 50
 		Voice: Move
 	Tooltip:
-		Name: 负子蝽运输机
+		Name: actor-txdx.name
 	Tooltip@NoRow:
-		Name: 负子蝽运输机
+		Name: actor-txdx.name
 	Buildable:
-		Queue: Aircraft.Yuri, Aircraft.Lazarus
+		Queue: Aircraft.Shared, Aircraft.Yuri, Aircraft.Lazarus
 		BuildPaletteOrder: 10
-		Prerequisites: ~techlevel.2
-		Description: 装备毒性火箭弹的轻型运兵飞碟\n\n侦测隐形\n\n·强势对抗：步兵\n·弱势对抗：载具、建筑、飞行器
-		BuildDuration: 500
+		Prerequisites: ~aircraft.yuri, ~techlevel.2
+		Description: actor-txdx.description
+		BuildDuration: 375
 		BuildDurationModifier: 100
 	Aircraft:
-		LandableTerrainTypes: Clear, Rough, Road, DirtRoad, Ore, Gems
+		LandableTerrainTypes: Clear, Sand, Rough, Road, DirtRoad, Ore, Gems
 		TurnSpeed: 1023
 		Speed: 180
 		AltitudeVelocity: 200
@@ -2410,14 +2996,52 @@ txdx:
 		RenderOnGround: true
 	Armament@primary:
 		Weapon: MosquitoMissile
-		RequiresCondition: !rank-elite
+		Damage: 80
+		RequiresCondition: !rank-elite && !rocket_barrage
 	Armament@elite:
 		Weapon: MosquitoMissileE
-		RequiresCondition: rank-elite
+		Damage: 160
+		RequiresCondition: rank-elite && !rocket_barrage
+	Armament@primary-ammo:
+		Name: barrage
+		Weapon: MosquitoBarrage
+		Damage: 40
+		LocalOffset: 0,384,0, 384,0,0, 0,0,0, 0,-384,0, -384,0,0
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite && rocket_barrage
+	Armament@elite-ammo:
+		Name: barrage
+		Weapon: MosquitoBarrageE
+		Damage: 40
+		PauseOnCondition: !ammo
+		LocalOffset: 0,384,0, 384,0,0, 0,0,0, 0,-384,0, -384,0,0
+		RequiresCondition: rank-elite && rocket_barrage
 	AttackAircraft:
 		Voice: Attack
 		AttackType: Hover
-		FacingTolerance: 128
+		FacingTolerance: 512
+		Armaments: primary, barrage
+		PauseOnCondition: emp || magnefreeze || chronodisable
+	AmmoPool:
+		Ammo: 6
+		Armaments: barrage
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Count: 2
+		Delay: 60
+		RequiresCondition: !rank-elite
+	ReloadAmmoPool@elite:
+		Count: 2
+		Delay: 30
+		RequiresCondition: rank-elite
+	WithAmmoPipsDecoration:
+		Margin: 4, 9
+		FullSequence: pip-ammo
+		EmptySequence: pip-ammoempty
+		Palette: ra
+		Position: BottomLeft
+		RequiresSelection: true
+		RequiresCondition: rocket_barrage
 	Voiced:
 		VoiceSet: FloatingDiskVoice
 	RenderSprites:
@@ -2440,7 +3064,11 @@ txdx:
 		ValidRelationships: None
 	Repairable:
 		Voice: Move
-		RepairActors: gadept, nadept, nadepb, yadept, yadepb, caoutp
+		RepairActors: gadept, nadept, nadepb, yadept, yadepb, caoutp, caoutb
+	RepairableNear:
+		Voice: Move
+		CloseEnough: 3c0
+		RepairActors: gaweap, gaweab, gaweac, gawead, naweap, naweab, naweac, nawead, yaweap, yaweab, yaweac, yawead, gayard, nayard, yayard, gaairc, gaairb, baairf, baairb, naheli, yadisk
 	Cargo:
 		Types: Infantry, Garrisoner, SmallVehicle
 		MaxWeight: 5
@@ -2449,8 +3077,8 @@ txdx:
 		AfterUnloadDelay: 0
 		UnloadVoice: Move
 	WithCargoSounds:
-		EnterSound: genter1a.wav
-		ExitSound: gexit1a.wav
+		EnterSounds: genter1a.wav
+		ExitSounds: gexit1a.wav
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: txdxhusk
@@ -2461,16 +3089,16 @@ txdx:
 		RequiresCondition: !airborne
 	DeathSounds:
 		DeathTypes: NonTemporal
-	AmbientSound@Move:
-		SoundFiles: vflolo2a.wav, vflolo2b.wav
-		Volume: 0.40
-		RequiresCondition: moving
-	SoundAnnouncement@end:
-		SoundFiles: vflolo3a.wav
-		Volume: 0.40
-		RequiresCondition: !moving
-	GrantConditionOnMovement:
-		Condition: moving
+	# AmbientSound@Move:
+	#	SoundFiles: vflolo2a.wav, vflolo2b.wav
+	#	Volume: 0.40
+	#	RequiresCondition: moving
+	# SoundAnnouncement@end:
+	#	SoundFiles: vflolo3a.wav
+	#	Volume: 0.40
+	#	RequiresCondition: !moving
+	# GrantConditionOnMovement:
+	#	Condition: moving
 	HitShape:
 	WithCargoPipsDecoration:
 		Margin: 4, 3
@@ -2482,14 +3110,17 @@ txdx:
 			yellow: pip-yellow
 			blue: pip-blue
 			red: pip-red
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange, Cargo
+		Upgrades: upgrade.disc_armor, upgrade.rocket_barrage
 
 txdxhusk:
 	Inherits: ^HelicopterHusk
 	Inherits@DISCARMOR: ^AffectedByDiscArmor
 	Tooltip:
-		Name: 负子蝽运输机
+		Name: actor-txdx.name
 	Tooltip@NoRow:
-		Name: 负子蝽运输机
+		Name: actor-txdx.name
 	Aircraft:
 		TurnSpeed: 40
 		Speed: 180
@@ -2503,8 +3134,8 @@ txdxhusk:
 	#	Types: SatelliteScan
 	#	Type: GroundPosition
 	RevealOnDeath:
-		Radius: 5c0
-		Duration: 50
+		Radius: 10c0
+		Duration: 125
 	RenderVoxels:
 		Image: txdx
 	-WithVoxelBody:
@@ -2526,16 +3157,18 @@ kite:
 	Inherits@AIRPROP: ^AffectedByAerialPropaganda
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@BLACKNAPALM: ^AffectedByBlackNapalm
-	Inherits@CHAOS: ^BerserkableVoxel
+	Inherits@CHAOS: ^BerserkableVoxelArmed
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@MC: ^MindControllable
 	Inherits@RADIATON: ^DamagedByRadiation50Percent
 	DamagedByTintedCells:
 		RequiresCondition: !airborne
+	DamagedByTintedCells@ORANGE:
+		RequiresCondition: !airborne
 	Tooltip:
-		Name: 黑鸢直升机
+		Name: actor-kite.name
 	Tooltip@NoRow:
-		Name: 黑鸢直升机
+		Name: actor-kite.name
 	Selectable:
 		Bounds: 1689, 2896, 0, -965
 	Health:
@@ -2544,15 +3177,19 @@ kite:
 		Type: Light
 	Armament@primary:
 		Weapon: NapalmBomb
+		Damage: 150
 		RequiresCondition: !rank-elite && !black_napalm
 	Armament@elite:
 		Weapon: NapalmBombE
+		Damage: 200
 		RequiresCondition: rank-elite && !black_napalm
 	Armament@primary-black:
 		Weapon: NapalmBombBlack
+		Damage: 300
 		RequiresCondition: !rank-elite && black_napalm
 	Armament@elite-black:
 		Weapon: NapalmBombBlackE
+		Damage: 400
 		RequiresCondition: rank-elite && black_napalm
 	Voiced:
 		VoiceSet: BlackKiteVoice
@@ -2563,10 +3200,10 @@ kite:
 		Voice: Build
 		ValidRelationships: None
 	Buildable:
-		Queue: Aircraft.Vietnam
+		Queue: Aircraft.Shared, Aircraft.Vietnam
 		BuildPaletteOrder: 40
-		Prerequisites: naradr, ~techlevel.3
-		Description: 配备燃烧弹的越南武装直升机\n\n必须在目标正上方才能投弹\n燃烧弹会烧灼目标区域并造成持续伤害\n\n·强势对抗：步兵、建筑\n·弱势对抗：载具
+		Prerequisites: ~aircraft.vietnam, naradr, ~techlevel.3
+		Description: actor-kite.description
 		BuildDuration: 625
 		BuildDurationModifier: 100
 	UpdatesPlayerStatistics:
@@ -2587,8 +3224,8 @@ kite:
 	#	Type: GroundPosition
 	AttackAircraft:
 		Voice: Attack
-		FacingTolerance: 128
 		AttackType: Hover
+		FacingTolerance: 512
 		PauseOnCondition: emp || magnefreeze || chronodisable
 	Aircraft:
 		Crushes: crate
@@ -2601,7 +3238,11 @@ kite:
 		PauseOnCondition: emp || magnefreeze || chronodisable
 	Repairable:
 		Voice: Move
-		RepairActors: gadept, nadept, nadepb, yadept, yadepb, caoutp
+		RepairActors: gadept, nadept, nadepb, yadept, yadepb, caoutp, caoutb
+	RepairableNear:
+		Voice: Move
+		CloseEnough: 3c0
+		RepairActors: gaweap, gaweab, gaweac, gawead, naweap, naweab, naweac, nawead, yaweap, yaweab, yaweac, yawead, gayard, nayard, yayard, gaairc, gaairb, baairf, baairb, naheli, yadisk
 	RenderSprites:
 	Targetable@MC:
 		RequiresCondition: !controlled && !permamc && !airborne
@@ -2626,24 +3267,27 @@ kite:
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: kitehusk
-	AmbientSound@Move:
-		SoundFiles: vcholo2a.wav, vcholo2b.wav, vcholo2c.wav
-		Volume: 0.45
-		RequiresCondition: moving
-	SoundAnnouncement@end:
-		SoundFiles: vcholo3a.wav
-		Volume: 0.45
-		RequiresCondition: !moving
-	GrantConditionOnMovement:
-		Condition: moving
+	# AmbientSound@Move:
+	#	SoundFiles: vcholo2a.wav, vcholo2b.wav, vcholo2c.wav
+	#	Volume: 0.45
+	#	RequiresCondition: moving
+	# SoundAnnouncement@end:
+	#	SoundFiles: vcholo3a.wav
+	#	Volume: 0.45
+	#	RequiresCondition: !moving
+	# GrantConditionOnMovement:
+	#	Condition: moving
 	HitShape:
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange
 
 kitehusk:
 	Inherits: ^HelicopterHusk
+	Inherits@AIRPROP: ^AffectedByAerialPropaganda
 	Tooltip:
-		Name: 黑鸢直升机
+		Name: actor-kite.name
 	Tooltip@NoRow:
-		Name: 黑鸢直升机
+		Name: actor-kite.name
 	Aircraft:
 		TurnSpeed: 28
 		Speed: 150
@@ -2657,16 +3301,23 @@ kitehusk:
 	#	Types: SatelliteScan
 	#	Type: GroundPosition
 	RevealOnDeath:
-		Radius: 4c0
-		Duration: 50
+		Radius: 8c0
+		Duration: 125
 	RenderSprites:
 		Image: kite
 	RenderVoxels:
 		Image: kite
+	-ProximityExternalCondition@AIRPROP:
 	-WithVoxelBody:
 	WithVoxelHelicopterBody:
 		TickRate: 1
 		ShowShadow: false
+		RequiresCondition: !airprop
+	WithVoxelHelicopterBody@propaganda:
+		TickRate: 1
+		ShowShadow: false
+		Sequence: idle-propaganda
+		RequiresCondition: airprop
 	WithFacingSpriteBody:
 		Sequence: shadow
 		ForceToGround: true
@@ -2694,6 +3345,8 @@ magnedisk:
 		QuantizedFacings: 1
 	DamagedByTintedCells:
 		RequiresCondition: !airborne
+	DamagedByTintedCells@ORANGE:
+		RequiresCondition: !airborne
 	Valued:
 		Cost: 1100
 	DeliversCash:
@@ -2701,14 +3354,14 @@ magnedisk:
 		PlayerExperience: 60
 		Voice: Move
 	Tooltip:
-		Name: 爆蚊生化飞碟
+		Name: actor-magnedisk.name
 	Tooltip@NoRow:
-		Name: 爆蚊生化飞碟
+		Name: actor-magnedisk.name
 	Buildable:
-		Queue: Aircraft.Lazarus
+		Queue: Aircraft.Shared, Aircraft.Lazarus
 		BuildPaletteOrder: 30
-		Prerequisites: yadome, ~techlevel.3
-		Description: 装备高科技生物武器的反步兵飞碟\n\n攻击三次生物单位之后将会制造器官兽投向地面\n\n·强势对抗：步兵\n·弱势对抗：载具、建筑、飞行器
+		Prerequisites: ~aircraft.psinepal, yadome, ~techlevel.3
+		Description: actor-magnedisk.description
 		BuildDuration: 500
 		BuildDurationModifier: 100
 	Aircraft:
@@ -2732,14 +3385,16 @@ magnedisk:
 	#	Type: GroundPosition
 	Armament@primary:
 		Weapon: BloodSuck
+		Damage: 45
 		RequiresCondition: !rank-elite
 	Armament@elite:
 		Weapon: BloodSuckE
+		Damage: 60
 		RequiresCondition: rank-elite
 	AttackAircraft:
 		Voice: Attack
 		AttackType: Hover
-		FacingTolerance: 128
+		FacingTolerance: 512
 		Armaments: primary, growth
 	ExternalCondition@bloodsucked:
 		Condition: bloodsucked
@@ -2785,7 +3440,11 @@ magnedisk:
 		ValidRelationships: None
 	Repairable:
 		Voice: Move
-		RepairActors: gadept, nadept, nadepb, yadept, yadepb, caoutp
+		RepairActors: gadept, nadept, nadepb, yadept, yadepb, caoutp, caoutb
+	RepairableNear:
+		Voice: Move
+		CloseEnough: 3c0
+		RepairActors: gaweap, gaweab, gaweac, gawead, naweap, naweab, naweac, nawead, yaweap, yaweab, yaweac, yawead, gayard, nayard, yayard, gaairc, gaairb, baairf, baairb, naheli, yadisk
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: magnediskhusk
@@ -2796,25 +3455,28 @@ magnedisk:
 		RequiresCondition: !airborne
 	DeathSounds:
 		DeathTypes: NonTemporal
-	AmbientSound@Move:
-		SoundFiles: vflolo2a.wav, vflolo2b.wav
-		Volume: 0.40
-		RequiresCondition: moving
-	SoundAnnouncement@end:
-		SoundFiles: vflolo3a.wav
-		Volume: 0.40
-		RequiresCondition: !moving
-	GrantConditionOnMovement:
-		Condition: moving
+	# AmbientSound@Move:
+	#	SoundFiles: vflolo2a.wav, vflolo2b.wav
+	#	Volume: 0.40
+	#	RequiresCondition: moving
+	# SoundAnnouncement@end:
+	#	SoundFiles: vflolo3a.wav
+	#	Volume: 0.40
+	#	RequiresCondition: !moving
+	# GrantConditionOnMovement:
+	#	Condition: moving
 	HitShape:
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange
+		Armaments: primary
 
 magnediskhusk:
 	Inherits: ^HelicopterHusk
 	Inherits@DISCARMOR: ^AffectedByDiscArmor
 	Tooltip:
-		Name: 爆蚊生化飞碟
+		Name: actor-magnedisk.name
 	Tooltip@NoRow:
-		Name: 爆蚊生化飞碟
+		Name: actor-magnedisk.name
 	Aircraft:
 		TurnSpeed: 40
 		Speed: 180
@@ -2828,8 +3490,8 @@ magnediskhusk:
 	#	Types: SatelliteScan
 	#	Type: GroundPosition
 	RevealOnDeath:
-		Radius: 5c0
-		Duration: 50
+		Radius: 10c0
+		Duration: 125
 	RenderVoxels:
 		Image: magnedisk
 	-WithVoxelBody:
@@ -2860,28 +3522,32 @@ magnedisk.spawner:
 havoc:
 	Inherits: ^Helicopter
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@CHAOS: ^BerserkableVoxel
+	Inherits@CHAOS: ^BerserkableVoxelArmed
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@MC: ^MindControllable
 	Inherits@RADIATON: ^DamagedByRadiation50Percent
 	DamagedByTintedCells:
 		RequiresCondition: !airborne
+	DamagedByTintedCells@ORANGE:
+		RequiresCondition: !airborne
 	Tooltip:
-		Name: 浩劫反坦克直升机
+		Name: actor-havoc.name
 	Tooltip@NoRow:
-		Name: 浩劫反坦克直升机
+		Name: actor-havoc.name
 	Selectable:
 		Bounds: 1689, 2896, 0, -965
 	Health:
-		HP: 40000
+		HP: 30000
 	Armor:
 		Type: Light
 	Armament@primary:
 		Weapon: HeliRocket
+		Damage: 200
 		LocalOffset: 0,512,256, 0,-512,256
 		RequiresCondition: !rank-elite
 	Armament@elite:
 		Weapon: HeliRocketE
+		Damage: 400
 		LocalOffset: 0,512,256, 0,-512,256
 		RequiresCondition: rank-elite
 	Voiced:
@@ -2893,18 +3559,18 @@ havoc:
 		Voice: Build
 		ValidRelationships: None
 	Buildable:
-		Queue: Aircraft.Soviets, Aircraft.USSR, Aircraft.Vietnam, Aircraft.Cuba, Aircraft.Libya, Aircraft.Baku
+		Queue: Aircraft.Shared, Aircraft.Soviets, Aircraft.USSR, Aircraft.Vietnam, Aircraft.Cuba, Aircraft.Libya
 		BuildPaletteOrder: 30
-		Prerequisites: ~prerequisite.havoc, naradr, ~techlevel.3
-		Description: 先进反装甲武装直升机\n\n·强势对抗：载具\n·弱势对抗：步兵、飞行器
+		Prerequisites: ~aircraft.soviets, prerequisite.havoc, naradr, ~techlevel.3
+		Description: actor-havoc.description
 		BuildDuration: 625
 		BuildDurationModifier: 100
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Valued:
-		Cost: 1750
+		Cost: 1500
 	DeliversCash:
-		Payload: 1750
+		Payload: 1500
 		Voice: Move
 	RevealsShroud:
 		Range: 8c0
@@ -2916,8 +3582,8 @@ havoc:
 	#	Type: GroundPosition
 	AttackAircraft:
 		Voice: Attack
-		FacingTolerance: 2
 		AttackType: Hover
+		FacingTolerance: 2
 		PauseOnCondition: emp || magnefreeze || chronodisable
 	Aircraft:
 		Crushes: crate
@@ -2930,7 +3596,11 @@ havoc:
 		PauseOnCondition: emp || magnefreeze || chronodisable
 	Repairable:
 		Voice: Move
-		RepairActors: gadept, nadept, nadepb, yadept, yadepb, caoutp
+		RepairActors: gadept, nadept, nadepb, yadept, yadepb, caoutp, caoutb
+	RepairableNear:
+		Voice: Move
+		CloseEnough: 3c0
+		RepairActors: gaweap, gaweab, gaweac, gawead, naweap, naweab, naweac, nawead, yaweap, yaweab, yaweac, yawead, gayard, nayard, yayard, gaairc, gaairb, baairf, baairb, naheli, yadisk
 	RenderSprites:
 	Targetable@MC:
 		RequiresCondition: !controlled && !permamc && !airborne
@@ -2949,24 +3619,26 @@ havoc:
 	SpawnActorOnDeath:
 		DeathType: NonTemporal
 		Actor: havochusk
-	AmbientSound@Move:
-		SoundFiles: vcholo2a.wav, vcholo2b.wav, vcholo2c.wav
-		Volume: 0.45
-		RequiresCondition: moving
-	SoundAnnouncement@end:
-		SoundFiles: vcholo3a.wav
-		Volume: 0.45
-		RequiresCondition: !moving
-	GrantConditionOnMovement:
-		Condition: moving
+	# AmbientSound@Move:
+	#	SoundFiles: vcholo2a.wav, vcholo2b.wav, vcholo2c.wav
+	#	Volume: 0.45
+	#	RequiresCondition: moving
+	# SoundAnnouncement@end:
+	#	SoundFiles: vcholo3a.wav
+	#	Volume: 0.45
+	#	RequiresCondition: !moving
+	# GrantConditionOnMovement:
+	#	Condition: moving
 	HitShape:
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange
 
 havochusk:
 	Inherits: ^HelicopterHusk
 	Tooltip:
-		Name: 浩劫反坦克直升机
+		Name: actor-havoc.name
 	Tooltip@NoRow:
-		Name: 浩劫反坦克直升机
+		Name: actor-havoc.name
 	Aircraft:
 		TurnSpeed: 28
 		Speed: 165
@@ -2980,8 +3652,8 @@ havochusk:
 	#	Types: SatelliteScan
 	#	Type: GroundPosition
 	RevealOnDeath:
-		Radius: 4c0
-		Duration: 50
+		Radius: 8c0
+		Duration: 125
 	RenderSprites:
 		Image: havoc
 	RenderVoxels:
@@ -2995,3 +3667,262 @@ havochusk:
 		ForceToGround: true
 	BodyOrientation:
 		UseClassicPerspectiveFudge: false
+
+badgr:
+	Inherits: ^Plane
+	Inherits@AI: ^AIMicroManagable
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@CHAOS: ^BerserkableVoxelArmed
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@MC: ^MindControllable
+	Inherits@RADIATON: ^DamagedByRadiation50Percent
+	DamagedByTintedCells:
+		RequiresCondition: !airborne
+	DamagedByTintedCells@ORANGE:
+		RequiresCondition: !airborne
+	Valued:
+		Cost: 2500
+	DeliversCash:
+		Payload: 2500
+		PlayerExperience: 125
+		Voice: Move
+	Tooltip:
+		Name: actor-badgr.name
+	Tooltip@NoRow:
+		Name: actor-badgr.name
+	Buildable:
+		Queue: Aircraft.Shared, Aircraft.Baku
+		BuildPaletteOrder: 40
+		Description: actor-badgr.description
+		Prerequisites: ~aircraft.baku, natech, !prerequisite.enoughair, ~techlevel.4
+		BuildDuration: 1250
+		BuildDurationModifier: 100
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Aircraft:
+		AltitudeVelocity: 240
+		IdleTurnSpeed: 10
+		IdleSpeed: 90
+		TurnSpeed: 20
+		Speed: 150
+		Roll: 28
+		RollSpeed: 7
+		VTOL: false
+		PauseOnCondition: emp || magnefreeze || chronodisable
+	Selectable:
+		Bounds: 1158, 1158
+	Health:
+		HP: 40000
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 10c0
+	RevealsShroud@Ground:
+		Range: 10c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Range: 10c0
+	#	Types: SatelliteScan
+	#	Type: GroundPosition
+	Armament:
+		Weapon: BadgerBomb
+		Damage: 750
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite
+	Armament@Elite:
+		Weapon: BadgerBombE
+		Damage: 1000
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite
+	AttackAircraft:
+		FacingTolerance: 20
+		Voice: Attack
+		TargetFrozenActors: True
+		PauseOnCondition: emp || magnefreeze || chronodisable
+	WithVoxelBody:
+	Voiced:
+		VoiceSet: KirovVoice
+	ExternalCondition@PRODUCED:
+		Condition: produced
+	VoiceAnnouncement:
+		RequiresCondition: produced
+		Voice: Build
+		ValidRelationships: None
+	Repairable:
+		Voice: Move
+		RepairActors: gadept, nadept, nadepb, yadept, yadepb, caoutp, caoutb
+	RepairableNear:
+		Voice: Move
+		CloseEnough: 3c0
+		RepairActors: gaweap, gaweab, gaweac, gawead, naweap, naweab, naweac, nawead, yaweap, yaweab, yaweac, yawead, gayard, nayard, yayard, naheli, yadisk
+	Rearmable:
+		AmmoPools: primary, secondary
+		RearmActors: gaairc, gaairb, gaapad, gadock, baairf, baairb, badock, badocb
+	Targetable@MC:
+		RequiresCondition: !controlled && !permamc && !airborne
+	Targetable@CHAOS:
+		RequiresCondition: !airborne
+	AmmoPool:
+		Ammo: 1
+		ReloadDelay: 250
+		AmmoCondition: ammo
+	AutoTarget:
+		InitialStance: HoldFire
+		InitialStanceAI: HoldFire
+	RenderSprites:
+	RenderVoxels:
+	GrantConditionOnMovement@V:
+		Condition: vmove
+		ValidMovementTypes: Vertical
+	GrantConditionOnMovement@H:
+		Condition: hmove
+		ValidMovementTypes: Horizontal
+	SpawnActorOnDeath:
+		DeathType: NonTemporal
+		Actor: badgrhusk
+		RequiresCondition: airborne && (!vmove || hmove)
+	SpawnActorOnDeath@VTOL:
+		Actor: badgrhusk.VTOL
+		RequiresCondition: airborne && vmove && !hmove
+	Explodes:
+		DeathTypes: NonTemporal
+		Weapon: UnitExplode
+		RequiresCondition: !airborne
+	ProvidesPrerequisite@actorname:
+	GrantExternalConditionToOwner:
+		Condition: padaircraft
+	HitShape:
+	WithAmmoPipsDecoration:
+		Margin: 4, 3
+		FullSequence: pip-ammo
+		EmptySequence: pip-ammoempty
+		Palette: ra
+		Position: BottomLeft
+		RequiresSelection: true
+	# AmbientSound@Ambient:
+	#	SoundFiles: sparlo2a.wav, sparlo2b.wav, sparlo2c.wav
+	#	Volume: 0.35
+	#	RequiresCondition: airborne
+	# ProductionCostMultiplier@AI:
+	#	Prerequisites: prerequisite.aiplayer
+	#	Multiplier: 20
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange
+
+badgrhusk:
+	Inherits: ^PlaneHusk
+	Inherits@PAYLOAD: ^AffectedByIncreasedPayload
+	Tooltip:
+		Name: actor-badgr.name
+	Tooltip@NoRow:
+		Name: actor-badgr.name
+	FallsToEarth:
+		Explosion: B2Explode
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 150
+		AltitudeVelocity: 240
+	RevealsShroud:
+		Range: 10c0
+		Type: GroundPosition
+	# RevealsShroudToIntelligenceOwner:
+	#	Range: 10c0
+	#	Types: SatelliteScan
+	#	Type: GroundPosition
+	RevealOnDeath:
+		Radius: 10c0
+		Duration: 125
+	WithVoxelBody:
+	RenderVoxels:
+		Image: badgr
+
+badgrhusk.VTOL:
+	Inherits: ^HelicopterHusk
+	Tooltip:
+		Name: actor-badgr.name
+	Tooltip@NoRow:
+		Name: actor-badgr.name
+	FallsToEarth:
+		Explosion: B2Explode
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 150
+		AltitudeVelocity: 240
+	RevealsShroud:
+		Range: 10c0
+		Type: GroundPosition
+	# RevealsShroudToIntelligenceOwner:
+	#	Range: 10c0
+	#	Types: SatelliteScan
+	#	Type: GroundPosition
+	RevealOnDeath:
+		Radius: 10c0
+		Duration: 125
+	WithVoxelBody:
+	RenderVoxels:
+		Image: badgr
+
+repdron:
+	Inherits: ^Helicopter
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@STEALTHGEN: ^AffectedByStealthGenerator
+	-GivesExperience:
+	Tooltip:
+		Name: actor-repdron.name
+	-Selectable:
+	-SelectionDecorations:
+	Interactable:
+	Aircraft:
+		CruiseAltitude: 3c512
+		MaximumPitch: 90
+		Repulsable: true
+		TurnSpeed: 16
+		Speed: 128
+		IdleTurnSpeed: 10
+		IdleSpeed: 64
+		AltitudeVelocity: 200
+		RepulsionSpeed: 16
+		AirborneCondition: airborne
+		MoveIntoShroud: true
+	Armament:
+		Weapon: DroneRepair
+		Cursor: goldwrench
+		OutsideRangeCursor: goldwrench
+		TargetRelationships: Ally
+		ForceTargetRelationships: Ally
+	AttackAircraft:
+		AttackType: Hover
+		FacingTolerance: 512
+	RejectsOrders:
+	RenderSprites:
+	WithFacingSpriteBody:
+	BodyOrientation:
+		QuantizedFacings: 32
+	Health:
+		HP: 5000
+	HitShape:
+	DroneSpawnerSlave:
+		AttackCallBackDistance: 6c0
+	-UpdatesPlayerStatistics:
+	-ActorLostNotification:
+	-AppearsOnRadar:
+	-MapEditorData:
+	-Targetable@Airborne:
+	-Targetable@Ground:
+	-WithColoredOverlay@ironcurtain:
+	-DamageMultiplier@ironcurtain:
+	-Targetable@ironcurtain:
+	-Targetable@ironcurtained:
+	-TimedConditionBar@invulnerability:
+	-ExternalCondition@INVULNERABILITY:
+	AffectedByTemporal:
+		-RequiresCondition:
+	DamageMultiplier@nodamage:
+		Modifier: 0
+	WithDeathAnimation:
+		FallbackSequence: die
+		DeathSequence: die
+		DeathSequencePalette: effect
+		DeathPaletteIsPlayerPalette: False
+		UseDeathTypeSuffix: false
+		CrushedSequence: die
+		CrushedSequencePalette: effect

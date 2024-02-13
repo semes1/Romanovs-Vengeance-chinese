@@ -10,7 +10,7 @@ TIBTRE03:
 TIBTRE04:
 	Inherits: ^OreDrill
 	Tooltip:
-		Name: 宝石矿井
+		Name: actor-tibtre04.name
 	AppearsOnMapPreview:
 		Terrain: Gems
 	RadarColorFromTerrain:
@@ -18,6 +18,24 @@ TIBTRE04:
 	SeedsResource:
 		ResourceType: Gems
 		Interval: 100
+	WithIdleAnimation:
+		Interval: 500
+
+TIBTRE05:
+	Inherits: ^OreDrill
+	WithSpriteBody@2:
+		Name: body2
+		Sequence: idle-flipped
+	Tooltip:
+		Name: actor-tibtre05.name
+	SeedsResource:
+		Interval: 25
+	WithIdleAnimation:
+		Interval: 125
+	WithIdleAnimation@2:
+		Sequences: active-flipped
+		Interval: 125
+		Body: body2
 
 TREE01:
 	Inherits: ^Tree
@@ -105,24 +123,26 @@ TREE28:
 
 TREE29:
 	Inherits: ^Tree
+	MapEditorData:
+		ExcludeTilesets: SNOW
 
 TREE30:
-	Inherits: ^Tree
+	Inherits: TREE29
 
 TREE31:
-	Inherits: ^Tree
+	Inherits: TREE29
 
 TREE32:
-	Inherits: ^Tree
+	Inherits: TREE29
 
 TREE33:
-	Inherits: ^Tree
+	Inherits: TREE29
 
 TREE34:
-	Inherits: ^Tree
+	Inherits: TREE29
 
 TREE35:
-	Inherits: ^Tree
+	Inherits: TREE29
 
 TREE36:
-	Inherits: ^Tree
+	Inherits: TREE29

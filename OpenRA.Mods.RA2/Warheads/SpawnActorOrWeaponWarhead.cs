@@ -1,6 +1,6 @@
 #region Copyright & License Information
 /*
- * Copyright 2007-2020 The OpenRA Developers (see AUTHORS)
+ * Copyright (c) The OpenRA Developers and Contributors
  * This file is part of OpenRA, which is free software. It is made
  * available to you under the terms of the GNU General Public License
  * as published by the Free Software Foundation, either version 3 of
@@ -9,7 +9,7 @@
  */
 #endregion
 
-using System.Collections.Generic;
+using System;
 using System.Linq;
 using OpenRA.GameRules;
 using OpenRA.Mods.AS.Activities;
@@ -29,7 +29,7 @@ namespace OpenRA.Mods.RA2.Warheads
 		public readonly int Range = 10;
 
 		[Desc("Actors to spawn.")]
-		public readonly string[] Actors = { };
+		public readonly string[] Actors = Array.Empty<string>();
 
 		[Desc("Try to parachute the actors. When unset, actors will just fall down visually using FallRate."
 			+ " Requires the Parachutable trait on all actors if set.")]
@@ -64,7 +64,7 @@ namespace OpenRA.Mods.RA2.Warheads
 		public readonly string Palette = "effect";
 
 		[Desc("List of sounds that can be played at the spawning location.")]
-		public readonly string[] Sounds = new string[0];
+		public readonly string[] Sounds = Array.Empty<string>();
 
 		public readonly bool UsePlayerPalette = false;
 
@@ -73,7 +73,7 @@ namespace OpenRA.Mods.RA2.Warheads
 		public void RulesetLoaded(Ruleset rules, WeaponInfo info)
 		{
 			if (!rules.Weapons.TryGetValue(Weapon.ToLowerInvariant(), out weapon))
-				throw new YamlException("Weapons Ruleset does not contain an entry '{0}'".F(Weapon.ToLowerInvariant()));
+				throw new YamlException($"Weapons Ruleset does not contain an entry '{Weapon.ToLowerInvariant()}'");
 
 			foreach (var a in Actors)
 			{
@@ -81,7 +81,7 @@ namespace OpenRA.Mods.RA2.Warheads
 				var buildingInfo = actorInfo.TraitInfoOrDefault<BuildingInfo>();
 
 				if (buildingInfo != null)
-					throw new YamlException("SpawnActorOrWeaponWarhead cannot be used to spawn building actor '{0}'!".F(a));
+					throw new YamlException($"SpawnActorOrWeaponWarhead cannot be used to spawn building actor '{a}'!");
 			}
 		}
 

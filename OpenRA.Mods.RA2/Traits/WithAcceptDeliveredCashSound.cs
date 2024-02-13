@@ -1,6 +1,6 @@
 #region Copyright & License Information
 /*
- * Copyright 2007-2019 The OpenRA Developers (see AUTHORS)
+ * Copyright (c) The OpenRA Developers and Contributors
  * This file is part of OpenRA, which is free software. It is made
  * available to you under the terms of the GNU General Public License
  * as published by the Free Software Foundation, either version 3 of
@@ -8,9 +8,6 @@
  * information, see COPYING.
  */
 #endregion
-
-using System.Linq;
-using OpenRA.Traits;
 
 namespace OpenRA.Mods.Common.Traits.Render
 {
@@ -20,6 +17,12 @@ namespace OpenRA.Mods.Common.Traits.Render
 		[FieldLoader.Require]
 		[Desc("Sound to play when delivery is done.")]
 		public readonly string Sound = null;
+
+		[Desc("Does the sound play under shroud or fog.")]
+		public readonly bool AudibleThroughFog = false;
+
+		[Desc("Volume the EnterSound and ExitSound played at.")]
+		public readonly float SoundVolume = 1f;
 
 		public override object Create(ActorInitializer init) { return new WithAcceptDeliveredCashSound(init.Self, this); }
 	}
@@ -35,7 +38,11 @@ namespace OpenRA.Mods.Common.Traits.Render
 				return;
 
 			if (!string.IsNullOrEmpty(Info.Sound))
-				Game.Sound.Play(SoundType.World, Info.Sound, self.CenterPosition);
+			{
+				var pos = self.CenterPosition;
+				if (Info.AudibleThroughFog || (!self.World.ShroudObscures(pos) && !self.World.FogObscures(pos)))
+					Game.Sound.Play(SoundType.World, Info.Sound, pos, Info.SoundVolume);
+			}
 		}
 
 		void INotifyCashTransfer.OnDeliveringCash(Actor self, Actor acceptor) { }

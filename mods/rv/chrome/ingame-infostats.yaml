@@ -12,9 +12,9 @@ Container@SKIRMISH_STATS:
 					Width: 482
 					Height: 25
 					Font: MediumBold
-					Text: 任务目标：
+					Text: label-objective-mission
 				Label@STATS_STATUS:
-					X: 120
+					X: 100
 					Y: 22
 					Width: PARENT_RIGHT - 10
 					Height: 25
@@ -25,42 +25,48 @@ Container@SKIRMISH_STATS:
 					Width: 482
 					Height: 20
 					Font: Bold
-					Text: 消灭所有敌人！
+					Text: checkbox-objective-stats
 					Disabled: true
 					TextColorDisabled: FFFFFF
 		Container@STATS_HEADERS:
 			X: 22
 			Y: 81
-			Width: 393
+			Width: PARENT_RIGHT - 34
 			Children:
 				Label@NAME:
 					X: 10
 					Width: 210
 					Height: 25
-					Text: 玩家
+					Text: label-stats-player
 					Font: Bold
 				Label@FACTION:
 					X: 230
 					Width: 120
 					Height: 25
-					Text: 阵营
+					Text: label-stats-faction
 					Font: Bold
 				Label@SCORE:
 					X: 360
 					Width: 75
 					Height: 25
-					Text: 得分
+					Text: label-stats-score
 					Font: Bold
 					Align: Right
+				Label@ACTIONS:
+					X: 457
+					Width: 20
+					Height: 25
+					Text: label-stats-actions
+					Font: Bold
 		ScrollPanel@PLAYER_LIST:
 			X: 20
 			Y: 105
-			Width: 482
+			Width: PARENT_RIGHT - 30
 			Height: 265
 			ItemSpacing: 5
 			Children:
 				ScrollItem@TEAM_TEMPLATE:
-					BaseName: scrollheader
+					Background: scrollheader
 					Width: PARENT_RIGHT - 27
 					Height: 20
 					X: 2
@@ -107,17 +113,38 @@ Container@SKIRMISH_STATS:
 							Y: 3
 							Width: 32
 							Height: 16
-						Label@FACTION:
+						LabelWithTooltip@FACTION:
 							X: 264
-							Width: 86
+							Width: 123
 							Height: 25
 							Shadow: True
+							TooltipContainer: TOOLTIP_CONTAINER
+							TooltipTemplate: SIMPLE_TOOLTIP
 						Label@SCORE:
 							X: 360
-							Width: 75
+							Width: 60
 							Height: 25
 							Align: Right
 							Shadow: True
+						Checkbox@MUTE:
+							X: 457
+							Width: 25
+							Height: 25
+							Checkmark: mute
+							Background: checkbox-toggle
+							TooltipContainer: TOOLTIP_CONTAINER
+						Button@KICK:
+							X: 485
+							Width: 25
+							Height: 25
+							Background: checkbox-toggle
+							TooltipContainer: TOOLTIP_CONTAINER
+							Children:
+								Image:
+									ImageCollection: lobby-bits
+									ImageName: kick
+									X: 7
+									Y: 7
 				Container@SPECTATOR_TEMPLATE:
 					Width: PARENT_RIGHT - 27
 					Height: 25
@@ -141,13 +168,22 @@ Container@SKIRMISH_STATS:
 							Width: 166
 							Height: 25
 							Shadow: True
-						Button@KICK:
-							X: 195
-							Width: 24
+						Checkbox@MUTE:
+							X: 457
+							Width: 25
 							Height: 25
+							Checkmark: mute
+							Background: checkbox-toggle
+							TooltipContainer: TOOLTIP_CONTAINER
+						Button@KICK:
+							X: 485
+							Width: 25
+							Height: 25
+							Background: checkbox-toggle
+							TooltipContainer: TOOLTIP_CONTAINER
 							Children:
 								Image:
 									ImageCollection: lobby-bits
 									ImageName: kick
-									X: 6
-									Y: 8
+									X: 7
+									Y: 7

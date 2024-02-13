@@ -1,7 +1,8 @@
 smcv:
 	Inherits: ^ConstructionVehicle
 	Buildable:
-		Queue: Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya, Vehicle.Baku
+		Queue: Vehicle.Shared, Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya, Vehicle.Baku, Ship.Shared, Ship.Soviets, Ship.Baku
+		Prerequisites: ~vehicleorship.sovietsorbaku, ~techlevel.2, ~!global-suddendeath, ~!ai.mcv
 	Transforms:
 		IntoActor: nacnst
 	Voiced:
@@ -15,22 +16,35 @@ harv:
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@NOGUNNER: ^GunnerKillable
 	Buildable:
-		Queue: Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya, Vehicle.Baku
-		Description: 装备一挺机枪的采矿车\n\n免疫辐射\n移动时攻击\n\n·强势对抗：步兵\n·弱势对抗：载具、飞行器、建筑
+		Queue: Vehicle.Shared, Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya, Vehicle.Baku, Ship.Shared, Ship.Soviets, Ship.Baku
+		Description: actor-harv.description
+		Prerequisites: ~vehicleorship.sovietsorbaku, refinery, ~!global-megawealth, ~techlevel.1
 	Tooltip:
-		Name: 武装采矿车
+		Name: actor-harv.name
 	Tooltip@NoRow:
-		Name: 武装采矿车
+		Name: actor-harv.name
 	Armament@primary:
 		Weapon: 20mmrapid
+		Damage: 30
 		LocalOffset: 384,0,1024
 		MuzzleSequence: muzzle
 		RequiresCondition: !rank-elite
 	Armament@elite:
 		Weapon: 20mmrapidE
+		Damage: 50
 		LocalOffset: 384,0,1024
 		MuzzleSequence: muzzle
 		RequiresCondition: rank-elite
+	Armament@primary-line:
+		Weapon: 20mmrapidLine
+		LocalOffset: 384,0,1024
+		MuzzleSequence: muzzle
+		RequiresCondition: apbullets && !rank-elite
+	Armament@elite-line:
+		Weapon: 20mmrapidLineE
+		LocalOffset: 384,0,1024
+		MuzzleSequence: muzzle
+		RequiresCondition: apbullets && rank-elite
 	AttackTurreted:
 		Voice: Attack
 		PauseOnCondition: chronodisable || emp || nogunner || parachute
@@ -41,8 +55,18 @@ harv:
 	WithVoxelTurret:
 	Voiced:
 		VoiceSet: WarMinerVoice
-	ProducibleWithLevel:
-		Prerequisites: warfactory.infiltrated
+	ProducibleWithLevel@1:
+		Prerequisites: warfactory.infiltratedorbaacdm
+	WithProductionIconOverlay@1:
+		Prerequisites: warfactory.infiltratedorbaacdm
+		Types: chevron-veteran
+	ProducibleWithLevel@2:
+		Prerequisites: warfactory.infiltrated, baacdm
+	WithProductionIconOverlay@2:
+		Prerequisites: warfactory.infiltrated, baacdm
+		Types: chevron-elite
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange, Harvester
 
 dron:
 	Inherits: ^Vehicle
@@ -53,20 +77,28 @@ dron:
 		Color: FF50F580
 	WithColoredOverlay@MagneSlow:
 		Color: FF50F540
+	WithColoredOverlay@Cryo1:
+		Color: 00F5FF40
+	WithColoredOverlay@Cryo2:
+		Color: 00F5FF60
+	WithColoredOverlay@Cryo3:
+		Color: 00F5FF80
+	WithColoredOverlay@Cryo4:
+		Color: 00F5FFA0
 	Valued:
 		Cost: 500
 	DeliversCash:
 		Payload: 500
 		Voice: Move
 	Tooltip:
-		Name: 恐怖机器人
+		Name: actor-dron.name
 	Tooltip@NoRow:
-		Name: 恐怖机器人
+		Name: actor-dron.name
 	Buildable:
-		Queue: Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya, Vehicle.Baku
-		Prerequisites: ~techlevel.2
+		Queue: Vehicle.Shared, Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya
+		Prerequisites: ~vehicle.soviets, ~techlevel.2
 		BuildPaletteOrder: 40
-		Description: 通过寄生敌方载具以从内部缓慢破坏之的反载具无人机\n\n免疫辐射\n恐怖机器人的寄生可以通过维修平台、紧急维修支援能力以及应急维修车解除\n能立刻杀死步兵\n可以进入步兵运输载具但占据2格空间\n无法攻击建筑\n\n·强势对抗：步兵、载具\n·弱势对抗：飞行器、建筑\n\n·特殊能力：寄生
+		Description: actor-dron.description
 		BuildDuration: 175
 		BuildDurationModifier: 100
 	UpdatesPlayerStatistics:
@@ -86,7 +118,7 @@ dron:
 	#	Types: SatelliteScan
 	#	Range: 6c0
 	RevealOnDeath:
-		Radius: 3c0
+		Radius: 6c0
 	Passenger:
 		CargoType: SmallVehicle
 		Weight: 2
@@ -95,7 +127,7 @@ dron:
 	-Targetable@DRONE:
 	-SpeedMultiplier@DRONE:
 	-RevealsShroud@DRONE:
-	-ExplodeWeapon@dronesparks:
+	-PeriodicExplosion@dronesparks:
 	-RenderVoxels:
 	-Carryable:
 	-CaptureManager:
@@ -108,7 +140,7 @@ dron:
 		Sequence: shoot
 		RequiresCondition: jousting
 	GrantConditionOnTerrain@Water:
-		TerrainTypes: Water
+		TerrainTypes: Water, Beach
 		Condition: in_water
 	KillsSelf@LowPowerOnWater:
 		DamageTypes: NonTemporal
@@ -121,12 +153,10 @@ dron:
 		RequiresCondition: rank-elite
 	AttackInfectRV:
 		Voice: Attack
-		Damage: 5000
+		Damage: 4000
 		DamageInterval: 45
 		DamageTypes: DroneInfection, BulletDeath, NonTemporal
-		SuppressionDamageThreshold: 250
-		SuppressionCountThreshold: 1
-		SuppressionDamageType: SuppressTerrorDrone
+		SurviveHostDamageTypes: DroneInfection
 		JoustRange: 1c768
 		RequiresCondition: !chronodisable && !emp
 	RejectsOrders:
@@ -160,28 +190,40 @@ dron:
 		RequiresCondition: produced
 		Voice: Build
 		ValidRelationships: None
-	AmbientSound@Walk:
-		SoundFiles: vterlo1a.wav, vterlo1b.wav, vterlo1c.wav, vterlo2a.wav, vterlo2b.wav, vterlo2c.wav
-		Volume: 0.35
-		RequiresCondition: walking
-	SoundAnnouncement@end:
-		SoundFiles: vterlo3.wav
-		Volume: 0.35
-		RequiresCondition: !walking
-	GrantConditionOnMovement:
-		Condition: walking
-	ProducibleWithLevel:
-		Prerequisites: warfactory.infiltrated
+	# AmbientSound@Walk:
+	#	SoundFiles: vterlo1a.wav, vterlo1b.wav, vterlo1c.wav, vterlo2a.wav, vterlo2b.wav, vterlo2c.wav
+	#	Volume: 0.50
+	#	RequiresCondition: walking
+	# SoundAnnouncement@end:
+	#	SoundFiles: vterlo3.wav
+	#	Volume: 0.50
+	#	RequiresCondition: !walking
+	# GrantConditionOnMovement:
+	#	Condition: walking
+	ProducibleWithLevel@1:
+		Prerequisites: warfactory.infiltratedorbaacdm
+	WithProductionIconOverlay@1:
+		Prerequisites: warfactory.infiltratedorbaacdm
+		Types: chevron-veteran
+	ProducibleWithLevel@2:
+		Prerequisites: warfactory.infiltrated, baacdm
+	WithProductionIconOverlay@2:
+		Prerequisites: warfactory.infiltrated, baacdm
+		Types: chevron-elite
 	DeathSounds:
 		DeathTypes: NonTemporal
 	HitShape:
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange
+		Damage: 40
+		ReloadDelay: 45
 
 htk:
 	Inherits: ^Vehicle
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@BUNKER: ^TankBunkerable
 	Inherits@EXPERIENCE: ^GainsExperience
-	Inherits@CHAOS: ^BerserkableVoxel
+	Inherits@CHAOS: ^BerserkableVoxelArmed
 	Inherits@IMPFLAKS: ^AffectedByImprovedFlaks
 	Inherits@MC: ^MindControllableDisabledWithIC
 	Inherits@NOGUNNER: ^GunnerKillable
@@ -192,17 +234,17 @@ htk:
 		Payload: 500
 		Voice: Move
 	Tooltip:
-		Name: 防空步战车
+		Name: actor-htk.name
 	Tooltip@NoRow:
-		Name: 防空步战车
+		Name: actor-htk.name
 	Selectable:
 		Class: htk
 		Bounds: 1206, 1930, 0, -289
 	Buildable:
-		Queue: Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya, Vehicle.Baku
-		Prerequisites: ~techlevel.1
+		Queue: Vehicle.Shared, Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya, Vehicle.Baku
+		Prerequisites: ~vehicle.sovietsorbaku, ~techlevel.1
 		BuildPaletteOrder: 30
-		Description: 轻型反步兵防空运输车\n\n移动时攻击\n可以运输5名步兵\n乘员无法对外开火\n\n·强势对抗：步兵、飞行器\n·弱势对抗：载具、建筑
+		Description: actor-htk.description
 		BuildDuration: 250
 		BuildDurationModifier: 100
 	UpdatesPlayerStatistics:
@@ -220,9 +262,9 @@ htk:
 		Range: 9c0
 	# RevealsShroudToIntelligenceOwner:
 	#	Types: SatelliteScan
-	#	Range: 8c0
+	#	Range: 9c0
 	RevealOnDeath:
-		Radius: 4c512
+		Radius: 9c0
 	DetectCloaked:
 		Range: 5c0
 	RenderDetectionCircle:
@@ -234,22 +276,23 @@ htk:
 		AfterUnloadDelay: 0
 		PassengerFacing: 0
 		UnloadVoice: Move
-		EjectOnDeath: true
 		LoadingCondition: notmobile
 	WithCargoSounds:
-		EnterSound: genter1a.wav
-		ExitSound: gexit1a.wav
+		EnterSounds: genter1a.wav
+		ExitSounds: gexit1a.wav
 	AttackTurreted:
 		Voice: Attack
 		PauseOnCondition: chronodisable || emp || nogunner || parachute
 	AutoTarget:
 	Armament@primary:
 		Weapon: FlakTrackGun
+		Damage: 25
 		LocalOffset: 256,0,1536
 		MuzzleSequence: muzzle
 		RequiresCondition: !impflaks && !rank-elite
 	Armament@primary-insta:
 		Weapon: FlakTrackGunInsta
+		Damage: 25
 		LocalOffset: 256,0,1536
 		MuzzleSequence: muzzle
 		RequiresCondition: impflaks && !rank-elite
@@ -260,11 +303,13 @@ htk:
 		RequiresCondition: !rank-elite
 	Armament@primary-elite:
 		Weapon: FlakTrackGunE
+		Damage: 50
 		LocalOffset: 256,0,1536
 		MuzzleSequence: muzzle
 		RequiresCondition: !impflaks && rank-elite
 	Armament@primary-insta-elite:
 		Weapon: FlakTrackGunInstaE
+		Damage: 50
 		LocalOffset: 256,0,1536
 		MuzzleSequence: muzzle
 		RequiresCondition: impflaks && rank-elite
@@ -289,8 +334,16 @@ htk:
 		RequiresCondition: produced
 		Voice: Build
 		ValidRelationships: None
-	ProducibleWithLevel:
-		Prerequisites: warfactory.infiltrated
+	ProducibleWithLevel@1:
+		Prerequisites: warfactory.infiltratedorbaacdm
+	WithProductionIconOverlay@1:
+		Prerequisites: warfactory.infiltratedorbaacdm
+		Types: chevron-veteran
+	ProducibleWithLevel@2:
+		Prerequisites: warfactory.infiltrated, baacdm
+	WithProductionIconOverlay@2:
+		Prerequisites: warfactory.infiltrated, baacdm
+		Types: chevron-elite
 	HitShape:
 	WithCargoPipsDecoration:
 		Margin: 4, 3
@@ -309,23 +362,28 @@ htk:
 	#	SoundFiles: vflastaa.wav, vflastab.wav, vflastac.wav, vflastad.wav
 	#	Volume: 0.35
 	#	RequiresCondition: moving
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MinRange, Cargo, MaxRange
 
 htnk:
 	Inherits: ^MainBattleTank
+	Inherits@CRYO: ^AffectedByCryoShells
 	Inherits@NUKEENGINES: ^AffectedByNuclearEngines
+	Inherits@URANIUM: ^AffectedByUraniumShells
 	Valued:
 		Cost: 900
 	DeliversCash:
 		Payload: 900
 		Voice: Move
 	Tooltip:
-		Name: 犀牛主战坦克
+		Name: actor-htnk.name
 	Tooltip@NoRow:
-		Name: 犀牛主战坦克
+		Name: actor-htnk.name
 	Buildable:
-		Queue: Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya, Vehicle.Baku
-		Description: 苏联主战坦克\n\n移动时攻击\n\n·强势对抗：载具、建筑、舰艇\n·弱势对抗：步兵、飞行器
-		BuildDuration: 450
+		Queue: Vehicle.Shared, Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya
+		Description: actor-htnk.description
+		Prerequisites: ~vehicle.soviets, ~techlevel.1
+		BuildDuration: 500
 		BuildDurationModifier: 100
 	Mobile:
 		Speed: 90
@@ -333,23 +391,114 @@ htnk:
 		HP: 40000
 	Armament@primary:
 		Weapon: 120mm
+		Damage: 90
 		Recoil: 87
 		RecoilRecovery: 12
 		LocalOffset: 896,0,640
 		MuzzleSequence: muzzle
-		RequiresCondition: !rank-elite
+		RequiresCondition: !rank-elite && !cryo_shells # && !uranium_shells
 	Armament@elite:
+		Name: elite
 		Weapon: 120mmE
+		Damage: 180
 		Recoil: 87
 		RecoilRecovery: 12
 		LocalOffset: 896,0,640
 		MuzzleSequence: muzzle-2
-		RequiresCondition: rank-elite
+		RequiresCondition: rank-elite && !cryo_shells # && !uranium_shells
+	#Armament@primary-uranium:
+	#	Name: primary-uranium
+	#	Weapon: 120mmU
+	#	Damage: 90
+	#	Recoil: 87
+	#	RecoilRecovery: 12
+	#	LocalOffset: 896,0,640
+	#	MuzzleSequence: muzzle
+	#	RequiresCondition: !rank-elite && uranium_shells && !advirrad
+	#Armament@elite-uranium:
+	#	Name: elite-uranium
+	#	Weapon: 120mmUE
+	#	Damage: 180
+	#	Recoil: 87
+	#	RecoilRecovery: 12
+	#	LocalOffset: 896,0,640
+	#	MuzzleSequence: muzzle-2
+	#	RequiresCondition: rank-elite && uranium_shells && !advirrad
+	#Armament@primary-uranium-orange:
+	#	Name: primary-uranium-orange
+	#	Weapon: 120mmUOrange
+	#	Damage: 90
+	#	Recoil: 87
+	#	RecoilRecovery: 12
+	#	LocalOffset: 896,0,640
+	#	MuzzleSequence: muzzle
+	#	RequiresCondition: !rank-elite && uranium_shells && advirrad
+	#Armament@elite-uranium-orange:
+	#	Name: elite-uranium-orange
+	#	Weapon: 120mmUOrangeE
+	#	Damage: 180
+	#	Recoil: 87
+	#	RecoilRecovery: 12
+	#	LocalOffset: 896,0,640
+	#	MuzzleSequence: muzzle-2
+	#	RequiresCondition: rank-elite && uranium_shells && advirrad
+	Armament@primary-cryo:
+		Name: primary-cryo
+		Weapon: 120mmCryo
+		Damage: 90
+		Recoil: 87
+		RecoilRecovery: 12
+		LocalOffset: 896,0,640
+		MuzzleSequence: muzzle
+		RequiresCondition: !rank-elite && cryo_shells
+	Armament@elite-cryo:
+		Name: elite-cryo
+		Weapon: 120mmCryoE
+		Damage: 180
+		Recoil: 87
+		RecoilRecovery: 12
+		LocalOffset: 896,0,640
+		MuzzleSequence: muzzle-2
+		RequiresCondition: rank-elite && cryo_shells
+	AttackTurreted:
+		Armaments: primary, elite, primary-uranium, elite-uranium, primary-uranium-orange, elite-uranium-orange, primary-cryo, elite-cryo
 	WithVoxelBody:
 		RequiresCondition: !nuclear_engines
 	WithVoxelBody@NUCLEAR_ENGINES:
 		Sequence: idle-nuke
-		RequiresCondition: nuclear_engines
+		RequiresCondition: nuclear_engines && !advirrad
+	WithVoxelBody@NUCLEAR_ENGINES_ORANGE:
+		Sequence: idle-nuke-orange
+		RequiresCondition: nuclear_engines && advirrad
+	WithVoxelBarrel:
+		RequiresCondition: !rank-elite && !uranium_shells && !cryo_shells
+	WithVoxelBarrel@ELITE:
+		Armament: elite
+		RequiresCondition: rank-elite && !uranium_shells && !cryo_shells
+	WithVoxelBarrel@URANIUM_SHELLS:
+		Sequence: barrel-uranium
+		Armament: primary #-uranium
+		RequiresCondition: !rank-elite && uranium_shells && !advirrad
+	WithVoxelBarrel@ELITE_URANIUM_SHELLS:
+		Sequence: barrel-uranium
+		Armament: elite #-uranium
+		RequiresCondition: rank-elite && uranium_shells && !advirrad
+	WithVoxelBarrel@URANIUM_SHELLS_ORANGE:
+		Sequence: barrel-uranium-orange
+		Armament: primary #-uranium-orange
+		RequiresCondition: !rank-elite && uranium_shells && advirrad
+	WithVoxelBarrel@ELITE_URANIUM_SHELLS_ORANGE:
+		Sequence: barrel-uranium-orange
+		Armament: elite #-uranium-orange
+		RequiresCondition: rank-elite && uranium_shells && advirrad
+	WithVoxelBarrel@CRYO_SHELLS:
+		Sequence: barrel-cryo
+		Armament: primary-cryo
+		RequiresCondition: !rank-elite && cryo_shells
+	WithVoxelBarrel@ELITE_CRYO_SHELLS:
+		Sequence: barrel-cryo
+		Armament: elite-cryo
+		RequiresCondition: rank-elite && cryo_shells
 	Selectable:
 		Bounds: 1544, 2509, 0, -289
 	RenderVoxels:
@@ -368,31 +517,35 @@ htnk:
 	#	SoundFiles: vrhistaa.wav, vrhistab.wav, vrhistac.wav, vrhistad.wav
 	#	Volume: 0.3
 	#	RequiresCondition: moving
+	ActorStatValues:
+		Upgrades: upgrade.advanced_irradiators, upgrade.nuclear_engines, upgrade.uranium_shells
 
 apoc:
 	Inherits: ^Vehicle
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@BUNKER: ^TankBunkerable
 	Inherits@EXPERIENCE: ^GainsExperience
-	Inherits@CHAOS: ^BerserkableVoxel
+	Inherits@CRYO: ^AffectedByCryoShells
+	Inherits@CHAOS: ^BerserkableVoxelArmed
 	Inherits@MC: ^MindControllableDisabledWithIC
 	Inherits@NOGUNNER: ^GunnerKillable
 	Inherits@NUKEENGINES: ^AffectedByNuclearEngines
 	Inherits@RADIATON: ^DamagedByRadiation10Percent
+	Inherits@URANIUM: ^AffectedByUraniumShells
 	Valued:
 		Cost: 1750
 	DeliversCash:
 		Payload: 1750
 		Voice: Move
 	Tooltip:
-		Name: 天启坦克
+		Name: actor-apoc.name
 	Tooltip@NoRow:
-		Name: 天启坦克
+		Name: actor-apoc.name
 	Buildable:
-		Queue: Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya, Vehicle.Baku
+		Queue: Vehicle.Shared, Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya, Vehicle.Baku
 		BuildPaletteOrder: 120
-		Prerequisites: natech, ~techlevel.4
-		Description: 具备防空与自我修复能力的苏联超重型主战坦克\n\n可以碾压重型步兵和大部分载具\n移动时攻击\n\n·强势对抗：载具、建筑、飞行器\n·弱势对抗：步兵\n\n·特殊能力：自我回复至最大生命值的100%
+		Prerequisites: ~vehicle.sovietsorbaku, natech, ~techlevel.4
+		Description: actor-apoc.description
 		BuildDuration: 875
 		BuildDurationModifier: 100
 	UpdatesPlayerStatistics:
@@ -401,6 +554,8 @@ apoc:
 		Speed: 60
 		TurnSpeed: 32
 		Locomotor: omnicrusher
+	SpeedMultiplier@NUCLEAR_ENGINES:
+		Modifier: 125
 	-Crushable:
 	ChangesHealth:
 		PercentageStep: 1
@@ -418,52 +573,173 @@ apoc:
 	#	Types: SatelliteScan
 	#	Range: 6c0
 	RevealOnDeath:
-		Radius: 3c0
+		Radius: 6c0
 	Turreted:
 		TurnSpeed: 16
 	Armament@primary:
 		Weapon: 120mmx
+		Damage: 100
 		Recoil: 87
 		RecoilRecovery: 12
 		MuzzleSequence: muzzle
 		LocalOffset: 1280,-100,768
-		RequiresCondition: !rank-elite
+		RequiresCondition: !rank-elite && !cryo_shells # && !uranium_shells
 	Armament@primary2:
 		Name: primary2
 		Weapon: 120mmx
+		Damage: 100
 		FireDelay: 5
 		Recoil: 87
 		RecoilRecovery: 12
 		MuzzleSequence: muzzle
 		LocalOffset: 1280,100,768
-		RequiresCondition: !rank-elite
+		RequiresCondition: !rank-elite && !cryo_shells # && !uranium_shells
 	Armament@elite:
+		Name: elite
 		Weapon: 120mmxE
+		Damage: 200
 		Recoil: 87
 		RecoilRecovery: 12
 		MuzzleSequence: muzzle-2
 		LocalOffset: 1280,-100,768
-		RequiresCondition: rank-elite
+		RequiresCondition: rank-elite && !cryo_shells # && !uranium_shells
 	Armament@elite2:
-		Name: primary2
+		Name: elite2
 		Weapon: 120mmxE
+		Damage: 200
 		FireDelay: 5
 		Recoil: 87
 		RecoilRecovery: 12
 		MuzzleSequence: muzzle-2
 		LocalOffset: 1280,100,768
-		RequiresCondition: rank-elite
+		RequiresCondition: rank-elite && !cryo_shells # && !uranium_shells
+	#Armament@primary-uranium:
+	#	Name: primary-uranium
+	#	Weapon: 120mmxU
+	#	Damage: 100
+	#	Recoil: 87
+	#	RecoilRecovery: 12
+	#	MuzzleSequence: muzzle
+	#	LocalOffset: 1280,-100,768
+	#	RequiresCondition: !rank-elite && uranium_shells && !advirrad
+	#Armament@primary2-uranium:
+	#	Name: primary2-uranium
+	#	Weapon: 120mmxU
+	#	Damage: 100
+	#	FireDelay: 5
+	#	Recoil: 87
+	#	RecoilRecovery: 12
+	#	MuzzleSequence: muzzle
+	#	LocalOffset: 1280,100,768
+	#	RequiresCondition: !rank-elite && uranium_shells && !advirrad
+	#Armament@elite-uranium:
+	#	Name: elite-uranium
+	#	Weapon: 120mmxUE
+	#	Damage: 200
+	#	Recoil: 87
+	#	RecoilRecovery: 12
+	#	MuzzleSequence: muzzle-2
+	#	LocalOffset: 1280,-100,768
+	#	RequiresCondition: rank-elite && uranium_shells && !advirrad
+	#Armament@elite2-uranium:
+	#	Name: elite2-uranium
+	#	Weapon: 120mmxUE
+	#	Damage: 200
+	#	FireDelay: 5
+	#	Recoil: 87
+	#	RecoilRecovery: 12
+	#	MuzzleSequence: muzzle-2
+	#	LocalOffset: 1280,100,768
+	#	RequiresCondition: rank-elite && uranium_shells && !advirrad
+	#Armament@primary-uranium-orange:
+	#	Name: primary-uranium-orange
+	#	Weapon: 120mmxUOrange
+	#	Damage: 100
+	#	Recoil: 87
+	#	RecoilRecovery: 12
+	#	MuzzleSequence: muzzle
+	#	LocalOffset: 1280,-100,768
+	#	RequiresCondition: !rank-elite && uranium_shells && advirrad
+	#Armament@primary2-uranium-orange:
+	#	Name: primary2-uranium-orange
+	#	Weapon: 120mmxUOrange
+	#	Damage: 100
+	#	FireDelay: 5
+	#	Recoil: 87
+	#	RecoilRecovery: 12
+	#	MuzzleSequence: muzzle
+	#	LocalOffset: 1280,100,768
+	#	RequiresCondition: !rank-elite && uranium_shells && advirrad
+	#Armament@elite-uranium-orange:
+	#	Name: elite-uranium-orange
+	#	Weapon: 120mmxUOrangeE
+	#	Damage: 200
+	#	Recoil: 87
+	#	RecoilRecovery: 12
+	#	MuzzleSequence: muzzle-2
+	#	LocalOffset: 1280,-100,768
+	#	RequiresCondition: rank-elite && uranium_shells && advirrad
+	#Armament@elite2-uranium-orange:
+	#	Name: elite2-uranium-orange
+	#	Weapon: 120mmxUOrangeE
+	#	Damage: 200
+	#	FireDelay: 5
+	#	Recoil: 87
+	#	RecoilRecovery: 12
+	#	MuzzleSequence: muzzle-2
+	#	LocalOffset: 1280,100,768
+	#	RequiresCondition: rank-elite && uranium_shells && advirrad
+	Armament@primary-cryo:
+		Name: primary-cryo
+		Weapon: 120mmxCryo
+		Damage: 100
+		Recoil: 87
+		RecoilRecovery: 12
+		MuzzleSequence: muzzle
+		LocalOffset: 1280,-100,768
+		RequiresCondition: !rank-elite && cryo_shells
+	Armament@primary2-cryo:
+		Name: primary2-cryo
+		Weapon: 120mmxCryo
+		Damage: 100
+		FireDelay: 5
+		Recoil: 87
+		RecoilRecovery: 12
+		MuzzleSequence: muzzle
+		LocalOffset: 1280,100,768
+		RequiresCondition: !rank-elite && cryo_shells
+	Armament@elite-cryo:
+		Name: elite-cryo
+		Weapon: 120mmxCryoE
+		Damage: 200
+		Recoil: 87
+		RecoilRecovery: 12
+		MuzzleSequence: muzzle-2
+		LocalOffset: 1280,-100,768
+		RequiresCondition: rank-elite && cryo_shells
+	Armament@elite2-cryo:
+		Name: elite2-cryo
+		Weapon: 120mmxCryoE
+		Damage: 200
+		FireDelay: 5
+		Recoil: 87
+		RecoilRecovery: 12
+		MuzzleSequence: muzzle-2
+		LocalOffset: 1280,100,768
+		RequiresCondition: rank-elite && cryo_shells
 	Armament@antiair:
 		Weapon: MammothTusk
+		Damage: 160
 		LocalOffset: 80,200,768, 80,-200,768
 		RequiresCondition: !rank-elite
 	Armament@antiairelite:
 		Weapon: MammothTuskE
+		Damage: 280
 		LocalOffset: 80,200,768, 80,-200,768
 		RequiresCondition: rank-elite
 	AttackTurreted:
 		Voice: Attack
-		Armaments: primary, primary2
+		Armaments: primary, primary2, elite, elite2, primary-uranium, primary2-uranium, elite-uranium, elite2-uranium, primary-uranium-orange, primary2-uranium-orange, elite-uranium-orange, elite2-uranium-orange, primary-cryo, primary2-cryo, elite-cryo, elite2-cryo
 		PauseOnCondition: chronodisable || emp || nogunner || parachute
 	WithMuzzleOverlay:
 	AutoTarget:
@@ -476,12 +752,72 @@ apoc:
 		RequiresCondition: !nuclear_engines
 	WithVoxelBody@NUCLEAR_ENGINES:
 		Sequence: idle-nuke
-		RequiresCondition: nuclear_engines
+		RequiresCondition: nuclear_engines && !advirrad
+	WithVoxelBody@NUCLEAR_ENGINES_ORANGE:
+		Sequence: idle-nuke-orange
+		RequiresCondition: nuclear_engines && advirrad
 	WithVoxelTurret:
 	WithVoxelBarrel:
+		RequiresCondition: !rank-elite && !uranium_shells && !cryo_shells
 	WithVoxelBarrel@2:
 		Sequence: barrel2
 		Armament: primary2
+		RequiresCondition: !rank-elite && !uranium_shells && !cryo_shells
+	WithVoxelBarrel@ELITE:
+		Armament: elite
+		RequiresCondition: rank-elite && !uranium_shells && !cryo_shells
+	WithVoxelBarrel@ELITE_2:
+		Sequence: barrel2
+		Armament: elite2
+		RequiresCondition: rank-elite && !uranium_shells && !cryo_shells
+	WithVoxelBarrel@URANIUM_SHELLS:
+		Sequence: barrel-uranium
+		Armament: primary #-uranium
+		RequiresCondition: !rank-elite && uranium_shells && !advirrad
+	WithVoxelBarrel@2URANIUM_SHELLS:
+		Sequence: barrel2-uranium
+		Armament: primary2 #-uranium
+		RequiresCondition: !rank-elite && uranium_shells && !advirrad
+	WithVoxelBarrel@ELITE_URANIUM_SHELLS:
+		Sequence: barrel-uranium
+		Armament: elite #-uranium
+		RequiresCondition: rank-elite && uranium_shells && !advirrad
+	WithVoxelBarrel@ELITE_2URANIUM_SHELLS:
+		Sequence: barrel2-uranium
+		Armament: elite2 #-uranium
+		RequiresCondition: rank-elite && uranium_shells && !advirrad
+	WithVoxelBarrel@URANIUM_SHELLS_ORANGE:
+		Sequence: barrel-uranium-orange
+		Armament: primary #-uranium-orange
+		RequiresCondition: !rank-elite && uranium_shells && advirrad
+	WithVoxelBarrel@2URANIUM_SHELLS_ORANGE:
+		Sequence: barrel2-uranium-orange
+		Armament: primary2 #-uranium-orange
+		RequiresCondition: !rank-elite && uranium_shells && advirrad
+	WithVoxelBarrel@ELITE_URANIUM_SHELLS_ORANGE:
+		Sequence: barrel-uranium-orange
+		Armament: elite #-uranium-orange
+		RequiresCondition: rank-elite && uranium_shells && advirrad
+	WithVoxelBarrel@ELITE_2URANIUM_SHELLS_ORANGE:
+		Sequence: barrel2-uranium-orange
+		Armament: elite2 #-uranium-orange
+		RequiresCondition: rank-elite && uranium_shells && advirrad
+	WithVoxelBarrel@CRYO_SHELLS:
+		Sequence: barrel-cryo
+		Armament: primary-cryo
+		RequiresCondition: !rank-elite && cryo_shells
+	WithVoxelBarrel@2CRYO_SHELLS:
+		Sequence: barrel2-cryo
+		Armament: primary2-cryo
+		RequiresCondition: !rank-elite && cryo_shells
+	WithVoxelBarrel@ELITE_CRYO_SHELLS:
+		Sequence: barrel-cryo
+		Armament: elite-cryo
+		RequiresCondition: rank-elite && cryo_shells
+	WithVoxelBarrel@ELITE_2CRYO_SHELLS:
+		Sequence: barrel2-cryo
+		Armament: elite2-cryo
+		RequiresCondition: rank-elite && cryo_shells
 	Explodes:
 		Weapon: ApocExplode
 		EmptyWeapon: ApocExplode
@@ -493,8 +829,16 @@ apoc:
 		RequiresCondition: produced
 		Voice: Build
 		ValidRelationships: None
-	ProducibleWithLevel:
-		Prerequisites: warfactory.infiltrated
+	ProducibleWithLevel@1:
+		Prerequisites: warfactory.infiltratedorbaacdm
+	WithProductionIconOverlay@1:
+		Prerequisites: warfactory.infiltratedorbaacdm
+		Types: chevron-veteran
+	ProducibleWithLevel@2:
+		Prerequisites: warfactory.infiltrated, baacdm
+	WithProductionIconOverlay@2:
+		Prerequisites: warfactory.infiltrated, baacdm
+		Types: chevron-elite
 	HitShape:
 	# GrantConditionOnMovement@MoveStart:
 	#	Condition: moving
@@ -503,13 +847,22 @@ apoc:
 	#	SoundFiles: vapostaa.wav, vapostab.wav, vapostac.wav
 	#	Volume: 0.5
 	#	RequiresCondition: moving
+	GrantConditionOnFaction@Baku:
+		Condition: baku
+		Factions: transcaucus, turkmen, tuva, russianfed, serbia
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MinRange, None, MaxRange
+		Upgrades: upgrade.advanced_irradiators, upgrade.nuclear_engines, upgrade.uranium_shells
+	ActorStatOverride@Baku:
+		Upgrades: upgrade.nuclear_engines
+		RequiresCondition: baku
 
 ttnk:
 	Inherits: ^Vehicle
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@BUNKER: ^TankBunkerable
 	Inherits@EXPERIENCE: ^GainsExperience
-	Inherits@CHAOS: ^BerserkableVoxel
+	Inherits@CHAOS: ^BerserkableVoxelArmed
 	Inherits@MC: ^MindControllableDisabledWithIC
 	Inherits@NOGUNNER: ^GunnerKillable
 	Inherits@OVERCHARGE: ^AffectedByOvercharge
@@ -520,14 +873,14 @@ ttnk:
 		Payload: 1200
 		Voice: Move
 	Tooltip:
-		Name: 特斯拉坦克
+		Name: actor-ttnk.name
 	Tooltip@NoRow:
-		Name: 特斯拉坦克
+		Name: actor-ttnk.name
 	Buildable:
-		Queue: Vehicle.USSR
+		Queue: Vehicle.Shared, Vehicle.USSR
 		BuildPaletteOrder: 90
-		Prerequisites: naradr, ~techlevel.3
-		Description: 配备双联装特斯拉线圈的苏俄特种反装甲坦克\n\n移动时攻击\n攻击可以越过围墙、闸门和特斯拉围栏\n\n·强势对抗：步兵、载具、建筑\n·弱势对抗：飞行器
+		Prerequisites: ~vehicle.russia, naradr, ~techlevel.3
+		Description: actor-ttnk.description
 		BuildDuration: 625
 		BuildDurationModifier: 100
 	UpdatesPlayerStatistics:
@@ -546,23 +899,27 @@ ttnk:
 	#	Types: SatelliteScan
 	#	Range: 6c0
 	RevealOnDeath:
-		Radius: 3c0
+		Radius: 6c0
 	Turreted:
 		TurnSpeed: 28
 	Armament@primary:
 		Weapon: TankBolt
+		Damage: 140
 		LocalOffset: 280,196,640, 280,-196,640
 		RequiresCondition: !overcharge && !rank-elite
 	Armament@elite:
 		Weapon: TankBoltE
+		Damage: 160
 		LocalOffset: 280,196,640, 280,-196,640
 		RequiresCondition: !overcharge && rank-elite
 	Armament@primary-overcharge:
 		Weapon: TankBoltCharged
+		Damage: 140
 		LocalOffset: 280,196,640, 280,-196,640
 		RequiresCondition: overcharge && !rank-elite
 	Armament@elite-overcharge:
 		Weapon: TankBoltChargedE
+		Damage: 160
 		LocalOffset: 280,196,640, 280,-196,640
 		RequiresCondition: overcharge && rank-elite
 	AttackTurreted:
@@ -583,8 +940,16 @@ ttnk:
 		RequiresCondition: produced
 		Voice: Build
 		ValidRelationships: None
-	ProducibleWithLevel:
-		Prerequisites: warfactory.infiltrated
+	ProducibleWithLevel@1:
+		Prerequisites: warfactory.infiltratedorbaacdm
+	WithProductionIconOverlay@1:
+		Prerequisites: warfactory.infiltratedorbaacdm
+		Types: chevron-veteran
+	ProducibleWithLevel@2:
+		Prerequisites: warfactory.infiltrated, baacdm
+	WithProductionIconOverlay@2:
+		Prerequisites: warfactory.infiltrated, baacdm
+		Types: chevron-elite
 	HitShape:
 	# GrantConditionOnMovement@MoveStart:
 	#	Condition: moving
@@ -593,18 +958,22 @@ ttnk:
 	#	SoundFiles: vtesstaa.wav, vtesstab.wav
 	#	Volume: 0.35
 	#	RequiresCondition: moving
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange
 
 dtruck:
 	Inherits: ^Vehicle
+	Inherits@ADVIRRAD: ^AffectedByAdvancedIrradiators
 	Inherits@CHAOS: ^BerserkableVoxel
 	Inherits@MC: ^MindControllableDisabledWithIC
 	Inherits@HIEXPLOSIVE: ^AffectedByHighExplosiveBombs
 	Inherits@RADIATON: ^DamagedByRadiation50Percent
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Buildable:
-		Queue: Vehicle.Libya
+		Queue: Vehicle.Shared, Vehicle.Libya
 		BuildPaletteOrder: 90
-		Prerequisites: naradr, ~techlevel.3
-		Description: 载有大量核爆炸物的利比亚自杀式载具\n\n死亡时爆炸\n能造成范围伤害\n爆炸可以伤害友军\n爆炸后留下一片辐射区\n\n·强势对抗：步兵、载具、建筑\n·弱势对抗：飞行器\n\n·特殊能力：自爆
+		Prerequisites: ~vehicle.libya, naradr, ~techlevel.3
+		Description: actor-dtruck.description
 		BuildDuration: 750
 		BuildDurationModifier: 100
 	UpdatesPlayerStatistics:
@@ -615,9 +984,9 @@ dtruck:
 		Payload: 1500
 		Voice: Move
 	Tooltip:
-		Name: 自爆卡车
+		Name: actor-dtruck.name
 	Tooltip@NoRow:
-		Name: 自爆卡车
+		Name: actor-dtruck.name
 	Selectable:
 		Bounds: 1544, 2509, 0, -289
 	Health:
@@ -634,13 +1003,18 @@ dtruck:
 	#	Types: SatelliteScan
 	#	Range: 6c0
 	RevealOnDeath:
-		Radius: 3c0
+		Radius: 6c0
 	Explodes:
 		Weapon: demobomb
 		EmptyWeapon: demobomb
+		RequiresCondition: !advirrad
+	Explodes@Orange:
+		Weapon: demobombOrange
+		EmptyWeapon: demobombOrange
+		RequiresCondition: advirrad
 	AttackFrontal:
 		Voice: Attack
-		FacingTolerance: 128
+		FacingTolerance: 512
 		RequiresCondition: !chronodisable && !emp
 	Armament@PRIMARY:
 		Weapon: DemoTruckTargeting
@@ -657,11 +1031,15 @@ dtruck:
 	RenderSprites:
 	RenderVoxels:
 	WithVoxelBody:
+		RequiresCondition: !hiexplosive
+	WithVoxelBody@HIEXPLOSIVE:
+		Sequence: idle-hiexplosive
+		RequiresCondition: hiexplosive
 	ExternalCondition@PRODUCED:
 		Condition: produced
-	VoiceAnnouncement:
+	NotificationAnnouncement:
 		RequiresCondition: produced
-		Voice: Build
+		Notification: MyTruckIsLoaded
 	Voiced:
 		VoiceSet: DemolitionTruckVoice
 	HitShape:
@@ -672,21 +1050,31 @@ dtruck:
 	#	SoundFiles: vdemstaa.wav, vdemstab.wav, vdemstac.wav
 	#	Volume: 0.4
 	#	RequiresCondition: moving
+	AutoTarget:
+		ScanRadius: 8
+		InitialStance: HoldFire
+		InitialStanceAI: AttackAnything
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, Spread
+		Damage: 1200
+		Spread: 8c0
 
 v3:
 	Inherits: ^Vehicle
+	Inherits@ADVIRRAD: ^AffectedByAdvancedIrradiators
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@EXPERIENCE: ^GainsExperience
-	Inherits@CHAOS: ^BerserkableVoxel
+	Inherits@CHAOS: ^BerserkableVoxelArmed
 	Inherits@HIEXPLOSIVE: ^AffectedByHighExplosiveBombs
 	Inherits@MC: ^MindControllableDisabledWithIC
 	Inherits@NOGUNNER: ^GunnerKillable
+	Inherits@RADBOMBS: ^AffectedByRadioactiveBombs
 	Inherits@RADIATON: ^DamagedByRadiation50Percent
 	Buildable:
-		Queue: Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya, Vehicle.Baku
+		Queue: Vehicle.Shared, Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya
 		BuildPaletteOrder: 100
-		Prerequisites: natech, ~techlevel.3
-		Description: 从阵线后方发射V3火箭的远程炮兵\n\n可以自动索敌\nV3火箭可以被拦截\n能造成范围伤害\n\n·强势对抗：步兵、建筑\n·弱势对抗：载具、飞行器
+		Prerequisites: ~vehicle.soviets, natech, ~techlevel.3
+		Description: actor-v3.description
 		BuildDuration: 500
 		BuildDurationModifier: 100
 	UpdatesPlayerStatistics:
@@ -697,9 +1085,9 @@ v3:
 		Payload: 900
 		Voice: Move
 	Tooltip:
-		Name: V3火箭发射车
+		Name: actor-v3.name
 	Tooltip@NoRow:
-		Name: V3火箭发射车
+		Name: actor-v3.name
 	Health:
 		HP: 15000
 	Armor:
@@ -713,7 +1101,7 @@ v3:
 	#	Types: SatelliteScan
 	#	Range: 6c0
 	RevealOnDeath:
-		Radius: 3c0
+		Radius: 6c0
 	Armament:
 		Weapon: V3Launcher
 	FirepowerMultiplier@RANK-1:
@@ -721,8 +1109,10 @@ v3:
 	FirepowerMultiplier@RANK-ELITE:
 		RequiresCondition: rank-elite
 		Modifier: 220
-	AttackFrontal:
+	AttackFollowFrontal:
 		Voice: Attack
+		FacingTolerance: 2
+		MustFaceTarget: true
 		TargetFrozenActors: True
 		PauseOnCondition: chronodisable || emp || nogunner
 	MissileSpawnerMaster:
@@ -743,7 +1133,13 @@ v3:
 	RenderVoxels:
 		Image: v3
 	WithVoxelBody@FULL:
-		RequiresCondition: loaded
+		RequiresCondition: loaded && !radbombs
+	WithVoxelBody@FULL-RADBOMBS:
+		Sequence: idle-rad
+		RequiresCondition: loaded && radbombs && !advirrad
+	WithVoxelBody@FULL-RADBOMBS-ORANGE:
+		Sequence: idle-rad-orange
+		RequiresCondition: loaded && radbombs && advirrad
 	WithVoxelBody@EMPTY:
 		Sequence: empty
 		RequiresCondition: !loaded
@@ -756,8 +1152,16 @@ v3:
 		RequiresCondition: produced
 		Voice: Build
 		ValidRelationships: None
-	ProducibleWithLevel:
-		Prerequisites: warfactory.infiltrated
+	ProducibleWithLevel@1:
+		Prerequisites: warfactory.infiltratedorbaacdm
+	WithProductionIconOverlay@1:
+		Prerequisites: warfactory.infiltratedorbaacdm
+		Types: chevron-veteran
+	ProducibleWithLevel@2:
+		Prerequisites: warfactory.infiltrated, baacdm
+	WithProductionIconOverlay@2:
+		Prerequisites: warfactory.infiltrated, baacdm
+		Types: chevron-elite
 	# GrantConditionOnMovement@MoveStart:
 	#	Condition: moving
 	#	ValidMovementTypes: Horizontal
@@ -765,13 +1169,17 @@ v3:
 	#	SoundFiles: vv3lstaa.wav, vv3lstab.wav, vv3lstac.wav
 	#	Volume: 0.35
 	#	RequiresCondition: moving
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange
+		Damage: 200
+		Upgrades: upgrade.radioactive_bombs, upgrade.advanced_irradiators, upgrade.high_explosive_bombs
 
 m3:
 	Inherits: v3
 	Tooltip:
-		Name: Meme3 Launcher
+		Name: actor-m3.name
 	Tooltip@NoRow:
-		Name: Meme3 Launcher
+		Name: actor-m3.name
 	Buildable:
 		Queue: Vehicle.Unused
 	-MissileSpawnerMaster:
@@ -784,13 +1192,14 @@ m3:
 
 v3rocket:
 	Inherits: ^ShootableMissile
+	Inherits@ADVIRRAD: ^AffectedByAdvancedIrradiators
 	Inherits@RADBOMBS: ^AffectedByRadioactiveBombs
 	Valued:
 		Cost: 50
 	Tooltip:
-		Name: V3火箭
+		Name: actor-v3rocket.name
 	Tooltip@NoRow:
-		Name: V3火箭
+		Name: actor-v3rocket.name
 	Health:
 		HP: 5000
 	Armor:
@@ -810,37 +1219,53 @@ v3rocket:
 		SpawnAtLastPosition: false
 		Type: CenterPosition
 	MissileSpawnerSlave:
-	SpawnedExplodes:
+	ExplodesForMaster:
 		Weapon: V3Weapon
 		EmptyWeapon: V3Weapon
 		RequiresCondition: !airborne && !radbombs && !rank-elite
-	SpawnedExplodes@Elite:
+	ExplodesForMaster@Elite:
 		Weapon: V3WeaponE
 		EmptyWeapon: V3WeaponE
 		RequiresCondition: !airborne && !radbombs && rank-elite
-	SpawnedExplodes@Rad:
+	ExplodesForMaster@Rad:
 		Weapon: V3WeaponRad
 		EmptyWeapon: V3WeaponRad
-		RequiresCondition: !airborne && radbombs && !rank-elite
-	SpawnedExplodes@EliteRad:
+		RequiresCondition: !airborne && radbombs && !advirrad && !rank-elite
+	ExplodesForMaster@EliteRad:
 		Weapon: V3WeaponRadE
 		EmptyWeapon: V3WeaponRadE
-		RequiresCondition: !airborne && radbombs && rank-elite
-	SpawnedExplodes@Airborne:
+		RequiresCondition: !airborne && radbombs && !advirrad && rank-elite
+	ExplodesForMaster@RadOrange:
+		Weapon: V3WeaponRadOrange
+		EmptyWeapon: V3WeaponRadOrange
+		RequiresCondition: !airborne && radbombs && advirrad && !rank-elite
+	ExplodesForMaster@EliteRadOrange:
+		Weapon: V3WeaponRadOrangeE
+		EmptyWeapon: V3WeaponRadOrangeE
+		RequiresCondition: !airborne && radbombs && advirrad && rank-elite
+	ExplodesForMaster@Airborne:
 		Weapon: UnitExplode
 		EmptyWeapon: UnitExplode
 		RequiresCondition: airborne
 	ExternalCondition@RANK-ELITE:
 		Condition: rank-elite
+	WithVoxelBody:
+		RequiresCondition: !radbombs
+	WithVoxelBody@RADBOMBS:
+		Sequence: idle-rad
+		RequiresCondition: radbombs && !advirrad
+	WithVoxelBody@RADBOMBS-ORANGE:
+		Sequence: idle-rad-orange
+		RequiresCondition: radbombs && advirrad
 	RenderVoxels:
 		Image: v3rocket
 
 m3rocket:
 	Inherits: v3rocket
 	Tooltip:
-		Name: Meme3 Rocket
+		Name: actor-m3rocket.name
 	Tooltip@NoRow:
-		Name: Meme3 Rocket
+		Name: actor-m3rocket.name
 	-BallisticMissile:
 	BallisticMissileOld:
 		LaunchAngle: 160
@@ -850,9 +1275,15 @@ m3rocket:
 		AirborneCondition: airborne
 	-MissileSpawnerSlave:
 	MissileSpawnerOldSlave:
-	SpawnedExplodes:
-		RequiresCondition: !airborne
-	-SpawnedExplodes@Elite:
+	ExplodesForMaster:
+		RequiresCondition: !airborne && !radbombs
+	-ExplodesForMaster@Elite:
+	ExplodesForMaster@Rad:
+		RequiresCondition: !airborne && radbombs && !advirrad
+	-ExplodesForMaster@EliteRad:
+	ExplodesForMaster@RadOrange:
+		RequiresCondition: !airborne && radbombs && advirrad
+	-ExplodesForMaster@EliteRadOrange:
 	-ExternalCondition@RANK-ELITE:
 
 # Custom Soviet Vehicles
@@ -860,7 +1291,7 @@ tric:
 	Inherits: ^Vehicle
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EXPERIENCE: ^GainsExperience
-	Inherits@CHAOS: ^BerserkableVoxel
+	Inherits@CHAOS: ^BerserkableVoxelArmed
 	Inherits@HIEXPLOSIVE: ^AffectedByHighExplosiveBombs
 	Inherits@MC: ^MindControllableDisabledWithIC
 	Inherits@NOGUNNER: ^GunnerKillable
@@ -871,16 +1302,16 @@ tric:
 		Payload: 500
 		Voice: Move
 	Tooltip:
-		Name: 火炮摩托
+		Name: actor-tric.name
 	Tooltip@NoRow:
-		Name: 火炮摩托
+		Name: actor-tric.name
 	Selectable:
 		Bounds: 965, 1930, 0, -482
 	Buildable:
-		Queue: Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya, Vehicle.Baku
-		Prerequisites: naradr, ~techlevel.2
+		Queue: Vehicle.Shared, Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya
+		Prerequisites: ~vehicle.soviets, naradr, ~techlevel.2
 		BuildPaletteOrder: 70
-		Description: 中程轻型高射速炮兵\n\n能造成范围伤害\n\n·强势对抗：步兵、建筑\n·弱势对抗：载具、飞行器
+		Description: actor-tric.description
 		BuildDuration: 175
 		BuildDurationModifier: 100
 	UpdatesPlayerStatistics:
@@ -898,19 +1329,22 @@ tric:
 	#	Types: SatelliteScan
 	#	Range: 8c0
 	RevealOnDeath:
-		Radius: 4c0
-	AttackFrontal:
+		Radius: 8c0
+	AttackFollowFrontal:
 		Voice: Attack
 		FacingTolerance: 2
+		MustFaceTarget: true
 		TargetFrozenActors: true
 		PauseOnCondition: chronodisable || emp || nogunner
 	Armament@primary:
 		Weapon: CycleMortar
+		Damage: 50
 		LocalOffset: 128,128,768
 		MuzzleSequence: muzzle
 		RequiresCondition: !rank-elite
 	Armament@elite:
 		Weapon: CycleMortarE
+		Damage: 100
 		LocalOffset: 128,128,768
 		MuzzleSequence: muzzle-2
 		RequiresCondition: rank-elite
@@ -936,14 +1370,25 @@ tric:
 		RequiresCondition: produced
 		Voice: Build
 		ValidRelationships: None
-	ProducibleWithLevel:
-		Prerequisites: warfactory.infiltrated
+	ProducibleWithLevel@1:
+		Prerequisites: warfactory.infiltratedorbaacdm
+	WithProductionIconOverlay@1:
+		Prerequisites: warfactory.infiltratedorbaacdm
+		Types: chevron-veteran
+	ProducibleWithLevel@2:
+		Prerequisites: warfactory.infiltrated, baacdm
+	WithProductionIconOverlay@2:
+		Prerequisites: warfactory.infiltrated, baacdm
+		Types: chevron-elite
 	HitShape:
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange
 
 deva:
 	Inherits: ^Vehicle
+	Inherits@ADVIRRAD: ^AffectedByAdvancedIrradiators
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@CHAOS: ^BerserkableVoxel
+	Inherits@CHAOS: ^BerserkableVoxelArmed
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@MC: ^MindControllableDisabledWithIC
 	Inherits@NOGUNNER: ^GunnerKillable
@@ -953,14 +1398,14 @@ deva:
 		Payload: 2200
 		Voice: Move
 	Tooltip:
-		Name: 灭世战车
+		Name: actor-deva.name
 	Tooltip@NoRow:
-		Name: 灭世战车
+		Name: actor-deva.name
 	Buildable:
-		Queue: Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya
+		Queue: Vehicle.Shared, Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya
 		BuildPaletteOrder: 990
-		Prerequisites: natech, ~caslab, ~techlevel.4
-		Description: 装备核武弹头的苏联高科技重型坦克\n\n免疫辐射\n能造成范围伤害\n死亡时自爆\n使用自爆能力的毁伤效果更显著\n攻击和自爆能形成一片辐射区\n\n·强势对抗：步兵、载具、建筑\n·弱势对抗：飞行器\n\n·特殊能力：自爆
+		Prerequisites: ~vehicle.soviets, natech, ~caslab, ~techlevel.4
+		Description: actor-deva.description
 		BuildDuration: 1125
 		BuildDurationModifier: 100
 	UpdatesPlayerStatistics:
@@ -987,24 +1432,39 @@ deva:
 	#	Types: SatelliteScan
 	#	Range: 6c0
 	RevealOnDeath:
-		Radius: 3c0
+		Radius: 6c0
 	Targetable:
 		TargetTypes: Ground, Vehicle, DetonateAttack, DroneInfection, ImmuneToRadiation
 	Turreted:
 		TurnSpeed: 32
 	Armament@primary:
 		Weapon: 120mmxRad
+		Damage: 200
 		LocalOffset: 896,100,768, 896,-100,768
 		MuzzleSequence: muzzle
-		RequiresCondition: !rank-elite
+		RequiresCondition: !rank-elite && !advirrad
 	Armament@elite:
 		Weapon: 120mmxRadE
+		Damage: 400
 		LocalOffset: 896,100,768, 896,-100,768
 		MuzzleSequence: muzzle-2
-		RequiresCondition: rank-elite
-	AttackFrontal:
+		RequiresCondition: rank-elite && !advirrad
+	Armament@primary-orange:
+		Weapon: 120mmxRadOrange
+		Damage: 200
+		LocalOffset: 896,100,768, 896,-100,768
+		MuzzleSequence: muzzle
+		RequiresCondition: !rank-elite && advirrad
+	Armament@elite-orange:
+		Weapon: 120mmxRadOrangeE
+		Damage: 400
+		LocalOffset: 896,100,768, 896,-100,768
+		MuzzleSequence: muzzle-2
+		RequiresCondition: rank-elite && advirrad
+	AttackFollowFrontal:
 		Voice: Attack
 		FacingTolerance: 2
+		MustFaceTarget: true
 		RequiresCondition: !overload
 		PauseOnCondition: chronodisable || emp || nogunner
 	WithMuzzleOverlay:
@@ -1019,24 +1479,35 @@ deva:
 	Explodes:
 		Weapon: DevastatorExplosion
 		EmptyWeapon: DevastatorExplosion
-		RequiresCondition: !meltdown
+		RequiresCondition: !meltdown && !advirrad
+	Explodes@ORANGE:
+		Weapon: DevastatorExplosionOrange
+		EmptyWeapon: DevastatorExplosionOrange
+		RequiresCondition: !meltdown && advirrad
 	Explodes@OVERLOAD:
 		Weapon: demobomb
 		EmptyWeapon: demobomb
-		RequiresCondition: meltdown
+		RequiresCondition: meltdown && !advirrad
+	Explodes@OVERLOADORANGE:
+		Weapon: demobombOrange
+		EmptyWeapon: demobombOrange
+		RequiresCondition: meltdown && advirrad
 	GrantConditionOnDeploy@REACTOR:
 		Voice: Attack
 		DeployedCondition: overload
 		PauseOnCondition: overload || chronodisable || emp
 		CanDeployOnRamps: true
-	WithColoredOverlay@OVERLOAD:
-		Color: 00000080
-		RequiresCondition: overload
 	KillsSelf@MELTDOWN:
 		Delay: 75
 		DamageTypes: NonTemporal
 		RequiresCondition: overload && !chronodisable && !emp
 		GrantsCondition: meltdown
+	WithIdleOverlay@MELTDOWN:
+		Image: rac4countdown
+		Sequence: idle
+		Palette: mouse
+		PauseOnCondition: !overload
+		RequiresCondition: overload
 	Voiced:
 		VoiceSet: DevastatorVoice
 	ExternalCondition@PRODUCED:
@@ -1045,8 +1516,16 @@ deva:
 		RequiresCondition: produced
 		Voice: Build
 		ValidRelationships: None
-	ProducibleWithLevel:
-		Prerequisites: warfactory.infiltrated
+	ProducibleWithLevel@1:
+		Prerequisites: warfactory.infiltratedorbaacdm
+	WithProductionIconOverlay@1:
+		Prerequisites: warfactory.infiltratedorbaacdm
+		Types: chevron-veteran
+	ProducibleWithLevel@2:
+		Prerequisites: warfactory.infiltrated, baacdm
+	WithProductionIconOverlay@2:
+		Prerequisites: warfactory.infiltrated, baacdm
+		Types: chevron-elite
 	HitShape:
 	# GrantConditionOnMovement@MoveStart:
 	#	Condition: moving
@@ -1055,19 +1534,20 @@ deva:
 	#	SoundFiles: vapostaa.wav, vapostab.wav, vapostac.wav
 	#	Volume: 0.5
 	#	RequiresCondition: moving
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange
 
 exps:
 	Inherits: ^ExpansionVehicle
 	Buildable:
-		Queue: Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya, Vehicle.Baku
+		Queue: Vehicle.Shared, Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya, Vehicle.Baku, Ship.Shared, Ship.Soviets, Ship.Baku
+		Prerequisites: ~vehicleorship.sovietsorbaku, ~techlevel.1, ~!ai.ev
 	Selectable:
 		Bounds: 1641, 2702, 0, -337
 	Transforms:
 		IntoActor: naexpn
 	Voiced:
 		VoiceSet: SovietConstructionVehicleVoice
-	Hovers:
-		InitialHeight: 128
 	RenderSprites:
 		Image: expn
 	RenderVoxels:
@@ -1079,7 +1559,7 @@ ftnk:
 	Inherits@BLACKNAPALM: ^AffectedByBlackNapalm
 	Inherits@BUNKER: ^TankBunkerable
 	Inherits@EXPERIENCE: ^GainsExperience
-	Inherits@CHAOS: ^BerserkableVoxel
+	Inherits@CHAOS: ^BerserkableVoxelArmed
 	Inherits@MC: ^MindControllableDisabledWithIC
 	Inherits@NOGUNNER: ^GunnerKillable
 	Inherits@RADIATON: ^DamagedByRadiation10Percent
@@ -1089,14 +1569,14 @@ ftnk:
 		Payload: 900
 		Voice: Move
 	Tooltip:
-		Name: 火焰坦克
+		Name: actor-ftnk.name
 	Tooltip@NoRow:
-		Name: 火焰坦克
+		Name: actor-ftnk.name
 	Buildable:
-		Queue: Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya
+		Queue: Vehicle.Shared, Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya
 		BuildPaletteOrder: 80
-		Prerequisites: naradr, ~techlevel.3
-		Description: 配备双联装火焰喷射器的重型反步兵载具\n\n移动时攻击\n能造成范围伤害\n\n·强势对抗：步兵、建筑\n·弱势对抗：载具、飞行器\n\n·特殊能力：清除驻军
+		Prerequisites: ~vehicle.soviets, naradr, ~techlevel.3
+		Description: actor-ftnk.description
 		BuildDuration: 375
 		BuildDurationModifier: 100
 	UpdatesPlayerStatistics:
@@ -1115,23 +1595,27 @@ ftnk:
 	#	Types: SatelliteScan
 	#	Range: 6c0
 	RevealOnDeath:
-		Radius: 3c0
+		Radius: 6c0
 	Turreted:
 		TurnSpeed: 28
 	Armament@primary:
 		Weapon: TankFlamer
+		Damage: 100
 		LocalOffset: 768,-384,640, 768,384,640
 		RequiresCondition: !rank-elite && !black_napalm
 	Armament@elite:
 		Weapon: TankFlamerE
+		Damage: 280
 		LocalOffset: 768,-384,640, 768,384,640
 		RequiresCondition: rank-elite && !black_napalm
 	Armament@primary-black:
 		Weapon: TankFlamerBlack
+		Damage: 200
 		LocalOffset: 768,-384,640, 768,384,640
 		RequiresCondition: !rank-elite && black_napalm
 	Armament@elite-black:
 		Weapon: TankFlamerBlackE
+		Damage: 560
 		LocalOffset: 768,-384,640, 768,384,640
 		RequiresCondition: rank-elite && black_napalm
 	AttackTurreted:
@@ -1152,8 +1636,16 @@ ftnk:
 		RequiresCondition: produced
 		Voice: Build
 		ValidRelationships: None
-	ProducibleWithLevel:
-		Prerequisites: warfactory.infiltrated
+	ProducibleWithLevel@1:
+		Prerequisites: warfactory.infiltratedorbaacdm
+	WithProductionIconOverlay@1:
+		Prerequisites: warfactory.infiltratedorbaacdm
+		Types: chevron-veteran
+	ProducibleWithLevel@2:
+		Prerequisites: warfactory.infiltrated, baacdm
+	WithProductionIconOverlay@2:
+		Prerequisites: warfactory.infiltrated, baacdm
+		Types: chevron-elite
 	Explodes:
 		Weapon: FlameTankExplode
 		EmptyWeapon: FlameTankExplode
@@ -1165,3 +1657,5 @@ ftnk:
 	#	SoundFiles: vrhistaa.wav, vrhistab.wav, vrhistac.wav, vrhistad.wav
 	#	Volume: 0.3
 	#	RequiresCondition: moving
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange

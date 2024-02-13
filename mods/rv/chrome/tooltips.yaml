@@ -81,7 +81,8 @@ Background@WORLD_TOOLTIP:
 			X: 7
 			Y: 51
 			Height: 5
-			Font: Bold
+			Font: TinyBold
+			VAlign: Top
 
 Background@SPAWN_TOOLTIP:
 	Logic: SpawnSelectorTooltipLogic
@@ -118,7 +119,7 @@ Background@LATENCY_TOOLTIP:
 			Y: 3
 			Height: 26
 			Font: Bold
-			Text: Latency:
+			Text: label-latency-tooltip-prefix
 		Label@LATENCY:
 			Y: 3
 			Height: 26
@@ -133,7 +134,7 @@ Background@ANONYMOUS_PLAYER_TOOLTIP:
 		Label@NAME:
 			X: 7
 			Y: 2
-			Text: Anonymous Player
+			Text: label-anonymous-player-tooltip-name
 			Height: 24
 			Font: MediumBold
 		Label@LOCATION:
@@ -164,7 +165,7 @@ Background@ANONYMOUS_PLAYER_TOOLTIP:
 				Label@LABEL:
 					X: 10
 					Height: 12
-					Text: Game Admin
+					Text: label-game-admin
 					Font: TinyBold
 
 Background@REGISTERED_PLAYER_TOOLTIP:
@@ -207,7 +208,7 @@ Background@REGISTERED_PLAYER_TOOLTIP:
 									X: 10
 									Y: 1
 									Height: 12
-									Text: 房主
+									Text: label-game-admin
 									Font: TinyBold
 				Container@MESSAGE_HEADER:
 					Height: 26
@@ -228,7 +229,7 @@ Background@REGISTERED_PLAYER_TOOLTIP:
 					Background: tooltip-separator
 
 Background@PRODUCTION_TOOLTIP:
-	Logic: ProductionTooltipLogic
+	Logic: ProductionTooltipLogicCA
 	Background: dialog4
 	Width: 200
 	Height: 65
@@ -249,7 +250,6 @@ Background@PRODUCTION_TOOLTIP:
 			Y: 26
 			Height: 15
 			Font: TinyBold
-			Text: 需要 {0}
 		Label@DESC:
 			X: 7
 			Y: 27
@@ -286,6 +286,16 @@ Background@PRODUCTION_TOOLTIP:
 		Label@POWER:
 			Y: 42
 			Height: 23
+			Font: Bold
+		Image@ARMORTYPE_ICON:
+			Y: 46
+			Width: 16
+			Height: 16
+			ImageCollection: sidebar-bits
+			ImageName: production-tooltip-armor
+		Label@ARMORTYPE:
+			Y: 42
+			Height: 16
 			Font: Bold
 
 Background@SUPPORT_POWER_TOOLTIP:
@@ -324,6 +334,24 @@ Background@SUPPORT_POWER_TOOLTIP:
 
 Background@ARMY_TOOLTIP:
 	Logic: ArmyTooltipLogic
+	Background: dialog4
+	Width: 200
+	Height: 65
+	Children:
+		Label@NAME:
+			X: 7
+			Y: 3
+			Height: 23
+			Font: Bold
+		Label@DESC:
+			X: 7
+			Y: 27
+			Height: 2
+			Font: TinyBold
+			VAlign: Top
+
+Background@ACTOR_ICON_TOOLTIP:
+	Logic: ActorIconTooltipLogic
 	Background: dialog4
 	Width: 200
 	Height: 65

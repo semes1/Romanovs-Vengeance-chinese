@@ -6,7 +6,10 @@
 		DefeatMusic: score
 	ActorMap:
 	Selection:
+	ControlGroups:
 	ScreenMap:
+	VoxelCache:
+	ModelRenderer:
 	TerrainGeometryOverlay:
 	TerrainLighting:
 	TerrainRenderer:
@@ -43,6 +46,7 @@
 			DirtRoad: 100
 			Ore: 90
 			Gems: 90
+			Beach: 70
 			Water: 70
 	Locomotor@FLAMEGUY:
 		Name: flameguy
@@ -73,7 +77,6 @@
 			Road: 100
 			Bridge: 100
 			DirtRoad: 100
-			Beach: 100
 			Ore: 90
 			Gems: 90
 	Locomotor@TRACKED:
@@ -89,7 +92,6 @@
 			Road: 100
 			Bridge: 100
 			DirtRoad: 100
-			Beach: 100
 			Ore: 90
 			Gems: 90
 	Locomotor@HEAVYTRACKED:
@@ -105,7 +107,6 @@
 			Road: 100
 			Bridge: 100
 			DirtRoad: 100
-			Beach: 100
 			Ore: 90
 			Gems: 90
 	Locomotor@OMNICRUSHER:
@@ -121,7 +122,6 @@
 			Road: 100
 			Bridge: 100
 			DirtRoad: 100
-			Beach: 100
 			Ore: 90
 			Gems: 90
 	Locomotor@NAVAL:
@@ -143,13 +143,13 @@
 			Road: 100
 			Bridge: 100
 			DirtRoad: 100
-			Beach: 100
 			Ore: 100
 			Gems: 100
+			Beach: 100
 			Water: 100
 	Locomotor@HEAVYAMPHIBIOUS:
 		Name: heavyamphibious
-		Crushes: fence, crate, nmine, mine, infantry
+		Crushes: crate, nmine, mine, tree, fence, infantry
 		CrushDamageTypes: NonTemporal, Crush
 		TerrainSpeeds:
 			Clear: 100
@@ -160,9 +160,26 @@
 			Road: 100
 			Bridge: 100
 			DirtRoad: 100
-			Beach: 100
 			Ore: 100
 			Gems: 100
+			Beach: 100
+			Water: 100
+	Locomotor@OMNIAMPHIBIOUS:
+		Name: omniamphibious
+		Crushes: crate, nmine, mine, tree, fence, infantry, vehicle
+		CrushDamageTypes: NonTemporal, Crush
+		TerrainSpeeds:
+			Clear: 100
+			Sand: 100
+			Rough: 100
+			Dune: 100
+			Rail: 100
+			Road: 100
+			Bridge: 100
+			DirtRoad: 100
+			Ore: 100
+			Gems: 100
+			Beach: 100
 			Water: 100
 	ShroudRenderer:
 		Index: 255, 16, 32, 48, 64, 80, 96, 112, 128, 144, 160, 176, 192, 208, 224, 240, 20, 40, 56, 65, 97, 130, 148, 194, 24, 33, 66, 132, 28, 41, 67, 134, 1, 2, 4, 8, 3, 6, 12, 9, 7, 14, 13, 11, 5, 10, 15, 255
@@ -170,111 +187,111 @@
 		FogPalette: shroud
 		ShroudPalette: shroud
 	Faction@random:
-		Name: 随机
+		Name: Random
 		InternalName: Random
 		RandomFactionMembers: random-allies, random-soviets, random-psicorps
-		Side: 随机
-		Description: 完全随机\n系统将会为玩家分配一个随机阵营下的随机子阵营
+		Side: Randoms
+		Description: Random Country\nA random country will be chosen when the game starts.
 	Faction@allies:
-		Name: 盟军
+		Name: Allies
 		InternalName: random-allies
 		RandomFactionMembers: america, england, france, germany, korea
-		Side: 随机
-		Description: 盟军阵营随机\n系统将会为玩家分配一个随机的盟军子阵营
+		Side: Randoms
+		Description: Random Allied Country\nA random Allied country will be chosen when the game starts.
 	Faction@soviets:
-		Name: 苏联
+		Name: Soviets
 		InternalName: random-soviets
 		RandomFactionMembers: russia, iraq, vietnam, cuba, libya
-		Side: 随机
-		Description: 苏联阵营随机\n系统将会为玩家分配一个随机的苏联子阵营
+		Side: Randoms
+		Description: Random Soviet Country\nA random Soviet country will be chosen when the game starts.
 	Faction@psicorps:
-		Name: 灵能军团
+		Name: Psi-Corps
 		InternalName: random-psicorps
 		RandomFactionMembers: psicorps, psinepal, psisouth, psitrans, psimoon
-		Side: 随机
-		Description: 灵能军团随机\n系统将会为玩家分配一个随机的灵能军团子阵营
+		Side: Randoms
+		Description: Random Psi-Corps Faction\nA random Psi-Corps faction will be chosen when the game starts.
 	Faction@baku:
 		Name: Baku Pact
 		InternalName: random-bakupact
 		RandomFactionMembers: transcaucus, turkmen, tuva, russianfed, serbia
-		Side: 随机
+		Side: Randoms
 		Description: Random Baku Pact Country\nA random Baku Pact country will be chosen when the game starts.
 		Selectable: false
 	Faction@1:
-		Name: 美国
+		Name: United States
 		InternalName: america
-		Side: 盟军
-		Description: 美利坚联邦合众国\n首都：华盛顿特区（1776-1973）\n            西雅图（1973-至今）\n\n·独有步兵：海豹突击队\n·独有支援能力：伞兵（盟军步兵与重装步兵）
+		Side: Allies
+		Description: United States of America\nCapital: Washington D.C. (1776-1973)\n             Seattle (1973-)\n\nSpecial Infantry: Navy SEAL\nSpecial Ability: Airborne\nSpecial Upgrade: Boost-Gliding Systems
 	Faction@2:
-		Name: 英国
+		Name: United Kingdom
 		InternalName: england
-		Side: 盟军
-		Description: 大不列颠及北爱尔兰联合王国\n首都：伦敦\n\n·独有步兵：狙击手\n·独有支援能力：战术轰炸
+		Side: Allies
+		Description: United Kingdom of Great Britain and Northern Ireland\nCapital: London\n\n\nSpecial Infantry: Sniper\nSpecial Ability: Carpet Bombing\nSpecial Upgrade: Portable Weaponry
 	Faction@3:
-		Name: 法国
+		Name: France
 		InternalName: france
-		Side: 盟军
-		Description: 法兰西第四共和国\n首都：巴黎\n\n·独有建筑：幻境炮塔\n·独有支援能力：力场护盾
+		Side: Allies
+		Description: French Fourth Republic\nCapital: Paris\n\n\nSpecial Building: Mirage Turret\nSpecial Ability: Force Shield\nSpecial Upgrade: Grand Cannon Protocols
 	Faction@4:
-		Name: 德国
+		Name: Germany
 		InternalName: germany
-		Side: 盟军
-		Description: 德意志共和国\n首都：柏林\n\n·独有载具：坦克歼击车\n·独有支援能力：超时空突袭（灰熊坦克）
+		Side: Allies
+		Description: German Republic\nCapital: Berlin\n\n\nSpecial Vehicle: Tank Destroyer\nSpecial Ability: Chrono Grizzly\nSpecial Upgrade: Advanced Gun Systems
 	Faction@5:
-		Name: 韩国
+		Name: Korea
 		InternalName: korea
-		Side: 盟军
-		Description: 大韩民国\n首都：首尔\n\n·独有飞行器：黑鹰轰炸机\n·独有支援能力：超时空炸弹
+		Side: Allies
+		Description: Republic of Korea\nCapital: Seoul\n\n\nSpecial Aircraft: Black Eagle\nSpecial Ability: Chronobomb\nSpecial Upgrade: EMP Munitions
 	Faction@6:
-		Name: 苏俄
+		Name: Soviet Union
 		InternalName: russia
-		Side: 苏联
-		Description: 苏维埃社会主义共和国联盟（苏俄）\n首都：莫斯科\n\n·独有载具：特斯拉坦克\n·独有支援能力：特斯拉小队空投（特斯拉步兵与特斯拉坦克）
+		Side: Soviets
+		Description: Union of Soviet Socialist Republics\nCapital: Moscow\n\n\nSpecial Vehicle: Tesla Tank\nSpecial Ability: Tesla Drop\nSpecial Upgrade: Overcharge
 	Faction@7:
-		Name: 伊拉克
+		Name: Iraq
 		InternalName: iraq
-		Side: 苏联
-		Description: 伊拉克共和国\n首都：巴格达\n\n·独有步兵：辐射军团\n·独有支援特殊能力：化武飞弹
+		Side: Soviets
+		Description: Iraqi Republic\nCapital: Baghdad\n\n\nSpecial Infantry: Desolator\nSpecial Ability: Radiation Missile\nSpecial Upgrade: Advanced Irradiators
 	Faction@8:
-		Name: 越南
+		Name: Vietnam
 		InternalName: vietnam
-		Side: 苏联
-		Description: 越南社会主义共和国\n首都：河内\n\n·独有飞行器：黑鸢武装直升机\n·独有支援能力：战地碉堡
+		Side: Soviets
+		Description: Socialist Republic of Vietnam\nCapital: Hanoi\n\n\nSpecial Aircraft: Black Kite\nSpecial Ability: Instant Bunker\nSpecial Upgrade: Aerial Propaganda
 	Faction@9:
-		Name: 古巴
+		Name: Cuba
 		InternalName: cuba
-		Side: 苏联
-		Description: 古巴共和国\n首都：哈瓦那\n\n·独有步兵：恐怖分子\n·独有支援能力：革命之怒
+		Side: Soviets
+		Description: Republic of Cuba\nCapital: Havana\n\n\nSpecial Infantry: Terrorist\nSpecial Ability: Death Bombs\nSpecial Upgrade: Targeted Explosives
 	Faction@10:
-		Name: 利比亚
+		Name: Libya
 		InternalName: libya
-		Side: 苏联
-		Description: 大阿拉伯利比亚人民社会主义民众国\n首都：的黎波里\n\n·独有载具：自爆卡车\n·独有支援能力：游击队突袭（动员兵与防空步兵）
+		Side: Soviets
+		Description: Libyan Arab Jamahiriya\nCapital: Tripoli\n\n\nSpecial Vehicle: Demolition Truck\nSpecial Ability: Ambush\nSpecial Upgrade: High Explosive Bombs
 	Faction@11:
-		Name: 尤里格勒
+		Name: Yurigrad
 		InternalName: psicorps
-		Side: 灵能军团
-		Description: 尤里格勒\n秘密司令部：苏俄库班地区\n\n·独有载具：奴隶采矿场\n·独有支援能力：克隆人军团（尤里复制人）
+		Side: Psi-Corps
+		Description: Yurigrad\nCenter of Operations: Kuban Region\n\n\nSpecial Vehicle: Slave Miner\nSpecial Ability: Psi-Ops Drop\nSpecial Upgrade: Chaos Tank Compensators
 	Faction@12:
-		Name: 绝地教团
+		Name: Lazarus Corps
 		InternalName: psinepal
-		Side: 灵能军团
-		Description: 绝地教团\n秘密司令部：尼泊尔喜马拉雅山脉\n\n·独有飞行器：爆蚊生化飞碟\n·独有支援能力：幻化成形
+		Side: Psi-Corps
+		Description: Lazarus Corps\nCenter of Operations: Himalayas\n\n\nSpecial Aircraft: Mosquito Disc\nSpecial Ability: Hologram Army\nSpecial Upgrade: Laser Capacitors
 	Faction@13:
-		Name: 极地守卫
+		Name: Antarctica
 		InternalName: psisouth
-		Side: 灵能军团
-		Description: 极地守卫\n秘密司令部：南极洲半岛\n\n·独有建筑：巨型尤里雕塑\n·独有支援能力：纳米点防御无人机
+		Side: Psi-Corps
+		Description: Antarctica\nCenter of Operations: Antarctic Peninsula\n\n\nSpecial Building: Yuri Statue\nSpecial Ability: Point Defense Drones\nSpecial Upgrade: Mastery of Mind
 	Faction@14:
-		Name: 特堡要塞
+		Name: Fort. Transylvania
 		InternalName: psitrans
-		Side: 灵能军团
-		Description: 特堡要塞\n秘密司令部：罗马尼亚特兰斯瓦尼亚\n\n·独有载具：深渊狼蛛\n·独有支援能力：虫潮降临（负子蝽运输机）
+		Side: Psi-Corps
+		Description: Fortress of Transylvania\nCenter of Operations: Transylvania\n\n\nSpecial Vehicle: Giant Tarantula\nSpecial Ability: Lethocerus Swarm\nSpecial Upgrade: DNA Boosters
 	Faction@15:
-		Name: 月影军团
+		Name: Lunar Eclipse
 		InternalName: psimoon
-		Side: 灵能军团
-		Description: 月影军团\n秘密司令部：月球指挥所\n\n独有步兵：空天战士\n独有支援能力：离子炮轰炸
+		Side: Psi-Corps
+		Description: Lunar Eclipse\nCenter of Operations: The Moon\n\n\nSpecial Infantry: Cosmonaut\nSpecial Ability: Ion Cannon\nSpecial Upgrade: Disc Armor
 	Faction@16:
 		Name: Japan
 		InternalName: japan
@@ -297,7 +314,7 @@
 		Name: Ukraine
 		InternalName: ukraine
 		Side: Allies
-		Description: Ukrainian Republic\nCapital: Kiev
+		Description: Ukrainian Republic\nCapital: Kyiv
 		Selectable: false
 	Faction@20:
 		Name: Australia
@@ -351,7 +368,7 @@
 		Name: Turkmenistan
 		InternalName: turkmen
 		Side: Baku Pact
-		Description: Republic of Turkmenistan\nCapital: Ashgabat
+		Description: Republic of Turkmenistan\nCapital: Ashgabat\n\n\nSpecial Infantry: Angry Mob
 		Selectable: false
 	Faction@29:
 		Name: Tuva
@@ -376,14 +393,13 @@
 			Ore:
 				Sequences: tib01, tib02, tib03, tib04, tib05, tib06, tib07, tib08, tib09, tib10, tib11, tib12, tib13, tib14, tib15, tib16, tib17, tib18, tib19, tib20
 				Palette: resource
-				Name: 矿物
+				Name: Valuable Minerals
 			Gems:
 				Sequences: gem01, gem02, gem03, gem04, gem05, gem06, gem07, gem08, gem09, gem10, gem11, gem12
 				Palette: resource
-				Name: 宝石
-	ExitsDebugOverlayManager:
+				Name: Valuable Minerals
 	CliffBackImpassabilityLayer:
-	GlobalLightingPaletteEffect:
+	TintPostProcessEffect:
 		Ambient: 1.0
 		Red: 1.0
 		Green: 1.0
@@ -394,6 +410,8 @@ World:
 	ChatCommands:
 	DevCommands:
 	DebugVisualizationCommands:
+	PathFinderOverlay:
+	HierarchicalPathFinderOverlay:
 	PlayerCommands:
 	TauntCommands:
 	HelpCommand:
@@ -401,7 +419,6 @@ World:
 	BuildingInfluence:
 	ProductionQueueFromSelection:
 		ProductionTabsWidget: PRODUCTION_TABS
-	DomainIndex:
 	SmudgeLayer@smallscorch:
 		Type: SmallScorch
 		Sequence: smallscorches
@@ -456,29 +473,20 @@ World:
 		Palette: effect
 	BridgeLayer:
 	WarheadDebugOverlay:
+	ExitsDebugOverlayManager:
 	CustomTerrainDebugOverlay:
 	SpawnMapActors:
 	MapBuildRadius:
-		AllyBuildRadiusCheckboxLabel: 协助建设
-		AllyBuildRadiusCheckboxDescription: 与盟友共享建筑范围
 		AllyBuildRadiusCheckboxDisplayOrder: 4
-		BuildRadiusCheckboxLabel: 有限建筑范围
-		BuildRadiusCheckboxDescription: 建筑只能放置在建筑工厂的一定范围之内
 		BuildRadiusCheckboxDisplayOrder: 7
 	MapOptions:
-		ShortGameCheckboxLabel: 快速游戏
-		ShortGameCheckboxDescription: 消灭敌方所有基础建筑与移动基地车即可获胜
 		ShortGameCheckboxDisplayOrder: 2
-		TechLevelDropdownLabel: 科技限制
-		TechLevelDropdownDescription: 限制最高科技层级
-		TechLevelDropdownDisplayOrder: 2
-		GameSpeedDropdownLabel: 游戏速度
-		GameSpeedDropdownDescription: 更改游戏内时间的流速
-		GameSpeedDropdownDisplayOrder: 5
+		TechLevelDropdownDisplayOrder: 4
+		GameSpeedDropdownDisplayOrder: 2
 	CreateMapPlayers:
 	StartingUnits@nobasesallies:
 		Class: nobases
-		ClassName: 无基地
+		ClassName: options-starting-units.no-bases
 		Factions: france, korea, japan, belarus, poland, ukraine, aussie, china, turkey, canada
 		BaseActor: tany
 		BaseActorFacing: 640
@@ -489,7 +497,7 @@ World:
 		OuterSupportRadius: 8
 	StartingUnits@nobasesamerica:
 		Class: nobases
-		ClassName: 无基地
+		ClassName: options-starting-units.no-bases
 		Factions: america
 		BaseActor: tany
 		BaseActorFacing: 640
@@ -500,7 +508,7 @@ World:
 		OuterSupportRadius: 8
 	StartingUnits@nobasesengland:
 		Class: nobases
-		ClassName: 无基地
+		ClassName: options-starting-units.no-bases
 		Factions: england
 		BaseActor: tany
 		BaseActorFacing: 640
@@ -511,7 +519,7 @@ World:
 		OuterSupportRadius: 8
 	StartingUnits@nobasesgermany:
 		Class: nobases
-		ClassName: 无基地
+		ClassName: options-starting-units.no-bases
 		Factions: germany
 		BaseActor: tany
 		BaseActorFacing: 640
@@ -522,13 +530,13 @@ World:
 		OuterSupportRadius: 8
 	StartingUnits@amcv:
 		Class: none
-		ClassName: 仅基地车
+		ClassName: options-starting-units.mcv-only
 		Factions: america, england, france, germany, korea, japan, belarus, poland, ukraine, aussie, china, turkey, canada
 		BaseActor: amcv
 		BaseActorFacing: 640
 	StartingUnits@amcvdog:
 		Class: mcvdog
-		ClassName: 基地车与军犬
+		ClassName: options-starting-units.mcv-and-dog
 		Factions: america, england, france, germany, korea, japan, belarus, poland, ukraine, aussie, china, turkey, canada
 		BaseActor: amcv
 		BaseActorFacing: 640
@@ -538,7 +546,7 @@ World:
 		OuterSupportRadius: 5
 	StartingUnits@lightallies:
 		Class: light
-		ClassName: 少量援军
+		ClassName: options-starting-units.light-support
 		Factions: america, england, france, germany, korea, japan, belarus, poland, ukraine, aussie, china, turkey, canada
 		BaseActor: amcv
 		BaseActorFacing: 640
@@ -548,7 +556,7 @@ World:
 		OuterSupportRadius: 5
 	StartingUnits@mediumallies:
 		Class: medium
-		ClassName: 中等援军
+		ClassName: options-starting-units.medium-support
 		Factions: america, england, france, germany, korea, japan, belarus, poland, ukraine, aussie, china, turkey, canada
 		BaseActor: amcv
 		BaseActorFacing: 640
@@ -558,7 +566,7 @@ World:
 		OuterSupportRadius: 5
 	StartingUnits@heavyallies:
 		Class: heavy
-		ClassName: 大量援军
+		ClassName: options-starting-units.heavy-support
 		Factions: america, england, france, germany, korea, japan, belarus, poland, ukraine, aussie, china, turkey, canada
 		BaseActor: amcv
 		BaseActorFacing: 640
@@ -568,7 +576,7 @@ World:
 		OuterSupportRadius: 5
 	StartingUnits@unholyamcv:
 		Class: unholy
-		ClassName: 非常联盟
+		ClassName: options-starting-units.unholy-alliance
 		Factions: america, england, france, germany, korea, japan, belarus, poland, ukraine, aussie, china, turkey, canada
 		BaseActor: amcv
 		BaseActorFacing: 640
@@ -578,7 +586,7 @@ World:
 		OuterSupportRadius: 5
 	StartingUnits@nobasessoviets:
 		Class: nobases
-		ClassName: 无基地
+		ClassName: options-starting-units.no-bases
 		Factions: vietnam, mexico, mongolia
 		BaseActor: boris
 		BaseActorFacing: 640
@@ -589,7 +597,7 @@ World:
 		OuterSupportRadius: 8
 	StartingUnits@nobasesrussia:
 		Class: nobases
-		ClassName: 无基地
+		ClassName: options-starting-units.no-bases
 		Factions: russia
 		BaseActor: boris
 		BaseActorFacing: 640
@@ -600,7 +608,7 @@ World:
 		OuterSupportRadius: 8
 	StartingUnits@nobasesiraq:
 		Class: nobases
-		ClassName: 无基地
+		ClassName: options-starting-units.no-bases
 		Factions: iraq
 		BaseActor: boris
 		BaseActorFacing: 640
@@ -611,7 +619,7 @@ World:
 		OuterSupportRadius: 8
 	StartingUnits@nobasesvietnam:
 		Class: nobases
-		ClassName: 无基地
+		ClassName: options-starting-units.no-bases
 		Factions: vietnam
 		BaseActor: boris
 		BaseActorFacing: 640
@@ -622,7 +630,7 @@ World:
 		OuterSupportRadius: 8
 	StartingUnits@nobasescuba:
 		Class: nobases
-		ClassName: 无基地
+		ClassName: options-starting-units.no-bases
 		Factions: cuba
 		BaseActor: boris
 		BaseActorFacing: 640
@@ -633,7 +641,7 @@ World:
 		OuterSupportRadius: 8
 	StartingUnits@nobaseslibya:
 		Class: nobases
-		ClassName: 无基地
+		ClassName: options-starting-units.no-bases
 		Factions: libya
 		BaseActor: boris
 		BaseActorFacing: 640
@@ -643,13 +651,13 @@ World:
 		OuterSupportRadius: 8
 	StartingUnits@smcv:
 		Class: none
-		ClassName: 仅基地车
+		ClassName: options-starting-units.mcv-only
 		Factions: russia, iraq, vietnam, cuba, libya, chile, mexico, mongolia, transcaucus, turkmen, tuva, russianfed, serbia
 		BaseActor: smcv
 		BaseActorFacing: 640
 	StartingUnits@smcvdog:
 		Class: mcvdog
-		ClassName: 基地车与军犬
+		ClassName: options-starting-units.mcv-and-dog
 		Factions: russia, iraq, vietnam, cuba, libya, chile, mexico, mongolia, transcaucus, turkmen, tuva, russianfed, serbia
 		BaseActor: smcv
 		BaseActorFacing: 640
@@ -659,7 +667,7 @@ World:
 		OuterSupportRadius: 5
 	StartingUnits@lightsoviets:
 		Class: light
-		ClassName: 少量援军
+		ClassName: options-starting-units.light-support
 		Factions: russia, iraq, vietnam, cuba, libya, chile, mexico, mongolia, transcaucus, turkmen, tuva, russianfed, serbia
 		BaseActor: smcv
 		BaseActorFacing: 640
@@ -669,7 +677,7 @@ World:
 		OuterSupportRadius: 5
 	StartingUnits@mediumsoviets:
 		Class: medium
-		ClassName: 中等援军
+		ClassName: options-starting-units.medium-support
 		Factions: russia, iraq, vietnam, cuba, libya, chile, mexico, mongolia, transcaucus, turkmen, tuva, russianfed, serbia
 		BaseActor: smcv
 		BaseActorFacing: 640
@@ -679,7 +687,7 @@ World:
 		OuterSupportRadius: 5
 	StartingUnits@heavysoviets:
 		Class: heavy
-		ClassName: 大量援军
+		ClassName: options-starting-units.heavy-support
 		Factions: russia, iraq, vietnam, cuba, libya, chile, mexico, mongolia, transcaucus, turkmen, tuva, russianfed, serbia
 		BaseActor: smcv
 		BaseActorFacing: 640
@@ -689,7 +697,7 @@ World:
 		OuterSupportRadius: 5
 	StartingUnits@unholysmcv:
 		Class: unholy
-		ClassName: 非常联盟
+		ClassName: options-starting-units.unholy-alliance
 		Factions: russia, iraq, vietnam, cuba, libya, chile, mexico, mongolia, transcaucus, turkmen, tuva, russianfed, serbia
 		BaseActor: smcv
 		BaseActorFacing: 640
@@ -699,7 +707,7 @@ World:
 		OuterSupportRadius: 5
 	StartingUnits@nobasespsicorps:
 		Class: nobases
-		ClassName: 无基地
+		ClassName: options-starting-units.no-bases
 		Factions: psicorps, psisouth
 		BaseActor: yurix
 		BaseActorFacing: 640
@@ -710,7 +718,7 @@ World:
 		OuterSupportRadius: 8
 	StartingUnits@nobasespsipsinepal:
 		Class: nobases
-		ClassName: 无基地
+		ClassName: options-starting-units.no-bases
 		Factions: psinepal
 		BaseActor: yurix
 		BaseActorFacing: 640
@@ -721,7 +729,7 @@ World:
 		OuterSupportRadius: 8
 	StartingUnits@nobasespsitrans:
 		Class: nobases
-		ClassName: 无基地
+		ClassName: options-starting-units.no-bases
 		Factions: psitrans
 		BaseActor: yurix
 		BaseActorFacing: 640
@@ -732,7 +740,7 @@ World:
 		OuterSupportRadius: 8
 	StartingUnits@nobasespsipsimoon:
 		Class: nobases
-		ClassName: 无基地
+		ClassName: options-starting-units.no-bases
 		Factions: psimoon
 		BaseActor: yurix
 		BaseActorFacing: 640
@@ -743,13 +751,13 @@ World:
 		OuterSupportRadius: 8
 	StartingUnits@pcv:
 		Class: none
-		ClassName: 仅基地车
+		ClassName: options-starting-units.mcv-only
 		Factions: psicorps, psinepal, psisouth, psitrans, psimoon
 		BaseActor: pcv
 		BaseActorFacing: 640
 	StartingUnits@pcvdog:
 		Class: mcvdog
-		ClassName: 基地车与军犬
+		ClassName: options-starting-units.mcv-and-dog
 		Factions: psicorps, psinepal, psisouth, psitrans, psimoon
 		BaseActor: pcv
 		BaseActorFacing: 640
@@ -759,7 +767,7 @@ World:
 		OuterSupportRadius: 5
 	StartingUnits@lightpsicorps:
 		Class: light
-		ClassName: 少量援军
+		ClassName: options-starting-units.light-support
 		Factions: psicorps, psinepal, psisouth, psitrans, psimoon
 		BaseActor: pcv
 		BaseActorFacing: 640
@@ -769,7 +777,7 @@ World:
 		OuterSupportRadius: 5
 	StartingUnits@mediumpsicorps:
 		Class: medium
-		ClassName: 中等援军
+		ClassName: options-starting-units.medium-support
 		Factions: psicorps, psinepal, psisouth, psitrans, psimoon
 		BaseActor: pcv
 		BaseActorFacing: 640
@@ -779,7 +787,7 @@ World:
 		OuterSupportRadius: 5
 	StartingUnits@heavypsicorps:
 		Class: heavy
-		ClassName: 大量援军
+		ClassName: options-starting-units.heavy-support
 		Factions: psicorps, psinepal, psisouth, psitrans, psimoon
 		BaseActor: pcv
 		BaseActorFacing: 640
@@ -789,7 +797,7 @@ World:
 		OuterSupportRadius: 5
 	StartingUnits@unholypcv:
 		Class: unholy
-		ClassName: 非常联盟
+		ClassName: options-starting-units.unholy-alliance
 		Factions: psicorps, psinepal, psisouth, psitrans, psimoon
 		BaseActor: pcv
 		BaseActorFacing: 640
@@ -799,45 +807,46 @@ World:
 		OuterSupportRadius: 5
 	StartingUnits@nobasesbaku:
 		Class: nobases
-		ClassName: 无基地
+		ClassName: options-starting-units.no-bases
 		Factions: transcaucus, turkmen, russianfed, serbia
 		BaseActor: vlkv
 		BaseActorFacing: 640
-		SupportActors: e2, e2, e2, e2, e2, shk, shk, shk, dog, chit, engineer, flakt, flakt, ivan, hjck, itrp, htnk, htnk, htk, htk, htk, dron, dron, dron, dron, tric, tric, apoc, v3, hind
+		SupportActors: e2, e2, e2, e2, e2, rctt, rctt, rctt, dog, chit, engineer, medi, mech, ivan, hjck, itrp, htnk, htnk, htk, htk, htk, send, send, send, tric, tric, apoc, v3, hind
 		SupportActorsFacing: 640
 		InnerSupportRadius: 2
 		OuterSupportRadius: 8
 	StartingUnits@nobasestuva:
 		Class: nobases
-		ClassName: 无基地
+		ClassName: options-starting-units.no-bases
 		Factions: tuva
 		BaseActor: vlkv
 		BaseActorFacing: 640
-		SupportActors: e2, e2, e2, e2, e2, shk, shk, shk, dog, chit, engineer, mengineer, flakt, flakt, ivan, hjck, itrp, htnk, htk, htk, htk, dron, dron, dron, dron, tric, tric, apoc, v3, hind
+		SupportActors: e2, e2, e2, e2, e2, rctt, rctt, rctt, dog, chit, engineer, mengineer, medi, mech, ivan, hjck, itrp, htnk, htk, htk, htk, send, send, send, tric, tric, apoc, v3, hind
 		SupportActorsFacing: 640
 		InnerSupportRadius: 2
 		OuterSupportRadius: 8
 	CrateSpawner:
-		CheckboxLabel: 随机工具箱
-		CheckboxDescription: 开启后地图上随机出现奖惩效果不一的工具箱
 		DeliveryAircraft: pdplane.crate
 		Minimum: 1
 		Maximum: 3
-		SpawnInterval: 3000
 		WaterChance: 25
+		SpawnInterval: 3000
 		InitialSpawnDelay: 1000
-		CheckboxEnabled: False
-		CheckboxDisplayOrder: 1
+		RequiresCondition: crates_enabled
+	LobbySystemActorConditionCheckbox@CRATES:
+		ID: crates
+		Label: checkbox-crates.label
+		Description: checkbox-crates.description
+		Enabled: false
+		DisplayOrder: 1
+		Actors: World, Player
+		Condition: crates_enabled
 	MapCreeps:
 		CheckboxVisible: false
 	MapStartingLocations:
-		SeparateTeamSpawnsCheckboxLabel: 安全出生点
-		SeparateTeamSpawnsCheckboxDescription: 所有随机出生的玩家将被分配到尽可能远离敌方的位置
 		SeparateTeamSpawnsCheckboxDisplayOrder: 6
 	SpawnStartingUnits:
-		DropdownLabel: 初始部队
-		DropdownDescription: 调整玩家初始部队的规模
-		DropdownDisplayOrder: 3
+		DropdownDisplayOrder: 1
 	PathFinder:
 	ValidateOrder:
 	DebugPauseState:
@@ -851,23 +860,21 @@ World:
 		Scripts: main.lua, regicide.lua, koth.lua, domination.lua, commanders-powers.lua
 	ScriptLobbyDropdown@CPMODIFIER:
 		ID: cpmodifier
-		Label: 指挥官技能点获取
+		Label: dropdown-cpmodifier.label
+		Description: dropdown-cpmodifier.description
 		Values:
-			disabled: 0, 0, 0, 0, 0
-			one: 1, 1, 1, 1, 1
-			normal: 1, 1, 1, 1, 3
-			two: 2, 2, 2, 2, 2
-			double: 2, 2, 2, 2, 6
-			three: 3, 3, 3, 3, 3
-			triple: 3, 3, 3, 3, 5
-			all: 4, 0, 11, 0, 2
+			disabled: options-cpmodifier.disabled
+			one: options-cpmodifier.one
+			normal: options-cpmodifier.normal
+			two: options-cpmodifier.two
+			double: options-cpmodifier.double
+			three: options-cpmodifier.three
+			triple: options-cpmodifier.triple
+			all: options-cpmodifier.all
 		Default: normal
-		Description: 每次晋升军衔时所获得的指挥官技能点的数量
-		DisplayOrder: 4
+		DisplayOrder: 3
 	TimeLimitManager:
-		TimeLimitLabel: 时限作战
-		TimeLimitDescription: 游戏进行到选定时刻时，得分最高的玩家或小队将会立即获得胜利
-		TimeLimitDisplayOrder: 1
+		TimeLimitDisplayOrder: 5
 		TimeLimitWarnings:
 			1: OneMinuteRemaining
 			2: TwoMinutesRemaining
@@ -880,10 +887,15 @@ World:
 		Darkest: 32
 		Brightest: 96
 		ZOffset: 0
+	TintedCellsLayer@RADIATIONORANGE:
+		Name: radioactivityorange
+		Color: FF7F00
+		Darkest: 32
+		Brightest: 96
+		ZOffset: 0
 	ColorPickerManager:
 		PreviewActor: amcv.colorpicker
-		PresetHues: 0.17, 0, 0.6, 0.3, 0.1, 0.5, 0.75, 0.85, 0.17, 0, 0.6, 0.3, 0.1, 0.5, 0.75, 0.85
-		PresetSaturations: 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45
+		PresetColors: DEE308, FF1818, 2973E7, 39D629, FFA518, 31D6E7, 9429BD, FF9CEF, 6F7104, 7F0C0C, 143973, 1C6B14, 7F520C, 186B73, 4A145E, 7F484E
 		FactionPreviewActors:
 			random-soviets: smcv.colorpicker
 			random-psicorps: pcv.colorpicker
@@ -928,10 +940,10 @@ EditorWorld:
 				AllowedTerrainTypes: Clear, Sand, Rough, Dune, Road, DirtRoad
 				MaxDensity: 12
 	EditorSelectionLayer:
-		Palette: placefootprint
+		AltPixelOffset: 0,1
 	LoadWidgetAtGameStart:
 	EditorActionManager:
 	BuildableTerrainOverlay:
-		AllowedTerrainTypes: Clear, Rough, Road, DirtRoad
+		AllowedTerrainTypes: Clear, Rough, Road, DirtRoad, Water
 		Palette: ra
 		Alpha: 0.35

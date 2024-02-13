@@ -3,465 +3,759 @@
 	Interactable:
 	ScriptTriggers:
 	Buildable:
-		Queue: Upgrade
+		Queue: Upgrade.Shared, Upgrade
 		BuildLimit: 1
 		BuildDurationModifier: 100
 	RenderSprites:
 	ProvidesPrerequisite@upgradename:
 	Valued:
 		Cost: 0
+	UpdatesPlayerStatistics:
+		AddToUpgradesTab: true
+	WithProductionIconOverlay:
+		Prerequisites: default.upgrade
+		Types: stripe-upgraded
+
+### Allies ###
+upgrade.gi_fortifications:
+	Inherits: ^default.upgrade
+	Tooltip:
+		Name: actor-upgrade-gi-fortifications.name
+	Buildable:
+		Queue: Upgrade.Shared, Upgrade.Allies
+		BuildPaletteOrder: 10
+		BuildDuration: 1500
+		Prerequisites: ~upgrade.allies, gaairc, ~techlevel.2
+		Description: actor-upgrade-gi-fortifications.description
+	Valued:
+		Cost: 2000
+	ProvidesPrerequisite@endurance_training:
+		Prerequisite: upgrade.endurance_training
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.gi_fortifications
 
 upgrade.a2a_missiles:
 	Inherits: ^default.upgrade
 	Tooltip:
-		Name: 空对空导弹
+		Name: actor-upgrade-a2a-missiles.name
 	Buildable:
-		Queue: Upgrade.Allies
-		BuildPaletteOrder: 10
-		BuildDuration: 750
-		Prerequisites: ~upgrade.allies, gaairc, ~techlevel.2
-		Description: 鹞鹰战机获得对空能力，但与对地武器共用弹药
-	Valued:
-		Cost: 2000
-
-upgrade.endurance_training:
-	Inherits: ^default.upgrade
-	Tooltip:
-		Name: 耐力特训
-	Buildable:
-		Queue: Upgrade.Allies
+		Queue: Upgrade.Shared, Upgrade.Allies
 		BuildPaletteOrder: 20
 		BuildDuration: 750
 		Prerequisites: ~upgrade.allies, gaairc, ~techlevel.2
-		Description: 盟军步兵和重装步兵提升25%移动速度
+		Description: actor-upgrade-a2a-missiles.description
 	Valued:
-		Cost: 1000
+		Cost: 1500
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.a2a_missiles
 
 upgrade.advanced_coolants:
 	Inherits: ^default.upgrade
 	Tooltip:
-		Name: 先进冷却剂
+		Name: actor-upgrade-advanced-coolants.name
 	Buildable:
-		Queue: Upgrade.Allies
+		Queue: Upgrade.Shared, Upgrade.Allies
 		BuildPaletteOrder: 30
-		BuildDuration: 1500
+		BuildDuration: 750
 		Prerequisites: ~upgrade.allies, gaairc, ~techlevel.2
-		Description: 所有火力发电厂的电力产出翻倍
+		Description: actor-upgrade-advanced-coolants.description
 	Valued:
-		Cost: 2500
+		Cost: 1500
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.advanced_coolants
 
 upgrade.advanced_training:
 	Inherits: ^default.upgrade
 	Tooltip:
-		Name: 士官学院
+		Name: actor-upgrade-advanced-training.name
 	Buildable:
-		Queue: Upgrade.Allies
+		Queue: Upgrade.Shared, Upgrade.Allies
 		BuildPaletteOrder: 40
 		BuildDuration: 1000
 		Prerequisites: ~upgrade.allies, gatech, ~techlevel.3
-		Description: 以下单位的经验获取效率提升50%：\n盟军步兵、重装步兵、掷弹兵、火箭飞行兵、海豹部队、谭雅、超时空突击队
+		Description: actor-upgrade-advanced-training.description
 	Valued:
 		Cost: 1500
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.advanced_training
+
+upgrade.predator_missiles:
+	Inherits: ^default.upgrade
+	Tooltip:
+		Name: actor-upgrade-predator-missiles.name
+	Buildable:
+		Queue: Upgrade.Shared, Upgrade.Allies
+		BuildPaletteOrder: 50
+		BuildDuration: 1000
+		Prerequisites: ~upgrade.allies, gatech, ~techlevel.3
+		Description: actor-upgrade-predator-missiles.description
+	Valued:
+		Cost: 1500
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.predator_missiles
 
 upgrade.composite_armor:
 	Inherits: ^default.upgrade
 	Tooltip:
-		Name: 复合装甲
+		Name: actor-upgrade-composite-armor.name
 	Buildable:
-		Queue: Upgrade.Allies
-		BuildPaletteOrder: 50
+		Queue: Upgrade.Shared, Upgrade.Allies
+		BuildPaletteOrder: 60
 		BuildDuration: 1500
 		Prerequisites: ~upgrade.allies, gatech, ~techlevel.3
-		Description: 以下单位受到的伤害降低25%：\n灰熊主战坦克、幻影坦克、坦克歼击车
+		Description: actor-upgrade-composite-armor.description
 	Valued:
 		Cost: 2000
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.composite_armor
 
 upgrade.boost_gliding_systems:
 	Inherits: ^default.upgrade
 	Tooltip:
-		Name: 先进火控雷达
+		Name: actor-upgrade-boost-gliding-systems.name
 	Buildable:
-		Queue: Upgrade.Allies
-		BuildPaletteOrder: 60
-		BuildDuration: 1500
-		Prerequisites: ~upgrade.america, gatech, ~techlevel.3
-		Description: 以下单位和建筑的攻击力与弹道速度提升25%：\n爱国者防空导弹系统、重装步兵、多功能步战车、神盾防空巡洋舰
-	Valued:
-		Cost: 2000
-
-upgrade.high_caliber_rounds:
-	Inherits: ^default.upgrade
-	Tooltip:
-		Name: 反坦克狙击枪
-	Buildable:
-		Queue: Upgrade.Allies
+		Queue: Upgrade.Shared, Upgrade.Allies
 		BuildPaletteOrder: 70
 		BuildDuration: 1500
-		Prerequisites: ~upgrade.england, gatech, ~techlevel.3
-		Description: 狙击手可以攻击载具并击伤载具炮手并使之短时间内无法攻击\n缴械效果对于无主武器或无人机类载具无效
+		Prerequisites: ~upgrade.america, gatech, ~techlevel.3
+		Description: actor-upgrade-boost-gliding-systems.description
 	Valued:
-		Cost: 3000
+		Cost: 2500
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.boost_gliding_systems
+
+upgrade.portable_weaponry:
+	Inherits: ^default.upgrade
+	Tooltip:
+		Name: actor-upgrade-portable-weaponry.name
+	Buildable:
+		Queue: Upgrade.Shared, Upgrade.Allies
+		BuildPaletteOrder: 80
+		BuildDuration: 1500
+		Prerequisites: ~upgrade.england, gatech, ~techlevel.3
+		Description: actor-upgrade-portable-weaponry.description
+	Valued:
+		Cost: 2000
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.portable_weaponry
 
 upgrade.grand_cannon_protocols:
 	Inherits: ^default.upgrade
 	Tooltip:
-		Name: 巨炮原型
+		Name: actor-upgrade-grand-cannon-protocols.name
 	Buildable:
-		Queue: Upgrade.Allies
-		BuildPaletteOrder: 80
+		Queue: Upgrade.Shared, Upgrade.Allies
+		BuildPaletteOrder: 90
 		BuildDuration: 1000
 		Prerequisites: ~upgrade.france, gatech, ~techlevel.3
-		Description: 可以从法国建筑工厂建造巨炮
+		Description: actor-upgrade-grand-cannon-protocols.description
 	Valued:
 		Cost: 1500
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.grand_cannon_protocols
 
 upgrade.advanced_gun_systems:
 	Inherits: ^default.upgrade
 	Tooltip:
-		Name: 先进坦克炮
+		Name: actor-upgrade-advanced-gun-systems.name
 	Buildable:
-		Queue: Upgrade.Allies
-		BuildPaletteOrder: 90
+		Queue: Upgrade.Shared, Upgrade.Allies
+		BuildPaletteOrder: 100
 		BuildDuration: 1000
 		Prerequisites: ~upgrade.germany, gatech, ~techlevel.3
-		Description: 以下载具的射程提升25%：灰熊主战坦克、坦克歼击车
+		Description: actor-upgrade-advanced-gun-systems.description
 	Valued:
 		Cost: 1500
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.advanced_gun_systems
 
 upgrade.emp_munitions:
 	Inherits: ^default.upgrade
 	Tooltip:
-		Name: 改进型电子脉冲
+		Name: actor-upgrade-emp-munitions.name
 	Buildable:
-		Queue: Upgrade.Allies
-		BuildPaletteOrder: 100
+		Queue: Upgrade.Shared, Upgrade.Allies
+		BuildPaletteOrder: 110
 		BuildDuration: 1500
 		Prerequisites: ~upgrade.korea, gatech, ~techlevel.3
-		Description: 以下单位的攻击可以短暂地瘫痪目标载具：掷弹兵、自行火炮
+		Description: actor-upgrade-emp-munitions.description
 	Valued:
 		Cost: 2000
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.emp_munitions
 
 upgrade.increased_payload:
 	Inherits: ^default.upgrade
 	Tooltip:
-		Name: 大容量弹仓
+		Name: actor-upgrade-increased-payload.name
 	Buildable:
-		Queue: Upgrade.Allies
-		BuildPaletteOrder: 110
+		Queue: Upgrade.Shared, Upgrade.Allies
+		BuildPaletteOrder: 120
 		BuildDuration: 1500
-		Prerequisites: ~upgrade.allies, gatech, ~techlevel.4
-		Description: B2幽灵轰炸机的载弹量翻倍
+		Prerequisites: ~upgrade.allies, gaweat, ~techlevel.4
+		Description: actor-upgrade-increased-payload.description
 	Valued:
-		Cost: 3000
+		Cost: 2500
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.increased_payload
 
-upgrade.improved_flaks:
+### Soviets ###
+upgrade.ap_bullets:
 	Inherits: ^default.upgrade
 	Tooltip:
-		Name: 瞬爆引信
+		Name: actor-upgrade-ap-bullets.name
 	Buildable:
-		Queue: Upgrade.Soviets, Upgrade.Baku
+		Queue: Upgrade.Soviets
 		BuildPaletteOrder: 10
-		BuildDuration: 750
+		BuildDuration: 2250
 		Prerequisites: ~upgrade.soviets, naradr, ~techlevel.2
-		Description: 防空炮武器对地攻击时将立即命中
+		Description: actor-upgrade-ap-bullets.description
+	Buildable@Baku:
+		Queue: Upgrade.Baku
+		BuildPaletteOrder: 10
+		BuildDuration: 2250
+		BuildDurationModifier: 100
+		BuildLimit: 1
+		Prerequisites: ~upgrade.baku, basops, ~techlevel.2
+		Description: actor-upgrade-ap-bullets.description-baku
+	Buildable@Shared:
+		Queue: Upgrade.Shared
+		BuildPaletteOrder: 10
+		BuildDuration: 2250
+		BuildDurationModifier: 100
+		BuildLimit: 1
+		Prerequisites: ~upgrade.sovietsorbaku, naradr, ~techlevel.2
+		Description: actor-upgrade-ap-bullets.description
 	Valued:
-		Cost: 1000
+		Cost: 2500
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.ap_bullets
 
 upgrade.bullet_proof_coats:
 	Inherits: ^default.upgrade
 	Tooltip:
-		Name: 加强型防弹衣
+		Name: actor-upgrade-bullet-proof-coats.name
 	Buildable:
-		Queue: Upgrade.Soviets, Upgrade.Baku
+		Queue: Upgrade.Soviets
 		BuildPaletteOrder: 20
-		BuildDuration: 1000
+		BuildDuration: 1500
 		Prerequisites: ~upgrade.soviets, naradr, ~techlevel.2
-		Description: 以下单位受到的伤害降低25%：动员兵、防空步兵
+		Description: actor-upgrade-bullet-proof-coats.description
+	Buildable@Baku:
+		Queue: Upgrade.Baku
+		BuildPaletteOrder: 20
+		BuildDuration: 1500
+		BuildDurationModifier: 100
+		BuildLimit: 1
+		Prerequisites: ~upgrade.baku, basops, ~techlevel.2
+		Description: actor-upgrade-bullet-proof-coats.description-baku
+	Buildable@Shared:
+		Queue: Upgrade.Shared
+		BuildPaletteOrder: 20
+		BuildDuration: 1500
+		BuildDurationModifier: 100
+		BuildLimit: 1
+		Prerequisites: ~upgrade.sovietsorbaku, naradr, ~techlevel.2
+		Description: actor-upgrade-bullet-proof-coats.description
 	Valued:
-		Cost: 1500
+		Cost: 2000
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.bullet_proof_coats
 
 upgrade.molotov_cocktails:
 	Inherits: ^default.upgrade
 	Tooltip:
-		Name: 火烧连营
+		Name: actor-upgrade-molotov-cocktails.name
 	Buildable:
-		Queue: Upgrade.Soviets
+		Queue: Upgrade.Shared, Upgrade.Soviets
 		BuildPaletteOrder: 30
-		BuildDuration: 750
+		BuildDuration: 1000
 		Prerequisites: ~upgrade.soviets, naradr, ~techlevel.2
-		Description: 动员兵可以使用燃烧瓶攻击建筑
+		Description: actor-upgrade-molotov-cocktails.description
 	Valued:
 		Cost: 1000
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.molotov_cocktails
 
 upgrade.smoke_grenades:
 	Inherits: ^default.upgrade
 	Tooltip:
-		Name: 烟雾缭绕
+		Name: actor-upgrade-smoke-grenades.name
 	Buildable:
-		Queue: Upgrade.Baku
+		Queue: Upgrade.Shared, Upgrade.Baku
 		BuildPaletteOrder: 30
 		BuildDuration: 750
-		Prerequisites: ~upgrade.soviets, naradr, ~techlevel.2
-		Description: 动员兵可以使用烟雾弹攻击敌方目标\n受影响的单位视野减半\n受影响的单位攻击力降低20%
+		Prerequisites: ~upgrade.baku, basops, ~techlevel.2
+		Description: actor-upgrade-smoke-grenades.description
 	Valued:
 		Cost: 1000
-
-upgrade.black_napalm:
-	Inherits: ^default.upgrade
-	Tooltip:
-		Name: 凝固汽油弹
-	Buildable:
-		Queue: Upgrade.Soviets
-		BuildPaletteOrder: 40
-		BuildDuration: 1000
-		Prerequisites: ~upgrade.soviets, natech, ~techlevel.3
-		Description: 以下单位的攻击力提升100%：\n火焰坦克、黒鸢直升机
-	Valued:
-		Cost: 2500
-
-upgrade.propaganda_effort:
-	Inherits: ^default.upgrade
-	Tooltip:
-		Name: 誓师大会
-	Buildable:
-		Queue: Upgrade.Baku
-		BuildPaletteOrder: 40
-		BuildDuration: 750
-		Prerequisites: ~upgrade.soviets, natech, ~techlevel.3
-		Description: 战地宣传塔和战地宣传指挥官技能的增益效果提升25%
-	Valued:
-		Cost: 1500
-
-upgrade.ap_bullets:
-	Inherits: ^default.upgrade
-	Tooltip:
-		Name: 穿甲弹
-	Buildable:
-		Queue: Upgrade.Soviets, Upgrade.Baku
-		BuildPaletteOrder: 50
-		BuildDuration: 1500
-		Prerequisites: ~upgrade.soviets, natech, ~techlevel.3
-		Description: 以下单位的攻击力提升25%：\n哨卫机枪、动员兵、鲍里斯、武装采矿车、武装攻城直升机
-	Valued:
-		Cost: 2000
-
-upgrade.overcharge:
-	Inherits: ^default.upgrade
-	Tooltip:
-		Name: 特斯拉过载
-	Buildable:
-		Queue: Upgrade.Soviets, Upgrade.Baku
-		BuildPaletteOrder: 60
-		BuildDuration: 1500
-		Prerequisites: ~upgrade.russia, natech, ~techlevel.3
-		Description: 特斯拉武器可以短暂地瘫痪目标载具
-	Valued:
-		Cost: 2500
-
-upgrade.radioactive_bombs:
-	Inherits: ^default.upgrade
-	Tooltip:
-		Name: 化武军备
-	Buildable:
-		Queue: Upgrade.Soviets, Upgrade.Baku
-		BuildPaletteOrder: 70
-		BuildDuration: 1500
-		Prerequisites: ~upgrade.iraq, natech, ~techlevel.3
-		Description: 以下单位的攻击将形成辐射区：\n基洛夫空艇、V3火箭发射车、V3无畏舰
-	Valued:
-		Cost: 2000
-
-upgrade.aerial_propaganda:
-	Inherits: ^default.upgrade
-	Tooltip:
-		Name: 广播天线
-	Buildable:
-		Queue: Upgrade.Soviets, Upgrade.Baku
-		BuildPaletteOrder: 80
-		BuildDuration: 1000
-		Prerequisites: ~upgrade.vietnam, natech, ~techlevel.3
-		Description: 以下单位将内置一座战地宣传塔：\n黒鸢直升机、基洛夫空艇
-	Valued:
-		Cost: 2000
-
-upgrade.targeted_explosives:
-	Inherits: ^default.upgrade
-	Tooltip:
-		Name: 智能炸药
-	Buildable:
-		Queue: Upgrade.Soviets, Upgrade.Baku
-		BuildPaletteOrder: 90
-		BuildDuration: 1000
-		Prerequisites: ~upgrade.cuba, natech, ~techlevel.3
-		Description: 以下来源的友军伤害将被移除：\n恐怖分子、疯狂伊文、革命之怒
-	Valued:
-		Cost: 1500
-
-upgrade.high_explosive_bombs:
-	Inherits: ^default.upgrade
-	Tooltip:
-		Name: 烈性炸药
-	Buildable:
-		Queue: Upgrade.Soviets, Upgrade.Baku
-		BuildPaletteOrder: 100
-		BuildDuration: 1500
-		Prerequisites: ~upgrade.libya, natech, ~techlevel.3
-		Description: 以下单位的攻击力提升25%：\n疯狂伊文、超时空伊文、火炮摩托、自爆卡车、V3火箭车、V3无畏舰
-	Valued:
-		Cost: 2500
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.smoke_grenades
 
 upgrade.nuclear_engines:
 	Inherits: ^default.upgrade
 	Tooltip:
-		Name: 核动力引擎
+		Name: actor-upgrade-nuclear-engines.name
 	Buildable:
-		Queue: Upgrade.Soviets, Upgrade.Baku
-		BuildPaletteOrder: 110
+		Queue: Upgrade.Soviets
+		BuildPaletteOrder: 40
 		BuildDuration: 1500
-		Prerequisites: ~upgrade.soviets, natech, ~techlevel.4
-		Description: 以下单位的移动速度提升25%并在被击毁时放出核辐射：\n犀牛主战坦克、天启坦克
+		Prerequisites: ~upgrade.soviets, natech, ~techlevel.3
+		Description: actor-upgrade-nuclear-engines.description
+	Buildable@Baku:
+		Queue: Upgrade.Baku
+		BuildPaletteOrder: 40
+		BuildDuration: 1500
+		BuildDurationModifier: 100
+		BuildLimit: 1
+		Prerequisites: ~upgrade.baku, natech, ~techlevel.3
+		Description: actor-upgrade-nuclear-engines.description-baku
+	Buildable@Shared:
+		Queue: Upgrade.Shared
+		BuildPaletteOrder: 40
+		BuildDuration: 1500
+		BuildDurationModifier: 100
+		BuildLimit: 1
+		Prerequisites: ~upgrade.sovietsorbaku, natech, ~techlevel.3
+		Description: actor-upgrade-nuclear-engines.description
+	Valued:
+		Cost: 1500
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.nuclear_engines
+
+upgrade.uranium_shells:
+	Inherits: ^default.upgrade
+	Tooltip:
+		Name: actor-upgrade-uranium-shells.name
+	Buildable:
+		Queue: Upgrade.Shared, Upgrade.Soviets
+		BuildPaletteOrder: 50
+		BuildDuration: 2250
+		Prerequisites: ~upgrade.soviets, natech, ~techlevel.3
+		Description: actor-upgrade-uranium-shells.description # \nShells of both units leave radiation at the target location.
+	Valued:
+		Cost: 2500
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.uranium_shells
+
+upgrade.mounted_mg:
+	Inherits: ^default.upgrade
+	Tooltip:
+		Name: actor-upgrade-mounted-mg.name
+	Buildable:
+		Queue: Upgrade.Shared, Upgrade.Baku
+		BuildPaletteOrder: 50
+		BuildDuration: 2250
+		Prerequisites: ~upgrade.baku, natech, ~techlevel.3
+		Description: actor-upgrade-mounted-mg.description
 	Valued:
 		Cost: 2000
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.mounted_mg
+
+upgrade.black_napalm:
+	Inherits: ^default.upgrade
+	Tooltip:
+		Name: actor-upgrade-black-napalm.name
+	Buildable:
+		Queue: Upgrade.Shared, Upgrade.Soviets
+		BuildPaletteOrder: 60
+		BuildDuration: 1000
+		Prerequisites: ~upgrade.soviets, natech, ~techlevel.3
+		Description: actor-upgrade-black-napalm.description
+	Valued:
+		Cost: 1500
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.black_napalm
+
+upgrade.propaganda_effort:
+	Inherits: ^default.upgrade
+	Tooltip:
+		Name: actor-upgrade-propaganda-effort.name
+	Buildable:
+		Queue: Upgrade.Shared, Upgrade.Baku
+		BuildPaletteOrder: 60
+		BuildDuration: 750
+		Prerequisites: ~upgrade.baku, natech, ~techlevel.3
+		Description: actor-upgrade-propaganda-effort.description
+	Valued:
+		Cost: 1500
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.propaganda_effort
+
+upgrade.overcharge:
+	Inherits: ^default.upgrade
+	Tooltip:
+		Name: actor-upgrade-overcharge.name
+	Buildable:
+		Queue: Upgrade.Shared, Upgrade.Soviets
+		BuildPaletteOrder: 70
+		BuildDuration: 1500
+		Prerequisites: ~upgrade.russia, natech, ~techlevel.3
+		Description: actor-upgrade-overcharge.description
+	Valued:
+		Cost: 2500
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.overcharge
+
+upgrade.advanced_irradiators:
+	Inherits: ^default.upgrade
+	Tooltip:
+		Name: actor-upgrade-advanced-irradiators.name
+	Buildable:
+		Queue: Upgrade.Shared, Upgrade.Soviets
+		BuildPaletteOrder: 80
+		BuildDuration: 1500
+		Prerequisites: ~upgrade.iraq, natech, ~techlevel.3
+		Description: actor-upgrade-advanced-irradiators.description
+	Valued:
+		Cost: 1000
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.advanced_irradiators
+
+upgrade.aerial_propaganda:
+	Inherits: ^default.upgrade
+	Tooltip:
+		Name: actor-upgrade-aerial-propaganda.name
+	Buildable:
+		Queue: Upgrade.Shared, Upgrade.Soviets
+		BuildPaletteOrder: 90
+		BuildDuration: 1000
+		Prerequisites: ~upgrade.vietnam, natech, ~techlevel.3
+		Description: actor-upgrade-aerial-propaganda.description
+	Valued:
+		Cost: 2000
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.aerial_propaganda
+
+upgrade.targeted_explosives:
+	Inherits: ^default.upgrade
+	Tooltip:
+		Name: actor-upgrade-targeted-explosives.name
+	Buildable:
+		Queue: Upgrade.Shared, Upgrade.Soviets
+		BuildPaletteOrder: 100
+		BuildDuration: 1000
+		Prerequisites: ~upgrade.cuba, natech, ~techlevel.3
+		Description: actor-upgrade-targeted-explosives.description
+	Valued:
+		Cost: 1500
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.targeted_explosives
+
+upgrade.high_explosive_bombs:
+	Inherits: ^default.upgrade
+	Tooltip:
+		Name: actor-upgrade-high-explosive-bombs.name
+	Buildable:
+		Queue: Upgrade.Shared, Upgrade.Soviets
+		BuildPaletteOrder: 110
+		BuildDuration: 1500
+		Prerequisites: ~upgrade.libya, natech, ~techlevel.3
+		Description: actor-upgrade-high-explosive-bombs.description
+	Valued:
+		Cost: 2500
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.high_explosive_bombs
+
+upgrade.radioactive_bombs:
+	Inherits: ^default.upgrade
+	Tooltip:
+		Name: actor-upgrade-radioactive-bombs.name
+	Buildable:
+		Queue: Upgrade.Shared, Upgrade.Soviets
+		BuildPaletteOrder: 120
+		BuildDuration: 1500
+		Prerequisites: ~upgrade.soviets, namisl, ~techlevel.5
+		Description: actor-upgrade-radioactive-bombs.description
+	Valued:
+		Cost: 2500
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.radioactive_bombs
+
+upgrade.cryo_warheads:
+	Inherits: ^default.upgrade
+	Tooltip:
+		Name: actor-upgrade-cryo-warheads.name
+	Buildable:
+		Queue: Upgrade.Shared, Upgrade.Baku
+		BuildPaletteOrder: 120
+		BuildDuration: 1500
+		Prerequisites: ~upgrade.baku, natech, ~techlevel.4
+		Description: actor-upgrade-cryo-warheads.description
+	Valued:
+		Cost: 2000
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.cryo_warheads
+
+### Psi-Corps ###
+upgrade.camouflage:
+	Inherits: ^default.upgrade
+	Tooltip:
+		Name: actor-upgrade-camouflage.name
+	Buildable:
+		Queue: Upgrade.Shared, Upgrade.Yuri
+		BuildPaletteOrder: 10
+		BuildDuration: 1500
+		Prerequisites: ~upgrade.yuri, yadome, ~techlevel.2
+		Description: actor-upgrade-camouflage.description
+	Valued:
+		Cost: 2000
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.camouflage
 
 upgrade.grinder_treads:
 	Inherits: ^default.upgrade
 	Tooltip:
-		Name: 生物科技履带
+		Name: actor-upgrade-grinder-treads.name
 	Buildable:
-		Queue: Upgrade.Yuri
-		BuildPaletteOrder: 10
-		BuildDuration: 1500
+		Queue: Upgrade.Shared, Upgrade.Yuri
+		BuildPaletteOrder: 20
+		BuildDuration: 1000
 		Prerequisites: ~upgrade.yuri, yadome, ~techlevel.2
-		Description: 载具辗毙步兵后将回复生命值
+		Description: actor-upgrade-grinder-treads.description
 	Valued:
-		Cost: 1500
+		Cost: 1000
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.grinder_treads
 
 upgrade.toxin_sprayer:
 	Inherits: ^default.upgrade
 	Tooltip:
-		Name: 毒气喷头
+		Name: actor-upgrade-toxin-sprayer.name
 	Buildable:
-		Queue: Upgrade.Yuri
-		BuildPaletteOrder: 20
+		Queue: Upgrade.Shared, Upgrade.Yuri
+		BuildPaletteOrder: 30
 		BuildDuration: 750
 		Prerequisites: ~upgrade.yuri, yadome, ~techlevel.2
-		Description: 装甲运兵卡车可以喷射毒雾
+		Description: actor-upgrade-toxin-sprayer.description
 	Valued:
 		Cost: 1000
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.toxin_sprayer
+
+upgrade.lazarus_prime:
+	Inherits: ^default.upgrade
+	Tooltip:
+		Name: actor-upgrade-lazarus-prime.name
+	Buildable:
+		Queue: Upgrade.Shared, Upgrade.Yuri
+		BuildPaletteOrder: 40
+		BuildDuration: 1500
+		Prerequisites: ~upgrade.yuri, yatech, ~techlevel.3
+		Description: actor-upgrade-lazarus-prime.description
+	Valued:
+		Cost: 1000
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.lazarus_prime
 
 upgrade.autoloaders:
 	Inherits: ^default.upgrade
 	Tooltip:
-		Name: 自动装弹机
+		Name: actor-upgrade-autoloaders.name
 	Buildable:
-		Queue: Upgrade.Yuri
-		BuildPaletteOrder: 30
-		BuildDuration: 1500
-		Prerequisites: ~upgrade.yuri, yadome, ~techlevel.2
-		Description: 鞭笞者轻型坦克一次发射两发炮弹
+		Queue: Upgrade.Shared, Upgrade.Yuri
+		BuildPaletteOrder: 50
+		BuildDuration: 2250
+		Prerequisites: ~upgrade.yuri, yatech, ~techlevel.3
+		Description: actor-upgrade-autoloaders.description
 	Valued:
 		Cost: 2500
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.autoloaders
 
-upgrade.camouflage:
+upgrade.rocket_barrage:
 	Inherits: ^default.upgrade
 	Tooltip:
-		Name: 绝地迷彩服
+		Name: actor-upgrade-rocket-barrage.name
 	Buildable:
-		Queue: Upgrade.Yuri
-		BuildPaletteOrder: 40
+		Queue: Upgrade.Shared, Upgrade.Yuri
+		BuildPaletteOrder: 60
 		BuildDuration: 1000
 		Prerequisites: ~upgrade.yuri, yatech, ~techlevel.3
-		Description: 以下单位获得隐形能力：\n军团新兵、病毒狙击手
+		Description: actor-upgrade-rocket-barrage.description
 	Valued:
 		Cost: 1500
-
-upgrade.advanced_magnetics:
-	Inherits: ^default.upgrade
-	Tooltip:
-		Name: 电磁过载
-	Buildable:
-		Queue: Upgrade.Yuri
-		BuildPaletteOrder: 50
-		BuildDuration: 750
-		Prerequisites: ~upgrade.yuri, yatech, ~techlevel.3
-		Description: 磁控坦克可以对载具造成伤害并且对建筑伤害提升25%
-	Valued:
-		Cost: 1500
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.rocket_barrage
 
 upgrade.chaos_tank_compensators:
 	Inherits: ^default.upgrade
 	Tooltip:
-		Name: 神经毒气压缩术
+		Name: actor-upgrade-chaos-tank-compensators.name
 	Buildable:
-		Queue: Upgrade.Yuri
-		BuildPaletteOrder: 60
+		Queue: Upgrade.Shared, Upgrade.Yuri
+		BuildPaletteOrder: 70
 		BuildDuration: 1500
 		Prerequisites: ~upgrade.psicorps, yatech, ~techlevel.3
-		Description: 混沌无人机的作用范围更广\n载具被击毁后会放射出神经毒气
+		Description: actor-upgrade-chaos-tank-compensators.description
 	Valued:
-		Cost: 2500
+		Cost: 1500
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.chaos_tank_compensators
 
 upgrade.laser_capacitors:
 	Inherits: ^default.upgrade
 	Tooltip:
-		Name: 绝地棱镜
+		Name: actor-upgrade-laser-capacitors.name
 	Buildable:
-		Queue: Upgrade.Yuri
-		BuildPaletteOrder: 70
-		BuildDuration: 1500
+		Queue: Upgrade.Shared, Upgrade.Yuri
+		BuildPaletteOrder: 80
+		BuildDuration: 2250
 		Prerequisites: ~upgrade.psinepal, yatech, ~techlevel.3
-		Description: 鞭笞者轻型坦克的武器替换为激光炮\n以下单位的攻击力提升25%：\n绝地战车、水蛭幽浮
+		Description: actor-upgrade-laser-capacitors.description
 	Valued:
-		Cost: 2000
+		Cost: 2500
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.laser_capacitors
 
 upgrade.mastery_of_mind:
 	Inherits: ^default.upgrade
 	Tooltip:
-		Name: 超凡飞升
+		Name: actor-upgrade-mastery-of-mind.name
 	Buildable:
-		Queue: Upgrade.Yuri
-		BuildPaletteOrder: 80
+		Queue: Upgrade.Shared, Upgrade.Yuri
+		BuildPaletteOrder: 90
 		BuildDuration: 1500
 		Prerequisites: ~upgrade.psisouth, yatech, ~techlevel.3
-		Description: 启用尤里复制人和灵偶大师的灵能震爆能力\n移除所有灵能震爆的友军伤害\n同时灵能震爆可以损伤载具
+		Description: actor-upgrade-mastery-of-mind.description # \nYuri Clone and Yuri Prime can control 2 assets at the same time.
 	Valued:
-		Cost: 2000
+		Cost: 1500
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.mastery_of_mind
 
 upgrade.dna_boosters:
 	Inherits: ^default.upgrade
 	Tooltip:
-		Name: 掌控进化
+		Name: actor-upgrade-dna-boosters.name
 	Buildable:
-		Queue: Upgrade.Yuri
-		BuildPaletteOrder: 90
+		Queue: Upgrade.Shared, Upgrade.Yuri
+		BuildPaletteOrder: 100
 		BuildDuration: 1500
 		Prerequisites: ~upgrade.psitrans, yatech, ~techlevel.3
-		Description: 解锁基因改造能力\n以下单位的移动速度提升33%：\n狂兽人、深渊巨蟹、深渊狼蛛
+		Description: actor-upgrade-dna-boosters.description
 	Valued:
-		Cost: 2500
+		Cost: 2000
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.dna_boosters
 
 upgrade.disc_armor:
 	Inherits: ^default.upgrade
 	Tooltip:
-		Name: 反应装甲
+		Name: actor-upgrade-disc-armor.name
 	Buildable:
-		Queue: Upgrade.Yuri
-		BuildPaletteOrder: 100
+		Queue: Upgrade.Shared, Upgrade.Yuri
+		BuildPaletteOrder: 110
 		BuildDuration: 1500
 		Prerequisites: ~upgrade.psimoon, yatech, ~techlevel.3
-		Description: 所有飞碟类飞行器受到的伤害降低33%
+		Description: actor-upgrade-disc-armor.description
 	Valued:
 		Cost: 2000
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.disc_armor
 
 upgrade.chainguns:
 	Inherits: ^default.upgrade
 	Tooltip:
-		Name: 新式枪管
+		Name: actor-upgrade-chainguns.name
 	Buildable:
-		Queue: Upgrade.Yuri
-		BuildPaletteOrder: 110
+		Queue: Upgrade.Shared, Upgrade.Yuri
+		BuildPaletteOrder: 120
 		BuildDuration: 1500
 		Prerequisites: ~upgrade.yuri, yatech, ~techlevel.4
-		Description: 所有加特林武器的攻击力提升25%
+		Description: actor-upgrade-chainguns.description
 	Valued:
 		Cost: 2000
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.chainguns
+
+### Unused ###
+upgrade.endurance_training:
+	Inherits: ^default.upgrade
+	Tooltip:
+		Name: actor-upgrade-endurance-training.name
+	Buildable:
+		Queue: Upgrade.Unused # Upgrade.Shared, Upgrade.Allies
+		BuildPaletteOrder: 10
+		BuildDuration: 750
+		Prerequisites: ~disabled # ~upgrade.allies, gaairc, ~techlevel.2
+		Description: actor-upgrade-endurance-training.description
+	Valued:
+		Cost: 1000
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.endurance_training
+
+upgrade.improved_flaks:
+	Inherits: ^default.upgrade
+	Tooltip:
+		Name: actor-upgrade-improved-flaks.name
+	Buildable:
+		Queue: Upgrade.Unused # Upgrade.Shared, Upgrade.Soviets, Upgrade.Baku
+		BuildPaletteOrder: 20
+		BuildDuration: 750
+		Prerequisites: ~disabled # ~upgrade.sovietsorbaku, naradr, ~techlevel.2
+		Description: actor-upgrade-improved-flaks.description
+	Valued:
+		Cost: 1000
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.improved_flaks
+
+upgrade.focused_mind:
+	Inherits: ^default.upgrade
+	Tooltip:
+		Name: actor-upgrade-focused-mind.name
+	Buildable:
+		Queue: Upgrade.Unused # Upgrade.Shared, Upgrade.Yuri
+		BuildPaletteOrder: 30
+		BuildDuration: 1000
+		Prerequisites: ~disabled # ~upgrade.yuri, yadome, ~techlevel.2
+		Description: actor-upgrade-focused-mind.description
+	Valued:
+		Cost: 1500
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.focused_mind
+
+upgrade.advanced_magnetics:
+	Inherits: ^default.upgrade
+	Tooltip:
+		Name: actor-upgrade-advanced-magnetics.name
+	Buildable:
+		Queue: Upgrade.Unused # Upgrade.Shared, Upgrade.Yuri
+		BuildPaletteOrder: 40
+		BuildDuration: 750
+		Prerequisites: ~disabled # ~upgrade.yuri, yatech, ~techlevel.3
+		Description: actor-upgrade-advanced-magnetics.description
+	Valued:
+		Cost: 1500
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.advanced_magnetics
+
+upgrade.cryo_shells:
+	Inherits: ^default.upgrade
+	Tooltip:
+		Name: actor-upgrade-cryo-shells.name
+	Buildable:
+		Queue: Upgrade.Unused # Upgrade.Shared, Upgrade.Baku
+		BuildPaletteOrder: 50
+		BuildDuration: 1500
+		Prerequisites: ~disabled # ~upgrade.baku, natech, ~techlevel.3
+		Description: actor-upgrade-cryo-shells.description
+	Valued:
+		Cost: 2500
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.cryo_shells
+
+upgrade.high_caliber_rounds:
+	Inherits: ^default.upgrade
+	Tooltip:
+		Name: actor-upgrade-high-caliber-rounds.name
+	Buildable:
+		Queue: Upgrade.Unused # Upgrade.Shared, Upgrade.Baku
+		BuildPaletteOrder: 80
+		BuildDuration: 1500
+		Prerequisites: ~disabled # ~upgrade.baku, natech, ~techlevel.3
+		Description: actor-upgrade-high-caliber-rounds.description
+	Valued:
+		Cost: 3000
+	WithProductionIconOverlay:
+		Prerequisites: upgrade.high_caliber_rounds

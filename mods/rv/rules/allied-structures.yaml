@@ -2,6 +2,11 @@ gacnst:
 	Inherits: ^ConstructionYard
 	Buildable:
 		BuildPaletteOrder: 10
+	ProvidesPrerequisite@building.allies:
+		Prerequisite: building.allies
+	ProvidesPrerequisite@building.france:
+		Prerequisite: building.france
+		Factions: france
 	Production:
 		Produces: Building.Allies, Support.Allies, Support.France
 	ProductionQueue@Building:
@@ -11,12 +16,16 @@ gacnst:
 		Factions: america, germany, england, korea, japan, belarus, poland, ukraine, aussie, china, turkey, canada, cuba, libya, iraq, russia, vietnam, chile, mexico, mongolia, psicorps, psinepal, psisouth, psitrans, psimoon, transcaucus, turkmen, tuva, russianfed, serbia
 	ProductionQueue@SupportFrance:
 		Type: Support.France
-		Factions: france
 		Group: Support
+		DisplayOrder: 5
 		LowPowerModifier: 200
+		Factions: france
 		ReadyAudio: ConstructionComplete
+		ReadyTextNotification: notification-construction-complete
 		BlockedAudio: NoBuild
+		BlockedTextNotification: notification-unable-to-build-more
 		LimitedAudio: BuildingInProgress
+		LimitedTextNotification: notification-unable-to-comply-building-in-progress
 		QueuedAudio: Building
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
@@ -33,6 +42,8 @@ gacnst:
 		Sequence: idle-fans
 		PauseOnCondition: chronodisable
 		RequiresCondition: !build-incomplete
+	WithIdleOverlay@waves:
+		RequiresCondition: !build-incomplete && in_water
 	WithBuildingPlacedOverlay:
 		RequiresCondition: !build-incomplete && !chronodisable
 	GrantConditionOnFaction@America:
@@ -139,7 +150,8 @@ gapowr:
 	Inherits@ADVCOOLANTS: ^AffectedByAdvancedCoolants
 	Inherits@SHAPE: ^2x2Shape
 	Buildable:
-		Queue: Building.Allies
+		Queue: Building.Shared, Building.Allies
+		Prerequisites: ~building.allies, ~techlevel.1
 	ProvidesPrerequisite@no-plug:
 		Prerequisite: gapowr.pluggable
 		RequiresCondition: !powrup
@@ -182,10 +194,10 @@ gapowr:
 		RequiresCondition: !build-incomplete && (powrup || advcoolants)
 	Power@ADVCOOLANTS:
 		Amount: 150
-		RequiresCondition: !chronodisable && !forceshieldnopower && !diskdrain && !power-outage && advcoolants
+		RequiresCondition: !chronodisable && !forceshieldnopower && !disabled && advcoolants
 	Power@PLUG:
 		Amount: 150
-		RequiresCondition: !chronodisable && !forceshieldnopower && !diskdrain && !power-outage && powrup
+		RequiresCondition: !chronodisable && !forceshieldnopower && !disabled && powrup
 	IsometricSelectable:
 		DecorationHeight: 60
 	Voiced:
@@ -197,12 +209,12 @@ gapowrup:
 	Valued:
 		Cost: 750
 	Tooltip:
-		Name: 先进冷却剂
+		Name: actor-gapowrup.name
 	Buildable:
-		Queue: Support.Unused # Support.Allies, Support.France
+		Queue: Support.Shared, Support.Allies, Support.France
 		BuildPaletteOrder: 80
-		Prerequisites: gapowr, gaairc, ~techlevel.2
-		Description: 使用先进冷却剂的火力发电厂将产出额外电力
+		Prerequisites: ~building.allies, gapowr, gaairc, ~!global-upgrades, ~techlevel.2
+		Description: actor-gapowrup.description
 		BuildDuration: 125
 		BuildDurationModifier: 100
 	Plug:
@@ -214,56 +226,144 @@ gapile:
 	Inherits: ^Barracks
 	Inherits@SHAPE: ^3x2Shape
 	Buildable:
-		Queue: Building.Allies
+		Queue: Building.Shared, Building.Allies
+		Description: actor-gapile.description
+		Prerequisites: ~building.allies, power, ~techlevel.1
 	Building:
 		Footprint: xxx xxx
 		Dimensions: 3,2
 	RallyPoint:
 		Path: 2,3
+	Exit@1Shared:
+		SpawnOffset: 0,768,0
+		ExitCell: 2,2
+		Priority: 2
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@2Shared:
+		SpawnOffset: -694,-196,0
+		ExitCell: 0,2
+		Priority: 2
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@fallback1Shared:
+		SpawnOffset: -384,512,0
+		ExitCell: 1,2
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@fallback2Shared:
+		SpawnOffset: 384,768,0
+		ExitCell: 3,1
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@fallback3Shared:
+		SpawnOffset: 1086,362,0
+		ExitCell: 3,0
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@fallback4Shared:
+		SpawnOffset: 1086,362,0
+		ExitCell: 3,-1
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@fallback5Shared:
+		SpawnOffset: 1086,362,0
+		ExitCell: 2,-1
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@fallback6Shared:
+		SpawnOffset: 362,-362,0
+		ExitCell: 1,-1
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@fallback7Shared:
+		SpawnOffset: -362,-1086,0
+		ExitCell: 0,-1
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@fallback8Shared:
+		SpawnOffset: -362,-1086,0
+		ExitCell: -1,-1
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@fallback9Shared:
+		SpawnOffset: -362,-1086,0
+		ExitCell: -1,0
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@fallback10Shared:
+		SpawnOffset: -1086,-362,0
+		ExitCell: -1,1
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@fallback11Shared:
+		SpawnOffset: -1086,-362,0
+		ExitCell: -1,2
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@fallback12Shared:
+		SpawnOffset: 384,768,0
+		ExitCell: 3,2
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
 	Exit@1:
 		SpawnOffset: 0,768,0
 		ExitCell: 2,2
 		Priority: 2
+		RequiresCondition: multiqueue
 	Exit@2:
 		SpawnOffset: -694,-196,0
 		ExitCell: 0,2
 		Priority: 2
+		RequiresCondition: multiqueue
 	Exit@fallback1:
 		SpawnOffset: -384,512,0
 		ExitCell: 1,2
+		RequiresCondition: multiqueue
 	Exit@fallback2:
 		SpawnOffset: 384,768,0
 		ExitCell: 3,1
+		RequiresCondition: multiqueue
 	Exit@fallback3:
 		SpawnOffset: 1086,362,0
 		ExitCell: 3,0
+		RequiresCondition: multiqueue
 	Exit@fallback4:
 		SpawnOffset: 1086,362,0
 		ExitCell: 3,-1
+		RequiresCondition: multiqueue
 	Exit@fallback5:
 		SpawnOffset: 1086,362,0
 		ExitCell: 2,-1
+		RequiresCondition: multiqueue
 	Exit@fallback6:
 		SpawnOffset: 362,-362,0
 		ExitCell: 1,-1
+		RequiresCondition: multiqueue
 	Exit@fallback7:
 		SpawnOffset: -362,-1086,0
 		ExitCell: 0,-1
+		RequiresCondition: multiqueue
 	Exit@fallback8:
 		SpawnOffset: -362,-1086,0
 		ExitCell: -1,-1
+		RequiresCondition: multiqueue
 	Exit@fallback9:
 		SpawnOffset: -362,-1086,0
 		ExitCell: -1,0
+		RequiresCondition: multiqueue
 	Exit@fallback10:
 		SpawnOffset: -1086,-362,0
 		ExitCell: -1,1
+		RequiresCondition: multiqueue
 	Exit@fallback11:
 		SpawnOffset: -1086,-362,0
 		ExitCell: -1,2
+		RequiresCondition: multiqueue
 	Exit@fallback12:
 		SpawnOffset: 384,768,0
 		ExitCell: 3,2
+		RequiresCondition: multiqueue
 	Production:
 		Produces: Infantry.Allies, Infantry.USA, Infantry.UK
 	ProductionQueue:
@@ -271,23 +371,31 @@ gapile:
 		Factions: germany, france, korea, japan, belarus, poland, ukraine, aussie, china, turkey, canada, cuba, libya, iraq, russia, vietnam, chile, mexico, mongolia, psicorps, psinepal, psisouth, psitrans, psimoon, transcaucus, turkmen, tuva, russianfed, serbia
 	ProductionQueue@USA:
 		Type: Infantry.USA
-		Factions: america
 		Group: Infantry
+		DisplayOrder: 13
 		LowPowerModifier: 200
+		Factions: america
 		ReadyAudio: UnitReady
+		ReadyTextNotification: notification-unit-ready
 		BlockedAudio: NoBuild
+		BlockedTextNotification: notification-unable-to-build-more
 		LimitedAudio: BuildingInProgress
+		LimitedTextNotification: notification-unable-to-comply-building-in-progress
 		QueuedAudio: Training
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
 	ProductionQueue@UK:
 		Type: Infantry.UK
-		Factions: england
 		Group: Infantry
+		DisplayOrder: 13
 		LowPowerModifier: 200
+		Factions: england
 		ReadyAudio: UnitReady
+		ReadyTextNotification: notification-unit-ready
 		BlockedAudio: NoBuild
+		BlockedTextNotification: notification-unable-to-build-more
 		LimitedAudio: BuildingInProgress
+		LimitedTextNotification: notification-unable-to-comply-building-in-progress
 		QueuedAudio: Training
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
@@ -301,54 +409,70 @@ gapile:
 		Sequence: idle-flag
 		PauseOnCondition: chronodisable
 		RequiresCondition: !build-incomplete
-	ProvidesPrerequisite@gapile:
+	ProvidesPrerequisite@buildingname:
 		Prerequisite: gapile
+	ProvidesPrerequisite@infantry.allies:
+		Prerequisite: infantry.allies
+	ProvidesPrerequisite@infantry.america:
+		Prerequisite: infantry.america
+		Factions: america
+	ProvidesPrerequisite@infantry.england:
+		Prerequisite: infantry.england
+		Factions: england
 	PlaceBuildingVariants:
 		Actors: gapilb
 	IsometricSelectable:
+		Class: gapile
 		DecorationHeight: 60
 
 garefn:
 	Inherits: ^Refinery
 	Buildable:
-		Queue: Building.Allies
+		Queue: Building.Shared, Building.Allies
+		Prerequisites: ~building.allies, power, ~!global-megawealth, ~techlevel.1, ~AIantiRush
 	FreeActor:
 		Actor: cmin
 	SmokeParticleEmitter@refinerysmoke1:
 		Offset: -1024,-512,3456
 	SmokeParticleEmitter@refinerysmoke2:
 		Offset: -64,-1280,3456
+	SpawnNeighboringActors:
+		Locations: 3,0, 3,1, 3,2
 	PlaceBuildingVariants:
 		Actors: garefb #, garefc, garefd
+		Facings: 640, 384 #, 128, 896
 	IsometricSelectable:
+		Class: garefn
 		DecorationHeight: 60
 
 gaairc:
-	Inherits: ^BaseBuilding
-	Inherits@EMPULSE: ^DisabledByEMP
-	Inherits@LOWPOWER: ^DisableOnLowPowerOrPowerDown
-	Inherits@MC: ^MindControllableBuilding
+	Inherits: ^Radar
+	Inherits@PRIMARY: ^PrimaryBuilding
 	Inherits@SPY: ^DisabledByInfiltration
 	Inherits@SHAPE: ^3x2Shape
 	Buildable:
-		Queue: Building.Allies
-		BuildPaletteOrder: 60
-		Prerequisites: power, garefn, ~techlevel.2
-		Description: 盟军科技建筑与飞行器制造厂\n\n提供一个盟军飞行器生产排程\n提供战术地图\n解锁阵营独有支援能力\n需要电力供应\n解锁科技升级\n提供4个着陆整备区域\n能同时整备4架盟军固定翼飞行器\n可以变更朝向
-		BuildDuration: 750
-		BuildDurationModifier: 100
-	Valued:
-		Cost: 1500
+		Queue: Building.Shared, Building.Allies
+		Prerequisites: ~building.allies, power, garefn, ~techlevel.2
+		Description: actor-gaairc.description
 	Tooltip:
-		Name: 盟军空军司令部
+		Name: actor-gaairc.name
 	Tooltip@NoRow:
-		Name: 盟军空军司令部
-	ProvidesPrerequisite:
-		Prerequisite: radar
+		Name: actor-gaairc.name
 	ProvidesPrerequisite@production:
 		Prerequisite: production
-	ProvidesPrerequisite@gaairc:
+	ProvidesPrerequisite@buildingname:
 		Prerequisite: gaairc
+	ProvidesPrerequisite@aircraft.allies:
+		Prerequisite: aircraft.allies
+	ProvidesPrerequisite@aircraft.america:
+		Prerequisite: aircraft.america
+		Factions: america
+	ProvidesPrerequisite@aircraft.england:
+		Prerequisite: aircraft.england
+		Factions: england
+	ProvidesPrerequisite@aircraft.korea:
+		Prerequisite: aircraft.korea
+		Factions: korea
 	ProvidesPrerequisite@america:
 		Prerequisite: radar.america
 		Factions: america
@@ -384,40 +508,28 @@ gaairc:
 	Building:
 		Footprint: x=x x==
 		Dimensions: 3,2
-	Health:
-		HP: 100000
-	Armor:
-		Type: Wood
-	ExternalCondition@disableradar:
-		Condition: disableradar
-	ProvidesRadar:
-		RequiresCondition: !disabled && !chronodisable && !disableradar
-	RevealsShroud:
-		Range: 10c0
-	# RevealsShroudToIntelligenceOwner:
-	#	Types: SatelliteScan
-	#	Range: 10c0
-	WithIdleOverlay@top:
-		Sequence: idle-top
-		PauseOnCondition: disabled || chronodisable
-		RequiresCondition: !build-incomplete
 	WithIdleOverlay@bottom:
 		Sequence: idle-bottom
+		PauseOnCondition: disabled || chronodisable
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@idle-pad-lights:
+		Sequence: idle-pad-lights
 		PauseOnCondition: disabled || chronodisable
 		RequiresCondition: !build-incomplete
 	WithIdleOverlay@mid:
 		Sequence: idle-mid
 		PauseOnCondition: disabled || chronodisable
 		RequiresCondition: !build-incomplete
+	WithIdleOverlay@bottom-lights:
+		Sequence: idle-bottom-lights
+		PauseOnCondition: disabled || chronodisable
+		RequiresCondition: !build-incomplete
 	WithIdleOverlay@dish:
 		Sequence: idle-dish
 		PauseOnCondition: disabled || chronodisable
 		RequiresCondition: !build-incomplete
-	Targetable:
-		TargetTypes: Ground, C4, DetonateAttack, Structure, NonGarrisonableStructure, SpyInfiltrate
-	Power:
-		Amount: -75
-		RequiresCondition: !chronodisable
+	GrantCondition@IDISABLE:
+		RequiresCondition: lowpower || powerdown || emp || infiltrated
 	Reservable:
 	ExitsDebugOverlay:
 	Exit@1:
@@ -440,53 +552,76 @@ gaairc:
 		Condition: airdock
 	GrantExternalConditionToProduced:
 		Condition: produced
+	Production@Shared:
+		Produces: Aircraft.Shared
+		PauseOnCondition: powerdown || infiltrated || emp || chronodisable
+		RequiresCondition: !multiqueue
 	Production:
 		Produces: Aircraft.Allies, Aircraft.USA, Aircraft.UK, Aircraft.Korea
-		PauseOnCondition: powerdown || chronodisable || infiltrated
+		PauseOnCondition: powerdown || infiltrated || emp || chronodisable
+		RequiresCondition: multiqueue
 	ProductionQueue:
 		Type: Aircraft.Allies
-		Factions: germany, france, japan, belarus, poland, ukraine, aussie, china, turkey, canada, cuba, libya, iraq, russia, vietnam, chile, mexico, mongolia, psicorps, psinepal, psisouth, psitrans, psimoon, transcaucus, turkmen, tuva, russianfed, serbia
 		Group: Aircraft
+		DisplayOrder: 25
 		LowPowerModifier: 200
+		Factions: germany, france, japan, belarus, poland, ukraine, aussie, china, turkey, canada, cuba, libya, iraq, russia, vietnam, chile, mexico, mongolia, psicorps, psinepal, psisouth, psitrans, psimoon, transcaucus, turkmen, tuva, russianfed, serbia
 		ReadyAudio: UnitReady
+		ReadyTextNotification: notification-unit-ready
 		BlockedAudio: NoBuild
+		BlockedTextNotification: notification-unable-to-build-more
 		LimitedAudio: BuildingInProgress
+		LimitedTextNotification: notification-unable-to-comply-building-in-progress
 		QueuedAudio: Training
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
 	ProductionQueue@USA:
 		Type: Aircraft.USA
-		Factions: america
 		Group: Aircraft
+		DisplayOrder: 25
 		LowPowerModifier: 200
+		Factions: america
 		ReadyAudio: UnitReady
+		ReadyTextNotification: notification-unit-ready
 		BlockedAudio: NoBuild
+		BlockedTextNotification: notification-unable-to-build-more
 		LimitedAudio: BuildingInProgress
+		LimitedTextNotification: notification-unable-to-comply-building-in-progress
 		QueuedAudio: Training
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
 	ProductionQueue@UK:
 		Type: Aircraft.UK
-		Factions: england
 		Group: Aircraft
+		DisplayOrder: 25
 		LowPowerModifier: 200
+		Factions: england
 		ReadyAudio: UnitReady
+		ReadyTextNotification: notification-unit-ready
 		BlockedAudio: NoBuild
+		BlockedTextNotification: notification-unable-to-build-more
 		LimitedAudio: BuildingInProgress
+		LimitedTextNotification: notification-unable-to-comply-building-in-progress
 		QueuedAudio: Training
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
 	ProductionQueue@Korea:
 		Type: Aircraft.Korea
-		Factions: korea
 		Group: Aircraft
+		DisplayOrder: 25
 		LowPowerModifier: 200
+		Factions: korea
 		ReadyAudio: UnitReady
+		ReadyTextNotification: notification-unit-ready
 		BlockedAudio: NoBuild
+		BlockedTextNotification: notification-unable-to-build-more
 		LimitedAudio: BuildingInProgress
+		LimitedTextNotification: notification-unable-to-comply-building-in-progress
 		QueuedAudio: Training
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
+	ProductionBar@Shared:
+		ProductionType: Aircraft.Shared
 	ProductionBar:
 		ProductionType: Aircraft.Allies
 	ProductionBar@USA:
@@ -495,15 +630,6 @@ gaairc:
 		ProductionType: Aircraft.UK
 	ProductionBar@Korea:
 		ProductionType: Aircraft.Korea
-	InfiltrateForSupportPowerReset:
-		Types: SpyInfiltrate
-	InfiltrateForExploration:
-		Types: SpyInfiltrate
-		InfiltratedNotification: RadarSabotaged
-		InfiltrationNotification: BuildingInfiltratedRadarSabotaged
-	GrantCondition@IDISABLE:
-		RequiresCondition: lowpower || powerdown || emp || infiltrated
-	SupportPowerChargeBar:
 	ParatroopersPower@paratroopers:
 		OrderName: AmericanParatroopers
 		PauseOnCondition: disabled || chronodisable
@@ -512,12 +638,14 @@ gaairc:
 		Icons:
 			1: airborne
 		ChargeInterval: 4500
+		Names:
+			1: Airborne
 		Descriptions:
-			1: 伞兵
-		LongDescs:
-			1: 两架运输机在选定位置投放至多5名盟军步兵与5名重型步兵
+			1: 2 Cargo Planes drop 5 GIs and 5 Guardian GIs\nanywhere on the map.
 		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: notification-select-target
 		EndChargeSpeechNotification: ParatroopersReady
+		EndChargeTextNotification: notification-paratroopers-ready
 		DropItems:
 			1: e1,e1,e1,e1,e1,ggi,ggi,ggi,ggi,ggi
 		SquadSizes:
@@ -542,12 +670,14 @@ gaairc:
 		Icons:
 			1: leaflet
 		ChargeInterval: 3750
+		Names:
+			1: Leaflet Drop
 		Descriptions:
-			1: 宣传品空投
-		LongDescs:
-			1: 一架运输机在选定位置投放心战宣传品\n降低敌方单位的移动速度与攻击速度
+			1: A Cargo Plane drops leaflets\nanywhere on the map.\nLeaflets slow enemy infantry\nand vehicle movement and\nfire speed.
 		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: notification-select-target
 		IncomingSpeechNotification: WarningEnemyAirstrikeInitiated
+		IncomingTextNotification: notification-enemy-airstrike-initiated
 		UnitTypes:
 			1: pdplane.leaflet
 		SquadSizes:
@@ -572,12 +702,14 @@ gaairc:
 		Icons:
 			1: carpetbomb
 		ChargeInterval: 6000
+		Names:
+			1: Carpet Bombing
 		Descriptions:
-			1: 战术轰炸
-		LongDescs:
-			1: 一架B-52轰炸机将精确轰炸选定区域
+			1: A B-52 drops bombs in a line\nanywhere on the map.
 		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: notification-select-target
 		IncomingSpeechNotification: WarningEnemyAirstrikeInitiated
+		IncomingTextNotification: notification-enemy-airstrike-initiated
 		UnitTypes:
 			1: b52
 		SquadSizes:
@@ -601,11 +733,12 @@ gaairc:
 		Icons:
 			1: grizzly
 		ChargeInterval: 6000
+		Names:
+			1: Chrono Grizzly
 		Descriptions:
-			1: 超时空支援（灰熊坦克）
-		LongDescs:
-			1: 在选定位置超时空传送3辆灰熊主战坦克\n这些灰熊主战坦克将永久存续直至被摧毁
+			1: Chronoshifts 3 Grizzly Tanks\nanywhere on the map.
 		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: notification-select-target
 		Weapons:
 			1: GrizzlySpawner
 		ActivationSequence:
@@ -619,12 +752,14 @@ gaairc:
 		Icons:
 			1: tankdrop
 		ChargeInterval: 6000
+		Names:
+			1: Tank Drop
 		Descriptions:
-			1: 坦克空投
-		LongDescs:
-			1: 三架运输机在选定位置空投3辆灰熊主战坦克\n这些灰熊主战坦克将永久存续直至被摧毁
+			1: 3 Cargo Planes drops 3 Grizzly Tanks\nanywhere on the map.
 		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: notification-select-target
 		EndChargeSpeechNotification: ParatroopersReady
+		EndChargeTextNotification: notification-paratroopers-ready
 		DropItems:
 			1: mtnk, mtnk, mtnk
 		SquadSizes:
@@ -651,10 +786,10 @@ gaairc:
 			1: force
 		Cursor: force-shield
 		ChargeInterval: 4500
+		Names:
+			1: Force Shield
 		Descriptions:
-			1: 力场护盾
-		LongDescs:
-			1: 使选定范围内的所有友方建筑在15秒内免疫一切伤害\n可以作用于友方科技建筑与已驻扎的民用建筑
+			1: Makes a group of buildings invulnerable for 15 seconds.
 		Durations:
 			1: 375
 		Conditions:
@@ -665,9 +800,13 @@ gaairc:
 			1: ___x___ __xxx__ _xxxxx_ xxxxxxx _xxxxx_ __xxx__ ___x___
 		OnFireSound: sforceon.wav
 		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: notification-select-target
 		EndChargeSpeechNotification: ForceShieldReady
+		EndChargeTextNotification: notification-force-shield-ready
 		LaunchSpeechNotification: ForceShieldActivated
+		LaunchTextNotification: notification-force-shield-activated
 		IncomingSpeechNotification: ForceShieldActivated
+		IncomingTextNotification: notification-force-shield-activated
 		EffectImage: explosion
 		EffectSequence: forceshield
 		EffectPalette: effect
@@ -680,12 +819,14 @@ gaairc:
 		Icons:
 			1: empulse
 		ChargeInterval: 7500
+		Names:
+			1: E. M. Pulse Strike
 		Descriptions:
-			1: 电磁脉冲炸弹
-		LongDescs:
-			1: 一架轰炸机将在选定位置投放一枚电磁脉冲炸弹\n电磁脉冲炸弹将瘫痪范围内的载具与部分建筑
+			1: A Cargo Plane drops an Electromagnetic Pulse\nbomb anywhere on the map.
 		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: notification-select-target
 		IncomingSpeechNotification: WarningEnemyAirstrikeInitiated
+		IncomingTextNotification: notification-enemy-airstrike-initiated
 		UnitTypes:
 			1: pdplane.emp
 		SquadSizes:
@@ -709,11 +850,12 @@ gaairc:
 		Icons:
 			1: chronobomb
 		ChargeInterval: 6000
+		Names:
+			1: Chronobomb
 		Descriptions:
-			1: 超时空炸弹
-		LongDescs:
-			1: 在选定区域超时空传送若干炸弹\n炸弹将自动伪装成无害的油桶并在一定时间后爆炸
+			1: Chronoshifts several explosive barrels\nanywhere on the map.
 		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: notification-select-target
 		Weapons:
 			1: BarrelSpawner
 		ActivationSequence:
@@ -723,16 +865,46 @@ gaairc:
 		Path: 1,2
 		Palette: mouse
 		IsPlayerPalette: false
-	LaysMinefield:
-		Mines: gadock
+	CommandBarBlacklist:
+		DisableStop: false
+	SpawnNeighboringActors:
+		ActorTypes: gadock
 		Locations: 1,0, 1,1, 2,1
+	AutoTarget:
+	AutoTargetPriority@DEFAULT:
+		ValidTargets: Repair, AirRepair, SeaAnimalRepair
+		ValidRelationships: Ally
+	AttackOmni:
+		PauseOnCondition: chronodisable || disabled
+	Armament:
+		Weapon: RepairDroneSpawn
+		Cursor: repair
+		OutsideRangeCursor: repair
+		TargetRelationships: Ally
+		ForceTargetRelationships: Ally
+		PauseOnCondition: build-incomplete
+	DroneSpawnerMaster:
+		Actors: repdron, repdron, repdron
+		SpawnOffset: -362,-1086,0, -384,512,0, 384,768,0
+		GatherCell: 1,0, 1,1, 2,1
+	WithRangeCircle:
+		Range: 6c0
+		Type: repair
+		Color: FF0000CC
+		BorderWidth: 0
+		Width: 2
 	PlaceBuildingVariants:
 		Actors: gaairb
 	IsometricSelectable:
+		Class: gaairc
 		DecorationHeight: 105
 	Voiced:
 		VoiceSet: AirfieldVoice
 		Volume: 0.8
+	ProvidesPrerequisite@AIantiRush:
+		Prerequisite: AIantiRush ## Hack: AI Building control. AI build refinary only when it has a combat producing line.
+	ActorStatValues:
+		Stats: Armor, Sight, Power
 
 gabarl:
 	Inherits: camisc02
@@ -741,7 +913,7 @@ gabarl:
 		Delay: 125
 		DamageTypes: NonTemporal
 	RenderSprites:
-		Image: camisc02
+		Image: camisc08
 	Explodes:
 		Weapon: SmallChronobombExplode
 
@@ -752,16 +924,31 @@ gabarls:
 		Delay: 125
 		DamageTypes: NonTemporal
 	RenderSprites:
-		Image: camisc01
+		Image: camisc07
 	Explodes:
 		Weapon: LargeChronobombExplode
 
 gaweap:
 	Inherits: ^WarFactory
 	Buildable:
-		Queue: Building.Allies
-	ProvidesPrerequisite@gaweap:
+		Queue: Building.Shared, Building.Allies
+		Description: actor-gaweap.description
+		Prerequisites: ~building.allies, refinery, ~techlevel.1
+	ProvidesPrerequisite@buildingname:
 		Prerequisite: gaweap
+	ProvidesPrerequisite@vehicle.allies:
+		Prerequisite: vehicle.allies
+	ProvidesPrerequisite@vehicle.america:
+		Prerequisite: vehicle.america
+		Factions: america
+	ProvidesPrerequisite@vehicle.england:
+		Prerequisite: vehicle.england
+		Factions: england
+	ProvidesPrerequisite@vehicle.germany:
+		Prerequisite: vehicle.germany
+		Factions: germany
+	ProvidesPrerequisite@vehicleorship.allies:
+		Prerequisite: vehicleorship.allies
 	ProvidesPrerequisite@powered:
 		Prerequisite: powered_robo
 		RequiresCondition: !chronodisable
@@ -772,34 +959,46 @@ gaweap:
 		Factions: france, korea, japan, belarus, poland, ukraine, aussie, china, turkey, canada, cuba, libya, iraq, russia, vietnam, chile, mexico, mongolia, psicorps, psinepal, psisouth, psitrans, psimoon, transcaucus, turkmen, tuva, russianfed, serbia
 	ProductionQueue@USA:
 		Type: Vehicle.USA
-		Factions: america
 		Group: Vehicle
+		DisplayOrder: 17
 		LowPowerModifier: 200
+		Factions: america
 		ReadyAudio: UnitReady
+		ReadyTextNotification: notification-unit-ready
 		BlockedAudio: NoBuild
+		BlockedTextNotification: notification-unable-to-build-more
 		LimitedAudio: BuildingInProgress
+		LimitedTextNotification: notification-unable-to-comply-building-in-progress
 		QueuedAudio: Training
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
 	ProductionQueue@UK:
 		Type: Vehicle.UK
-		Factions: england
 		Group: Vehicle
+		DisplayOrder: 17
 		LowPowerModifier: 200
+		Factions: england
 		ReadyAudio: UnitReady
+		ReadyTextNotification: notification-unit-ready
 		BlockedAudio: NoBuild
+		BlockedTextNotification: notification-unable-to-build-more
 		LimitedAudio: BuildingInProgress
+		LimitedTextNotification: notification-unable-to-comply-building-in-progress
 		QueuedAudio: Training
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
 	ProductionQueue@Germany:
 		Type: Vehicle.Germany
-		Factions: germany
 		Group: Vehicle
+		DisplayOrder: 17
 		LowPowerModifier: 200
+		Factions: germany
 		ReadyAudio: UnitReady
+		ReadyTextNotification: notification-unit-ready
 		BlockedAudio: NoBuild
+		BlockedTextNotification: notification-unable-to-build-more
 		LimitedAudio: BuildingInProgress
+		LimitedTextNotification: notification-unable-to-comply-building-in-progress
 		QueuedAudio: Training
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
@@ -822,12 +1021,23 @@ gaweap:
 	PlaceBuildingVariants:
 		Actors: gaweab #, gaweac, gawead
 	IsometricSelectable:
+		Class: gaweap
 		DecorationHeight: 60
 
 gayard:
 	Inherits: ^Shipyard
 	Buildable:
-		Queue: Building.Allies
+		Queue: Building.Shared, Building.Allies
+		Prerequisites: ~building.allies, refinery, ~techlevel.1
+		Description: actor-gayard.description
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@ship.allies:
+		Prerequisite: ship.allies
+	ProvidesPrerequisite@vehicleorship.allies:
+		Prerequisite: vehicleorship.allies
+	#ProvidesPrerequisite@powered:
+	#	Prerequisite: powered_robo
+	#	RequiresCondition: !chronodisable
 	Production:
 		Produces: Ship.Allies
 	ProductionQueue:
@@ -835,18 +1045,19 @@ gayard:
 	ProductionBar:
 		ProductionType: Ship.Allies
 	SpawnActorPower@sonar:
-		PauseOnCondition: chronodisable
+		PauseOnCondition: disabled || chronodisable
 		Icons:
 			1: sonar
 		Cursor: reveal
 		Prerequisites:
-			1: gayard
+			1: disabled # gayard
+		Names:
+			1: Sonar Pulse
 		Descriptions:
-			1: 声呐探测
-		LongDescs:
-			1: 在一段时间内揭示大范围内的潜艇和水雷
+			1: Reveals all submarines and naval mines in a\nlarge area for a short time.
 		ChargeInterval: 1000
 		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: notification-select-target
 		Actors:
 			1: sonar
 		LifeTime: 375
@@ -862,13 +1073,15 @@ gadept:
 	HitShape:
 		TargetableOffsets: 0,0,0, -720,-720,0, 720,720,0, -720,720,0, 0,1440,0, -1440,0,0
 	Buildable:
-		Queue: Building.Allies
-		Prerequisites: gaweap, ~techlevel.1
+		Queue: Building.Unused # Building.Shared, Building.Allies
+		Prerequisites: ~building.allies, gaweap, ~techlevel.1
 	Building:
 		Footprint: x++ x++ x++
 		Dimensions: 3,3
 	RallyPoint:
 		Path: 3,1
+	SpawnNeighboringActors:
+		Locations: 1,0, 1,1, 1,2, 2,0, 2,1, 2,2
 	WithIdleOverlay@side:
 		Sequence: idle-side
 		PauseOnCondition: chronodisable
@@ -881,16 +1094,17 @@ gadept:
 		EndSequence: repair-end
 		PauseOnCondition: chronodisable
 		RequiresCondition: !build-incomplete
+	WithIdleOverlay@waves:
+		RequiresCondition: !build-incomplete && in_water
 	IsometricSelectable:
 		DecorationHeight: 45
 
 gatech:
 	Inherits: ^BattleLab
 	Inherits@SHAPE: ^3x2Shape
-	Inherits@AI: ^AIMicroManagable
 	Buildable:
-		Queue: Building.Allies
-		Prerequisites: production, gaairc, ~techlevel.3, ~!ai.gatech
+		Queue: Building.Shared, Building.Allies
+		Prerequisites: ~building.allies, production, gaairc, ~techlevel.3, ~!ai.gatech
 	ProvidesPrerequisite@gatech:
 		Prerequisite: gatech
 	ProvidesPrerequisite@upgrade.allies:
@@ -920,9 +1134,14 @@ gatech:
 		Sequence: idle-lights
 		PauseOnCondition: chronodisable
 		RequiresCondition: !build-incomplete
+	Targetable:
+		TargetTypes: Ground, C4, DetonateAttack, Structure, NonGarrisonableStructure, SpyInfiltrate, HijackerInfiltrate, DiskInfiltrateAllied
+	Targetable@Water:
+		TargetTypes: Ground, Water, WaterStructure, C4, SpyInfiltrate, HijackerInfiltrate, DiskInfiltrateAllied
 	PlaceBuildingVariants:
 		Actors: gatecb
 	IsometricSelectable:
+		Class: gatech
 		DecorationHeight: 180
 	Voiced:
 		VoiceSet: TechCenterVoice
@@ -930,15 +1149,16 @@ gatech:
 
 gawall:
 	Inherits: ^Wall
+	Inherits@GTGCAN: ^AffectedByGrandCannonProtocols
 	Buildable:
-		Queue: Support.Allies, Support.France
-		Prerequisites: ~techlevel.1
+		Queue: Support.Shared, Support.Allies, Support.France
+		Prerequisites: ~building.allies, ~techlevel.1
 		BuildPaletteOrder: 10
-		Description: 阻止步兵与载具通过\n并可以阻挡枪炮类型的火力
+		Description: actor-gawall.description
 	Tooltip:
-		Name: 盟军围墙
+		Name: actor-gawall.name
 	Tooltip@NoRow:
-		Name: 盟军围墙
+		Name: actor-gawall.name
 	LineBuild:
 		NodeTypes: gawall
 	LineBuildNode:
@@ -951,20 +1171,21 @@ gawall:
 gapill:
 	Inherits: ^SupportBuilding
 	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@GTGCAN: ^AffectedByGrandCannonProtocols
 	Inherits@MC: ^MindControllableBuilding
 	Buildable:
-		Queue: Support.Allies, Support.France
+		Queue: Support.Shared, Support.Allies, Support.France
 		BuildPaletteOrder: 40
-		Prerequisites: gapile, ~techlevel.1
-		Description: 全自动反步兵防御\n\n侦测隐形\n可以放置在水域\n\n·强势对抗：步兵、轻型载具\n·弱势对抗：装甲载具、飞行器、舰艇
+		Prerequisites: ~building.allies, gapile, ~techlevel.1
+		Description: actor-gapill.description
 		BuildDuration: 250
 		BuildDurationModifier: 100
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: 机枪碉堡
+		Name: actor-gapill.name
 	Tooltip@NoRow:
-		Name: 机枪碉堡
+		Name: actor-gapill.name
 	Building:
 		Footprint: x
 		Dimensions: 1, 1
@@ -983,8 +1204,7 @@ gapill:
 		MuzzleSequence: muzzle
 	WithMuzzleOverlay:
 	AttackTurreted:
-		PauseOnCondition: chronodisable
-		RequiresCondition: !build-incomplete
+		PauseOnCondition: build-incomplete || chronodisable
 	Turreted:
 		TurnSpeed: 1023
 	DetectCloaked:
@@ -1007,6 +1227,9 @@ gapill:
 	Voiced:
 		VoiceSet: PillBoxVoice
 		Volume: 0.8
+	ActorStatValues:
+		Stats: Armor, Sight, None, Damage, ReloadDelay, MaxRange
+		Damage: 65
 
 nasam:
 	Inherits: ^VoxelLighting
@@ -1014,21 +1237,22 @@ nasam:
 	Inherits@BOOSTGLIDING: ^AffectedByBoostGlidingSystems
 	Inherits@DRAIN: ^DiskDrainable
 	Inherits@EMPULSE: ^DisabledByEMP
+	Inherits@GTGCAN: ^AffectedByGrandCannonProtocols
 	Inherits@LOWPOWER: ^DisableOnLowPowerOrPowerDown
 	Inherits@MC: ^MindControllableBuilding
 	Buildable:
-		Queue: Support.Allies, Support.France
-		BuildPaletteOrder: 60
-		Prerequisites: gaairc, ~techlevel.2
-		Description: 全自动防空设施\n\n仅能对空\n侦测隐形\n需要电力供应\n\n·强势对抗：飞行器\n·弱势对抗：地面目标
+		Queue: Support.Shared, Support.Allies, Support.France
+		BuildPaletteOrder: 50
+		Prerequisites: ~building.allies, gaairc, ~techlevel.2
+		Description: actor-nasam.description
 		BuildDuration: 375
 		BuildDurationModifier: 100
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: 爱国者防空导弹系统
+		Name: actor-nasam.name
 	Tooltip@NoRow:
-		Name: 爱国者防空导弹系统
+		Name: actor-nasam.name
 	Building:
 		Footprint: x
 		Dimensions: 1, 1
@@ -1047,14 +1271,15 @@ nasam:
 		Offset: 550,0,0
 		RealignDelay: -1
 	AttackTurreted:
-		PauseOnCondition: disabled || chronodisable
-		RequiresCondition: !build-incomplete
+		PauseOnCondition: build-incomplete || disabled || chronodisable
 	Armament:
 		Weapon: RedEye2
+		Damage: 60
 		LocalOffset: 500,200,900, 500,-200,900
 		RequiresCondition: !boostgliding
 	Armament@boost:
 		Weapon: RedEye2Boosted
+		Damage: 90
 		LocalOffset: 500,200,900, 500,-200,900
 		RequiresCondition: boostgliding
 	BodyOrientation:
@@ -1063,8 +1288,6 @@ nasam:
 		NormalsPalette: ts-normals
 	WithVoxelTurret:
 		RequiresCondition: !build-incomplete
-	GrantCondition@IDISABLE:
-		RequiresCondition: lowpower || powerdown || emp || diskdrain
 	WithRangeCircle:
 		Range: 12c0
 		Type: aa
@@ -1072,6 +1295,8 @@ nasam:
 	Power:
 		Amount: -30
 		RequiresCondition: !chronodisable
+	GrantCondition@IDISABLE:
+		RequiresCondition: lowpower || powerdown || emp || diskdrain
 	RequiresBuildableArea:
 		Adjacent: 3
 	IsometricSelectable:
@@ -1087,31 +1312,34 @@ nasam:
 	Voiced:
 		VoiceSet: PatriotMissileVoice
 		Volume: 0.8
+	ActorStatValues:
+		Stats: Armor, Sight, Power, Damage, ReloadDelay, MaxRange
+		Upgrades: upgrade.boost_gliding_systems, upgrade.grand_cannon_protocols
 
 gtgcan:
 	Inherits: ^VoxelLighting
 	Inherits@AUTOTARGET: ^AutoTargetGround
 	Inherits@DRAIN: ^DiskDrainable
-	Inherits@LOWPOWER: ^DisableOnLowPowerOrPowerDown
 	Inherits@EMPULSE: ^DisabledByEMP
+	Inherits@LOWPOWER: ^DisableOnLowPowerOrPowerDown
 	Inherits@MC: ^MindControllableBuilding
 	Inherits@SHAPE: ^2x2Shape
 	Buildable:
-		Queue: Support.France
+		Queue: Support.Shared, Support.France
 		BuildPaletteOrder: 90
+		Prerequisites: ~building.france, upgrade.grand_cannon_protocols, ~techlevel.3
+		Description: actor-gtgcan.description
 		BuildDuration: 750
-		Prerequisites: upgrade.grand_cannon_protocols, ~techlevel.3
-		Description: 法国全自动长程火炮平台
+		BuildDurationModifier: 100
 	Valued:
-		Cost: 2000
+		Cost: 1500
 	Tooltip:
-		Name: 巨炮
+		Name: actor-gtgcan.name
 	Tooltip@NoRow:
-		Name: 巨炮
+		Name: actor-gtgcan.name
 	Building:
 		Footprint: xx xx
 		Dimensions: 2, 2
-		TerrainTypes: Clear, Rough, Road, DirtRoad
 	Health:
 		HP: 90000
 	Armor:
@@ -1127,10 +1355,10 @@ gtgcan:
 		Offset: 400,0,0
 		RealignDelay: -1
 	AttackTurreted:
-		PauseOnCondition: disabled || chronodisable
-		RequiresCondition: !build-incomplete
+		PauseOnCondition: build-incomplete || disabled || chronodisable
 	Armament:
 		Weapon: GrandCannonWeapon
+		Damage: 150
 		Recoil: 127
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
@@ -1143,8 +1371,9 @@ gtgcan:
 		RequiresCondition: !build-incomplete
 	WithVoxelBarrel:
 		RequiresCondition: !build-incomplete
-	GrantCondition@IDISABLE:
-		RequiresCondition: lowpower || powerdown || emp || diskdrain
+	WithIdleOverlay@waves:
+		Sequence: idle-waves
+		RequiresCondition: in_water
 	AutoTarget:
 	WithMuzzleOverlay:
 	WithRangeCircle:
@@ -1153,40 +1382,45 @@ gtgcan:
 	Power:
 		Amount: -100
 		RequiresCondition: !chronodisable
+	GrantCondition@IDISABLE:
+		RequiresCondition: lowpower || powerdown || emp || diskdrain
 	IsometricSelectable:
 		DecorationHeight: 45
 	Voiced:
 		VoiceSet: GrandCannonVoice
 		Volume: 0.5
+	ActorStatValues:
+		Stats: Armor, Sight, Power, Damage, ReloadDelay, MaxRange
 
 gaorep:
 	Inherits: ^BaseBuilding
+	Inherits@EMPULSE: ^DisabledByEMP
 	Inherits@MC: ^MindControllableBuilding
 	Inherits@SHAPE: ^3x3Shape
 	Inherits@AICash: ^AICashCheat
 	Buildable:
-		Queue: Building.Allies
+		Queue: Building.Shared, Building.Allies
 		BuildPaletteOrder: 120
-		Prerequisites: garefn, gatech, ~techlevel.4
-		Description: 通过矿物或宝石所获取的资金提升25%\n\n同一玩家最多只能同时拥有一个\n不会提升油井的产出
+		Prerequisites: ~building.allies, gatech, ~techlevel.4
+		Description: actor-gaorep.description
 		BuildLimit: 1
 		BuildDuration: 1250
 		BuildDurationModifier: 100
 	Valued:
 		Cost: 2000
 	Tooltip:
-		Name: 矿石提纯器
+		Name: actor-gaorep.name
 		RequiresCondition: !megawealth && showownername
 	Tooltip@NoRow:
-		Name: 矿石提纯器
+		Name: actor-gaorep.name
 		RequiresCondition: !megawealth && !showownername
 	Tooltip@Megawealth:
-		Name: 矿石提纯器
-		GenericName: Structure
+		Name: actor-gaorep.megawealth-name
+		GenericName: meta-building.name
 		RequiresCondition: megawealth && showownername
 	Tooltip@Megawealth-NoRow:
-		Name: 矿石提纯器
-		GenericName: Structure
+		Name: actor-gaorep.megawealth-name
+		GenericName: meta-building.name
 		ShowOwnerRow: false
 		RequiresCondition: megawealth && !showownername
 	GrantConditionOnPrerequisite@megawealth:
@@ -1206,10 +1440,14 @@ gaorep:
 	#	Range: 6c0
 	WithIdleOverlay@glow:
 		Sequence: idle-glow
-		PauseOnCondition: chronodisable
+		PauseOnCondition: disabled || chronodisable
 		RequiresCondition: !build-incomplete
+	WithIdleOverlay@waves:
+		Sequence: idle-waves
+		RequiresCondition: in_water
 	ResourcePurifier:
 		Modifier: 25
+		RequiresCondition: !disabled && !chronodisable
 	Power:
 		Amount: -200
 		RequiresCondition: !chronodisable
@@ -1217,7 +1455,7 @@ gaorep:
 		Condition: resource-purify
 		Duration: 3
 	SmokeParticleEmitter@purifiersmoke:
-		RequiresCondition: resource-purify && !chronodisable
+		RequiresCondition: resource-purify && !disabled && !chronodisable
 		Image: smallsmoke
 		Sequences: idle
 		Palette: effect50alpha
@@ -1227,31 +1465,34 @@ gaorep:
 		Duration: 39
 		Offset: -128,0,3560
 	ProvidesPrerequisite@default:
+		RequiresCondition: !disabled && !chronodisable
 	IsometricSelectable:
 		DecorationHeight: 60
 	Voiced:
 		VoiceSet: OrePurifierVoice
 		Volume: 0.8
+	ActorStatValues:
+		Stats: Armor, Sight, Power
 
 gaspysat:
 	Inherits: ^BaseBuilding
-	Inherits@LOWPOWER: ^DisableOnLowPowerOrPowerDown
 	Inherits@EMPULSE: ^DisabledByEMP
+	Inherits@LOWPOWER: ^DisableOnLowPowerOrPowerDown
 	Inherits@MC: ^MindControllableBuilding
 	Inherits@SHAPE: ^2x2Shape
 	Buildable:
-		Queue: Building.Allies
+		Queue: Building.Shared, Building.Allies
 		BuildPaletteOrder: 110
-		Prerequisites: gatech, ~techlevel.4
-		Description: 提供 支援能力：间谍卫星\n\n需要电力供应\n提供战术雷达
+		Prerequisites: ~building.allies, gatech, ~techlevel.4
+		Description: actor-gaspysat.description
 		BuildDuration: 1000
 		BuildDurationModifier: 100
 	Valued:
 		Cost: 1500
 	Tooltip:
-		Name: 间谍卫星控制塔
+		Name: actor-gaspysat.name
 	Tooltip@NoRow:
-		Name: 间谍卫星控制塔
+		Name: actor-gaspysat.name
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -1277,9 +1518,14 @@ gaspysat:
 		Sequence: idle-dish
 		PauseOnCondition: disabled || chronodisable
 		RequiresCondition: !build-incomplete
+	WithIdleOverlay@waves:
+		Sequence: idle-waves
+		RequiresCondition: in_water
 	Power:
 		Amount: -100
 		RequiresCondition: !chronodisable
+	GrantCondition@IDISABLE:
+		RequiresCondition: lowpower || powerdown || emp
 	ExternalCondition@disableradar:
 		Condition: disableradar
 	ProvidesRadar:
@@ -1293,15 +1539,15 @@ gaspysat:
 		PauseOnCondition: disabled || chronodisable
 		Prerequisites:
 			1: gaspysat
+		Names:
+			1: Satellite Scan
 		Descriptions:
-			1: 间谍卫星
-		LongDescs:
-			1: 揭示整个战场30秒\n冷却完毕后该能力将自动启用
+			1: Reveals the whole map for 30 seconds.\nActivated automatically.
 		Icons:
 			1: satscan
 		Actors: camera.satscan
 		Type: SpySatellite
-		AutoFire: true
+		# AutoFire: true
 		ChargeInterval: 4500
 		OrderName: SatelliteScanPowerInfoOrder
 	IsometricSelectable:
@@ -1309,6 +1555,8 @@ gaspysat:
 	Voiced:
 		VoiceSet: SpySatelliteVoice
 		Volume: 0.8
+	ActorStatValues:
+		Stats: Armor, Sight, Power
 
 gagap:
 	Inherits: ^SupportBuilding
@@ -1319,18 +1567,16 @@ gagap:
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: 电磁干扰仪
+		Name: actor-gagap.name
 	Tooltip@NoRow:
-		Name: 电磁干扰仪
+		Name: actor-gagap.name
 	Buildable:
-		Queue: Support.Allies, Support.France
+		Queue: Support.Shared, Support.Allies, Support.France
 		BuildPaletteOrder: 100
-		Prerequisites: gatech, ~techlevel.3
-		Description: 阻断此处的雷达信号以遮蔽敌方视野\n\n需要电力供应\n无法遮挡范围内的超级武器建筑
-		BuildDuration: 125
+		Prerequisites: ~building.allies, gatech, ~techlevel.3
+		Description: actor-gagap.description
+		BuildDuration: 250
 		BuildDurationModifier: 100
-	Building:
-		TerrainTypes: Clear, Rough, Road, DirtRoad
 	Health:
 		HP: 60000
 	Armor:
@@ -1349,36 +1595,45 @@ gagap:
 	CaptureNotification:
 	Targetable:
 		TargetTypes: Ground, C4, DetonateAttack, Structure, NonGarrisonableStructure
+	Targetable@Water:
+		TargetTypes: Ground, Water, WaterStructure, C4
 	RenderShroudCircle:
 	WithIdleOverlay@head:
 		Sequence: idle-head
 		PauseOnCondition: disabled || chronodisable
 		RequiresCondition: !build-incomplete
-	GrantCondition@IDISABLE:
-		RequiresCondition: lowpower || powerdown || emp || diskdrain
+	WithIdleOverlay@waves:
+		Sequence: idle-waves
+		RequiresCondition: in_water
 	Power:
 		Amount: -50
 		RequiresCondition: !chronodisable
+	GrantCondition@IDISABLE:
+		RequiresCondition: lowpower || powerdown || emp || diskdrain
 	MustBeDestroyed:
 		RequiredForShortGame: false
-	GpsDotAS:
+	RangedGpsDot:
 		Sequence: Structure
 	IsometricSelectable:
 		DecorationHeight: 90
 	Voiced:
 		VoiceSet: GapGeneratorVoice
 		Volume: 0.8
+	ActorStatValues:
+		Stats: Armor, Sight, Power
 
 gaweat:
 	Inherits: ^PrimarySuperWeapon
 	Buildable:
-		Queue: Support.Allies, Support.France
-		Prerequisites: gatech, !enoughweather, ~techlevel.5
-		Description: 一种可以如同神明一般改变气象的高科技仪器\n\n需要电力供应\n必定会被揭示给敌对玩家\n\n·提供 超级武器：闪电风暴
+		Queue: Support.Shared, Support.Allies, Support.France
+		Prerequisites: ~building.allies, gatech, !enoughweather, ~techlevel.5
+		Description: actor-gaweat.description
 	Tooltip:
-		Name: 天气控制仪
+		Name: actor-gaweat.name
 	Tooltip@NoRow:
-		Name: 天气控制仪
+		Name: actor-gaweat.name
+	WithIdleOverlay@waves:
+		RequiresCondition: !build-incomplete && in_water
 	DetonateWeaponPower@WeatherStorm:
 		OrderName: WeatherStormInfoOrder
 		Prerequisites:
@@ -1387,10 +1642,10 @@ gaweat:
 			1: bolticon
 		Cursor: weatherstorm
 		ChargeInterval: 9000
+		Names:
+			1: Lightning Storm
 		Descriptions:
-			1: 闪电风暴
-		LongDescs:
-			1: 对选定的大范围区域造成重大破坏
+			1: Applies heavy damage over a large area.
 		Weapons:
 			1: WeatherStormInit
 		ActivationSequence:
@@ -1401,9 +1656,13 @@ gaweat:
 		SpawnCameraAtGround: true
 		EndChargeSound: swearead.wav
 		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: notification-select-target
 		EndChargeSpeechNotification: LightningStormReady
+		EndChargeTextNotification: notification-lightning-storm-ready
 		LaunchSpeechNotification: LightningStormCreated
+		LaunchTextNotification: notification-lightning-storm-created
 		IncomingSpeechNotification: LightningStormCreated
+		IncomingTextNotification: notification-lightning-storm-created
 		DisplayTimerRelationships: Ally, Neutral, Enemy
 		PauseOnCondition: disabled || chronodisable
 		DisplayRadarPing: True
@@ -1413,6 +1672,7 @@ gaweat:
 		Prerequisite: enoughweather
 	NotificationAnnouncement:
 		Notification: WeathercontrolDeviceDetected
+		TextNotification: notification-weather-control-device-detected
 	IsometricSelectable:
 		DecorationHeight: 75
 	Voiced:
@@ -1423,13 +1683,13 @@ gacsph:
 	Inherits: ^SecondarySuperWeapon
 	Inherits@SHAPE: ^4x3Shape
 	Buildable:
-		Queue: Support.Allies, Support.France
-		Prerequisites: gatech, !enoughchrono, ~techlevel.5
-		Description: 一种可以穿越时间与空间裂隙的高科技设备\n\n需要电力供应\n必定会被揭示给敌对玩家\n可以改变朝向\n\n·提供 超级武器：超时空传送
+		Queue: Support.Shared, Support.Allies, Support.France
+		Prerequisites: ~building.allies, gatech, !enoughchrono, ~techlevel.5
+		Description: actor-gacsph.description
 	Tooltip:
-		Name: 超时空传送仪
+		Name: actor-gacsph.name
 	Tooltip@NoRow:
-		Name: 超时空传送仪
+		Name: actor-gacsph.name
 	Building:
 		Footprint: xxx xxx xxx xxx
 		Dimensions: 4,3
@@ -1440,10 +1700,10 @@ gacsph:
 		Icons:
 			1: chrono
 		ChargeInterval: 6000
+		Names:
+			1: Chronoshift
 		Descriptions:
-			1: 超时空传送
-		LongDescs:
-			1: 将3x3范围内的载具、舰艇与具备超时空传送能力的步兵传送到目标区域\n目标区域的地形必须已被揭示\n不具备超时空传送能力的步兵将因此死亡\n传送载具或舰艇到各自不可通行的地形时，它们将被摧毁\n可以传送所有玩家的单位\n被传送的单位不会在一段时间后返回原位
+			1: Teleports a group of units across\nthe map.\n\nKills infantry.
 		Dimensions:
 			1: 3,3
 		Footprints:
@@ -1452,9 +1712,13 @@ gacsph:
 			1: -1
 		AllowMultiple: true
 		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: notification-select-target
 		EndChargeSpeechNotification: ChronosphereReady
+		EndChargeTextNotification: notification-chronosphere-ready
 		LaunchSpeechNotification: ChronosphereActivated
+		LaunchTextNotification: notification-chronosphere-activated
 		IncomingSpeechNotification: ChronosphereActivated
+		IncomingTextNotification: notification-chronosphere-activated
 		# Those sounds don't work: OpenRA/OpenRA#10540
 		# They also want to be played successive
 		#SelectTargetSound: schrlo1.wav, schrlo2a.wav schrlo2b.wav, schrlo2c.wav, schrlo3.wav
@@ -1479,6 +1743,7 @@ gacsph:
 		Prerequisite: enoughchrono
 	NotificationAnnouncement:
 		Notification: ChronosphereDetected
+		TextNotification: notification-chronosphere-detected
 	WithIdleOverlay@dome:
 		Sequence: idle-dome
 		PauseOnCondition: chronodisable
@@ -1490,6 +1755,7 @@ gacsph:
 	PlaceBuildingVariants:
 		Actors: gacspb
 	IsometricSelectable:
+		Class: gacsph
 		DecorationHeight: 45
 	Voiced:
 		VoiceSet: ChronosphereVoice
@@ -1499,22 +1765,23 @@ atesla:
 	Inherits: ^SupportBuilding
 	Inherits@AUTOTARGET: ^AutoTargetGround
 	Inherits@DRAIN: ^DiskDrainable
-	Inherits@LOWPOWER: ^DisableOnLowPowerOrPowerDown
 	Inherits@EMPULSE: ^DisabledByEMP
+	Inherits@GTGCAN: ^AffectedByGrandCannonProtocols
+	Inherits@LOWPOWER: ^DisableOnLowPowerOrPowerDown
 	Inherits@MC: ^MindControllableBuilding
 	Buildable:
-		Queue: Support.Allies, Support.France
-		BuildPaletteOrder: 70
-		Prerequisites: gaairc, ~techlevel.3
-		Description: 先进基地防御\n\n无法对空\n侦测隐形\n攻击单位时光束将会分叉并造成范围伤害\n从射程内的最多其他3座本方光棱塔获取增益\n提供增益的光棱塔无法开火\n需要电力供应\n\n·强势对抗：地面目标、舰艇\n·弱势对抗：飞行器\n\n附近其他光棱塔增幅倍率：\n没有光棱塔：100%\n一座光棱塔：200%\n两座光棱塔：300%\n三座光棱塔：400%
+		Queue: Support.Shared, Support.Allies, Support.France
+		BuildPaletteOrder: 60
+		Prerequisites: ~building.allies, gaairc, ~techlevel.3
+		Description: actor-atesla.description
 		BuildDuration: 625
 		BuildDurationModifier: 100
 	Valued:
 		Cost: 1200
 	Tooltip:
-		Name: Prism Tower
+		Name: actor-atesla.name
 	Tooltip@NoRow:
-		Name: Prism Tower
+		Name: actor-atesla.name
 	Building:
 		Footprint: x
 		Dimensions: 1, 1
@@ -1544,8 +1811,7 @@ atesla:
 		SupportArmament: support
 		BuffCondition: prism-stack
 		MaxSupportersPerAttacker: 3
-		PauseOnCondition: disabled || chronodisable
-		RequiresCondition: !build-incomplete
+		PauseOnCondition: build-incomplete || disabled || chronodisable
 	DetectCloaked:
 		Range: 7c0
 		RequiresCondition: !disabled
@@ -1553,6 +1819,8 @@ atesla:
 	Power:
 		Amount: -75
 		RequiresCondition: !chronodisable
+	GrantCondition@IDISABLE:
+		RequiresCondition: lowpower || powerdown || emp || diskdrain
 	AutoTarget:
 	WithIdleOverlay@normal:
 		Sequence: idle-normal
@@ -1572,8 +1840,6 @@ atesla:
 	FirepowerMultiplier@3:
 		Modifier: 400
 		RequiresCondition: prism-stack >= 3
-	GrantCondition@IDISABLE:
-		RequiresCondition: lowpower || powerdown || emp || diskdrain
 	IsometricSelectable:
 		Class: atesla
 		DecorationHeight: 90
@@ -1583,67 +1849,29 @@ atesla:
 	Voiced:
 		VoiceSet: PrismTowerVoice
 		Volume: 0.8
-
-power:
-	AlwaysVisible:
-	Interactable:
-	Tooltip:
-		Name: 火力发电厂
-
-refinery:
-	AlwaysVisible:
-	Interactable:
-	Tooltip:
-		Name: 矿石精炼厂
-
-barracks:
-	AlwaysVisible:
-	Interactable:
-	Tooltip:
-		Name: 兵营
-
-radar:
-	AlwaysVisible:
-	Interactable:
-	Tooltip:
-		Name: 盟军空军司令部
-
-warfactory:
-	AlwaysVisible:
-	Interactable:
-	Tooltip:
-		Name: 战车工厂
-
-production:
-	AlwaysVisible:
-	Interactable:
-	Tooltip:
-		Name: 任意生产建筑
-
-repairpad:
-	AlwaysVisible:
-	Interactable:
-	Tooltip:
-		Name: 维修平台
+	ActorStatValues:
+		Stats: Armor, Sight, Power, Damage, ReloadDelay, MaxRange
+		Damage: 150
+		ReloadDelay: 50
 
 # Yuri's Revenge Structures
 garobo:
 	Inherits: ^BaseBuilding
-	Inherits@LOWPOWER: ^DisableOnLowPowerOrPowerDown
 	Inherits@EMPULSE: ^DisabledByEMP
+	Inherits@LOWPOWER: ^DisableOnLowPowerOrPowerDown
 	Inherits@MC: ^MindControllableBuilding
 	Inherits@SHAPE: ^2x2Shape
 	Buildable:
 		Queue: Building.Unused # Building.Allies
 		BuildPaletteOrder: 80
 		Prerequisites: gaweap
-		Description: Allows production of Robot Tanks.\nRequired for Robot Tanks to function.
+		Description: actor-garobo.description
 	Valued:
 		Cost: 600
 	Tooltip:
-		Name: Robot Control Center
+		Name: actor-garobo.name
 	Tooltip@NoRow:
-		Name: Robot Control Center
+		Name: actor-garobo.name
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -1664,11 +1892,18 @@ garobo:
 		Sequence: idle-dish
 		PauseOnCondition: disabled || chronodisable
 		RequiresCondition: !build-incomplete
+	WithIdleOverlay@waves:
+		Sequence: idle-waves
+		RequiresCondition: in_water
 	Power:
 		Amount: -50
 		RequiresCondition: !chronodisable
+	GrantCondition@IDISABLE:
+		RequiresCondition: lowpower || powerdown || emp
 	IsometricSelectable:
 		DecorationHeight: 60
+	ActorStatValues:
+		Stats: Armor, Sight, Power
 
 # Custom Structures
 gaapad:
@@ -1678,16 +1913,16 @@ gaapad:
 	Buildable:
 		Queue: Building.Unused # Building.Allies
 		BuildPaletteOrder: 100
-		Prerequisites: gaairc, ~prerequisite.airpad, ~techlevel.2
-		Description: Rearms up to 3 aircraft.
+		Prerequisites: gaairc, prerequisite.airpad, ~techlevel.2
+		Description: actor-gaapad.description
 		BuildDuration: 125
 		BuildDurationModifier: 100
 	Valued:
 		Cost: 250
 	Tooltip:
-		Name: Airpad
+		Name: actor-gaapad.name
 	Tooltip@NoRow:
-		Name: Airpad
+		Name: actor-gaapad.name
 	ProvidesPrerequisite@default:
 	GrantExternalConditionToOwner:
 		Condition: airdock
@@ -1715,6 +1950,32 @@ gaapad:
 		Sequence: idle-pad
 		PauseOnCondition: chronodisable
 		RequiresCondition: !build-incomplete
+	WithIdleOverlay@waves:
+		Sequence: idle-waves
+		RequiresCondition: in_water
+	AutoTarget:
+	AutoTargetPriority@DEFAULT:
+		ValidTargets: Repair, AirRepair, SeaAnimalRepair
+		ValidRelationships: Ally
+	AttackOmni:
+		PauseOnCondition: chronodisable
+	Armament:
+		Weapon: RepairDroneSpawn
+		Cursor: repair
+		OutsideRangeCursor: repair
+		TargetRelationships: Ally
+		ForceTargetRelationships: Ally
+		PauseOnCondition: build-incomplete
+	DroneSpawnerMaster:
+		Actors: repdron
+		SpawnOffset: 0,0,0
+		GatherCell: 1,1
+	WithRangeCircle:
+		Range: 6c0
+		Type: repair
+		Color: FF0000CC
+		BorderWidth: 0
+		Width: 2
 	Power:
 		Amount: -10
 		RequiresCondition: !chronodisable
@@ -1728,14 +1989,16 @@ gaapad:
 	Exit@3:
 		Facing: 896
 		SpawnOffset: 0,512,0
-	LaysMinefield:
-		Mines: gadock
+	SpawnNeighboringActors:
+		ActorTypes: gadock
 		Locations: 1,0, 1,1
 	IsometricSelectable:
 		DecorationHeight: 30
 	Voiced:
 		VoiceSet: AirfieldVoice
 		Volume: 0.8
+	ActorStatValues:
+		Stats: Armor, Sight, Power
 
 gadock:
 	Interactable:
@@ -1747,7 +2010,7 @@ gadock:
 		Condition: dontmove
 	Mobile:
 		Speed: 1
-		Locomotor: wheeled
+		Locomotor: amphibious
 		PauseOnCondition: dontmove
 	Exit@1:
 		Facing: 896
@@ -1755,16 +2018,18 @@ gadock:
 
 gagatea:
 	Inherits: ^Gate_A
+	Inherits@GTGCAN: ^AffectedByGrandCannonProtocols
 	Buildable:
-		Queue: Support.Allies, Support.France
-		Prerequisites: ~techlevel.1
+		Queue: Support.Shared, Support.Allies, Support.France
+		Prerequisites: ~building.allies, ~techlevel.1
 		BuildPaletteOrder: 20
+		Description: actor-gagate.description
 		BuildDuration: 125
 		BuildDurationModifier: 100
 	Tooltip:
-		Name: 盟军闸门
+		Name: actor-gagate.name
 	Tooltip@NoRow:
-		Name: 盟军闸门
+		Name: actor-gagate.name
 	LineBuildNode:
 		Types: gawall
 	WithGateSpriteBody:
@@ -1773,25 +2038,34 @@ gagatea:
 		ReplaceableTypes: AlliedGate
 	PlaceBuildingVariants:
 		Actors: gagateb
+	IsometricSelectable:
+		Class: gagate
 
 gagateb:
 	Inherits: ^Gate_B
+	Inherits@GTGCAN: ^AffectedByGrandCannonProtocols
 	-Buildable:
 	Tooltip:
-		Name: 盟军闸门
+		Name: actor-gagate.name
 	Tooltip@NoRow:
-		Name: 盟军闸门
+		Name: actor-gagate.name
 	LineBuildNode:
 		Types: gawall
 	WithGateSpriteBody:
 		Type: gawall
 	Replacement:
 		ReplaceableTypes: AlliedGate
+	IsometricSelectable:
+		Class: gagate
 
 gasilo:
 	Inherits: ^Silo
 	Buildable:
-		Queue: Support.Allies, Support.France
+		Queue: Support.Shared, Support.Allies, Support.France
+		Prerequisites: ~building.allies, refinery, ~!global-megawealth, ~techlevel.1
+	WithIdleOverlay@waves:
+		Sequence: idle-waves
+		RequiresCondition: in_water
 	IsometricSelectable:
 		DecorationHeight: 45
 
@@ -1799,22 +2073,23 @@ gamgun:
 	Inherits: ^SupportBuilding
 	Inherits@AUTOTARGET: ^AutoTargetGround
 	Inherits@DRAIN: ^DiskDrainable
-	Inherits@LOWPOWER: ^DisableOnLowPowerOrPowerDown
 	Inherits@EMPULSE: ^DisabledByEMP
+	Inherits@GTGCAN: ^AffectedByGrandCannonProtocols
+	Inherits@LOWPOWER: ^DisableOnLowPowerOrPowerDown
 	Inherits@MC: ^MindControllableBuilding
 	Buildable:
-		Queue: Support.France
+		Queue: Support.Shared, Support.France
 		BuildPaletteOrder: 80
-		Prerequisites: gaairc, ~techlevel.3
-		Description: 运用幻影技术的法国先进炮塔\n\n侦测隐形\n停火状态或开火间隔期间隐形\n具有更远的建筑范围\n\n·强势对抗：步兵、载具\n·弱势对抗：建筑\n\n·特殊能力：隐形
+		Prerequisites: ~building.france, gaairc, ~techlevel.3
+		Description: actor-gamgun.description
 		BuildDuration: 375
 		BuildDurationModifier: 100
 	Valued:
 		Cost: 800
 	Tooltip:
-		Name: 幻境炮塔
+		Name: actor-gamgun.name
 	Tooltip@NoRow:
-		Name: 幻境炮塔
+		Name: actor-gamgun.name
 	Building:
 		Footprint: x
 		Dimensions: 1, 1
@@ -1832,8 +2107,7 @@ gamgun:
 		LocalOffset: 768,0,980
 		MuzzleSequence: muzzle
 	AttackTurreted:
-		PauseOnCondition: disabled || chronodisable
-		RequiresCondition: !build-incomplete
+		PauseOnCondition: build-incomplete || disabled || chronodisable
 	WithMuzzleOverlay:
 	Turreted:
 		TurnSpeed: 40
@@ -1843,12 +2117,12 @@ gamgun:
 		RequiresCondition: !disabled && !chronodisable && !emp
 		InitialDelay: 25
 		CloakDelay: 25
+		CloakStyle: Palette
+		CloakedPalette: cloak
 		IsPlayerPalette: true
 		UncloakOn: Attack, Damage
 	WithSpriteTurret:
 		RequiresCondition: !build-incomplete
-	GrantCondition@IDISABLE:
-		RequiresCondition: lowpower || powerdown || emp || diskdrain
 	DetectCloaked:
 		Range: 6c0
 	RenderDetectionCircle:
@@ -1860,6 +2134,8 @@ gamgun:
 	Power:
 		Amount: -25
 		RequiresCondition: !chronodisable
+	GrantCondition@IDISABLE:
+		RequiresCondition: lowpower || powerdown || emp || diskdrain
 	RequiresBuildableArea:
 		Adjacent: 15
 	-Cloak@stealth-generator:
@@ -1873,27 +2149,31 @@ gamgun:
 	Voiced:
 		VoiceSet: MirageTurretVoice
 		Volume: 0.8
+	ActorStatValues:
+		Stats: Armor, Sight, Power, Damage, ReloadDelay, MaxRange
+		Damage: 100
 
 gagun:
 	Inherits: ^SupportBuilding
 	Inherits@AUTOTARGET: ^AutoTargetGround
 	Inherits@DRAIN: ^DiskDrainable
-	Inherits@LOWPOWER: ^DisableOnLowPowerOrPowerDown
 	Inherits@EMPULSE: ^DisabledByEMP
+	Inherits@GTGCAN: ^AffectedByGrandCannonProtocols
+	Inherits@LOWPOWER: ^DisableOnLowPowerOrPowerDown
 	Inherits@MC: ^MindControllableBuilding
 	Buildable:
-		Queue: Support.Allies, Support.France
-		BuildPaletteOrder: 50
-		Prerequisites: gapile, ~prerequisite.gun_turret, ~techlevel.1
-		Description: 反载具基地防御\n\n需要电力供应\n侦测隐形\n\n·强势对抗：载具\n·弱势对抗：步兵、飞行器、建筑
+		Queue: Support.Shared, Support.Allies, Support.France
+		BuildPaletteOrder: 70
+		Prerequisites: ~building.allies, gapile, prerequisite.gun_turret, ~techlevel.1
+		Description: actor-gagun.description
 		BuildDuration: 250
 		BuildDurationModifier: 100
 	Valued:
 		Cost: 650
 	Tooltip:
-		Name: 反坦克炮塔
+		Name: actor-gagun.name
 	Tooltip@NoRow:
-		Name: 反坦克炮塔
+		Name: actor-gagun.name
 	Building:
 		Footprint: x
 		Dimensions: 1, 1
@@ -1913,8 +2193,7 @@ gagun:
 		LocalOffset: 874,0,640
 		MuzzleSequence: muzzle
 	AttackTurreted:
-		PauseOnCondition: disabled || chronodisable
-		RequiresCondition: !build-incomplete
+		PauseOnCondition: build-incomplete || disabled || chronodisable
 	WithMuzzleOverlay:
 	Turreted:
 		TurnSpeed: 40
@@ -1922,8 +2201,6 @@ gagun:
 		RealignDelay: -1
 	WithSpriteTurret:
 		RequiresCondition: !build-incomplete
-	GrantCondition@IDISABLE:
-		RequiresCondition: lowpower || powerdown || emp || diskdrain
 	DetectCloaked:
 		Range: 5c0
 	RenderDetectionCircle:
@@ -1935,6 +2212,8 @@ gagun:
 	Power:
 		Amount: -15
 		RequiresCondition: !chronodisable
+	GrantCondition@IDISABLE:
+		RequiresCondition: lowpower || powerdown || emp || diskdrain
 	RequiresBuildableArea:
 		Adjacent: 4
 	WithIdleOverlay@waves:
@@ -1946,11 +2225,18 @@ gagun:
 	Voiced:
 		VoiceSet: GunTurretVoice
 		Volume: 0.8
+	ActorStatValues:
+		Stats: Armor, Sight, Power, Damage, ReloadDelay, MaxRange
+		Damage: 150
 
 gaexpn:
 	Inherits: ^ExpansionNode
 	Voiced:
 		VoiceSet: AlliedExpansionNodeVoice
+	ActorStatValues:
+		Icon: icon
+		IconPalette: chrome
+		TooltipActor: expn
 
 gapilb:
 	Inherits: gapile
@@ -1965,14 +2251,54 @@ gapilb:
 	Building:
 		Footprint: xx xx xx
 		Dimensions: 2,3
+	Exit@1Shared:
+		SpawnOffset: 0,768,0
+		ExitCell: 2,2
+	Exit@2Shared:
+		SpawnOffset: 694,-196,0
+		ExitCell: 2,0
+	Exit@fallback1Shared:
+		SpawnOffset: -362,1086,0
+		ExitCell: 2,3
+	Exit@fallback2Shared:
+		SpawnOffset: -362,1086,0
+		ExitCell: 1,3
+	Exit@fallback3Shared:
+		SpawnOffset: -1086,362,0
+		ExitCell: 0,3
+	Exit@fallback4Shared:
+		SpawnOffset: -1086,362,0
+		ExitCell: -1,3
+	Exit@fallback5Shared:
+		SpawnOffset: -1086,362,0
+		ExitCell: -1,2
+	Exit@fallback6Shared:
+		SpawnOffset: -362,-362,0
+		ExitCell: -1,1
+	Exit@fallback7Shared:
+		SpawnOffset: 362,-1086,0
+		ExitCell: -1,0
+	Exit@fallback8Shared:
+		SpawnOffset: 362,-1086,0
+		ExitCell: -1,-1
+	Exit@fallback9Shared:
+		SpawnOffset: 362,-1086,0
+		ExitCell: 0,-1
+	Exit@fallback10Shared:
+		SpawnOffset: 1086,-362,0
+		ExitCell: 1,-1
+	Exit@fallback11Shared:
+		SpawnOffset: 1086,-362,0
+		ExitCell: 2,-1
+	Exit@fallback12Shared:
+		SpawnOffset: 384,512,0
+		ExitCell: 2,1
 	Exit@1:
 		SpawnOffset: 0,768,0
 		ExitCell: 2,2
-		Priority: 2
 	Exit@2:
 		SpawnOffset: 694,-196,0
 		ExitCell: 2,0
-		Priority: 2
 	Exit@fallback1:
 		SpawnOffset: -362,1086,0
 		ExitCell: 2,3
@@ -2009,6 +2335,10 @@ gapilb:
 	Exit@fallback12:
 		SpawnOffset: 384,512,0
 		ExitCell: 2,1
+	ActorStatValues:
+		Icon: icon
+		IconPalette: chrome
+		TooltipActor: gapile
 
 garefb:
 	Inherits: ^RefineryB
@@ -2021,8 +2351,15 @@ garefb:
 		Offset: 1024,-512,3456
 	SmokeParticleEmitter@refinerysmoke2:
 		Offset: 64,-1280,3456
+	SpawnNeighboringActors:
+		Locations: 0,3, 1,3, 2,3
 	IsometricSelectable:
+		Class: garefn
 		DecorationHeight: 60
+	ActorStatValues:
+		Icon: icon
+		IconPalette: chrome
+		TooltipActor: garefn
 
 garefc:
 	Inherits: ^RefineryC
@@ -2034,8 +2371,15 @@ garefc:
 		Offset: 1024,512,3456
 	SmokeParticleEmitter@refinerysmoke2:
 		Offset: 64,1280,3456
+	SpawnNeighboringActors:
+		Locations: 0,0, 0,1, 0,2
 	IsometricSelectable:
+		Class: garefn
 		DecorationHeight: 60
+	ActorStatValues:
+		Icon: icon
+		IconPalette: chrome
+		TooltipActor: garefn
 
 garefd:
 	Inherits: ^RefineryD
@@ -2047,8 +2391,15 @@ garefd:
 		Offset: -1024,512,3456
 	SmokeParticleEmitter@refinerysmoke2:
 		Offset: -64,1280,3456
+	SpawnNeighboringActors:
+		Locations: 0,0, 1,0, 2,0
 	IsometricSelectable:
+		Class: garefn
 		DecorationHeight: 60
+	ActorStatValues:
+		Icon: icon
+		IconPalette: chrome
+		TooltipActor: garefn
 
 gaweab:
 	Inherits: gaweap
@@ -2056,12 +2407,16 @@ gaweab:
 	-Buildable:
 	-PlaceBuildingVariants:
 	Building:
-		Footprint: xxx xxx xxx xxx ===
+		Footprint: xxx xxx xxx xxx +++
 		Dimensions: 3,5
 	RallyPoint:
 		Path: 1,6
 	Exit@1:
 		ExitCell: 1,4
+	ActorStatValues:
+		Icon: icon
+		IconPalette: chrome
+		TooltipActor: gaweap
 
 gaweac:
 	Inherits: gaweap
@@ -2073,11 +2428,15 @@ gaweac:
 	-WithIdleOverlay@bib:
 	-WithIdleOverlay@fan:
 	Building:
-		Footprint: =xxxx =xxxx =xxxx
+		Footprint: +xxxx +xxxx +xxxx
 	RallyPoint:
 		Path: -2,1
 	Exit@1:
 		ExitCell: 0,1
+	ActorStatValues:
+		Icon: icon
+		IconPalette: chrome
+		TooltipActor: gaweap
 
 gawead:
 	Inherits: gaweab
@@ -2087,7 +2446,7 @@ gawead:
 	-WithIdleOverlay@bib:
 	-WithIdleOverlay@fan:
 	Building:
-		Footprint: === xxx xxx xxx xxx
+		Footprint: +++ xxx xxx xxx xxx
 	RallyPoint:
 		Path: 1,-2
 	Exit@1:
@@ -2111,8 +2470,15 @@ gaairb:
 		SpawnOffset: 512,512,0
 	Exit@4:
 		SpawnOffset: -512,-512,0
-	LaysMinefield:
+	SpawnNeighboringActors:
 		Locations: 0,1, 1,1, 1,2
+	DroneSpawnerMaster:
+		SpawnOffset: -512,1024,0, 512,512,0, -512,-512,0
+		GatherCell: 0,1, 1,1, 1,2
+	ActorStatValues:
+		Icon: icon
+		IconPalette: chrome
+		TooltipActor: gaairc
 
 gatecb:
 	Inherits: gatech
@@ -2122,6 +2488,10 @@ gatecb:
 	Building:
 		Footprint: xx xx xx
 		Dimensions: 2,3
+	ActorStatValues:
+		Icon: icon
+		IconPalette: chrome
+		TooltipActor: gatech
 
 gacspb:
 	Inherits: gacsph
@@ -2135,3 +2505,7 @@ gacspb:
 		OrderName: ChronoshiftB
 		Prerequisites:
 			1: gacspb
+	ActorStatValues:
+		Icon: icon
+		IconPalette: chrome
+		TooltipActor: gacsph

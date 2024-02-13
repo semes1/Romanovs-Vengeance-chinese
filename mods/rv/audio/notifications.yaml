@@ -172,7 +172,22 @@ Speech:
 		WarningEnemyAirstrikeInitiated: 201
         	VolumeModifier: 2.2
 		InsufficientSilos: 202
-	DisablePrefixes: BaseAttackWarning
+		CruiserStrikeActivated: scruweaa
+			VolumeModifier: 0.6
+		V3StormActivated: sv3sweaa
+			VolumeModifier: 0.3
+		OrbitalDropActivated: sorbsata, sorbsatb
+			VolumeModifier: 0.7
+
+		# Unit Creation Notifications
+		MyTruckIsLoaded: vdemsea
+		KirovReporting: vkirsea
+		DiscInFlight: vflomoe
+		LetsRockAndRoll: itapcra, itapcrb, itapcrc, itapcrd
+		BorisHasArrived: iborcra, iborcrb, iborcrc, iborcrd, iborcre
+		TheresOnlyOneTrueYuri: iyupcrd
+		ForSovietGlory: iromatd
+	DisablePrefixes: BaseAttackWarning, CruiserStrikeActivated, V3StormActivated, OrbitalDropActivated, MyTruckIsLoaded, KirovReporting, DiscInFlight, LetsRockAndRoll, BorisHasArrived, TheresOnlyOneTrueYuri, ForSovietGlory
 
 Sounds:
 	DefaultVariant: .wav
@@ -180,15 +195,21 @@ Sounds:
 		RadarUp: uradaron
 		RadarDown: uradarof
 		CashTickUp: ucredup
+			InterruptType: Overlap
 		CashTickDown: ucreddn
+			InterruptType: Overlap
 		LevelUp: gupgrad1
 		DisablePower: gpowof
 		EnablePower: gpowon
 		ChatLine: umessage
+			InterruptType: Interrupt
 		BuildPaletteOpen: uslide1
 		BuildPaletteClose: uslide2
 		TabClick: utab
 		ClickSound: umenucl1
+			InterruptType: Overlap
 		ClickDisabledSound: ugamclos
+			InterruptType: Overlap
 		Beacon: ubeacon
+			InterruptType: Interrupt
 		Warning: uwarning

@@ -1,6 +1,6 @@
 #region Copyright & License Information
 /*
- * Copyright 2007-2020 The OpenRA Developers (see AUTHORS)
+ * Copyright (c) The OpenRA Developers and Contributors
  * This file is part of OpenRA, which is free software. It is made
  * available to you under the terms of the GNU General Public License
  * as published by the Free Software Foundation, either version 3 of
@@ -12,7 +12,6 @@
 using System.Linq;
 using OpenRA.Graphics;
 using OpenRA.Mods.Common.Activities;
-using OpenRA.Mods.Common.Graphics;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Mods.Common.Traits.Render;
 using OpenRA.Mods.RA2.Traits;
@@ -49,7 +48,7 @@ namespace OpenRA.Mods.RA2.Activities
 				infectable.Infector = self;
 				infectable.InfectorTrait = infector;
 				infectable.FirepowerMultipliers = self.TraitsImplementing<IFirepowerModifier>()
-					.Select(a => a.GetFirepowerModifier()).ToArray();
+					.Select(a => a.GetFirepowerModifier(infector.Info.Name)).ToArray();
 				infectable.Ticks = infector.Info.DamageInterval;
 				infectable.GrantCondition(targetActor);
 				infectable.RevokeCondition(targetActor, true);
@@ -72,17 +71,17 @@ namespace OpenRA.Mods.RA2.Activities
 
 		protected override void OnLastRun(Actor self)
 		{
-			CancelInfection(self);
+			CancelInfection();
 			base.OnLastRun(self);
 		}
 
 		protected override void OnActorDispose(Actor self)
 		{
-			CancelInfection(self);
+			CancelInfection();
 			base.OnActorDispose(self);
 		}
 
-		void CancelInfection(Actor self)
+		void CancelInfection()
 		{
 			if (target.Type != TargetType.Actor)
 				return;

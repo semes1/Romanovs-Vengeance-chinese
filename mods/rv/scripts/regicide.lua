@@ -1,5 +1,5 @@
 --[[
-   Copyright 2007-2021 The OpenRA Developers (see AUTHORS)
+   Copyright (c) The OpenRA Developers and Contributors
    This file is part of OpenRA, which is free software. It is made
    available to you under the terms of the GNU General Public License
    as published by the Free Software Foundation, either version 3 of
@@ -83,7 +83,7 @@ WorldLoadedRegicide = function()
 			players[player.InternalName] = {
 				object = player,
 				leader = Actor.Create(LeaderTypes[player.Faction], true, { Owner = player, Facing = Angle.SouthEast, Location = player.GetActorsByTypes(mcvs)[1].Location + CVec.New(3,3) }),
-				objective = player.AddPrimaryObjective("击杀敌方首长的同时，保护我方首长。"),
+				objective = player.AddPrimaryObjective("Keep your leader alive, while killing enemy ones."),
 				alive = true
 			}
 
@@ -93,21 +93,3 @@ WorldLoadedRegicide = function()
 		end
 	end
 end
-
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          
-                                                                                                                                                          

@@ -1,20 +1,21 @@
 e2:
-	Inherits@1: ^Infantry
-	Inherits@2: ^Parachutable
+	Inherits: ^Infantry
 	Inherits@APBULLETS: ^AffectedByAPBullets
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@BULLETPROOF: ^AffectedByBulletProofCoats
-	Inherits@CHAOS: ^Berserkable
+	Inherits@CHAOS: ^BerserkableArmed
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@MC: ^MindControllable
 	Inherits@MOLOTOV: ^AffectedByMolotovCocktails
+	Inherits@PARACHUTE: ^Parachutable
 	Inherits@SMOKEGREN: ^AffectedBySmokeGrenades
 	Inherits@VOICES: ^WithFeedbackVoicelines
 	Buildable:
-		Queue: Infantry.Soviets, Infantry.Cuba, Infantry.Iraq, Infantry.Baku, Infantry.Tuva
-		Prerequisites: ~techlevel.1
+		Queue: Infantry.Shared, Infantry.Soviets, Infantry.Cuba, Infantry.Iraq, Infantry.Baku, Infantry.Turkmenistan, Infantry.Tuva
+		BuildAtProductionType: Soldier
+		Prerequisites: ~infantry.sovietsorbaku, ~techlevel.1
 		BuildPaletteOrder: 10
-		Description: 廉价的泛用型步兵\n\n·强势对抗：步兵\n·弱势对抗：载具、飞行器
+		Description: actor-e2.description
 		BuildDuration: 75
 		BuildDurationModifier: 100
 	UpdatesPlayerStatistics:
@@ -25,9 +26,9 @@ e2:
 		Payload: 50
 		Voice: Move
 	Tooltip:
-		Name: 动员兵
+		Name: actor-e2.name
 	Tooltip@NoRow:
-		Name: 动员兵
+		Name: actor-e2.name
 	Selectable:
 		Bounds: 482, 1448, 0, -530
 	Health:
@@ -43,97 +44,133 @@ e2:
 	# RevealsShroudToIntelligenceOwner:
 	#	Range: 6c0
 	RevealOnDeath:
-		Radius: 3c0
+		Radius: 6c0
 	AttackFrontal:
 		Voice: Attack
 		FacingTolerance: 2
 	Armament@primary:
 		Weapon: M1Carbine
-		PauseOnCondition: chronodisable
+		Damage: 15
+		LocalOffset: 256,0,768
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: !rank-elite
 	Armament@elite:
 		Weapon: M1CarbineE
-		PauseOnCondition: chronodisable
+		Damage: 20
+		LocalOffset: 256,0,768
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: rank-elite
+	Armament@primary-line:
+		Weapon: M1CarbineLine
+		LocalOffset: 256,0,768
+		PauseOnCondition: chronodisable || webdisable || dogstun
+		RequiresCondition: apbullets && !rank-elite
+	Armament@elite-line:
+		Weapon: M1CarbineLineE
+		LocalOffset: 256,0,768
+		PauseOnCondition: chronodisable || webdisable || dogstun
+		RequiresCondition: apbullets && rank-elite
 	Armament@molotov:
 		Weapon: MolotovCocktail
+		Damage: 10
 		LocalOffset: 512,0,768
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: molotov && !rank-elite
 	Armament@molotov-elite:
 		Weapon: MolotovCocktailE
+		Damage: 14
 		LocalOffset: 512,0,768
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: molotov && rank-elite
 	Armament@smokegrens:
 		Weapon: SmokeGrenade
 		LocalOffset: 512,0,768
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: smokegrens && !rank-elite
 	Armament@smokegrens-elite:
 		Weapon: SmokeGrenadeE
 		LocalOffset: 512,0,768
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: smokegrens && rank-elite
 	Armament@opentopped:
 		Name: opentopped
 		Weapon: M1Carbine
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: !rank-elite
 	Armament@elite-opentopped:
 		Name: opentopped
 		Weapon: M1CarbineE
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: rank-elite
+	Armament@opentopped-line:
+		Name: opentopped
+		Weapon: M1CarbineLine
+		PauseOnCondition: chronodisable || webdisable || dogstun
+		RequiresCondition: apbullets && !rank-elite
+	Armament@elite-opentopped-line:
+		Name: opentopped
+		Weapon: M1CarbineLineE
+		PauseOnCondition: chronodisable || webdisable || dogstun
+		RequiresCondition: apbullets && rank-elite
 	Armament@molotov-opentopped:
 		Name: opentopped
 		Weapon: MolotovCocktail
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: molotov && !rank-elite
 	Armament@molotov-elite-opentopped:
 		Name: opentopped
 		Weapon: MolotovCocktailE
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: molotov && rank-elite
 	Armament@smokegrens-opentopped:
 		Name: opentopped
 		Weapon: SmokeGrenade
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: smokegrens && !rank-elite
 	Armament@smokegrens-elite-opentopped:
 		Name: opentopped
 		Weapon: SmokeGrenadeE
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: smokegrens && rank-elite
 	Armament@garrisoned:
 		Name: garrisoned
 		Weapon: UCM1Carbine
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: !rank-elite
 	Armament@elite-garrisoned:
 		Name: garrisoned
 		Weapon: UCM1CarbineE
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: rank-elite
+	Armament@garrisoned-line:
+		Name: garrisoned
+		Weapon: UCM1CarbineLine
+		PauseOnCondition: chronodisable || webdisable || dogstun
+		RequiresCondition: apbullets && !rank-elite
+	Armament@elite-garrisoned-line:
+		Name: garrisoned
+		Weapon: UCM1CarbineLineE
+		PauseOnCondition: chronodisable || webdisable || dogstun
+		RequiresCondition: apbullets && rank-elite
 	Armament@molotov-garrisoned:
 		Name: garrisoned
 		Weapon: UCMolotovCocktail
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: molotov && !rank-elite
 	Armament@molotov-elite-garrisoned:
 		Name: garrisoned
 		Weapon: UCMolotovCocktailE
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: molotov && rank-elite
 	Armament@smokegrens-garrisoned:
 		Name: garrisoned
 		Weapon: UCSmokeGrenade
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: smokegrens && !rank-elite
 	Armament@smokegrens-elite-garrisoned:
 		Name: garrisoned
 		Weapon: UCSmokeGrenadeE
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: smokegrens && rank-elite
 	WithInfantryBody:
 		RequiresCondition: !parachute && !webdisable && !bulletproof
@@ -146,7 +183,7 @@ e2:
 	WithSpriteBody@Parachute:
 		RequiresCondition: parachute && !bulletproof
 	WithSpriteBody@Parachute-BULLETPROOF:
-		Name: parachute
+		Name: parachute-bulletproof
 		Sequence: paradrop-bulletproof
 		RequiresCondition: parachute && bulletproof
 	WithDeathAnimation@normal:
@@ -160,26 +197,44 @@ e2:
 		RequiresCondition: bulletproof
 	Voiced:
 		VoiceSet: ConscriptVoice
-	ProducibleWithLevel:
-		Prerequisites: vete2flakt
+	ProducibleWithLevel@1:
+		Prerequisites: vete2flaktorbaacdm
+	WithProductionIconOverlay@1:
+		Prerequisites: vete2flaktorbaacdm
+		Types: chevron-veteran
+	ProducibleWithLevel@2:
+		Prerequisites: vete2flakt, baacdm
+	WithProductionIconOverlay@2:
+		Prerequisites: vete2flakt, baacdm
+		Types: chevron-elite
 	QuantizeFacingsFromSequence:
 		Sequence: stand
+	GrantConditionOnFaction@Baku:
+		Condition: baku
+		Factions: transcaucus, turkmen, tuva, russianfed, serbia
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange
+		Upgrades: upgrade.bullet_proof_coats, upgrade.molotov_cocktails, upgrade.ap_bullets
+	ActorStatOverride@Baku:
+		Upgrades: upgrade.bullet_proof_coats, upgrade.smoke_grenades, upgrade.ap_bullets
+		RequiresCondition: baku
 
 flakt:
-	Inherits@1: ^Infantry
-	Inherits@2: ^Parachutable
+	Inherits: ^Infantry
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@BULLETPROOF: ^AffectedByBulletProofCoats
-	Inherits@CHAOS: ^Berserkable
+	Inherits@CHAOS: ^BerserkableArmed
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@IMPFLAKS: ^AffectedByImprovedFlaks
 	Inherits@MC: ^MindControllable
+	Inherits@PARACHUTE: ^Parachutable
 	Inherits@VOICES: ^WithFeedbackVoicelines
 	Buildable:
-		Queue: Infantry.Soviets, Infantry.Cuba, Infantry.Iraq, Infantry.Baku, Infantry.Tuva
-		Prerequisites: ~techlevel.1
+		Queue: Infantry.Shared, Infantry.Soviets, Infantry.Cuba, Infantry.Iraq
+		BuildAtProductionType: Soldier
 		BuildPaletteOrder: 60
-		Description: 反步兵防空步兵\n\n能造成范围伤害\n\n·强势对抗：步兵、飞行器\n·弱势对抗：载具、建筑
+		Description: actor-flakt.description
+		Prerequisites: ~infantry.soviets, ~techlevel.1
 		BuildDuration: 175
 		BuildDurationModifier: 100
 	UpdatesPlayerStatistics:
@@ -190,9 +245,9 @@ flakt:
 		Payload: 150
 		Voice: Move
 	Tooltip:
-		Name: 防空步兵
+		Name: actor-flakt.name
 	Tooltip@NoRow:
-		Name: 防空步兵
+		Name: actor-flakt.name
 	Selectable:
 		Bounds: 482, 1448, 0, -530
 	Health:
@@ -206,117 +261,139 @@ flakt:
 	# RevealsShroudToIntelligenceOwner:
 	#	Range: 6c0
 	RevealOnDeath:
-		Radius: 3c0
+		Radius: 6c0
 	AttackFrontal:
 		Voice: Attack
 		FacingTolerance: 2
 	Armament@primary:
 		Weapon: FlakGuyGun
+		Damage: 20
 		LocalOffset: 256,0,1024
 		MuzzleSequence: muzzle
-		PauseOnCondition: chronodisable
+		ReloadingCondition: reload-ground
+		PauseOnCondition: chronodisable || webdisable || dogstun || reload-air
 		RequiresCondition: !impflaks && !rank-elite
 	Armament@primary-insta:
 		Weapon: FlakGuyGunInsta
+		Damage: 20
 		LocalOffset: 256,0,1024
 		MuzzleSequence: muzzle
-		PauseOnCondition: chronodisable
+		ReloadingCondition: reload-ground
+		PauseOnCondition: chronodisable || webdisable || dogstun || reload-air
 		RequiresCondition: impflaks && !rank-elite
 	Armament@secondary:
 		Weapon: FlakGuyAAGun
 		LocalOffset: 256,0,1024
 		MuzzleSequence: muzzle
-		PauseOnCondition: chronodisable
+		ReloadingCondition: reload-air
+		PauseOnCondition: chronodisable || webdisable || dogstun || reload-ground
 		RequiresCondition: !rank-elite
 	Armament@primary-elite:
 		Weapon: FlakGuyGunE
+		Damage: 40
 		LocalOffset: 256,0,1024
 		MuzzleSequence: muzzle
-		PauseOnCondition: chronodisable
+		ReloadingCondition: reload-ground
+		PauseOnCondition: chronodisable || webdisable || dogstun || reload-air
 		RequiresCondition: !impflaks && rank-elite
 	Armament@primary-insta-elite:
 		Weapon: FlakGuyGunInstaE
+		Damage: 40
 		LocalOffset: 256,0,1024
 		MuzzleSequence: muzzle
-		PauseOnCondition: chronodisable
+		ReloadingCondition: reload-ground
+		PauseOnCondition: chronodisable || webdisable || dogstun || reload-air
 		RequiresCondition: impflaks && rank-elite
 	Armament@secondary-elite:
 		Weapon: FlakGuyAAGunE
 		LocalOffset: 256,0,1024
 		MuzzleSequence: muzzle
-		PauseOnCondition: chronodisable
+		ReloadingCondition: reload-air
+		PauseOnCondition: chronodisable || webdisable || dogstun || reload-ground
 		RequiresCondition: rank-elite
 	Armament@primary-garrisoned:
 		Name: garrisoned
 		Weapon: UCFlakGuyGun
 		LocalOffset: 256,0,1024
-		PauseOnCondition: chronodisable
+		ReloadingCondition: reload-ground
+		PauseOnCondition: chronodisable || webdisable || dogstun || reload-air
 		RequiresCondition: !impflaks && !rank-elite
 	Armament@primary-garrisoned-insta:
 		Name: garrisoned
 		Weapon: UCFlakGuyGunInsta
 		LocalOffset: 256,0,1024
-		PauseOnCondition: chronodisable
+		ReloadingCondition: reload-ground
+		PauseOnCondition: chronodisable || webdisable || dogstun || reload-air
 		RequiresCondition: impflaks && !rank-elite
 	Armament@secondary-garrisoned:
 		Name: garrisoned
 		Weapon: UCFlakGuyAAGun
 		LocalOffset: 256,0,1024
-		PauseOnCondition: chronodisable
+		ReloadingCondition: reload-air
+		PauseOnCondition: chronodisable || webdisable || dogstun || reload-ground
 		RequiresCondition: !rank-elite
 	Armament@primary-elite-garrisoned:
 		Name: garrisoned
 		Weapon: UCFlakGuyGunE
 		LocalOffset: 256,0,1024
-		PauseOnCondition: chronodisable
+		ReloadingCondition: reload-ground
+		PauseOnCondition: chronodisable || webdisable || dogstun || reload-air
 		RequiresCondition: !impflaks && rank-elite
 	Armament@primary-elite-garrisoned-insta:
 		Name: garrisoned
 		Weapon: UCFlakGuyGunInstaE
 		LocalOffset: 256,0,1024
-		PauseOnCondition: chronodisable
+		ReloadingCondition: reload-ground
+		PauseOnCondition: chronodisable || webdisable || dogstun || reload-air
 		RequiresCondition: impflaks && rank-elite
 	Armament@secondary-elite-garrisoned:
 		Name: garrisoned
 		Weapon: UCFlakGuyAAGunE
 		LocalOffset: 256,0,1024
-		PauseOnCondition: chronodisable
+		ReloadingCondition: reload-air
+		PauseOnCondition: chronodisable || webdisable || dogstun || reload-ground
 		RequiresCondition: rank-elite
 	Armament@primary-opentopped:
 		Name: opentopped
 		Weapon: FlakGuyGun
 		LocalOffset: 256,0,1024
-		PauseOnCondition: chronodisable
+		ReloadingCondition: reload-ground
+		PauseOnCondition: chronodisable || webdisable || dogstun || reload-air
 		RequiresCondition: !impflaks && !rank-elite
 	Armament@primary-opentopped-insta:
 		Name: opentopped
 		Weapon: FlakGuyGunInsta
 		LocalOffset: 256,0,1024
-		PauseOnCondition: chronodisable
+		ReloadingCondition: reload-ground
+		PauseOnCondition: chronodisable || webdisable || dogstun || reload-air
 		RequiresCondition: impflaks && !rank-elite
 	Armament@secondary-opentopped:
 		Name: opentopped
 		Weapon: FlakGuyAAGun
 		LocalOffset: 256,0,1024
-		PauseOnCondition: chronodisable
+		ReloadingCondition: reload-air
+		PauseOnCondition: chronodisable || webdisable || dogstun || reload-ground
 		RequiresCondition: !rank-elite
 	Armament@primary-elite-opentopped:
 		Name: opentopped
 		Weapon: FlakGuyGunE
 		LocalOffset: 256,0,1024
-		PauseOnCondition: chronodisable
+		ReloadingCondition: reload-ground
+		PauseOnCondition: chronodisable || webdisable || dogstun || reload-air
 		RequiresCondition: !impflaks && rank-elite
 	Armament@primary-elite-opentopped-insta:
 		Name: opentopped
 		Weapon: FlakGuyGunInstaE
 		LocalOffset: 256,0,1024
-		PauseOnCondition: chronodisable
+		ReloadingCondition: reload-ground
+		PauseOnCondition: chronodisable || webdisable || dogstun || reload-air
 		RequiresCondition: impflaks && rank-elite
 	Armament@secondary-elite-opentopped:
 		Name: opentopped
 		Weapon: FlakGuyAAGunE
 		LocalOffset: 256,0,1024
-		PauseOnCondition: chronodisable
+		ReloadingCondition: reload-air
+		PauseOnCondition: chronodisable || webdisable || dogstun || reload-ground
 		RequiresCondition: rank-elite
 	WithMuzzleOverlay:
 	WithInfantryBody:
@@ -330,7 +407,7 @@ flakt:
 	WithSpriteBody@Parachute:
 		RequiresCondition: parachute && !bulletproof
 	WithSpriteBody@Parachute-BULLETPROOF:
-		Name: parachute
+		Name: parachute-bulletproof
 		Sequence: paradrop-bulletproof
 		RequiresCondition: parachute && bulletproof
 	WithDeathAnimation@normal:
@@ -344,19 +421,29 @@ flakt:
 		RequiresCondition: bulletproof
 	Voiced:
 		VoiceSet: FlakTrooperVoice
-	ProducibleWithLevel:
-		Prerequisites: vete2flakt
+	ProducibleWithLevel@1:
+		Prerequisites: vete2flaktorbaacdm
+	WithProductionIconOverlay@1:
+		Prerequisites: vete2flaktorbaacdm
+		Types: chevron-veteran
+	ProducibleWithLevel@2:
+		Prerequisites: vete2flakt, baacdm
+	WithProductionIconOverlay@2:
+		Prerequisites: vete2flakt, baacdm
+		Types: chevron-elite
 	QuantizeFacingsFromSequence:
 		Sequence: stand
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MinRange, None, MaxRange
 
 shk:
-	Inherits@1: ^Infantry
-	Inherits@2: ^Parachutable
+	Inherits: ^Infantry
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@CHAOS: ^Berserkable
+	Inherits@CHAOS: ^BerserkableArmed
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@MC: ^MindControllable
 	Inherits@OVERCHARGE: ^AffectedByOvercharge
+	Inherits@PARACHUTE: ^Parachutable
 	Inherits@VOICES: ^WithFeedbackVoicelines
 	AutoTargetPriority@DEFAULT:
 		InvalidTargets: NoAutoTarget, WaterStructure, TeslaBoost
@@ -372,10 +459,11 @@ shk:
 	AttackMove:
 		AttackMoveCondition: attack-move
 	Buildable:
-		Queue: Infantry.Soviets, Infantry.Cuba, Infantry.Iraq, Infantry.Baku, Infantry.Tuva
-		Prerequisites: ~techlevel.1
+		Queue: Infantry.Shared, Infantry.Soviets, Infantry.Cuba, Infantry.Iraq
+		BuildAtProductionType: Soldier
 		BuildPaletteOrder: 20
-		Description: 装备电能武器的重型步兵\n\n无法被一般载具碾压\n可以为特斯拉线圈充能\n\n·强势对抗：步兵、载具、建筑\n·弱势对抗：飞行器\n\n·特殊能力：特斯拉充能
+		Description: actor-shk.description
+		Prerequisites: ~infantry.soviets, ~techlevel.1
 		BuildDuration: 175
 		BuildDurationModifier: 100
 	UpdatesPlayerStatistics:
@@ -386,9 +474,9 @@ shk:
 		Payload: 200
 		Voice: Move
 	Tooltip:
-		Name: Tesla Trooper
+		Name: actor-shk.name
 	Tooltip@NoRow:
-		Name: Tesla Trooper
+		Name: actor-shk.name
 	Selectable:
 		Bounds: 482, 1448, 0, -530
 	Health:
@@ -398,7 +486,7 @@ shk:
 	# RevealsShroudToIntelligenceOwner:
 	#	Range: 6c0
 	RevealOnDeath:
-		Radius: 3c0
+		Radius: 6c0
 	Armor:
 		Type: Plate
 	Crushable:
@@ -419,62 +507,62 @@ shk:
 	Armament@primary:
 		Weapon: ElectricBolt
 		LocalOffset: 320,128,1024
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: !overcharge && !rank-elite
 	Armament@elite:
 		Weapon: ElectricBoltE
 		LocalOffset: 320,128,1024
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: !overcharge && rank-elite
 	Armament@primary-charged:
 		Weapon: ElectricBoltCharged
 		LocalOffset: 320,128,1024
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: overcharge && !rank-elite
 	Armament@elite-charged:
 		Weapon: ElectricBoltChargedE
 		LocalOffset: 320,128,1024
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: overcharge && rank-elite
 	Armament@opentopped:
 		Name: opentopped
 		Weapon: ElectricBolt
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: !overcharge && !rank-elite
 	Armament@elite-opentopped:
 		Name: opentopped
 		Weapon: ElectricBoltE
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: !overcharge && rank-elite
 	Armament@opentopped-charged:
 		Name: opentopped
 		Weapon: ElectricBoltCharged
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: overcharge && !rank-elite
 	Armament@elite-opentopped-charged:
 		Name: opentopped
 		Weapon: ElectricBoltChargedE
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: overcharge && rank-elite
 	Armament@garrisoned:
 		Name: garrisoned
 		Weapon: UCElectricBolt
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: !overcharge && !rank-elite
 	Armament@elite-garrisoned:
 		Name: garrisoned
 		Weapon: UCElectricBoltE
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: !overcharge && rank-elite
 	Armament@garrisoned-charged:
 		Name: garrisoned
 		Weapon: UCElectricBoltCharged
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: overcharge && !rank-elite
 	Armament@elite-garrisoned-charged:
 		Name: garrisoned
 		Weapon: UCElectricBoltChargedE
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: overcharge && rank-elite
 	Armament@charge:
 		Name: secondary
@@ -484,7 +572,7 @@ shk:
 		ForceTargetRelationships: None
 		Cursor: ability
 		OutsideRangeCursor: ability
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 	AmmoPool:
 	ReloadAmmoPool:
 		Delay: 70
@@ -495,10 +583,21 @@ shk:
 		RequiresCondition: !parachute && !webdisable
 	Voiced:
 		VoiceSet: TeslaTrooperVoice
-	ProducibleWithLevel:
-		Prerequisites: barracks.infiltrated
+	ProducibleWithLevel@1:
+		Prerequisites: barracks.infiltratedorbaacdm
+	WithProductionIconOverlay@1:
+		Prerequisites: barracks.infiltratedorbaacdm
+		Types: chevron-veteran
+	ProducibleWithLevel@2:
+		Prerequisites: barracks.infiltrated, baacdm
+	WithProductionIconOverlay@2:
+		Prerequisites: barracks.infiltrated, baacdm
+		Types: chevron-elite
 	QuantizeFacingsFromSequence:
 		Sequence: stand
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange
+		Damage: 50
 
 terror:
 	Inherits: ^Infantry
@@ -506,10 +605,11 @@ terror:
 	Inherits@MC: ^MindControllable
 	Inherits@VOICES: ^WithFeedbackVoicelines
 	Buildable:
-		Queue: Infantry.Cuba
+		Queue: Infantry.Shared, Infantry.Cuba
+		BuildAtProductionType: Soldier
 		BuildPaletteOrder: 90
-		Prerequisites: naradr, ~techlevel.3
-		Description: 身背高爆炸弹的古巴自杀式步兵\n\n死亡时爆炸\n能造成范围伤害\n爆炸可以伤害友军\n\n·强势对抗：步兵、载具、建筑\n·弱势对抗：飞行器\n\n·特殊能力：自爆
+		Description: actor-terror.description
+		Prerequisites: ~infantry.cuba, naradr, ~techlevel.3
 		BuildDuration: 125
 		BuildDurationModifier: 100
 	UpdatesPlayerStatistics:
@@ -520,9 +620,9 @@ terror:
 		Payload: 100
 		Voice: Move
 	Tooltip:
-		Name: 恐怖分子
+		Name: actor-terror.name
 	Tooltip@NoRow:
-		Name: 恐怖分子
+		Name: actor-terror.name
 	Selectable:
 		Bounds: 482, 1448, 0, -530
 	Health:
@@ -540,7 +640,7 @@ terror:
 	# RevealsShroudToIntelligenceOwner:
 	#	Range: 6c0
 	RevealOnDeath:
-		Radius: 3c0
+		Radius: 6c0
 	Armor:
 		Type: Flak
 	Explodes:
@@ -555,17 +655,17 @@ terror:
 		RequiresCondition: targetedexp
 	AttackFrontal:
 		Voice: Attack
-		FacingTolerance: 128
+		FacingTolerance: 512
 	Armament@PRIMARY:
 		Weapon: DemoTruckTargeting
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 	GrantConditionOnAttack:
 		Condition: triggered
 	GrantConditionOnDeploy:
 		Voice: Attack
 		CanDeployOnRamps: True
 		DeployedCondition: triggered
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 	KillsSelf@triggered:
 		DamageTypes: NonTemporal
 		RequiresCondition: triggered
@@ -575,18 +675,26 @@ terror:
 	-TakeCover:
 	QuantizeFacingsFromSequence:
 		Sequence: stand
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, Spread
+		Damage: 450
+		Spread: 2c0
+		Upgrades: upgrade.targeted_explosives
 
 deso:
 	Inherits: ^Infantry
+	Inherits@ADVIRRAD: ^AffectedByAdvancedIrradiators
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@CHAOS: ^Berserkable
+	Inherits@CHAOS: ^BerserkableArmed
 	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@PARACHUTE: ^Parachutable
 	Inherits@MC: ^MindControllable
 	Buildable:
-		Queue: Infantry.Iraq
+		Queue: Infantry.Shared, Infantry.Iraq
+		BuildAtProductionType: Soldier
 		BuildPaletteOrder: 100
-		Prerequisites: naradr, ~techlevel.3
-		Description: 配备辐射武器的伊拉克重型步兵\n\n无法被一般载具碾压\n攻击造成辐射伤害\n可以部署以形成一片辐射区\n免疫辐射\n无法攻击建筑\n\n·强势对抗：步兵、载具\n弱势对抗：飞行器、建筑\n\n·特殊能力：部署辐射区\n·特殊能力：自我回复至最大生命值的100%
+		Description: actor-deso.description
+		Prerequisites: ~infantry.iraq, naradr, ~techlevel.3
 		BuildDuration: 250
 		BuildDurationModifier: 100
 	UpdatesPlayerStatistics:
@@ -597,9 +705,9 @@ deso:
 		Payload: 300
 		Voice: Move
 	Tooltip:
-		Name: 辐射军团
+		Name: actor-deso.name
 	Tooltip@NoRow:
-		Name: 辐射军团
+		Name: actor-deso.name
 	Selectable:
 		Bounds: 482, 1448, 0, -530
 	Health:
@@ -618,7 +726,7 @@ deso:
 	# RevealsShroudToIntelligenceOwner:
 	#	Range: 6c0
 	RevealOnDeath:
-		Radius: 3c0
+		Radius: 6c0
 	Armor:
 		Type: Plate
 	ChangesHealth:
@@ -635,37 +743,74 @@ deso:
 		CrushClasses: vehicle
 	Armament@primary:
 		Weapon: RadBeamWeapon
+		Damage: 125
 		LocalOffset: 320,-128,1024
-		PauseOnCondition: chronodisable
-		RequiresCondition: !rank-elite
+		PauseOnCondition: chronodisable || webdisable || dogstun
+		RequiresCondition: !rank-elite && !advirrad
 	Armament@elite:
 		Weapon: RadBeamWeaponE
+		Damage: 200
 		LocalOffset: 320,-128,1024
-		PauseOnCondition: chronodisable
-		RequiresCondition: rank-elite
+		PauseOnCondition: chronodisable || webdisable || dogstun
+		RequiresCondition: rank-elite && !advirrad
+	Armament@primary-orange:
+		Weapon: RadBeamWeaponOrange
+		Damage: 125
+		LocalOffset: 320,-128,1024
+		PauseOnCondition: chronodisable || webdisable || dogstun
+		RequiresCondition: !rank-elite && advirrad
+	Armament@elitey-orange:
+		Weapon: RadBeamWeaponOrangeE
+		Damage: 200
+		LocalOffset: 320,-128,1024
+		PauseOnCondition: chronodisable || webdisable || dogstun
+		RequiresCondition: rank-elite && advirrad
 	Armament@opentopped:
 		Name: opentopped
 		Weapon: RadBeamWeapon
-		PauseOnCondition: chronodisable
-		RequiresCondition: !rank-elite
+		PauseOnCondition: chronodisable || webdisable || dogstun
+		RequiresCondition: !rank-elite && !advirrad
 	Armament@elite-opentopped:
 		Name: opentopped
 		Weapon: RadBeamWeaponE
-		PauseOnCondition: chronodisable
-		RequiresCondition: rank-elite
+		PauseOnCondition: chronodisable || webdisable || dogstun
+		RequiresCondition: rank-elite && !advirrad
+	Armament@opentopped-orange:
+		Name: opentopped
+		Weapon: RadBeamWeaponOrange
+		PauseOnCondition: chronodisable || webdisable || dogstun
+		RequiresCondition: !rank-elite && advirrad
+	Armament@elite-opentopped-orange:
+		Name: opentopped
+		Weapon: RadBeamWeaponOrangeE
+		PauseOnCondition: chronodisable || webdisable || dogstun
+		RequiresCondition: rank-elite && advirrad
 	Armament@garrisoned:
 		Name: garrisoned
 		Weapon: UCRadBeamWeapon
-		PauseOnCondition: chronodisable
-		RequiresCondition: !rank-elite
+		PauseOnCondition: chronodisable || webdisable || dogstun
+		RequiresCondition: !rank-elite && !advirrad
 	Armament@elite-garrisoned:
 		Name: garrisoned
 		Weapon: UCRadBeamWeaponE
-		PauseOnCondition: chronodisable
-		RequiresCondition: rank-elite
+		PauseOnCondition: chronodisable || webdisable || dogstun
+		RequiresCondition: rank-elite && !advirrad
+	Armament@garrisoned-orange:
+		Name: garrisoned
+		Weapon: UCRadBeamWeaponOrange
+		PauseOnCondition: chronodisable || webdisable || dogstun
+		RequiresCondition: !rank-elite && advirrad
+	Armament@elite-garrisoned-orange:
+		Name: garrisoned
+		Weapon: UCRadBeamWeaponOrangeE
+		PauseOnCondition: chronodisable || webdisable || dogstun
+		RequiresCondition: rank-elite && advirrad
 	PeriodicExplosion@deploy:
 		Weapon: RadEruptionWeapon
-		RequiresCondition: deployed && !chronodisable
+		RequiresCondition: deployed && !chronodisable && !advirrad
+	PeriodicExplosion@deployorange:
+		Weapon: RadEruptionWeaponOrange
+		RequiresCondition: deployed && !chronodisable && advirrad
 	AttackFrontal:
 		Voice: Attack
 		FacingTolerance: 2
@@ -676,19 +821,50 @@ deso:
 		DefaultAttackSequence: shoot
 		RequiresCondition: !editorhack
 	WithInfantryBody:
-		DefaultAttackSequence: shoot
-		RequiresCondition: undeployed
+		RequiresCondition: undeployed && !parachute && !webdisable && !advirrad
 	WithInfantryBody@Deployed:
 		StandSequences: deployed
 		DefaultAttackSequence: deployed-shoot
-		RequiresCondition: deployed
+		RequiresCondition: deployed && !parachute && !webdisable && !advirrad
+	WithInfantryBody@ORANGE:
+		IdleSequences: idle1-orange, idle2-orange
+		MoveSequence: run-orange
+		StandSequences: stand-orange
+		DefaultAttackSequence: shoot-orange
+		RequiresCondition: undeployed && !parachute && !webdisable && advirrad
+	WithInfantryBody@DeployedORANGE:
+		StandSequences: deployed-orange
+		DefaultAttackSequence: deployed-shoot-orange
+		RequiresCondition: deployed && !parachute && !webdisable && advirrad
+	WithSpriteBody@Parachute:
+		RequiresCondition: parachute && !advirrad
+	WithSpriteBody@Parachute-ORANGE:
+		Name: parachute-orange
+		Sequence: paradrop-orange
+		RequiresCondition: parachute && advirrad
+	WithDeathAnimation@normal:
+		RequiresCondition: !advirrad
+	WithDeathAnimation@ORANGE:
+		DeathSequence: die-orange
+		DeathSequencePalette: infantry
+		DeathTypes:
+			ExplosionDeath: 1
+			BulletDeath: 2
+		RequiresCondition: advirrad
 	WithSpriteBody:
 		Sequence: dot
 		Name: dot
-		RequiresCondition: !undeployed
+		RequiresCondition: !undeployed && !advirrad
+	WithSpriteBody@Orange:
+		Sequence: dot
+		Name: dot-orange
+		RequiresCondition: !undeployed && advirrad
 	WithMakeAnimation:
 		Sequence: deploy
 		BodyNames: dot
+	WithMakeAnimation@orange:
+		Sequence: deploy-orange
+		BodyNames: dot-orange
 	GrantConditionOnDeploy:
 		DeployedCondition: deployed
 		UndeployedCondition: undeployed
@@ -698,16 +874,28 @@ deso:
 		Voice: Deploy
 		UndeployOnMove: true
 		PauseOnCondition: chronodisable
+		RequiresCondition: !parachute && !webdisable && !dogstun
 	Targetable:
 		TargetTypes: Ground, Infantry, DetonateAttack, Disguise, ImmuneToRadiation
 	Voiced:
 		VoiceSet: DesolatorVoice
-	ProducibleWithLevel:
-		Prerequisites: barracks.infiltrated
+	ProducibleWithLevel@1:
+		Prerequisites: barracks.infiltratedorbaacdm
+	WithProductionIconOverlay@1:
+		Prerequisites: barracks.infiltratedorbaacdm
+		Types: chevron-veteran
+	ProducibleWithLevel@2:
+		Prerequisites: barracks.infiltrated, baacdm
+	WithProductionIconOverlay@2:
+		Prerequisites: barracks.infiltrated, baacdm
+		Types: chevron-elite
 	QuantizeFacingsFromSequence:
 		Sequence: stand
 	-TakeCover:
 	-DamagedByTintedCells:
+	-DamagedByTintedCells@ORANGE:
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange
 
 ivan:
 	Inherits: ^Infantry
@@ -716,10 +904,11 @@ ivan:
 	Inherits@HIEXPLOSIVE: ^AffectedByHighExplosiveBombs
 	Inherits@MC: ^MindControllable
 	Buildable:
-		Queue: Infantry.Soviets, Infantry.Cuba, Infantry.Iraq, Infantry.Baku, Infantry.Tuva
+		Queue: Infantry.Shared, Infantry.Soviets, Infantry.Cuba, Infantry.Iraq, Infantry.Baku, Infantry.Turkmenistan, Infantry.Tuva
+		BuildAtProductionType: Soldier
 		BuildPaletteOrder: 80
-		Prerequisites: naradr, ~techlevel.3
-		Description: 身背定时炸弹的爆破专家\n\n可以在任何地面目标上放置定时炸弹，甚至包括奶牛\n定时炸弹能造成范围伤害\n死亡时爆炸\n\n·强势对抗：地面目标\n·弱势对抗：飞行器\n\n·特殊能力：放置定时炸弹
+		Description: actor-ivan.description
+		Prerequisites: ~infantry.sovietsorbaku, naradr, ~techlevel.3
 		BuildDuration: 250
 		BuildDurationModifier: 100
 	UpdatesPlayerStatistics:
@@ -730,9 +919,9 @@ ivan:
 		Payload: 300
 		Voice: Move
 	Tooltip:
-		Name: 疯狂伊文
+		Name: actor-ivan.name
 	Tooltip@NoRow:
-		Name: 疯狂伊文
+		Name: actor-ivan.name
 	Selectable:
 		Bounds: 482, 1448, 0, -530
 	Voiced:
@@ -749,7 +938,7 @@ ivan:
 	# RevealsShroudToIntelligenceOwner:
 	#	Range: 6c0
 	RevealOnDeath:
-		Radius: 3c0
+		Radius: 6c0
 	Armor:
 		Type: None
 	Passenger:
@@ -763,11 +952,13 @@ ivan:
 		RequiresCondition: targetedexp
 	Armament@primary:
 		Weapon: IvanBombAttacher
-		PauseOnCondition: chronodisable
+		Damage: 600
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: !rank-elite
 	Armament@elite:
 		Weapon: IvanBombAttacherE
-		PauseOnCondition: chronodisable
+		Damage: 1500
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: rank-elite
 	AttackFrontal:
 		Voice: Attack
@@ -784,19 +975,45 @@ ivan:
 		InitialStance: HoldFire
 		InitialStanceAI: AttackAnything
 	-TakeCover:
+	ProducibleWithLevel@1:
+		Prerequisites: barracks.infiltratedorbaacdm
+	WithProductionIconOverlay@1:
+		Prerequisites: barracks.infiltratedorbaacdm
+		Types: chevron-veteran
+	ProducibleWithLevel@2:
+		Prerequisites: barracks.infiltrated, baacdm
+	WithProductionIconOverlay@2:
+		Prerequisites: barracks.infiltrated, baacdm
+		Types: chevron-elite
+	GrantConditionOnFaction@Baku:
+		Condition: baku
+		Factions: transcaucus, turkmen, tuva, russianfed, serbia
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange
+		Upgrades: upgrade.targeted_explosives, upgrade.high_explosive_bombs
+	ActorStatOverride@Baku:
+		Upgrades:
+		RequiresCondition: baku
 
 civan:
 	Inherits: ivan
 	Buildable:
 		BuildPaletteOrder: 970
-		Prerequisites: ~allies.tech.infiltrated, ~techlevel.4
-		Description: 身背定时炸弹与单兵超时空仪器的爆破专家\n\n可以在任何地面目标上放置定时炸弹，甚至包括奶牛\n定时炸弹能造成范围伤害\n不会在死亡时爆炸\n不会死于“超级武器：超时空传送”\n\n·强势对抗：地面目标\n·弱势对抗：飞行器\n\n·特殊能力：放置定时炸弹\n·特殊能力：超时空传送
+		Description: actor-civan.description
+		Prerequisites: ~infantry.sovietsorbaku, ~allies.tech.infiltrated, ~techlevel.4
+		BuildDuration: 375
+	Buildable@Allied:
+		Queue: Infantry.Shared, Infantry.Allies, Infantry.USA, Infantry.UK
+		BuildAtProductionType: Soldier
+		BuildPaletteOrder: 980
+		Description: actor-civan.description
+		Prerequisites: ~infantry.allies, ~soviets.tech.infiltrated, ~techlevel.4
 		BuildDuration: 375
 		BuildDurationModifier: 100
 	Tooltip:
-		Name: 超时空伊文
+		Name: actor-civan.name
 	Tooltip@NoRow:
-		Name: 超时空伊文
+		Name: actor-civan.name
 	Valued:
 		Cost: 1000
 	Crushable:
@@ -825,13 +1042,14 @@ civan:
 		TargetCursor: chronosphere
 		TeleportCondition: chronoed
 		ConditionDuration: 120
-		RequiresCondition: !affectedbytemporal
+		PauseOnCondition: affectedbytemporal
 	Contrail@Teleport: ##HACK: add a trace for teleport. 
 		Offset: 0, 0, 700
-		Color: 00F0F8AA
+		StartColor: 00F0F8AA
+		StartColorAlpha: 176
+		StartColorUsePlayerColor: false
 		ZOffset: -1024
-		UsePlayerColor: false
-		TrailWidth: 36
+		StartWidth: 36
 		TrailLength: 2
 	GrantCondition@ChronoDisable:
 		RequiresCondition: affectedbytemporal || chronoed
@@ -843,16 +1061,19 @@ civan:
 		Class: civan
 	RenderSprites:
 		Image: civan
+	ActorStatValues:
+		Upgrades: upgrade.high_explosive_bombs
 
 yuri:
 	Inherits: ^Infantry
-	Inherits@2: ^Parachutable
 	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@PARACHUTE: ^Parachutable
 	Buildable:
 		Queue: Infantry.Unused # Infantry.Soviets, Infantry.Cuba, Infantry.Iraq
+		BuildAtProductionType: Soldier
 		BuildPaletteOrder: 150
 		Prerequisites: natech, ~techlevel.4
-		Description: 具备强大灵能的特种部队\n\n·强势对抗：步兵、载具\n·弱势对抗：军犬、遥控坦克、恐怖机器人、飞行器
+		Description: actor-yuri.description
 		BuildDuration: 500
 		BuildDurationModifier: 100
 	UpdatesPlayerStatistics:
@@ -863,9 +1084,9 @@ yuri:
 		Payload: 600
 		Voice: Move
 	Tooltip:
-		Name: 尤里复制人
+		Name: actor-yuri.name
 	Tooltip@NoRow:
-		Name: 尤里复制人
+		Name: actor-yuri.name
 	Selectable:
 		Bounds: 482, 1448, 0, -530
 	Voiced:
@@ -876,19 +1097,19 @@ yuri:
 		Voice: Move
 		GarrisonType: Garrisoner
 	Mobile:
-		RequiresCondition: !deployed && !deploying && !chronodisable && !webdisable
+		RequiresCondition: !deployed && !deploying && !chronodisable && !webdisable && !dogstun
 	RevealsShroud:
 		Range: 8c0
 	# RevealsShroudToIntelligenceOwner:
 	#	Range: 8c0
 	RevealOnDeath:
-		Radius: 4c0
+		Radius: 8c0
 	Armor:
 		Type: None
 	PeriodicExplosion:
 		Weapon: PsiWave
 		LocalOffset: 0,0,128
-		RequiresCondition: deployed && !chronodisable
+		RequiresCondition: deployed && !chronodisable && !webdisable && !dogstun
 	GrantTimedConditionOnDeploy:
 		DeployedTicks: 50
 		CooldownTicks: 0
@@ -899,7 +1120,7 @@ yuri:
 		UndeployAnimation: undeploy
 		ShowSelectionBar: false
 		Voice:
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || ((webdisable || dogstun) && !deployed)
 	WithInfantryBody:
 		DefaultAttackSequence: shoot
 		IdleSequences: idle1,idle2
@@ -917,23 +1138,23 @@ yuri:
 		Weapon: MindControl
 		MuzzleSequence: muzzle
 		LocalOffset: 0,0,960
-		PauseOnCondition: deployed || chronodisable
+		PauseOnCondition: deployed || chronodisable || webdisable || dogstun
 		RequiresCondition: !rank-elite
 	Armament@elite:
 		Weapon: MindControlE
 		MuzzleSequence: muzzle
 		LocalOffset: 0,0,960
-		PauseOnCondition: deployed || chronodisable
+		PauseOnCondition: deployed || chronodisable || webdisable || dogstun
 		RequiresCondition: rank-elite
 	Armament@garrisoned:
 		Name: garrisoned
 		Weapon: UCMindControl
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: !rank-elite
 	Armament@elite-garrisoned:
 		Name: garrisoned
 		Weapon: UCMindControlE
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: rank-elite
 	WithMuzzleOverlay:
 	MindController:
@@ -956,21 +1177,24 @@ yuri:
 	AutoTargetPriority@DEFAULT:
 		ValidTargets: MindControl
 		RequiresCondition: !controlling
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, MindControl, ReloadDelay, MaxRange
 
 yuripr:
 	Inherits: yuri
 	Buildable:
 		Queue: Infantry.Unused
+		BuildAtProductionType: Soldier
 		BuildLimit: 1
 		BuildPaletteOrder: 990
 		Prerequisites: ~soviets.tech.infiltrated, ~techlevel.4
-		Description: 毫无疑问是尤里本人\n\n可以释放出冲击波快速消灭步兵\n同一玩家最多只能同时拥有一个（不计算复制工厂）\n\n·强势对抗：步兵、载具、建筑\n·弱势对抗：军犬、遥控坦克、恐怖机器人、飞行器\n\n·特殊能力：灵能震爆（释放冲击波快速消灭步兵）
+		Description: actor-yuripr.description
 		BuildDuration: 1125
 		BuildDurationModifier: 100
 	Tooltip:
-		Name: 尤里
+		Name: actor-yuripr.name
 	Tooltip@NoRow:
-		Name: 尤里
+		Name: actor-yuripr.name
 	Valued:
 		Cost: 2000
 	DeliversCash:
@@ -998,7 +1222,7 @@ yuripr:
 	# RevealsShroudToIntelligenceOwner:
 	#	Range: 8c0
 	RevealOnDeath:
-		Radius: 4c0
+		Radius: 8c0
 	Armament:
 		Weapon: SuperMindControl
 	Armament@elite:
@@ -1021,11 +1245,12 @@ boris:
 		Modifier: 33
 		RequiresCondition: leaflet
 	Buildable:
-		Queue: Infantry.Soviets, Infantry.Cuba, Infantry.Iraq
+		Queue: Infantry.Shared, Infantry.Soviets, Infantry.Cuba, Infantry.Iraq
+		BuildAtProductionType: Soldier
 		BuildPaletteOrder: 180
-		Prerequisites: natech, ~techlevel.4
+		Prerequisites: ~infantry.soviets, natech, ~techlevel.4
 		BuildLimit: 1
-		Description: 手持AKM突击步枪的两栖特种兵精英\n\n可以呼叫米格空袭以攻击建筑\n装备了简易皮划艇以通过水域\n同一玩家最多只能同时拥有一个（不计算复制工厂）\n无法被一般载具辗压\n\n·强势对抗：步兵、载具、建筑\n·弱势对抗：飞行器\n\n·特殊能力：两栖\n·特殊能力：米格空袭
+		Description: actor-boris.description
 		BuildDuration: 1125
 		BuildDurationModifier: 100
 	UpdatesPlayerStatistics:
@@ -1036,9 +1261,9 @@ boris:
 		Payload: 1000
 		Voice: Move
 	Tooltip:
-		Name: 鲍里斯·布科夫
+		Name: actor-boris.name
 	Tooltip@NoRow:
-		Name: 鲍里斯·布科夫
+		Name: actor-boris.name
 	Selectable:
 		Bounds: 482, 1448, 0, -530
 	Health:
@@ -1052,12 +1277,13 @@ boris:
 	Mobile:
 		Speed: 75
 		Locomotor: swimsuit
+		RequiresCondition: !chronodisable && !webdisable
 	RevealsShroud:
 		Range: 9c0
 	# RevealsShroudToIntelligenceOwner:
 	#	Range: 9c0
 	RevealOnDeath:
-		Radius: 4c512
+		Radius: 9c0
 	Armor:
 		Type: Flak
 	Crushable:
@@ -1074,24 +1300,53 @@ boris:
 		StartIfBelow: 100
 	Armament@primary:
 		Weapon: AKM
+		Damage: 65
+		LocalOffset: 256,0,768
+		PauseOnCondition: chronodisable || webdisable
 		RequiresCondition: !rank-elite
 	Armament@elite:
 		Weapon: AKME
+		Damage: 90
+		LocalOffset: 256,0,768
+		PauseOnCondition: chronodisable || webdisable
 		RequiresCondition: rank-elite
+	Armament@primary-line:
+		Weapon: AKMLine
+		LocalOffset: 256,0,768
+		PauseOnCondition: chronodisable || webdisable
+		RequiresCondition: apbullets && !rank-elite
+	Armament@elite-line:
+		Weapon: AKMLineE
+		LocalOffset: 256,0,768
+		PauseOnCondition: chronodisable || webdisable
+		RequiresCondition: apbullets && rank-elite
 	Armament@opentopped:
 		Name: opentopped
 		Weapon: AKM
+		PauseOnCondition: chronodisable || webdisable
 		RequiresCondition: !rank-elite
 	Armament@elite-opentopped:
 		Name: opentopped
 		Weapon: AKME
+		PauseOnCondition: chronodisable || webdisable
 		RequiresCondition: rank-elite
+	Armament@opentopped-line:
+		Name: opentopped
+		Weapon: AKMLine
+		PauseOnCondition: chronodisable || webdisable
+		RequiresCondition: apbullets && !rank-elite
+	Armament@elite-opentopped-line:
+		Name: opentopped
+		Weapon: AKMLineE
+		PauseOnCondition: chronodisable || webdisable
+		RequiresCondition: apbullets && rank-elite
 	Armament@flare:
 		Name: secondary
 		Weapon: Flare
 		LocalOffset: 320,128,768
 		Cursor: airstrike
 		OutsideRangeCursor: airstrike
+		PauseOnCondition: chronodisable || webdisable
 		RequiresCondition: !airstrike
 	Armament@flare-saw:
 		Name: secondary
@@ -1099,30 +1354,41 @@ boris:
 		LocalOffset: 320,128,768
 		Cursor: airstrike
 		OutsideRangeCursor: airstrike
+		PauseOnCondition: chronodisable || webdisable
 		RequiresCondition: airstrike
 	Armament@garrisoned:
 		Name: garrisoned
 		Weapon: UCAKM
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable
 		RequiresCondition: !rank-elite
 	Armament@elite-garrisoned:
 		Name: garrisoned
 		Weapon: UCAKME
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable
 		RequiresCondition: rank-elite
+	Armament@garrisoned-line:
+		Name: garrisoned
+		Weapon: UCAKMLine
+		PauseOnCondition: chronodisable || webdisable
+		RequiresCondition: apbullets && !rank-elite
+	Armament@elite-garrisoned-line:
+		Name: garrisoned
+		Weapon: UCAKMLineE
+		PauseOnCondition: chronodisable || webdisable
+		RequiresCondition: apbullets && rank-elite
 	Armament@flare-garrisoned:
 		Name: garrisoned-secondary
 		Weapon: UCFlare
 		Cursor: airstrike
 		OutsideRangeCursor: airstrike
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable
 		RequiresCondition: !airstrike
 	Armament@flare-saw-garrisoned:
 		Name: garrisoned-secondary
 		Weapon: UCFlareSAW
 		Cursor: airstrike
 		OutsideRangeCursor: airstrike
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable
 		RequiresCondition: airstrike
 	GrantConditionOnAttack:
 		Condition: airstrike
@@ -1147,13 +1413,21 @@ boris:
 		PauseOnCondition: chronodisable
 	ExternalCondition@PRODUCED:
 		Condition: produced
-	VoiceAnnouncement:
+	NotificationAnnouncement:
 		RequiresCondition: produced
-		Voice: Build
+		Notification: BorisHasArrived
 	Voiced:
 		VoiceSet: BorisVoice
-	ProducibleWithLevel:
-		Prerequisites: barracks.infiltrated
+	ProducibleWithLevel@1:
+		Prerequisites: barracks.infiltratedorbaacdm
+	WithProductionIconOverlay@1:
+		Prerequisites: barracks.infiltratedorbaacdm
+		Types: chevron-veteran
+	ProducibleWithLevel@2:
+		Prerequisites: barracks.infiltrated, baacdm
+	WithProductionIconOverlay@2:
+		Prerequisites: barracks.infiltrated, baacdm
+		Types: chevron-elite
 	QuantizeFacingsFromSequence:
 		Sequence: stand
 	WithInfantryBody:
@@ -1165,22 +1439,31 @@ boris:
 		-IdleSequences:
 		AttackSequences:
 			secondary: swim-shoot-flare
-	TakeCover:
-		RequiresCondition: !swimming
+	-TakeCover:
+	-WithColoredOverlay@IDISABLE:
+	-GrantCondition@IDISABLE:
+	-SpeedMultiplier@DOGSTUN:
+	-Targetable@DOGSTUN:
+	-TimedConditionBar@DOGSTUN:
+	-ExternalCondition@dogstun:
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange
+		Armaments: primary
 
 # Custom Revenge Infantry
 pyro:
 	Inherits: ^Infantry
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@BLACKNAPALM: ^AffectedByBlackNapalm
-	Inherits@CHAOS: ^Berserkable
+	Inherits@CHAOS: ^BerserkableArmed
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@MC: ^MindControllable
 	Buildable:
 		Queue: Infantry.Unused # Infantry.Soviets, Infantry.Cuba, Infantry.Iraq
+		BuildAtProductionType: Soldier
 		BuildPaletteOrder: 75
 		Prerequisites: naradr, ~techlevel.2
-		Description: 装备火焰喷射器的精英步兵\n\n能造成范围伤害\n\n·强势对抗：步兵、建筑\n·弱势对抗：载具、飞行器\n\n·特殊能力：清除驻军
+		Description: actor-pyro.description
 		BuildDuration: 125
 		BuildDurationModifier: 100
 	UpdatesPlayerStatistics:
@@ -1191,9 +1474,9 @@ pyro:
 		Payload: 150
 		Voice: Move
 	Tooltip:
-		Name: 火焰兵
+		Name: actor-pyro.name
 	Tooltip@NoRow:
-		Name: 火焰兵
+		Name: actor-pyro.name
 	Selectable:
 		Bounds: 482, 1448, 0, -530
 	Health:
@@ -1209,83 +1492,107 @@ pyro:
 	# RevealsShroudToIntelligenceOwner:
 	#	Range: 6c0
 	RevealOnDeath:
-		Radius: 3c0
+		Radius: 6c0
 	Armament@primary:
 		Weapon: Flamer
+		Damage: 50
 		LocalOffset: 512,0,768
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: !rank-elite && !black_napalm
 	Armament@elite:
 		Weapon: FlamerE
+		Damage: 140
 		LocalOffset: 512,0,768
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: rank-elite && !black_napalm
 	Armament@opentopped:
 		Name: opentopped
 		Weapon: Flamer
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: !rank-elite && !black_napalm
 	Armament@elite-opentopped:
 		Name: opentopped
 		Weapon: FlamerE
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: rank-elite && !black_napalm
 	Armament@garrisoned:
 		Name: garrisoned
 		Weapon: UCFlamer
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: !rank-elite && !black_napalm
 	Armament@elite-garrisoned:
 		Name: garrisoned
 		Weapon: UCFlamerE
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: rank-elite && !black_napalm
 	Armament@primary-black:
 		Weapon: FlamerBlack
+		Damage: 100
 		LocalOffset: 512,0,768
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: !rank-elite && black_napalm
 	Armament@elite_black:
 		Weapon: FlamerBlackE
+		Damage: 280
 		LocalOffset: 512,0,768
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: rank-elite && black_napalm
 	Armament@opentopped-black:
 		Name: opentopped
 		Weapon: FlamerBlack
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: !rank-elite && black_napalm
 	Armament@elite-opentopped-black:
 		Name: opentopped
 		Weapon: FlamerBlackE
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: rank-elite && black_napalm
 	Armament@garrisoned-black:
 		Name: garrisoned
 		Weapon: UCFlamerBlack
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: !rank-elite && black_napalm
 	Armament@elite-garrisoned-black:
 		Name: garrisoned
 		Weapon: UCFlamerBlackE
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: rank-elite && black_napalm
 	AttackFrontal:
 		Voice: Attack
 		FacingTolerance: 2
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 	Voiced:
 		VoiceSet: FlamethrowerVoice
 		Volume: 6
-	ProducibleWithLevel:
-		Prerequisites: barracks.infiltrated
+	ProducibleWithLevel@1:
+		Prerequisites: barracks.infiltratedorbaacdm
+	WithProductionIconOverlay@1:
+		Prerequisites: barracks.infiltratedorbaacdm
+		Types: chevron-veteran
+	ProducibleWithLevel@2:
+		Prerequisites: barracks.infiltrated, baacdm
+	WithProductionIconOverlay@2:
+		Prerequisites: barracks.infiltrated, baacdm
+		Types: chevron-elite
 	QuantizeFacingsFromSequence:
 		Sequence: stand
 	WithInfantryBody:
 		IdleSequences: idle1,idle2,idle3,idle4
 		DefaultAttackSequence: shoot
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange
 
 hjck:
 	Inherits: ^Infantry
 	Inherits@CHAOS: ^Berserkable
 	Inherits@MC: ^MindControllable
+	Inherits@SWIMSUIT: ^WithSwimSuit
 	Buildable:
-		Queue: Infantry.Soviets, Infantry.Cuba, Infantry.Iraq, Infantry.Baku, Infantry.Tuva
-		Prerequisites: naradr, ~techlevel.2
+		Queue: Infantry.Shared, Infantry.Soviets, Infantry.Cuba, Infantry.Iraq
+		BuildAtProductionType: Soldier
+		Prerequisites: ~infantry.soviets, naradr, ~techlevel.3
 		BuildPaletteOrder: 70
-		Description: 行踪诡异的功能型步兵\n\n抢夺敌方载具\n渗透敌方建筑\n静止不动时隐形\n\n·无武装\n\n·特殊能力：隐形
+		Description: actor-hjck.description
 		BuildDuration: 250
 		BuildDurationModifier: 100
 	Valued:
@@ -1294,9 +1601,9 @@ hjck:
 		Payload: 250
 		Voice: Move
 	Tooltip:
-		Name: 劫持者
+		Name: actor-hjck.name
 	Tooltip@NoRow:
-		Name: 劫持者
+		Name: actor-hjck.name
 	Selectable:
 		Bounds: 482, 1448, 0, -530
 	Health:
@@ -1309,21 +1616,24 @@ hjck:
 		CustomPipType: yellow
 	Mobile:
 		Speed: 90
+		Locomotor: swimsuit
 	RevealsShroud:
 		Range: 6c0
 	# RevealsShroudToIntelligenceOwner:
 	#	Range: 6c0
 	RevealOnDeath:
-		Radius: 3c0
+		Radius: 6c0
 	Cloak:
 		RequiresCondition: !chronodisable
 		InitialDelay: 25
 		CloakDelay: 50
+		CloakStyle: Palette
+		CloakedPalette: cloak
 		IsPlayerPalette: true
 		UncloakOn: Damage, Move
 		EffectImage: explosion
 		EffectPalette: effect75alpha
-		EnterEffectSequence: smokebomb
+		CloakEffectSequence: smokebomb
 		EffectOffset: 0, 0, 1000
 	CaptureManager:
 	Captures:
@@ -1341,29 +1651,40 @@ hjck:
 		Sequence: stand
 	WithInfantryBody:
 		-DefaultAttackSequence:
+	ActorStatValues:
+		Stats: Armor, Sight, Speed
 
 itrp:
 	Inherits: ^Infantry
-	Inherits@CHAOS: ^Berserkable
+	Inherits@CHAOS: ^BerserkableArmed
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@MC: ^MindControllable
 	Selectable:
 		Bounds: 482, 1448, 0, -530
 	Tooltip:
-		Name: 钢铁军团
+		Name: actor-itrp.name
 	Tooltip@NoRow:
-		Name: 钢铁军团
+		Name: actor-itrp.name
 	Buildable:
-		Queue: Infantry.Soviets, Infantry.Cuba, Infantry.Iraq, Infantry.Baku, Infantry.Tuva
+		Queue: Infantry.Shared, Infantry.Soviets, Infantry.Cuba, Infantry.Iraq, Infantry.Baku, Infantry.Turkmenistan, Infantry.Tuva
+		BuildAtProductionType: Soldier
 		BuildPaletteOrder: 140
-		Prerequisites: natech, ~techlevel.4
-		Description: 装备攻击型铁幕武器的精英重型步兵\n\n可以为友方载具、舰艇施加短暂的铁幕效果\n对生物型舰艇施加铁幕效果将使它们死亡\n对潜艇施加铁幕效果将使它们上浮（显形）\n需要使用强制移动命令才能进入运输载具\n无法被一般载具碾压\n无法被军犬选为目标\n仅能攻击敌方步兵\n\n·强势对抗：步兵\n·弱势对抗：载具、飞行器、建筑\n特殊能力：钢铁护盾（部署使用）
+		Prerequisites: ~infantry.sovietsorbaku, natech, ~techlevel.4
+		Description: actor-itrp.description
 		BuildDuration: 500
 		BuildDurationModifier: 100
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-	ProducibleWithLevel:
-		Prerequisites: barracks.infiltrated
+	ProducibleWithLevel@1:
+		Prerequisites: barracks.infiltratedorbaacdm
+	WithProductionIconOverlay@1:
+		Prerequisites: barracks.infiltratedorbaacdm
+		Types: chevron-veteran
+	ProducibleWithLevel@2:
+		Prerequisites: barracks.infiltrated, baacdm
+	WithProductionIconOverlay@2:
+		Prerequisites: barracks.infiltrated, baacdm
+		Types: chevron-elite
 	Valued:
 		Cost: 1200
 	DeliversCash:
@@ -1371,7 +1692,7 @@ itrp:
 		Voice: Move
 	Mobile:
 		Speed: 45
-		RequiresCondition: !deployed && !deploying && !chronodisable && !webdisable
+		RequiresCondition: !deployed && !deploying && !chronodisable && !webdisable && !dogstun
 	Health:
 		HP: 20000
 	Armor:
@@ -1384,7 +1705,7 @@ itrp:
 	# RevealsShroudToIntelligenceOwner:
 	#	Range: 6c0
 	RevealOnDeath:
-		Radius: 3c0
+		Radius: 6c0
 	Crushable:
 		CrushClasses: vehicle
 	Crushable@Cheater:
@@ -1397,86 +1718,86 @@ itrp:
 	Armament@primary:
 		Weapon: CurtainRifle
 		LocalOffset: 512,0,384
-		PauseOnCondition: chronodisable
 		Cursor: iron-curtain
 		OutsideRangeCursor: iron-curtain
 		TargetRelationships: Ally
 		ForceTargetRelationships: Ally, Neutral, Enemy
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: !rank-elite
 	Armament@ap:
 		Weapon: CurtainRifleAP
 		LocalOffset: 512,0,384
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: !rank-elite
 	Armament@elite:
 		Weapon: CurtainRifleE
 		LocalOffset: 512,0,384
-		PauseOnCondition: chronodisable
 		Cursor: iron-curtain
 		OutsideRangeCursor: iron-curtain
 		TargetRelationships: Ally
 		ForceTargetRelationships: Ally, Neutral, Enemy
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: rank-elite
 	Armament@elite-ap:
 		Weapon: CurtainRifleAPE
 		LocalOffset: 512,0,384
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: rank-elite
 	Armament@opentopped:
 		Name: opentopped
 		Weapon: CurtainRifle
-		PauseOnCondition: chronodisable
 		Cursor: iron-curtain
 		OutsideRangeCursor: iron-curtain
 		TargetRelationships: Ally
 		ForceTargetRelationships: Ally, Neutral, Enemy
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: !rank-elite
 	Armament@opentopped-ap:
 		Name: opentopped
 		Weapon: CurtainRifleAP
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: !rank-elite
 	Armament@elite-opentopped:
 		Name: opentopped
 		Weapon: CurtainRifleE
-		PauseOnCondition: chronodisable
 		Cursor: iron-curtain
 		OutsideRangeCursor: iron-curtain
 		TargetRelationships: Ally
 		ForceTargetRelationships: Ally, Neutral, Enemy
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: rank-elite
 	Armament@elite-opentopped-ap:
 		Name: opentopped
 		Weapon: CurtainRifleAPE
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: rank-elite
 	Armament@garrisoned:
 		Name: garrisoned
 		Weapon: UCCurtainRifle
-		PauseOnCondition: chronodisable
 		Cursor: iron-curtain
 		OutsideRangeCursor: iron-curtain
 		TargetRelationships: Ally
 		ForceTargetRelationships: Ally, Neutral, Enemy
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: !rank-elite
 	Armament@garrisoned-ap:
 		Name: garrisoned
 		Weapon: UCCurtainRifleAP
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: !rank-elite
 	Armament@elite-garrisoned:
 		Name: garrisoned
 		Weapon: UCCurtainRifle
-		PauseOnCondition: chronodisable
 		Cursor: iron-curtain
 		OutsideRangeCursor: iron-curtain
 		TargetRelationships: Ally
 		ForceTargetRelationships: Ally, Neutral, Enemy
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: rank-elite
 	Armament@elite-garrisoned-ap:
 		Name: garrisoned
 		Weapon: UCCurtainRifleAPE
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: rank-elite
 	AutoTarget:
 	AutoTargetPriority@DEFAULT:
@@ -1491,30 +1812,39 @@ itrp:
 		TargetTypes: Ground, Infantry, DetonateAttack, Disguise, DogImmune, IronCurtainImmune
 	WithInfantryBody:
 		DefaultAttackSequence: shoot
+		RequiresCondition: !webdisable && !deployed && !deploying
+	WithSpriteBody@DEPLOYED:
+		Sequence: deployed
+		Name: deployed
+		RequiresCondition: !webdisable && (deployed || deploying)
 	PeriodicExplosion:
 		Weapon: IronTrooperCurtain
-		RequiresCondition: deployed && !chronodisable
+		RequiresCondition: deployed && !chronodisable && !webdisable && !dogstun
 	GrantTimedConditionOnDeploy:
 		DeployedTicks: 1
-		CooldownTicks: 3000
+		CooldownTicks: 1500
 		DeployedCondition: deployed
 		DeployingCondition: deploying
-		DeployAnimation: idle1
-		UndeployAnimation: idle1
-		StartsFullyCharged: true
+		BodyNames: deployed
+		DeployAnimation: deploy
+		UndeployAnimation: undeploy
 		Facing: 96
 		Voice:
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || ((webdisable || dogstun) && !deployed)
 	-Targetable@ironcurtain:
 	-KillsSelf@ironcurtain:
 	-ExternalCondition@INVULNERABILITY:
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange
+		Damage: 500
 
 shkc:
 	Inherits: shk
 	Buildable:
+		Queue: Infantry.Shared, Infantry.Soviets, Infantry.Cuba, Infantry.Iraq, Infantry.Baku, Infantry.Turkmenistan, Infantry.Tuva
 		BuildPaletteOrder: 980
-		Prerequisites: ~soviets.tech.infiltrated, ~techlevel.4
-		Description: 装备电能武器的重型步兵\n\n无法被一般载具碾压\n可以为特斯拉线圈充能\n\n·强势对抗：步兵、载具、建筑\n·弱势对抗：飞行器\n\n·特殊能力：特斯拉充能
+		Prerequisites: ~infantry.sovietsorbaku, ~soviets.tech.infiltrated, ~techlevel.4
+		Description: actor-shkc.description
 		BuildDuration: 375
 		BuildDurationModifier: 100
 	Valued:
@@ -1522,9 +1852,9 @@ shkc:
 	DeliversCash:
 		Payload: 750
 	Tooltip:
-		Name: 特斯拉突击队
+		Name: actor-shkc.name
 	Tooltip@NoRow:
-		Name: 特斯拉突击队
+		Name: actor-shkc.name
 	Health:
 		HP: 15000
 	Mobile:
@@ -1534,15 +1864,19 @@ shkc:
 	# RevealsShroudToIntelligenceOwner:
 	#	Range: 6c0
 	RevealOnDeath:
-		Radius: 3c0
+		Radius: 6c0
 	Armament@primary:
 		Weapon: ElectricBoltCommando
+		Damage: 100
 	Armament@elite:
 		Weapon: ElectricBoltCommandoE
+		Damage: 150
 	Armament@primary-charged:
 		Weapon: ElectricBoltCommandoCharged
+		Damage: 100
 	Armament@elite-charged:
 		Weapon: ElectricBoltCommandoChargedE
+		Damage: 150
 	Armament@opentopped:
 		Weapon: ElectricBoltCommando
 	Armament@elite-opentopped:
@@ -1563,22 +1897,16 @@ shkc:
 		Weapon: TeslaBombAttacher
 		Cursor: c4
 		OutsideRangeCursor: c4
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: !rank-elite
 	Armament@elite-tesla-bomb:
 		Weapon: TeslaBombAttacherE
 		Cursor: c4
 		OutsideRangeCursor: c4
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: rank-elite
 	WithInfantryBody:
 		AttackSequences:
 			secondary: shoot
-
-ttrp.soviet:
-	Inherits: ttrp
-	Buildable:
-		Queue: Infantry.Soviets, Infantry.Cuba, Infantry.Iraq, Infantry.Baku, Infantry.Tuva
-		BuildPaletteOrder: 990
-		Prerequisites: ~yuri.tech.infiltrated, ~techlevel.4
-	-MapEditorData:
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange

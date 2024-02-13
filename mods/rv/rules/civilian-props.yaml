@@ -1,9 +1,9 @@
 camisc01:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 油桶
+		Name: actor-camisc01.name
 	Tooltip@NoRow:
-		Name: 油桶
+		Name: actor-camisc01.name
 	Health:
 		HP: 500
 	Armor:
@@ -17,13 +17,17 @@ camisc01:
 		Categories: Decoration
 	Explodes:
 		Weapon: LargeBarrelExplode
+	ActorStatValues:
+		Stats: Armor, Sight, None, Damage, Spread
+		Damage: 450
+		Spread: 3c0
 
 camisc02:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 油桶
+		Name: actor-camisc02.name
 	Tooltip@NoRow:
-		Name: 油桶
+		Name: actor-camisc02.name
 	Health:
 		HP: 500
 	Armor:
@@ -37,13 +41,17 @@ camisc02:
 		Categories: Decoration
 	Explodes:
 		Weapon: SmallBarrelExplode
+	ActorStatValues:
+		Stats: Armor, Sight, None, Damage, Spread
+		Damage: 450
+		Spread: 3c0
 
 camisc03:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 垃圾桶
+		Name: actor-camisc03.name
 	Tooltip@NoRow:
-		Name: 垃圾桶
+		Name: actor-camisc03.name
 	Health:
 		HP: 10000
 	Armor:
@@ -58,9 +66,9 @@ camisc03:
 camisc04:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 邮桶
+		Name: actor-camisc04.name
 	Tooltip@NoRow:
-		Name: 邮桶
+		Name: actor-camisc04.name
 	Health:
 		HP: 1000
 	Armor:
@@ -77,9 +85,9 @@ camisc04:
 camisc05:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 铜管
+		Name: actor-camisc05.name
 	Tooltip@NoRow:
-		Name: 铜管
+		Name: actor-camisc05.name
 	Health:
 		HP: 1000
 	Armor:
@@ -100,9 +108,9 @@ camisc06:
 		Footprint: xx
 		Dimensions: 2, 1
 	Tooltip:
-		Name: V3弹药架
+		Name: actor-camisc06.name
 	Tooltip@NoRow:
-		Name: V3弹药架
+		Name: actor-camisc06.name
 	Health:
 		HP: 1000
 	Armor:
@@ -118,9 +126,9 @@ camisc06:
 camsc11:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 轮胎
+		Name: actor-camsc11.name
 	Tooltip@NoRow:
-		Name: 轮胎
+		Name: actor-camsc11.name
 	Health:
 		HP: 1000
 	Armor:
@@ -134,9 +142,9 @@ camsc11:
 camsc12:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 训练靶
+		Name: actor-camsc12.name
 	Tooltip@NoRow:
-		Name: 训练靶
+		Name: actor-camsc12.name
 	Health:
 		HP: 1000
 	Armor:
@@ -154,9 +162,9 @@ camsc13:
 		Footprint: x x
 		Dimensions: 1, 2
 	Tooltip:
-		Name: 废弃坦克
+		Name: actor-camsc13.name
 	Tooltip@NoRow:
-		Name: 废弃坦克
+		Name: actor-camsc13.name
 	Health:
 		HP: 80000
 	Armor:
@@ -169,9 +177,9 @@ camsc13:
 ammocrat:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 弹药箱
+		Name: actor-ammocrat.name
 	Tooltip@NoRow:
-		Name: 弹药箱
+		Name: actor-ammocrat.name
 	Health:
 		HP: 100
 	RenderSprites:
@@ -182,9 +190,9 @@ ammocrat:
 camsc01:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 热狗摊
+		Name: actor-camsc01.name
 	Tooltip@NoRow:
-		Name: 热狗摊
+		Name: actor-camsc01.name
 	RevealsShroud:
 		Range: 6c0
 	Health:
@@ -198,9 +206,9 @@ camsc01:
 camsc02:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 海滩遮阳伞
+		Name: actor-camsc02.name
 	Tooltip@NoRow:
-		Name: 海滩遮阳伞
+		Name: actor-camsc02.name
 	RevealsShroud:
 		Range: 6c0
 	Health:
@@ -214,9 +222,9 @@ camsc02:
 camsc03:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 海滩遮阳伞
+		Name: actor-camsc03.name
 	Tooltip@NoRow:
-		Name: 海滩遮阳伞
+		Name: actor-camsc03.name
 	RevealsShroud:
 		Range: 6c0
 	Health:
@@ -230,9 +238,9 @@ camsc03:
 camsc04:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 沙滩浴巾
+		Name: actor-camsc04.name
 	Tooltip@NoRow:
-		Name: 沙滩浴巾
+		Name: actor-camsc04.name
 	RevealsShroud:
 		Range: 6c0
 	Health:
@@ -246,9 +254,9 @@ camsc04:
 camsc05:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 沙滩浴巾
+		Name: actor-camsc05.name
 	Tooltip@NoRow:
-		Name: 沙滩浴巾
+		Name: actor-camsc05.name
 	RevealsShroud:
 		Range: 6c0
 	Health:
@@ -262,9 +270,9 @@ camsc05:
 camsc06:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 营火
+		Name: actor-camsc06.name
 	Tooltip@NoRow:
-		Name: 营火
+		Name: actor-camsc06.name
 	RevealsShroud:
 		Range: 6c0
 	Health:
@@ -282,9 +290,9 @@ caeuro05:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^2x2Shape
 	Tooltip:
-		Name: 雕像
+		Name: actor-caeuro05.name
 	Tooltip@NoRow:
-		Name: 雕像
+		Name: actor-caeuro05.name
 	Armor:
 		Type: concrete
 	RevealsShroud:
@@ -302,9 +310,9 @@ caeuro05:
 capark01:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 长凳
+		Name: actor-capark01.name
 	Tooltip@NoRow:
-		Name: 长凳
+		Name: actor-capark01.name
 	RevealsShroud:
 		Range: 6c0
 	Health:
@@ -319,9 +327,9 @@ capark02:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^2x1Shape
 	Tooltip:
-		Name: 秋千
+		Name: actor-capark02.name
 	Tooltip@NoRow:
-		Name: 秋千
+		Name: actor-capark02.name
 	RevealsShroud:
 		Range: 6c0
 	Health:
@@ -339,9 +347,9 @@ capark03:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^2x2Shape
 	Tooltip:
-		Name: 旋转木马
+		Name: actor-capark03.name
 	Tooltip@NoRow:
-		Name: 旋转木马
+		Name: actor-capark03.name
 	RevealsShroud:
 		Range: 6c0
 	Health:
@@ -358,9 +366,9 @@ capark03:
 castrt01:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 红绿灯
+		Name: actor-castrt01.name
 	Armor:
-		Type: steel
+		Type: Steel
 	RevealsShroud:
 		Range: 6c0
 	Health:
@@ -374,11 +382,11 @@ castrt01:
 castrt02:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 红绿灯
+		Name: actor-castrt02.name
 	Tooltip@NoRow:
-		Name: 红绿灯
+		Name: actor-castrt02.name
 	Armor:
-		Type: steel
+		Type: Steel
 	RevealsShroud:
 		Range: 6c0
 	Health:
@@ -392,11 +400,11 @@ castrt02:
 castrt03:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 红绿灯
+		Name: actor-castrt03.name
 	Tooltip@NoRow:
-		Name: 红绿灯
+		Name: actor-castrt03.name
 	Armor:
-		Type: steel
+		Type: Steel
 	RevealsShroud:
 		Range: 6c0
 	Health:
@@ -410,11 +418,11 @@ castrt03:
 castrt04:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 红绿灯
+		Name: actor-castrt04.name
 	Tooltip@NoRow:
-		Name: 红绿灯
+		Name: actor-castrt04.name
 	Armor:
-		Type: steel
+		Type: Steel
 	RevealsShroud:
 		Range: 6c0
 	Health:
@@ -428,11 +436,11 @@ castrt04:
 castrt05:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 公交车站
+		Name: actor-castrt05.name
 	Tooltip@NoRow:
-		Name: 公交车站
+		Name: actor-castrt05.name
 	Armor:
-		Type: steel
+		Type: Steel
 	RevealsShroud:
 		Range: 6c0
 	Health:
@@ -447,11 +455,11 @@ camov01:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^1x4Shape
 	Tooltip:
-		Name: 汽车影院荧幕
+		Name: actor-camov01.name
 	Tooltip@NoRow:
-		Name: 汽车影院荧幕
+		Name: actor-camov01.name
 	Armor:
-		Type: steel
+		Type: Steel
 	RevealsShroud:
 		Range: 6c0
 	Health:
@@ -468,7 +476,7 @@ camov02:
 	Inherits: ^GarrisonableBuilding
 	Inherits@shape: ^2x2Shape
 	Tooltip:
-		Name: 汽车影院小卖部
+		Name: actor-camov02.name
 	Building:
 		Dimensions: 2,2
 		Footprint: xx xx
@@ -494,23 +502,23 @@ camov02.rubble:
 pole01:
 	Inherits: ^TelephonePole
 	Tooltip:
-		Name: 多用电线杆
+		Name: actor-pole01.name
 	Tooltip@NoRow:
-		Name: 多用电线杆
+		Name: actor-pole01.name
 
 pole02:
 	Inherits: ^TelephonePole
 	Tooltip:
-		Name: 多用电线杆
+		Name: actor-pole02.name
 	Tooltip@NoRow:
-		Name: 多用电线杆
+		Name: actor-pole02.name
 
 hdstn01:
 	Inherits: ^Tree
 	Tooltip:
-		Name: 露营烤炉
+		Name: actor-hdstn01.name
 	Tooltip@NoRow:
-		Name: 露营烤炉
+		Name: actor-hdstn01.name
 	MapEditorData:
 		Categories: Decoration
 	-MirageTarget:
@@ -578,9 +586,9 @@ sign06:
 spkr01:
 	Inherits: ^Tree
 	Tooltip:
-		Name: 播音喇叭
+		Name: actor-spkr01.name
 	Tooltip@NoRow:
-		Name: 播音喇叭
+		Name: actor-spkr01.name
 	MapEditorData:
 		Categories: Decoration
 	-MirageTarget:
@@ -588,9 +596,9 @@ spkr01:
 carus02c:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 克里姆林宫墙
+		Name: actor-carus02c.name
 	Tooltip@NoRow:
-		Name: 克里姆林宫墙
+		Name: actor-carus02c.name
 	Armor:
 		Type: concrete
 	Health:
@@ -601,9 +609,9 @@ carus02c:
 carus02d:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 克里姆林宫墙
+		Name: actor-carus02d.name
 	Tooltip@NoRow:
-		Name: 克里姆林宫墙
+		Name: actor-carus02d.name
 	Armor:
 		Type: concrete
 	Health:
@@ -614,9 +622,9 @@ carus02d:
 carus02e:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 克里姆林宫墙
+		Name: actor-carus02e.name
 	Tooltip@NoRow:
-		Name: 克里姆林宫墙
+		Name: actor-carus02e.name
 	Armor:
 		Type: concrete
 	Health:
@@ -627,9 +635,9 @@ carus02e:
 carus02f:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 克里姆林宫墙
+		Name: actor-carus02f.name
 	Tooltip@NoRow:
-		Name: 克里姆林宫墙
+		Name: actor-carus02f.name
 	Armor:
 		Type: concrete
 	Health:
@@ -653,9 +661,9 @@ cakrmw:
 	Buildable:
 		Queue: Support.Civilian
 	Tooltip:
-		Name: 克里姆林宫墙
+		Name: actor-cakrmw.name
 	Tooltip@NoRow:
-		Name: 克里姆林宫墙
+		Name: actor-cakrmw.name
 	Armor:
 		Type: Concrete
 	LineBuild:
@@ -670,9 +678,9 @@ gagate_a:
 	Buildable:
 		Queue: Support.Civilian
 	Tooltip:
-		Name: 边防检查站
+		Name: actor-gagate-a.name
 	Tooltip@NoRow:
-		Name: 边防检查站
+		Name: actor-gagate-a.name
 	IsometricSelectable:
 		DecorationHeight: 30
 
@@ -680,9 +688,9 @@ gagate_a:
 cabarr01:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 拒马
+		Name: actor-cabarr01.name
 	Tooltip@NoRow:
-		Name: 拒马
+		Name: actor-cabarr01.name
 	Armor:
 		Type: concrete
 	Health:
@@ -693,9 +701,9 @@ cabarr01:
 cabarr02:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 拒马
+		Name: actor-cabarr02.name
 	Tooltip@NoRow:
-		Name: 拒马
+		Name: actor-cabarr02.name
 	Armor:
 		Type: concrete
 	Health:
@@ -715,9 +723,9 @@ capark06:
 casin03e:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 施工铭牌
+		Name: actor-casin03e.name
 	Tooltip@NoRow:
-		Name: 施工铭牌
+		Name: actor-casin03e.name
 	Health:
 		HP: 500
 	-ShakeOnDeath:
@@ -730,9 +738,9 @@ casin03s:
 caurb01:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 电话亭
+		Name: actor-caurb01.name
 	Tooltip@NoRow:
-		Name: 电话亭
+		Name: actor-caurb01.name
 	Health:
 		HP: 500
 	-ShakeOnDeath:
@@ -742,9 +750,9 @@ caurb01:
 caurb02:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 消防栓
+		Name: actor-caurb02.name
 	Tooltip@NoRow:
-		Name: 消防栓
+		Name: actor-caurb02.name
 	Health:
 		HP: 500
 	-ShakeOnDeath:
@@ -754,9 +762,9 @@ caurb02:
 caurb03:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 聚光灯
+		Name: actor-caurb03.name
 	Tooltip@NoRow:
-		Name: 聚光灯
+		Name: actor-caurb03.name
 	Health:
 		HP: 500
 	-ShakeOnDeath:
@@ -769,34 +777,34 @@ cagatene:
 	Buildable:
 		Queue: Support.Civilian
 	Tooltip:
-		Name: 边防检查站
+		Name: actor-cagatene.name
 	Tooltip@NoRow:
-		Name: 边防检查站
+		Name: actor-cagatene.name
 
 cagatenw:
 	Inherits: ^Gate_A
 	Buildable:
 		Queue: Support.Civilian
 	Tooltip:
-		Name: 边防检查站
+		Name: actor-cagatenw.name
 	Tooltip@NoRow:
-		Name: 边防检查站
+		Name: actor-cagatenw.name
 
 cagatesw:
 	Inherits: ^Gate_B
 	Buildable:
 		Queue: Support.Civilian
 	Tooltip:
-		Name: 边防检查站
+		Name: actor-cagatesw.name
 	Tooltip@NoRow:
-		Name: 边防检查站
+		Name: actor-cagatesw.name
 
 capark07:
 	Inherits: ^CivBuilding
 	Tooltip:
-		Name: 野餐桌
+		Name: actor-capark07.name
 	Tooltip@NoRow:
-		Name: 野餐桌
+		Name: actor-capark07.name
 	RevealsShroud:
 		Range: 6c0
 	Health:
@@ -806,3 +814,9 @@ capark07:
 		Categories: Decoration
 	IsometricSelectable:
 		DecorationHeight: 15
+
+camisc07:
+	Inherits: camisc01
+
+camisc08:
+	Inherits: camisc02

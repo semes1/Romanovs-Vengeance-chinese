@@ -2,32 +2,63 @@ nacnst:
 	Inherits: ^ConstructionYard
 	Buildable:
 		BuildPaletteOrder: 20
-	ProvidesPrerequisite@soviets:
-		Prerequisite: structures.soviets
+	ProvidesPrerequisite@building.soviets:
+		Prerequisite: building.soviets
+		Factions: america, germany, england, france, korea, japan, belarus, poland, ukraine, aussie, china, turkey, canada, cuba, libya, iraq, russia, vietnam, chile, mexico, mongolia, psicorps, psinepal, psisouth, psitrans, psimoon
+	ProvidesPrerequisite@building.sovietsorbaku:
+		Prerequisite: building.sovietsorbaku
+	ProvidesPrerequisite@building.baku:
+		Prerequisite: building.baku
+		Factions: transcaucus, turkmen, tuva, russianfed, serbia
 	Production:
-		Produces: Building.Soviets, Support.Soviets, Support.Baku
+		Produces: Building.Soviets, Building.Baku, Support.Soviets, Support.Baku
 	ProductionQueue@Building:
 		Type: Building.Soviets
+		DisplayOrder: 2
+		Factions: america, germany, england, france, korea, japan, belarus, poland, ukraine, aussie, china, turkey, canada, cuba, libya, iraq, russia, vietnam, chile, mexico, mongolia, psicorps, psinepal, psisouth, psitrans, psimoon
+	ProductionQueue@BuildingBaku:
+		Type: Building.Baku
+		Group: Building
+		DisplayOrder: 4
+		LowPowerModifier: 200
+		Factions: transcaucus, turkmen, tuva, russianfed, serbia
+		ReadyAudio: ConstructionComplete
+		ReadyTextNotification: notification-construction-complete
+		BlockedAudio: NoBuild
+		BlockedTextNotification: notification-unable-to-build-more
+		LimitedAudio: BuildingInProgress
+		LimitedTextNotification: notification-unable-to-comply-building-in-progress
+		QueuedAudio: Building
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
 	ProductionQueue@Support:
 		Type: Support.Soviets
+		DisplayOrder: 6
 		Factions: america, germany, england, france, korea, japan, belarus, poland, ukraine, aussie, china, turkey, canada, cuba, libya, iraq, russia, vietnam, chile, mexico, mongolia, psicorps, psinepal, psisouth, psitrans, psimoon
 	ProductionQueue@SupportBaku:
 		Type: Support.Baku
-		Factions: transcaucus, turkmen, tuva, russianfed, serbia
 		Group: Support
+		DisplayOrder: 8
 		LowPowerModifier: 200
+		Factions: transcaucus, turkmen, tuva, russianfed, serbia
 		ReadyAudio: ConstructionComplete
+		ReadyTextNotification: notification-construction-complete
 		BlockedAudio: NoBuild
+		BlockedTextNotification: notification-unable-to-build-more
 		LimitedAudio: BuildingInProgress
+		LimitedTextNotification: notification-unable-to-comply-building-in-progress
 		QueuedAudio: Building
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
 	ProductionBar@Building:
 		ProductionType: Building.Soviets
+	ProductionBar@BuildingBaku:
+		ProductionType: Building.Baku
 	ProductionBar@Support:
 		ProductionType: Support.Soviets
 	ProductionBar@SupportBaku:
 		ProductionType: Support.Baku
+		Color: 8A8A8A
 	Transforms:
 		IntoActor: smcv
 	WithIdleOverlay@top:
@@ -169,12 +200,13 @@ napowr:
 	Inherits: ^PowerPlant
 	Inherits@SHAPE: ^3x2Shape
 	Buildable:
-		Queue: Building.Soviets
-		Description: 为基地其他建筑提供电力\n\n可以变更朝向
+		Queue: Building.Shared, Building.Soviets, Building.Baku
+		Description: actor-napowr.description
+		Prerequisites: ~building.sovietsorbaku, ~techlevel.1
 	Tooltip:
-		Name: 特斯拉反应炉
+		Name: actor-napowr.name
 	Tooltip@NoRow:
-		Name: 特斯拉反应炉
+		Name: actor-napowr.name
 	Building:
 		Footprint: xxx xxx
 		Dimensions: 3,2
@@ -182,9 +214,12 @@ napowr:
 		Sequence: idle-lights
 		PauseOnCondition: chronodisable
 		RequiresCondition: !build-incomplete
+	Explodes@Reactor:
+		Weapon: TeslaReactorExplode
 	PlaceBuildingVariants:
 		Actors: napowb
 	IsometricSelectable:
+		Class: napowr
 		DecorationHeight: 45
 	Voiced:
 		VoiceSet: PowerPlantVoice
@@ -194,95 +229,157 @@ nahand:
 	Inherits: ^Barracks
 	Inherits@SHAPE: ^2x2Shape
 	Buildable:
-		Queue: Building.Soviets
-		Description: 训练步兵\n\n提供一个步兵生产排程\n只能训练与建筑工厂之阵营相同阵营的步兵
+		Queue: Building.Shared, Building.Soviets
+		Description: actor-nahand.description
+		Prerequisites: ~building.soviets, power, ~techlevel.1
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
+	Exit@1Shared:
+		SpawnOffset: -512,768,0
+		ExitCell: 1,2
+		Priority: 2
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@2Shared:
+		SpawnOffset: -512,768,0
+		ExitCell: 0,2
+		Priority: 2
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@fallback1Shared:
+		SpawnOffset: 0,724,0
+		ExitCell: 2,2
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@fallback2Shared:
+		SpawnOffset: 0,724,0
+		ExitCell: 2,1
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@fallback3Shared:
+		SpawnOffset: 724,0,0
+		ExitCell: 2,0
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@fallback4Shared:
+		SpawnOffset: 724,0,0
+		ExitCell: 2,-1
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@fallback5Shared:
+		SpawnOffset: 724,0,0
+		ExitCell: 1,-1
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@fallback6Shared:
+		SpawnOffset: 0,-724,0
+		ExitCell: 0,-1
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@fallback7Shared:
+		SpawnOffset: 0,-724,0
+		ExitCell: -1,-1
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@fallback8Shared:
+		SpawnOffset: 0,-724,0
+		ExitCell: -1,0
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@fallback9Shared:
+		SpawnOffset: -724,0,0
+		ExitCell: -1,1
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@fallback10Shared:
+		SpawnOffset: -724,0,0
+		ExitCell: -1,2
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
 	Exit@1:
 		SpawnOffset: -512,768,0
 		ExitCell: 1,2
 		Priority: 2
+		RequiresCondition: multiqueue
 	Exit@2:
 		SpawnOffset: -512,768,0
 		ExitCell: 0,2
 		Priority: 2
+		RequiresCondition: multiqueue
 	Exit@fallback1:
 		SpawnOffset: 0,724,0
 		ExitCell: 2,2
+		RequiresCondition: multiqueue
 	Exit@fallback2:
 		SpawnOffset: 0,724,0
 		ExitCell: 2,1
+		RequiresCondition: multiqueue
 	Exit@fallback3:
 		SpawnOffset: 724,0,0
 		ExitCell: 2,0
+		RequiresCondition: multiqueue
 	Exit@fallback4:
 		SpawnOffset: 724,0,0
 		ExitCell: 2,-1
+		RequiresCondition: multiqueue
 	Exit@fallback5:
 		SpawnOffset: 724,0,0
 		ExitCell: 1,-1
+		RequiresCondition: multiqueue
 	Exit@fallback6:
 		SpawnOffset: 0,-724,0
 		ExitCell: 0,-1
+		RequiresCondition: multiqueue
 	Exit@fallback7:
 		SpawnOffset: 0,-724,0
 		ExitCell: -1,-1
+		RequiresCondition: multiqueue
 	Exit@fallback8:
 		SpawnOffset: 0,-724,0
 		ExitCell: -1,0
+		RequiresCondition: multiqueue
 	Exit@fallback9:
 		SpawnOffset: -724,0,0
 		ExitCell: -1,1
+		RequiresCondition: multiqueue
 	Exit@fallback10:
 		SpawnOffset: -724,0,0
 		ExitCell: -1,2
+		RequiresCondition: multiqueue
 	Production:
-		Produces: Infantry.Soviets, Infantry.Cuba, Infantry.Iraq, Infantry.Baku, Infantry.Tuva
+		Produces: Infantry.Soviets, Infantry.Cuba, Infantry.Iraq
 	ProductionQueue:
 		Type: Infantry.Soviets
-		Factions: america, germany, england, france, korea, japan, belarus, poland, ukraine, aussie, china, turkey, canada, libya, russia, vietnam, chile, mexico, mongolia, psicorps, psinepal, psisouth, psitrans, psimoon
+		DisplayOrder: 14
+		Factions: america, germany, england, france, korea, japan, belarus, poland, ukraine, aussie, china, turkey, canada, libya, russia, vietnam, chile, mexico, mongolia, psicorps, psinepal, psisouth, psitrans, psimoon, transcaucus, turkmen, tuva, russianfed, serbia
 	ProductionQueue@Cuba:
 		Type: Infantry.Cuba
-		Factions: cuba
 		Group: Infantry
+		DisplayOrder: 14
 		LowPowerModifier: 200
+		Factions: cuba
 		ReadyAudio: UnitReady
+		ReadyTextNotification: notification-unit-ready
 		BlockedAudio: NoBuild
+		BlockedTextNotification: notification-unable-to-build-more
 		LimitedAudio: BuildingInProgress
+		LimitedTextNotification: notification-unable-to-comply-building-in-progress
 		QueuedAudio: Training
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
 	ProductionQueue@Iraq:
 		Type: Infantry.Iraq
+		Group: Infantry
+		DisplayOrder: 14
+		LowPowerModifier: 200
 		Factions: iraq
-		Group: Infantry
-		LowPowerModifier: 200
 		ReadyAudio: UnitReady
+		ReadyTextNotification: notification-unit-ready
 		BlockedAudio: NoBuild
+		BlockedTextNotification: notification-unable-to-build-more
 		LimitedAudio: BuildingInProgress
-		QueuedAudio: Training
-		OnHoldAudio: OnHold
-		CancelledAudio: Cancelled
-	ProductionQueue@Baku:
-		Type: Infantry.Baku
-		Factions: transcaucus, turkmen, russianfed, serbia
-		Group: Infantry
-		LowPowerModifier: 200
-		ReadyAudio: UnitReady
-		BlockedAudio: NoBuild
-		LimitedAudio: BuildingInProgress
-		QueuedAudio: Training
-		OnHoldAudio: OnHold
-		CancelledAudio: Cancelled
-	ProductionQueue@Tuva:
-		Type: Infantry.Tuva
-		Factions: tuva
-		Group: Infantry
-		LowPowerModifier: 200
-		ReadyAudio: UnitReady
-		BlockedAudio: NoBuild
-		LimitedAudio: BuildingInProgress
+		LimitedTextNotification: notification-unable-to-comply-building-in-progress
 		QueuedAudio: Training
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
@@ -292,14 +389,20 @@ nahand:
 		ProductionType: Infantry.Cuba
 	ProductionBar@Iraq:
 		ProductionType: Infantry.Iraq
-	ProductionBar@Baku:
-		ProductionType: Infantry.Baku
-	ProductionBar@Tuva:
-		ProductionType: Infantry.Tuva
 	RallyPoint:
 		Path: 3,3
-	ProvidesPrerequisite@nahand:
+	ProvidesPrerequisite@buildingname:
 		Prerequisite: nahand
+	ProvidesPrerequisite@infantry.soviets:
+		Prerequisite: infantry.soviets
+	ProvidesPrerequisite@infantry.iraq:
+		Prerequisite: infantry.iraq
+		Factions: iraq
+	ProvidesPrerequisite@infantry.cuba:
+		Prerequisite: infantry.cuba
+		Factions: cuba
+	ProvidesPrerequisite@infantry.sovietsorbaku:
+		Prerequisite: infantry.sovietsorbaku
 	ProvidesPrerequisite@mwfacref:
 		Prerequisite: narefn
 	IsometricSelectable:
@@ -308,44 +411,38 @@ nahand:
 narefn:
 	Inherits: ^Refinery
 	Buildable:
-		Queue: Building.Soviets
+		Queue: Building.Shared, Building.Soviets, Building.Baku
+		Prerequisites: ~building.sovietsorbaku, power, ~!global-megawealth, ~techlevel.1, ~AIantiRush
 	FreeActor:
 		Actor: harv
 	SmokeParticleEmitter@refinerysmoke1:
 		Offset: -1024,-384,4096
 	SmokeParticleEmitter@refinerysmoke2:
 		Offset: 128,-1408,4096
+	WithIdleOverlay@waves:
+		RequiresCondition: !build-incomplete && in_water
 	PlaceBuildingVariants:
 		Actors: narefb #, narefc, narefd
+		Facings: 640, 384 #, 128, 896
 	IsometricSelectable:
+		Class: narefn
 		DecorationHeight: 90
 
 naradr:
-	Inherits: ^BaseBuilding
-	Inherits@LOWPOWER: ^DisableOnLowPowerOrPowerDown
-	Inherits@EMPULSE: ^DisabledByEMP
-	Inherits@MC: ^MindControllableBuilding
+	Inherits: ^Radar
 	Inherits@SHAPE: ^2x2Shape
 	Inherits@AI: ^AIMicroManagable
 	Buildable:
-		Queue: Building.Soviets
-		BuildPaletteOrder: 60
-		Prerequisites: power, narefn, ~techlevel.2, ~!ai.naradr
-		Description: 苏联科技建筑\n\n提供战术地图\n解锁阵营独有支援能力\n需要电力供应\n解锁科技升级
-		BuildDuration: 750
-		BuildDurationModifier: 100
+		Queue: Building.Shared, Building.Soviets
+		Prerequisites: ~building.soviets, power, narefn, ~techlevel.2, ~!ai.naradr
+		Description: actor-naradr.description
 	ProvidesPrerequisite@AIbuildinglimit:
 		RequiresCondition: ai-control
 		Prerequisite: ai.naradr
-	Valued:
-		Cost: 1500
 	Tooltip:
-		Name: 苏联雷达站
+		Name: actor-naradr.name
 	Tooltip@NoRow:
-		Name: 苏联雷达站
-	ProvidesPrerequisite:
-		Prerequisite: radar
-	ProvidesPrerequisite@default:
+		Name: actor-naradr.name
 	ProvidesPrerequisite@russia:
 		Prerequisite: radar.russia
 		Factions: russia
@@ -361,9 +458,6 @@ naradr:
 	ProvidesPrerequisite@libya:
 		Prerequisite: radar.libya
 		Factions: libya
-	ProvidesPrerequisite@baku:
-		Prerequisite: radar.baku
-		Factions: transcaucus, turkmen, tuva, russianfed, serbia
 	ProvidesPrerequisite@upgrade.russia:
 		Prerequisite: upgrade.russia
 		Factions: russia
@@ -381,23 +475,11 @@ naradr:
 		Factions: libya
 	ProvidesPrerequisite@upgrade.soviets:
 		Prerequisite: upgrade.soviets
+	ProvidesPrerequisite@upgrade.sovietsorbaku:
+		Prerequisite: upgrade.sovietsorbaku
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
-	Health:
-		HP: 100000
-	Armor:
-		Type: Wood
-	ExternalCondition@disableradar:
-		Condition: disableradar
-	ProvidesRadar:
-		RequiresCondition: !disabled && !chronodisable && !disableradar
-	RevealsShroud:
-		Range: 10c0
-	# RevealsShroudToIntelligenceOwner:
-	#	Types: SatelliteScan
-	#	Range: 10c0
-	SupportPowerChargeBar:
 	ParatroopersPower@tesladrop:
 		OrderName: RussianTeslaDrop
 		PauseOnCondition: disabled || chronodisable
@@ -406,12 +488,14 @@ naradr:
 		Icons:
 			1: tesladrop
 		ChargeInterval: 4500
+		Names:
+			1: Tesla Drop
 		Descriptions:
-			1: 特斯拉小队空投
-		LongDescs:
-			1: 一架运输机在选定位置投放1辆特斯拉坦克和3名特斯拉步兵
+			1: A Cargo Plane drops a Tesla Tank\n and 3 Tesla Troopers anywhere on the map.
 		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: notification-select-target
 		EndChargeSpeechNotification: ParatroopersReady
+		EndChargeTextNotification: notification-paratroopers-ready
 		DropItems:
 			1: shk, shk, shk, ttnk
 		SquadSizes:
@@ -434,16 +518,24 @@ naradr:
 		PauseOnCondition: disabled || chronodisable
 		Prerequisites:
 			1: radar.iraq
+			2: upgrade.advanced_irradiators
 		Icons:
 			1: radmissile
+			2: radmissile
 		ChargeInterval: 6000
+		Names:
+			1: Radiation Missile
+			2: Radiation Missile
 		Descriptions:
-			1: 化武飞弹
-		LongDescs:
-			1: 在选定位置投放一枚化武飞弹\n飞弹命中后将遗留下一片辐射区
+			1: Fires a missile that deals low damage\nand leaves radiation.
+			2: Fires a missile that deals low damage\nand leaves radiation.
 		LaunchSound: sradlaun.wav
 		SelectTargetSpeechNotification: SelectTarget
-		MissileWeapon: RadiationMissile
+		SelectTargetTextNotification: notification-select-target
+		MissileWeapons:
+			1: RadiationMissile
+			2: RadiationMissileOrange
+		MissileImage: RadiationMissile
 		MissilePalette: player
 		IsPlayerPalette: true
 		CameraRange: 8c0
@@ -453,6 +545,7 @@ naradr:
 		DisplayBeacon: True
 		BeaconPosters:
 			1: radmicon
+			2: radmicon
 		ArrowSequence: arrow
 		ClockSequence: clock
 		TrailInterval: 0
@@ -460,6 +553,7 @@ naradr:
 		TrailSequences: idle
 		CircleRanges:
 			1: 4c0
+			2: 4c0
 		CircleColor: FFFFFFFF
 		CircleBorderColor: 00000060
 	DetonateWeaponPower@instanbunker:
@@ -470,11 +564,12 @@ naradr:
 		Icons:
 			1: bunker
 		ChargeInterval: 3000
+		Names:
+			1: Instant Bunker
 		Descriptions:
-			1: 战地碉堡
-		LongDescs:
-			1: 立刻在选定位置建造一座战地碉堡\n可以容纳5名步兵在其中战斗\n免疫清除驻军效果\n战地碉堡可以维修\n出售战地碉堡将不会获得资金
+			1: Places a bunker anywhere on the map.
 		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: notification-select-target
 		Weapons:
 			1: BunkerSpawner
 		ActivationSequence:
@@ -486,11 +581,12 @@ naradr:
 		Icons:
 			1: ambush
 		ChargeInterval: 6000
+		Names:
+			1: Ambush
 		Descriptions:
-			1: 游击队突袭
-		LongDescs:
-			1: 立刻在选定位置部署一支游击队\n游击队由9名动员兵和6名防空步兵组成
+			1: Spawns 9 Conscripts and 6 Flak Troopers\nanywhere on the map.
 		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: notification-select-target
 		Weapons:
 			1: AmbushSpawner
 		ActivationSequence:
@@ -504,11 +600,12 @@ naradr:
 		Icons:
 			1: deathbombs
 		ChargeInterval: 3000
+		Names:
+			1: Death Bombs
 		Descriptions:
-			1: 革命之怒
-		LongDescs:
-			1: 在选定的友方单位上部署自杀式炸弹\n自杀式炸弹将在单位阵亡时引爆\n炸弹将会造成友军伤害
+			1: Arms a group of friendly units with explosives that trigger when unit dies.
 		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: notification-select-target
 		Durations:
 			1: -1
 		Conditions:
@@ -516,7 +613,7 @@ naradr:
 		Dimensions:
 			1: 3,3
 		Footprints:
-			1: _x_ xxx _x_
+			1: xxx xxx xxx
 		OnFireSound: icraatta.wav
 	AirstrikePowerRV@clustermines:
 		ActivationDelay: 125
@@ -527,12 +624,14 @@ naradr:
 		Icons:
 			1: cluster
 		ChargeInterval: 4500
+		Names:
+			1: Cluster Mines
 		Descriptions:
-			1: 集束地雷空投
-		LongDescs:
-			1: 一架运输机在选定位置一次性投放13枚地雷
+			1: A Cargo plane drops 13 mines\nanywhere on the map.
 		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: notification-select-target
 		IncomingSpeechNotification: WarningEnemyAirstrikeInitiated
+		IncomingTextNotification: notification-enemy-airstrike-initiated
 		UnitTypes:
 			1: pdplane.cluster_mines
 		SquadSizes:
@@ -547,55 +646,14 @@ naradr:
 		UseDirectionalTarget: True
 		DirectionArrowAnimation: swdirection
 		DirectionArrowPalette: mouse
-	AirstrikePower@leafletdrop:
-		OrderName: BakuPactLeafletDrop
-		PauseOnCondition: disabled || chronodisable
-		Prerequisites:
-			1: radar.baku
-		Icons:
-			1: leaflet
-		ChargeInterval: 3750
-		Descriptions:
-			1: 宣传品空投
-		LongDescs:
-			1: 一架运输机在选定位置投放心战宣传品\n降低敌方单位的移动速度与攻击速度
-		SelectTargetSpeechNotification: SelectTarget
-		IncomingSpeechNotification: WarningEnemyAirstrikeInitiated
-		UnitTypes:
-			1: pdplane.leaflet.baku
-		SquadSizes:
-			1: 1
-		QuantizedFacings: 8
-		CameraActor: CAMERA
-		CameraRemoveDelay: 100
-		DisplayBeacon: True
-		BeaconPosters:
-			1: leaficon
-		ArrowSequence: arrow
-		ClockSequence: clock
-		UseDirectionalTarget: True
-		DirectionArrowAnimation: swdirection
-		DirectionArrowPalette: mouse
 	WithIdleOverlay@dish:
 		Sequence: idle-dish
 		PauseOnCondition: disabled || chronodisable
 		RequiresCondition: !build-incomplete
-	Targetable:
-		TargetTypes: Ground, C4, DetonateAttack, Structure, NonGarrisonableStructure, SpyInfiltrate
-	InfiltrateForSupportPowerReset:
-		Types: SpyInfiltrate
-	InfiltrateForExploration:
-		Types: SpyInfiltrate
-		InfiltratedNotification: RadarSabotaged
-		InfiltrationNotification: BuildingInfiltratedRadarSabotaged
-	Power:
-		Amount: -75
-		RequiresCondition: !chronodisable
+	GrantCondition@IDISABLE:
+		RequiresCondition: lowpower || powerdown || emp
 	IsometricSelectable:
 		DecorationHeight: 90
-	Voiced:
-		VoiceSet: RadarVoice
-		Volume: 0.8
 
 mine:
 	Inherits@1: ^SpriteActor
@@ -620,15 +678,15 @@ mine:
 	Cloak:
 		CloakSound:
 		UncloakSound:
-		Palette:
 		InitialDelay: 0
+		CloakStyle: None
 	Tooltip:
-		Name: 地雷
-		GenericName: 地雷
+		Name: actor-mine.name
+		GenericName: actor-mine.name
 		RequiresCondition: showownername
 	Tooltip@NoRow:
-		Name: 地雷
-		GenericName: 地雷
+		Name: actor-mine.name
+		GenericName: actor-mine.name
 		ShowOwnerRow: false
 		RequiresCondition: !showownername
 	GrantConditionOnPrerequisite@SHOWOWNERNAME:
@@ -651,66 +709,111 @@ mine:
 naweap:
 	Inherits: ^WarFactory
 	Buildable:
-		Queue: Building.Soviets
-	ProvidesPrerequisite@naweap:
+		Queue: Building.Shared, Building.Soviets, Building.Baku
+		Description: actor-naweap.description
+		Prerequisites: ~building.sovietsorbaku, refinery, ~techlevel.1
+	ProvidesPrerequisite@buildingname:
 		Prerequisite: naweap
+	ProvidesPrerequisite@vehicle.soviets:
+		Prerequisite: vehicle.soviets
+		Factions: america, france, england, germany, korea, japan, belarus, poland, ukraine, aussie, china, turkey, canada, russia, iraq, vietnam, cuba, libya, chile, mexico, mongolia, psicorps, psinepal, psisouth, psitrans, psimoon
+	ProvidesPrerequisite@vehicle.russia:
+		Prerequisite: vehicle.russia
+		Factions: russia
+	ProvidesPrerequisite@vehicle.iraq:
+		Prerequisite: vehicle.iraq
+		Factions: iraq
+	ProvidesPrerequisite@vehicle.cuba:
+		Prerequisite: vehicle.cuba
+		Factions: cuba
+	ProvidesPrerequisite@vehicle.libya:
+		Prerequisite: vehicle.libya
+		Factions: libya
+	ProvidesPrerequisite@vehicle.baku:
+		Prerequisite: vehicle.baku
+		Factions: transcaucus, turkmen, tuva, russianfed, serbia
+	ProvidesPrerequisite@vehicle.sovietsorbaku:
+		Prerequisite: vehicle.sovietsorbaku
+	ProvidesPrerequisite@vehicleorship.sovietsorbaku:
+		Prerequisite: vehicleorship.sovietsorbaku
 	Production:
 		Produces: Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya, Vehicle.Baku
 	ProductionQueue:
 		Type: Vehicle.Soviets
+		DisplayOrder: 18
 		Factions: america, germany, england, france, korea, japan, belarus, poland, ukraine, aussie, china, turkey, canada, vietnam, chile, mexico, mongolia, psicorps, psinepal, psisouth, psitrans, psimoon
 	ProductionQueue@USSR:
 		Type: Vehicle.USSR
-		Factions: russia
 		Group: Vehicle
+		DisplayOrder: 18
 		LowPowerModifier: 200
+		Factions: russia
 		ReadyAudio: UnitReady
+		ReadyTextNotification: notification-unit-ready
 		BlockedAudio: NoBuild
+		BlockedTextNotification: notification-unable-to-build-more
 		LimitedAudio: BuildingInProgress
+		LimitedTextNotification: notification-unable-to-comply-building-in-progress
 		QueuedAudio: Training
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
 	ProductionQueue@Iraq:
 		Type: Vehicle.Iraq
-		Factions: iraq
 		Group: Vehicle
+		DisplayOrder: 18
 		LowPowerModifier: 200
+		Factions: iraq
 		ReadyAudio: UnitReady
+		ReadyTextNotification: notification-unit-ready
 		BlockedAudio: NoBuild
+		BlockedTextNotification: notification-unable-to-build-more
 		LimitedAudio: BuildingInProgress
+		LimitedTextNotification: notification-unable-to-comply-building-in-progress
 		QueuedAudio: Training
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
 	ProductionQueue@Cuba:
 		Type: Vehicle.Cuba
-		Factions: cuba
 		Group: Vehicle
+		DisplayOrder: 18
 		LowPowerModifier: 200
+		Factions: cuba
 		ReadyAudio: UnitReady
+		ReadyTextNotification: notification-unit-ready
 		BlockedAudio: NoBuild
+		BlockedTextNotification: notification-unable-to-build-more
 		LimitedAudio: BuildingInProgress
+		LimitedTextNotification: notification-unable-to-comply-building-in-progress
 		QueuedAudio: Training
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
 	ProductionQueue@Libya:
 		Type: Vehicle.Libya
-		Factions: libya
 		Group: Vehicle
+		DisplayOrder: 18
 		LowPowerModifier: 200
+		Factions: libya
 		ReadyAudio: UnitReady
+		ReadyTextNotification: notification-unit-ready
 		BlockedAudio: NoBuild
+		BlockedTextNotification: notification-unable-to-build-more
 		LimitedAudio: BuildingInProgress
+		LimitedTextNotification: notification-unable-to-comply-building-in-progress
 		QueuedAudio: Training
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
 	ProductionQueue@Baku:
 		Type: Vehicle.Baku
-		Factions: transcaucus, turkmen, tuva, russianfed, serbia
 		Group: Vehicle
+		DisplayOrder: 20
 		LowPowerModifier: 200
+		Factions: transcaucus, turkmen, tuva, russianfed, serbia
 		ReadyAudio: UnitReady
+		ReadyTextNotification: notification-unit-ready
 		BlockedAudio: NoBuild
+		BlockedTextNotification: notification-unable-to-build-more
 		LimitedAudio: BuildingInProgress
+		LimitedTextNotification: notification-unable-to-comply-building-in-progress
 		QueuedAudio: Training
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
@@ -733,35 +836,69 @@ naweap:
 	PlaceBuildingVariants:
 		Actors: naweab #, naweac, nawead
 	IsometricSelectable:
+		Class: naweap
 		DecorationHeight: 90
 
 nayard:
 	Inherits: ^Shipyard
 	Buildable:
-		Queue: Building.Soviets
+		Queue: Building.Shared, Building.Soviets, Building.Baku
+		Prerequisites: ~building.sovietsorbaku, refinery, ~techlevel.1
+		Description: actor-nayard.description
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@ship.soviets:
+		Prerequisite: ship.soviets
+		Factions: america, france, england, germany, korea, japan, belarus, poland, ukraine, aussie, china, turkey, canada, russia, iraq, vietnam, cuba, libya, chile, mexico, mongolia, psicorps, psinepal, psisouth, psitrans, psimoon
+	ProvidesPrerequisite@ship.baku:
+		Prerequisite: ship.baku
+		Factions: transcaucus, turkmen, tuva, russianfed, serbia
+	ProvidesPrerequisite@ship.sovietsorbaku:
+		Prerequisite: ship.sovietsorbaku
+	ProvidesPrerequisite@vehicleorship.sovietsorbaku:
+		Prerequisite: vehicleorship.sovietsorbaku
 	Production:
-		Produces: Ship.Soviets
+		Produces: Ship.Soviets, Ship.Baku
 	ProductionQueue:
 		Type: Ship.Soviets
+		DisplayOrder: 22
+		Factions: america, france, england, germany, korea, japan, belarus, poland, ukraine, aussie, china, turkey, canada, russia, iraq, vietnam, cuba, libya, chile, mexico, mongolia, psicorps, psinepal, psisouth, psitrans, psimoon
+	ProductionQueue@Baku:
+		Type: Ship.Baku
+		Group: Ship
+		DisplayOrder: 24
+		LowPowerModifier: 200
+		Factions: transcaucus, turkmen, tuva, russianfed, serbia
+		ReadyAudio: UnitReady
+		ReadyTextNotification: notification-unit-ready
+		BlockedAudio: NoBuild
+		BlockedTextNotification: notification-unable-to-build-more
+		LimitedAudio: BuildingInProgress
+		LimitedTextNotification: notification-unable-to-comply-building-in-progress
+		QueuedAudio: Training
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
 	ProductionBar:
 		ProductionType: Ship.Soviets
+	ProductionBar@Baku:
+		ProductionType: Ship.Baku
 	WithIdleOverlay@lights:
 		Sequence: idle-lights
 		PauseOnCondition: chronodisable
 		RequiresCondition: !build-incomplete
 	AirstrikePower@navalmines:
 		OrderName: SovietNavalMines
-		PauseOnCondition: chronodisable
+		PauseOnCondition: disabled || chronodisable
 		Icons:
 			1: navalmines
 		Prerequisites:
-			1: nayard
+			1: disabled # nayard
 		ChargeInterval: 3000
+		Names:
+			1: Naval Mines
 		Descriptions:
-			1: 水雷空投
-		LongDescs:
-			1: 在指定水域空投5枚水雷
+			1: A Cargo plane drops 5 naval mines\nanywhere on the map.
 		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: notification-select-target
 		UnitTypes:
 			1: pdplane.naval_mines
 		SquadSizes:
@@ -785,9 +922,9 @@ nmine:
 		CrushClasses: nmine
 		DetonateClasses: nmine
 	Tooltip:
-		Name: 水雷
+		Name: actor-nmine.name
 	Tooltip@NoRow:
-		Name: 水雷
+		Name: actor-nmine.name
 	RevealsShroud:
 		Range: 3c0
 	# RevealsShroudToIntelligenceOwner:
@@ -799,8 +936,6 @@ nmine:
 		Footprint: x
 		Dimensions: 1,1
 		TerrainTypes: Water
-	Cloak:
-		CloakTypes: Cloak, Underwater
 	Explodes:
 		Weapon: MineExplosion
 	RenderSprites:
@@ -808,20 +943,14 @@ nmine:
 
 nadept:
 	Inherits: ^ServiceDepot
-	Inherits@SHAPE: ^4x3Shape
 	HitShape:
 		TargetableOffsets: 0,0,0, -360,360,0, 360,-360,0, -1080,1080,0, -360,1800,0, -1800,360,0, 360,1080,0, -360,-1080,0, 1080,360,0, -1080,-360,0
 	Buildable:
-		Queue: Building.Soviets
-		Prerequisites: naweap, ~techlevel.1
-		Description: 消耗资金以高效修复各类载具\n\n可以变更朝向\n\n·特殊能力：解除寄生（恐怖机器人）
+		Queue: Building.Unused # Building.Shared, Building.Soviets, Building.Baku
+		Prerequisites: ~building.sovietsorbaku, naweap, ~techlevel.1
+		Description: actor-nadept.description
 	ProvidesPrerequisite@default:
 		Prerequisite: nadept
-	Building:
-		Footprint: x+++ x+++ x+++
-		Dimensions: 4,3
-	RallyPoint:
-		Path: 4,1
 	WithSpriteBody:
 		PauseOnCondition: chronodisable
 	WithIdleOverlay@normal:
@@ -831,118 +960,83 @@ nadept:
 	PlaceBuildingVariants:
 		Actors: nadepb
 	IsometricSelectable:
+		Class: nadept
 		DecorationHeight: 90
 
 naheli:
-	Inherits: ^BaseBuilding
-	Inherits@MC: ^MindControllableBuilding
-	Inherits@SPY: ^DisabledByInfiltration
-	Inherits@SHAPE: ^3x3Shape
+	Inherits: ^Helipad
 	Buildable:
-		Queue: Building.Soviets
-		BuildPaletteOrder: 100
-		Prerequisites: naradr, ~techlevel.2
-		Description: 制造飞行器\n\n提供一个苏联飞行器生产排程
-		BuildDuration: 125
-		BuildDurationModifier: 100
-	Valued:
-		Cost: 500
+		Queue: Building.Shared, Building.Soviets
+		Description: actor-naheli.description
+		Prerequisites: ~building.soviets, naradr, ~techlevel.2
 	Tooltip:
-		Name: 苏联飞机制造厂
+		Name: actor-naheli.name
 	Tooltip@NoRow:
-		Name: 苏联飞机制造厂
-	ProvidesPrerequisite@default:
-	ProvidesPrerequisite@production:
-		Prerequisite: production
-	Building:
-		Footprint: xxx xxx xxx
-		Dimensions: 3,3
-	Health:
-		HP: 75000
-	RevealsShroud:
-		Range: 6c0
-	# RevealsShroudToIntelligenceOwner:
-	#	Types: SatelliteScan
-	#	Range: 6c0
-	Armor:
-		Type: Wood
-	Reservable:
-	RallyPoint:
-		Path: 3,1
-		Palette: mouse
-		IsPlayerPalette: false
+		Name: actor-naheli.name
 	Exit@1:
-		Facing: 640
-		ExitCell: 1,1
 		SpawnOffset: -384,128,0
-	GrantExternalConditionToProduced:
-		Condition: produced
 	Production:
-		Produces: Aircraft.Soviets, Aircraft.USSR, Aircraft.Vietnam, Aircraft.Cuba, Aircraft.Libya, Aircraft.Baku
-		PauseOnCondition: chronodisable || infiltrated
+		Produces: Aircraft.Soviets, Aircraft.USSR, Aircraft.Vietnam, Aircraft.Cuba, Aircraft.Libya
 	ProductionQueue:
 		Type: Aircraft.Soviets
-		Factions: america, germany, england, france, korea, japan, belarus, poland, ukraine, aussie, china, turkey, canada, iraq, chile, mexico, mongolia, psicorps, psinepal, psisouth, psitrans, psimoon
-		Group: Aircraft
-		LowPowerModifier: 200
-		ReadyAudio: UnitReady
-		BlockedAudio: NoBuild
-		LimitedAudio: BuildingInProgress
-		QueuedAudio: Training
-		OnHoldAudio: OnHold
-		CancelledAudio: Cancelled
+		Factions: america, germany, england, france, korea, japan, belarus, poland, ukraine, aussie, china, turkey, canada, iraq, chile, mexico, mongolia, psicorps, psinepal, psisouth, psitrans, psimoon, transcaucus, turkmen, tuva, russianfed, serbia
 	ProductionQueue@USSR:
 		Type: Aircraft.USSR
-		Factions: russia
 		Group: Aircraft
+		DisplayOrder: 26
 		LowPowerModifier: 200
+		Factions: russia
 		ReadyAudio: UnitReady
+		ReadyTextNotification: notification-unit-ready
 		BlockedAudio: NoBuild
+		BlockedTextNotification: notification-unable-to-build-more
 		LimitedAudio: BuildingInProgress
+		LimitedTextNotification: notification-unable-to-comply-building-in-progress
 		QueuedAudio: Training
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
 	ProductionQueue@Vietnam:
 		Type: Aircraft.Vietnam
-		Factions: vietnam
 		Group: Aircraft
+		DisplayOrder: 26
 		LowPowerModifier: 200
+		Factions: vietnam
 		ReadyAudio: UnitReady
+		ReadyTextNotification: notification-unit-ready
 		BlockedAudio: NoBuild
+		BlockedTextNotification: notification-unable-to-build-more
 		LimitedAudio: BuildingInProgress
+		LimitedTextNotification: notification-unable-to-comply-building-in-progress
 		QueuedAudio: Training
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
 	ProductionQueue@Cuba:
 		Type: Aircraft.Cuba
-		Factions: cuba
 		Group: Aircraft
+		DisplayOrder: 26
 		LowPowerModifier: 200
+		Factions: cuba
 		ReadyAudio: UnitReady
+		ReadyTextNotification: notification-unit-ready
 		BlockedAudio: NoBuild
+		BlockedTextNotification: notification-unable-to-build-more
 		LimitedAudio: BuildingInProgress
+		LimitedTextNotification: notification-unable-to-comply-building-in-progress
 		QueuedAudio: Training
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
 	ProductionQueue@Libya:
 		Type: Aircraft.Libya
+		Group: Aircraft
+		DisplayOrder: 26
+		LowPowerModifier: 200
 		Factions: libya
-		Group: Aircraft
-		LowPowerModifier: 200
 		ReadyAudio: UnitReady
+		ReadyTextNotification: notification-unit-ready
 		BlockedAudio: NoBuild
+		BlockedTextNotification: notification-unable-to-build-more
 		LimitedAudio: BuildingInProgress
-		QueuedAudio: Training
-		OnHoldAudio: OnHold
-		CancelledAudio: Cancelled
-	ProductionQueue@Baku:
-		Type: Aircraft.Baku
-		Factions: transcaucus, turkmen, tuva, russianfed, serbia
-		Group: Aircraft
-		LowPowerModifier: 200
-		ReadyAudio: UnitReady
-		BlockedAudio: NoBuild
-		LimitedAudio: BuildingInProgress
+		LimitedTextNotification: notification-unable-to-comply-building-in-progress
 		QueuedAudio: Training
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
@@ -956,13 +1050,22 @@ naheli:
 		ProductionType: Aircraft.Cuba
 	ProductionBar@Libya:
 		ProductionType: Aircraft.Libya
-	ProductionBar@Baku:
-		ProductionType: Aircraft.Baku
-	Power:
-		Amount: -50
-		RequiresCondition: !chronodisable
-	Targetable:
-		TargetTypes: Ground, C4, DetonateAttack, Structure, NonGarrisonableStructure, SpyInfiltrate
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@aircraft.soviets:
+		Prerequisite: aircraft.soviets
+	ProvidesPrerequisite@aircraft.russia:
+		Prerequisite: aircraft.russia
+	ProvidesPrerequisite@aircraft.vietnam:
+		Prerequisite: aircraft.vietnam
+		Factions: vietnam
+	ProvidesPrerequisite@aircraft.cuba:
+		Prerequisite: aircraft.cuba
+		Factions: cuba
+	ProvidesPrerequisite@aircraft.libya:
+		Prerequisite: aircraft.libya
+		Factions: libya
+	ProvidesPrerequisite@aircraft.sovietsorbaku:
+		Prerequisite: aircraft.sovietsorbaku
 	WithIdleOverlay@lights:
 		Sequence: idle-lights
 		PauseOnCondition: chronodisable
@@ -973,24 +1076,23 @@ naheli:
 		RequiresCondition: !build-incomplete
 	IsometricSelectable:
 		DecorationHeight: 60
-	Voiced:
-		VoiceSet: AirfieldVoice
-		Volume: 0.8
 
 nanrct:
 	Inherits: ^PowerPlant
+	Inherits@ADVIRRAD: ^AffectedByAdvancedIrradiators
 	Inherits@SHAPE: ^4x4Shape
 	Buildable:
-		Queue: Building.Soviets
+		Queue: Building.Shared, Building.Soviets, Building.Baku
 		BuildPaletteOrder: 110
-		Prerequisites: natech, ~techlevel.3
+		Prerequisites: ~building.sovietsorbaku, natech, ~techlevel.3
+		Description: actor-nanrct.description
 		BuildDuration: 1000
 	Valued:
 		Cost: 1500
 	Tooltip:
-		Name: 大型核能反应堆
+		Name: actor-nanrct.name
 	Tooltip@NoRow:
-		Name: 大型核能反应堆
+		Name: actor-nanrct.name
 	Building:
 		Footprint: xxxx xxxx xxxx _xx_
 		Dimensions: 4,4
@@ -1001,30 +1103,48 @@ nanrct:
 	WithIdleOverlay@lights:
 		Sequence: idle-lights
 		PauseOnCondition: chronodisable
-		RequiresCondition: !build-incomplete
+		RequiresCondition: !build-incomplete && !advirrad
+	WithIdleOverlay@lights-orange:
+		Sequence: idle-lights-orange
+		PauseOnCondition: chronodisable
+		RequiresCondition: !build-incomplete && advirrad
+	WithIdleOverlay@waves:
+		RequiresCondition: !build-incomplete && in_water
 	Explodes:
 		Type: CenterPosition
 		Weapon: NukePayload
 		EmptyWeapon: NukePayload
+		RequiresCondition: !advirrad
+	Explodes@Orange:
+		Type: CenterPosition
+		Weapon: NukePayloadOrange
+		EmptyWeapon: NukePayloadOrange
+		RequiresCondition: advirrad
 	Power:
 		Amount: 1000
 	IsometricSelectable:
+		Class: nanrct
 		DecorationHeight: 60
+	PlaceBuildingVariants:
+		Actors: nanrcb
 	Voiced:
 		VoiceSet: NuclearReactorVoice
 		Volume: 0.8
+	GrantConditionOnFaction@Baku:
+		Condition: baku
+		Factions: transcaucus, turkmen, tuva, russianfed, serbia
+	ActorStatOverride@Baku:
+		Upgrades:
+		RequiresCondition: baku
 
 natech:
 	Inherits: ^BattleLab
 	Inherits@SHAPE: ^3x3Shape
-	Inherits@AI: ^AIMicroManagable
 	Buildable:
-		Queue: Building.Soviets
-		Prerequisites: production, naradr, ~techlevel.3, ~!ai.natech
-		Description: 高级科技建筑\n\n解锁科技升级
+		Queue: Building.Shared, Building.Soviets, Building.Baku
+		Prerequisites: ~building.sovietsorbaku, production, naradr, ~techlevel.3, ~!ai.natech
+		Description: actor-natech.description
 	ProvidesPrerequisite@default:
-	ProvidesPrerequisite@upgrade.soviets:
-		Prerequisite: upgrade.soviets
 	ProvidesPrerequisite@upgrade.russia:
 		Prerequisite: upgrade.russia
 		Factions: russia
@@ -1040,6 +1160,14 @@ natech:
 	ProvidesPrerequisite@upgrade.libya:
 		Prerequisite: upgrade.libya
 		Factions: libya
+	ProvidesPrerequisite@upgrade.soviets:
+		Prerequisite: upgrade.soviets
+		Factions: america, france, england, germany, korea, japan, belarus, poland, ukraine, aussie, china, turkey, canada, russia, iraq, vietnam, cuba, libya, chile, mexico, mongolia, psicorps, psinepal, psisouth, psitrans, psimoon
+	ProvidesPrerequisite@upgrade.sovietsorbaku:
+		Prerequisite: upgrade.sovietsorbaku
+	ProvidesPrerequisite@upgrade.baku:
+		Prerequisite: upgrade.baku
+		Factions: transcaucus, turkmen, tuva, russianfed, serbia
 	ProvidesPrerequisite@AIbuildinglimit:
 		RequiresCondition: ai-control
 		Prerequisite: ai.natech
@@ -1048,6 +1176,10 @@ natech:
 		Dimensions: 3,3
 	InfiltrateForSupportPower:
 		Proxy: soviets.tech.infiltrated
+	Targetable:
+		TargetTypes: Ground, C4, DetonateAttack, Structure, NonGarrisonableStructure, SpyInfiltrate, HijackerInfiltrate, DiskInfiltrateSoviet
+	Targetable@Water:
+		TargetTypes: Ground, Water, WaterStructure, C4, SpyInfiltrate, HijackerInfiltrate, DiskInfiltrateSoviet
 	IsometricSelectable:
 		DecorationHeight: 120
 	Voiced:
@@ -1056,23 +1188,25 @@ natech:
 
 naclon:
 	Inherits: ^BaseBuilding
+	Inherits@EMPULSE: ^DisabledByEMP
 	Inherits@MC: ^MindControllableBuilding
 	Inherits@SHAPE: ^2x2Shape
 	Buildable:
 		Queue: Building.Unused # Building.Soviets, Building.Baku
 		BuildPaletteOrder: 120
 		Prerequisites: natech
-		Description: 复制绝大部分训练完毕的步兵\n\n可以回收步兵以获取其造价一半的资金\n无法回收工程师\n回收军犬获得的资金较少\n同一玩家最多只能同时拥有一个
+		Description: actor-naclon.description
 		BuildLimit: 1
 	Valued:
 		Cost: 2000
 	Tooltip:
-		Name: 苏联复制工厂
+		Name: actor-naclon.name
 	Tooltip@NoRow:
-		Name: 苏联复制工厂
+		Name: actor-naclon.name
 	Building:
 		Footprint: xx xx
 		Dimensions: 2, 2
+		-SecondaryTerrainTypes:
 	Health:
 		HP: 75000
 	Armor:
@@ -1128,10 +1262,13 @@ naclon:
 		PauseOnCondition: chronodisable
 	Production:
 		Produces: Clone.Soviets
+		PauseOnCondition: chronodisable || disabled
 	RallyPoint:
 		Path: 3,3
 		Palette: mouse
 		IsPlayerPalette: false
+	CommandBarBlacklist:
+		DisableStop: false
 	ClonesProducedUnits:
 		CloneableTypes: Infantry
 		ProductionType: Clone.Soviets
@@ -1141,24 +1278,26 @@ naclon:
 	Voiced:
 		VoiceSet: CloningVatsVoice
 		Volume: 0.8
+	ActorStatValues:
+		Stats: Armor, Sight, Power
 
 napsis:
 	Inherits: ^BaseBuilding
-	Inherits@LOWPOWER: ^DisableOnLowPowerOrPowerDown
 	Inherits@EMPULSE: ^DisabledByEMP
+	Inherits@LOWPOWER: ^DisableOnLowPowerOrPowerDown
 	Inherits@MC: ^MindControllableBuilding
 	Inherits@SHAPE: ^2x2Shape
 	Buildable:
 		Queue: Support.Unused # Support.Soviets, Support.Baku
 		BuildPaletteOrder: 80
 		Prerequisites: natech, ~techlevel.4
-		Description: 侦测敌方单位与建筑的动向
+		Description: actor-napsis.description
 	Valued:
 		Cost: 1500
 	Tooltip:
-		Name: 灵能探测仪
+		Name: actor-napsis.name
 	Tooltip@NoRow:
-		Name: 灵能探测仪
+		Name: actor-napsis.name
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -1171,38 +1310,46 @@ napsis:
 	# RevealsShroudToIntelligenceOwner:
 	#	Types: SatelliteScan
 	#	Range: 6c0
-	GpsASProvider:
-		RequiresCondition: !disabled && !build-incomplete && !chronodisable
+	RangedGpsProvider:
+		Range: 25c0
+		RequiresCondition: !build-incomplete && !disabled && !chronodisable
 	RenderDetectionCircle:
 	WithRangeCircle:
 		Range: 25c0
 		Type: sensor
 	DetectCloaked:
-		CloakTypes: Cloak, Underwater
+		DetectionTypes: Cloak, Underwater
 		Range: 25c0
 	WithIdleOverlay@spin:
 		Sequence: idle-spin
 		PauseOnCondition: disabled || chronodisable
 		RequiresCondition: !build-incomplete
+	WithIdleOverlay@waves:
+		Sequence: idle-waves
+		RequiresCondition: in_water
 	Power:
 		Amount: -200
 		RequiresCondition: !chronodisable
+	GrantCondition@IDISABLE:
+		RequiresCondition: lowpower || powerdown || emp
 	IsometricSelectable:
 		DecorationHeight: 120
 	Voiced:
 		VoiceSet: PsychicSensorVoice
 		Volume: 0.8
+	ActorStatValues:
+		Stats: Armor, Sight, Power
 
 nairon:
 	Inherits: ^SecondarySuperWeapon
 	Buildable:
-		Queue: Support.Soviets, Support.Baku
-		Prerequisites: natech, !enoughiron, ~techlevel.5
-		Description: 一种可以生成保护屏障的高科技装置\n\n需要电力供应\n必定会被揭示给敌对玩家\n\n·提供 超级武器：铁幕
+		Queue: Support.Shared, Support.Soviets, Support.Baku
+		Prerequisites: ~building.sovietsorbaku, natech, !enoughiron, ~techlevel.5
+		Description: actor-nairon.description
 	Tooltip:
-		Name: 铁幕装置
+		Name: actor-nairon.name
 	Tooltip@NoRow:
-		Name: 铁幕装置
+		Name: actor-nairon.name
 	WithSpriteBody:
 		PauseOnCondition: chronodisable
 	GrantExternalConditionPower@IRONCURTAIN:
@@ -1212,10 +1359,10 @@ nairon:
 			1: nairon
 		Cursor: iron-curtain
 		ChargeInterval: 6000
+		Names:
+			1: Invulnerability
 		Descriptions:
-			1: 铁幕
-		LongDescs:
-			1: 使3x3范围内的载具与建筑在20秒内免疫伤害\n绝大部分步兵单位将因此死亡
+			1: Makes a group of units invulnerable\nfor 20 seconds.\n\nKills infantry.
 		AllowMultiple: true
 		Durations:
 			1: 500
@@ -1227,9 +1374,13 @@ nairon:
 			1: xxx xxx xxx
 		ValidRelationships: Ally, Neutral, Enemy
 		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: notification-select-target
 		EndChargeSpeechNotification: IronCurtainReady
+		EndChargeTextNotification: notification-iron-curtain-ready
 		LaunchSpeechNotification: IronCurtainActivated
+		LaunchTextNotification: notification-iron-curtain-activated
 		IncomingSpeechNotification: IronCurtainActivated
+		IncomingTextNotification: notification-iron-curtain-activated
 		EndChargeSound: siroread.wav
 		OnFireSound: siroon.wav
 		EffectImage: explosion
@@ -1242,6 +1393,7 @@ nairon:
 		Prerequisite: enoughiron
 	NotificationAnnouncement:
 		Notification: IronCurtainDetected
+		TextNotification: notification-iron-curtain-detected
 	IsometricSelectable:
 		DecorationHeight: 75
 	Voiced:
@@ -1251,32 +1403,43 @@ nairon:
 namisl:
 	Inherits: ^PrimarySuperWeapon
 	Buildable:
-		Queue: Support.Soviets
-		Prerequisites: natech, !enoughnuke, ~techlevel.5
-		Description: 制造、组装并发射核弹的场所\n\n需要电力供应\n必定会被揭示给敌对玩家\n\n·提供 超级武器：核弹攻击
+		Queue: Support.Shared, Support.Soviets
+		Prerequisites: ~building.soviets, natech, !enoughnuke, ~techlevel.5
+		Description: actor-namisl.description
 	Tooltip:
-		Name: 核弹发射井
+		Name: actor-namisl.name
 	Tooltip@NoRow:
-		Name: 核弹发射井
+		Name: actor-namisl.name
 	NukePower:
 		Prerequisites:
 			1: namisl
+			2: upgrade.advanced_irradiators
 		Cursor: nuke
 		Icons:
 			1: abomb
+			2: abomb
 		ChargeInterval: 9000
+		Names:
+			1: Nuclear Missile
+			2: Nuclear Missile
 		Descriptions:
-			1: 核弹攻击
-		LongDescs:
-			1: 向目标区域发射一枚毁灭性的核弹\n核弹爆炸后将留下一片辐射区
+			1: Launches a devastating nuclear missile\nat a target location.
+			2: Launches a devastating nuclear missile\nat a target location.
 		AllowMultiple: true
 		EndChargeSound: snukread.wav
 		LaunchSound: snuklaun.wav
 		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: notification-select-target
 		EndChargeSpeechNotification: NuclearMissileReady
+		EndChargeTextNotification: notification-nuclear-missile-ready
 		LaunchSpeechNotification: NuclearMissileLaunched
+		LaunchTextNotification: notification-nuclear-missile-launched
 		IncomingSpeechNotification: NuclearMissileLaunched
-		MissileWeapon: atomic
+		IncomingTextNotification: notification-nuclear-missile-launched
+		MissileWeapons:
+			1: atomic
+			2: atomicOrange
+		MissileImage: atomic
 		MissilePalette: player
 		SpawnOffset: 0,0,-1c0
 		IsPlayerPalette: true
@@ -1285,6 +1448,7 @@ namisl:
 		DisplayRadarPing: True
 		BeaconPosters:
 			1: nukeicon
+			2: nukeicon
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CameraRange: 10c0
@@ -1297,12 +1461,14 @@ namisl:
 		TrailSequences: idle
 		CircleRanges:
 			1: 10c0
+			2: 10c0
 		CircleColor: FFFFFFFF
 		CircleBorderColor: 00000060
 	ProvidesPrerequisite@swlimit:
 		Prerequisite: enoughnuke
 	NotificationAnnouncement:
 		Notification: NuclearSiloDetected
+		TextNotification: notification-nuclear-silo-detected
 	WithSupportPowerActivationOverlay:
 		Sequence: smoke
 		Palette: effect50alpha
@@ -1311,18 +1477,20 @@ namisl:
 	Voiced:
 		VoiceSet: NuclearSiloVoice
 		Volume: 0.8
+	ActorStatValues:
+		Upgrades: upgrade.advanced_irradiators
 
 nawall:
 	Inherits: ^Wall
 	Buildable:
-		Queue: Support.Soviets, Support.Baku
-		Prerequisites: ~techlevel.1
+		Queue: Support.Shared, Support.Soviets, Support.Baku
+		Prerequisites: ~building.sovietsorbaku, ~techlevel.1
 		BuildPaletteOrder: 10
-		Description: 阻止步兵与载具通过\n并可以阻挡枪炮类型的火力
+		Description: actor-nawall.description
 	Tooltip:
-		Name: 苏联围墙
+		Name: actor-nawall.name
 	Tooltip@NoRow:
-		Name: 苏联围墙
+		Name: actor-nawall.name
 	LineBuild:
 		NodeTypes: nawall
 	LineBuildNode:
@@ -1336,22 +1504,22 @@ naflak:
 	Inherits: ^VoxelLighting
 	Inherits@AUTOTARGET: ^AutoTargetAir
 	Inherits@DRAIN: ^DiskDrainable
-	Inherits@LOWPOWER: ^DisableOnLowPowerOrPowerDown
 	Inherits@EMPULSE: ^DisabledByEMP
+	Inherits@LOWPOWER: ^DisableOnLowPowerOrPowerDown
 	Inherits@MC: ^MindControllableBuilding
 	Buildable:
-		Queue: Support.Soviets, Support.Baku
-		BuildPaletteOrder: 60
-		Prerequisites: naradr, ~techlevel.2
-		Description: 速射防空武器\n\n仅能对空\n需要电力供应\n侦测隐形\n\n·强势对抗：飞行器\n·弱势对抗：地面单位
+		Queue: Support.Shared, Support.Soviets, Support.Baku
+		BuildPaletteOrder: 50
+		Prerequisites: ~building.sovietsorbaku, naradr, ~techlevel.2
+		Description: actor-naflak.description
 		BuildDuration: 375
 		BuildDurationModifier: 100
 	Valued:
 		Cost: 700
 	Tooltip:
-		Name: 高射炮
+		Name: actor-naflak.name
 	Tooltip@NoRow:
-		Name: 高射炮
+		Name: actor-naflak.name
 	Building:
 		Footprint: x
 		Dimensions: 1, 1
@@ -1369,10 +1537,9 @@ naflak:
 		Offset: 450,0,0
 		RealignDelay: -1
 	AttackTurreted:
-		PauseOnCondition: disabled || chronodisable
-		RequiresCondition: !build-incomplete
+		PauseOnCondition: build-incomplete || disabled || chronodisable
 	Armament:
-		Weapon: FlakWeapon
+		Weapon: FlakWeaponCannon
 		LocalOffset: 640,0,1536
 		MuzzleSequence: muzzle
 	WithMuzzleOverlay:
@@ -1381,8 +1548,6 @@ naflak:
 	RenderVoxels:
 	WithVoxelTurret:
 		RequiresCondition: !build-incomplete
-	GrantCondition@IDISABLE:
-		RequiresCondition: lowpower || powerdown || emp || diskdrain
 	WithRangeCircle:
 		Range: 12c0
 		Type: aa
@@ -1390,6 +1555,8 @@ naflak:
 	Power:
 		Amount: -30
 		RequiresCondition: !chronodisable
+	GrantCondition@IDISABLE:
+		RequiresCondition: lowpower || powerdown || emp || diskdrain
 	RequiresBuildableArea:
 		Adjacent: 3
 	IsometricSelectable:
@@ -1405,6 +1572,9 @@ naflak:
 	Voiced:
 		VoiceSet: FlakCannonVoice
 		Volume: 0.8
+	ActorStatValues:
+		Stats: Armor, Sight, Power, Damage, ReloadDelay, MaxRange
+		Damage: 40
 
 tesla:
 	Inherits: ^SupportBuilding
@@ -1415,18 +1585,18 @@ tesla:
 	Inherits@OVERCHARGE: ^AffectedByOvercharge
 	Inherits@MC: ^MindControllableBuilding
 	Buildable:
-		Queue: Support.Soviets, Support.Baku
-		BuildPaletteOrder: 70
-		Prerequisites: naradr, ~techlevel.3
-		Description: 先进基地防御\n\n无法对空\n侦测隐形\n可以从特斯拉步兵和特斯拉突击队的充能中获取增益\n在有电力供应的情况下，3名特斯拉步兵的充能可以使特斯拉线圈的伤害最大化\n最大充能的伤害是未充能状态的两倍\n没有充能的情况下需要电力供应\n缺乏电力的情况下，1名特斯拉步兵的充能即可使线圈正常工作\n\n·强势对抗：地面目标、舰艇\n·弱势对抗：飞行器\n\n·特殊能力：特斯拉充能
+		Queue: Support.Shared, Support.Soviets
+		BuildPaletteOrder: 60
+		Prerequisites: ~building.soviets, naradr, ~techlevel.3
+		Description: actor-tesla.description
 		BuildDuration: 625
 		BuildDurationModifier: 100
 	Valued:
 		Cost: 1500
 	Tooltip:
-		Name: 特斯拉线圈
+		Name: actor-tesla.name
 	Tooltip@NoRow:
-		Name: 特斯拉线圈
+		Name: actor-tesla.name
 	Building:
 		Footprint: x
 		Dimensions: 1, 1
@@ -1445,51 +1615,54 @@ tesla:
 	WithTeslaChargeOverlay:
 	Armament:
 		Weapon: CoilBolt
+		Damage: 75
 		LocalOffset: 0,0,3072
 		RequiresCondition: ((!lowpower && !charged) || (lowpower && charged == 1)) && !overcharge
 	Armament@charged:
 		Weapon: CoilBoltCharged
+		Damage: 75
 		LocalOffset: 0,0,3072
 		RequiresCondition: ((!lowpower && !charged) || (lowpower && charged == 1)) && overcharge
 	Armament@1:
 		Weapon: OPCoilBolt
+		Damage: 100
 		LocalOffset: 0,0,3072
 		RequiresCondition: ((!lowpower && charged == 1) || (lowpower && charged == 2)) && !overcharge
 	Armament@1charged:
 		Weapon: OPCoilBoltCharged
+		Damage: 100
 		LocalOffset: 0,0,3072
 		RequiresCondition: ((!lowpower && charged == 1) || (lowpower && charged == 2)) && overcharge
 	Armament@2:
 		Weapon: OPerCoilBolt
+		Damage: 125
 		LocalOffset: 0,0,3072
 		RequiresCondition: ((!lowpower && charged == 2) || (lowpower && charged >= 3)) && !overcharge
 	Armament@2charged:
 		Weapon: OPerCoilBoltCharged
+		Damage: 125
 		LocalOffset: 0,0,3072
 		RequiresCondition: ((!lowpower && charged == 2) || (lowpower && charged >= 3)) && overcharge
 	Armament@3:
 		Weapon: OPestCoilBolt
+		Damage: 150
 		LocalOffset: 0,0,3072
 		RequiresCondition: !lowpower && charged >= 3 && !overcharge
 	Armament@3charged:
 		Weapon: OPestCoilBoltCharged
+		Damage: 150
 		LocalOffset: 0,0,3072
 		RequiresCondition: !lowpower && charged >= 3 && overcharge
 	AttackTesla:
 		MaxCharges: 3
 		ReloadDelay: 80
 		ChargeAudio: btespow.wav
-		PauseOnCondition: disabled || chronodisable
-		RequiresCondition: !build-incomplete
+		PauseOnCondition: build-incomplete || disabled || chronodisable
 	DetectCloaked:
 		Range: 7c0
 		RequiresCondition: !disabled
 	RenderDetectionCircle:
 	AutoTarget:
-	GrantConditionOnPowerState@LOWPOWER:
-		RequiresCondition: !charged
-	GrantCondition@IDISABLE:
-		RequiresCondition: lowpower || powerdown || emp || diskdrain
 	WithRangeCircle:
 		Range: 8c0
 		Type: teslacoil
@@ -1509,6 +1682,10 @@ tesla:
 	Power:
 		Amount: -75
 		RequiresCondition: !chronodisable
+	GrantConditionOnPowerState@LOWPOWER:
+		RequiresCondition: !charged
+	GrantCondition@IDISABLE:
+		RequiresCondition: lowpower || powerdown || emp || diskdrain
 	WithIdleOverlay@powered:
 		Sequence: idle-powered
 		PauseOnCondition: chronodisable
@@ -1525,6 +1702,9 @@ tesla:
 	Voiced:
 		VoiceSet: TeslaCoilVoice
 		Volume: 0.8
+	ActorStatValues:
+		Stats: Armor, Sight, Power, Damage, ReloadDelay, MaxRange
+		ReloadDelay: 80
 
 nalasr:
 	Inherits: ^SupportBuilding
@@ -1532,18 +1712,18 @@ nalasr:
 	Inherits@AUTOTARGET: ^AutoTargetGround
 	Inherits@MC: ^MindControllableBuilding
 	Buildable:
-		Queue: Support.Soviets, Support.Baku
-		BuildPaletteOrder: 50
-		Prerequisites: nahand, ~techlevel.1
-		Description: 全自动反步兵防御\n\n侦测隐形\n\n·强势对抗：步兵、轻型载具\n·弱势对抗：装甲载具、飞行器、舰艇
+		Queue: Support.Shared, Support.Soviets, Support.Baku
+		BuildPaletteOrder: 40
+		Prerequisites: ~building.sovietsorbaku, nahand, ~techlevel.1
+		Description: actor-nalasr.description
 		BuildDuration: 250
 		BuildDurationModifier: 100
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: 哨卫机枪
+		Name: actor-nalasr.name
 	Tooltip@NoRow:
-		Name: 哨卫机枪
+		Name: actor-nalasr.name
 	Health:
 		HP: 40000
 	Armor:
@@ -1559,12 +1739,16 @@ nalasr:
 		Offset: 0,0,0
 		RealignDelay: -1
 	AttackTurreted:
-		PauseOnCondition: chronodisable
-		RequiresCondition: !build-incomplete
+		PauseOnCondition: build-incomplete || chronodisable
 	Armament:
 		Weapon: vulcan
 		LocalOffset: 702,128,768, 702,-128,768
 		MuzzleSequence: muzzle
+	Armament@line:
+		Weapon: vulcanLine
+		LocalOffset: 702,128,768, 702,-128,768
+		MuzzleSequence: muzzle
+		RequiresCondition: apbullets
 	WithMuzzleOverlay:
 	DetectCloaked:
 		Range: 5c0
@@ -1588,6 +1772,9 @@ nalasr:
 	Voiced:
 		VoiceSet: SentryGunVoice
 		Volume: 0.8
+	ActorStatValues:
+		Stats: Armor, Sight, None, Damage, ReloadDelay, MaxRange
+		Damage: 65
 
 # Yuri's Revenge Structures
 nabnkr:
@@ -1599,19 +1786,19 @@ nabnkr:
 		Queue: Support.Unused # Support.Soviets, Support.Baku
 		BuildPaletteOrder: 40
 		Prerequisites: nahand, ~techlevel.1
-		Description: 立刻在选定位置建造一座战地碉堡\n\n可以容纳5名步兵在其中战斗\n免疫清除驻军效果
+		Description: actor-nabnkr.description
 	Valued:
 		Cost: 500
 	CustomSellValue:
 		Value: 0
 	Tooltip:
-		Name: 战地碉堡
+		Name: actor-nabnkr.name
 	Tooltip@NoRow:
-		Name: 战地碉堡
+		Name: actor-nabnkr.name
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
-		TerrainTypes: Clear, Rough, Road, DirtRoad
+		-SecondaryTerrainTypes:
 	Health:
 		HP: 60000
 	Armor:
@@ -1623,11 +1810,11 @@ nabnkr:
 		AfterLoadDelay: 0
 		BeforeUnloadDelay: 0
 		AfterUnloadDelay: 0
-		EjectOnDeath: true
+		EjectOnDeathDamage: 0
 		LoadedCondition: loaded
 	WithCargoSounds:
-		EnterSound: ugarris.wav
-		ExitSound: ugarris.wav
+		EnterSounds: ugarris.wav
+		ExitSounds: ugarris.wav
 	-SpawnActorsOnSell@allies:
 	-SpawnActorsOnSell@soviets:
 	-SpawnActorsOnSell@psicorps:
@@ -1640,8 +1827,7 @@ nabnkr:
 	AttackOpenTopped:
 		Armaments: garrisoned, garrisoned-secondary
 		PortOffsets: 768,0,1024, 448,-682,1024, -448,-682,1024, -768,0,1024, -448,682,1024, 448,682,1024
-		PauseOnCondition: chronodisable
-		RequiresCondition: !build-incomplete
+		PauseOnCondition: build-incomplete || chronodisable
 	RevealsShroud:
 		Range: 6c0
 	# RevealsShroudToIntelligenceOwner:
@@ -1660,7 +1846,7 @@ nabnkr:
 			yellow: pip-garrison-yellow
 			blue: pip-garrison-blue
 			red: pip-garrison-red
-	EngineerRepairable:
+	InstantlyRepairable:
 		RequiresCondition: !ivanbomb && !sealC4 && !commandoC4 && !teslabomb && !toxinbomb && damaged
 	GrantConditionOnDamageState@DAMAGED:
 		Condition: damaged
@@ -1670,39 +1856,47 @@ nabnkr:
 	Voiced:
 		VoiceSet: BattleBunkerVoice
 		Volume: 0.8
+	ActorStatValues:
+		Stats: Armor, Sight, Cargo, Damage, ReloadDelay, MaxRange
 
 naindp:
 	Inherits: ^BaseBuilding
+	Inherits@EMPULSE: ^DisabledByEMP
 	Inherits@MC: ^MindControllableBuilding
 	Inherits@SHAPE: ^3x3Shape
 	Buildable:
-		Queue: Building.Soviets
+		Queue: Building.Shared, Building.Soviets
 		BuildPaletteOrder: 120
-		Prerequisites: narefn, natech, ~techlevel.4
-		Description: 降低所有载具25%的造价与建造时间\n\n同一玩家最多只能同时拥有一个\n\n最多只有5个军工车间可以产生效果\n最多可以使得所有载具的价格降低76%
+		Prerequisites: ~building.soviets, natech, ~techlevel.4
+		Description: actor-naindp.description
 		BuildLimit: 1
 		BuildDuration: 1250
 		BuildDurationModifier: 100
 	Valued:
 		Cost: 2000
 	Tooltip:
-		Name: 军工车间
+		Name: actor-naindp.name
 	Tooltip@NoRow:
-		Name: 军工车间
+		Name: actor-naindp.name
 	ProvidesPrerequisite@default:
+		RequiresCondition: !disabled && !chronodisable
 	Building:
 		Footprint: xxx xxx xxx
 		Dimensions: 3,3
 	WithIdleOverlay@pistons:
 		Sequence: idle-pistons
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || disabled
 		RequiresCondition: !build-incomplete
 	WithIdleOverlay@lights:
 		Sequence: idle-lights
-		PauseOnCondition: chronodisable
+		PauseOnCondition: chronodisable || disabled
 		RequiresCondition: !build-incomplete
+	WithIdleOverlay@waves:
+		Sequence: idle-waves
+		RequiresCondition: in_water
 	GrantExternalConditionToOwner:
 		Condition: naindp
+		RequiresCondition: !disabled && !chronodisable
 	Health:
 		HP: 75000
 	Armor:
@@ -1720,20 +1914,22 @@ naindp:
 	Voiced:
 		VoiceSet: IndustrialPlantVoice
 		Volume: 0.8
+	ActorStatValues:
+		Stats: Armor, Sight, Power
 
 # Custom Structures
 nagatea:
 	Inherits: ^Gate_A
 	Buildable:
-		Queue: Support.Soviets, Support.Baku
-		Prerequisites: ~techlevel.1
+		Queue: Support.Shared, Support.Soviets, Support.Baku
+		Prerequisites: ~building.sovietsorbaku, ~techlevel.1
 		BuildPaletteOrder: 20
 		BuildDuration: 125
 		BuildDurationModifier: 100
 	Tooltip:
-		Name: 苏联闸门
+		Name: actor-nagate.name
 	Tooltip@NoRow:
-		Name: 苏联闸门
+		Name: actor-nagate.name
 	LineBuildNode:
 		Types: nawall
 	WithGateSpriteBody:
@@ -1742,41 +1938,47 @@ nagatea:
 		ReplaceableTypes: SovietGate
 	PlaceBuildingVariants:
 		Actors: nagateb
+	IsometricSelectable:
+		Class: nagate
 
 nagateb:
 	Inherits: ^Gate_B
 	-Buildable:
 	Tooltip:
-		Name: 苏联闸门
+		Name: actor-nagate.name
 	Tooltip@NoRow:
-		Name: 苏联闸门
+		Name: actor-nagate.name
 	LineBuildNode:
 		Types: nawall
 	WithGateSpriteBody:
 		Type: nawall
 	Replacement:
 		ReplaceableTypes: SovietGate
+	IsometricSelectable:
+		Class: nagate
 
 napost:
 	Inherits: ^BaseBuilding
 	Inherits@AUTOTARGET: ^AutoTargetGround
 	Inherits@DRAIN: ^DiskDrainable
-	Inherits@LOWPOWER: ^DisableOnLowPowerOrPowerDown
 	Inherits@EMPULSE: ^DisabledByEMP
+	Inherits@LOWPOWER: ^DisableOnLowPowerOrPowerDown
 	Inherits@OVERCHARGE: ^AffectedByOvercharge
 	Buildable:
-		Queue: Support.Soviets, Support.Baku
-		BuildPaletteOrder: 40
-		Prerequisites: power, ~prerequisite.tesla_fence, ~techlevel.1
-		Description: 通过电力在两个节点之间建立特斯拉围栏\n\n需要电力供应\n围栏可以阻止步兵与载具通过并可以阻挡枪炮类型的火力\n围栏不可被破坏但会因节点被破坏或停电而失去作用\n围栏节点具有微弱的攻击能力且可以被特斯拉步兵充能\n\n·强势对抗：无\n·弱势对抗：一切\n\n·特殊能力：特斯拉充能
+		Queue: Support.Shared, Support.Soviets, Support.Baku
+		BuildPaletteOrder: 70
+		Prerequisites: ~building.sovietsorbaku, power, prerequisite.tesla_fence, ~techlevel.1
+		Description: actor-napost.description
 		BuildDuration: 125
 		BuildDurationModifier: 100
 	Valued:
 		Cost: 200
 	Tooltip:
-		Name: 特斯拉围栏节点
+		Name: actor-napost.name
 	Tooltip@NoRow:
-		Name: 特斯拉围栏节点
+		Name: actor-napost.name
+	Building:
+		-SecondaryTerrainTypes:
 	Health:
 		HP: 50000
 	Armor:
@@ -1794,45 +1996,56 @@ napost:
 	WithTeslaChargeOverlay:
 	Armament:
 		Weapon: PostBolt
+		Damage: 50
 		LocalOffset: 0,0,30
 		RequiresCondition: ((!lowpower && !charged) || (lowpower && charged == 1)) && !overcharge
 	Armament@charged:
 		Weapon: PostBoltCharged
+		Damage: 50
 		LocalOffset: 0,0,30
 		RequiresCondition: ((!lowpower && !charged) || (lowpower && charged == 1)) && overcharge
 	Armament@1:
 		Weapon: OPPostBolt
+		Damage: 65
 		LocalOffset: 0,0,30
 		RequiresCondition: ((!lowpower && charged == 1) || (lowpower && charged == 2)) && !overcharge
 	Armament@1charged:
 		Weapon: OPPostBoltCharged
+		Damage: 65
 		LocalOffset: 0,0,30
 		RequiresCondition: ((!lowpower && charged == 1) || (lowpower && charged == 2)) && overcharge
 	Armament@2:
 		Weapon: OPerPostBolt
+		Damage: 80
 		LocalOffset: 0,0,30
 		RequiresCondition: ((!lowpower && charged == 2) || (lowpower && charged >= 3)) && !overcharge
 	Armament@2charged:
 		Weapon: OPerPostBoltCharged
+		Damage: 80
 		LocalOffset: 0,0,30
 		RequiresCondition: ((!lowpower && charged == 2) || (lowpower && charged >= 3)) && overcharge
 	Armament@3:
 		Weapon: OPestPostBolt
+		Damage: 95
 		LocalOffset: 0,0,30
 		RequiresCondition: !lowpower && charged >= 3 && !overcharge
 	Armament@3charged:
 		Weapon: OPestPostBoltCharged
+		Damage: 95
 		LocalOffset: 0,0,30
 		RequiresCondition: !lowpower && charged >= 3 && overcharge
 	AttackTesla:
 		MaxCharges: 1
 		ReloadDelay: 80
 		ChargeAudio: btespow.wav
-		PauseOnCondition: disabled || chronodisable
-		RequiresCondition: !build-incomplete
+		PauseOnCondition: build-incomplete || disabled || chronodisable
 	Power:
 		Amount: -10
 		RequiresCondition: !chronodisable
+	GrantConditionOnPowerState@LOWPOWER:
+		RequiresCondition: !charged
+	GrantCondition@IDISABLE:
+		RequiresCondition: lowpower || powerdown || emp || diskdrain
 	RevealsShroud:
 		Range: 4c0
 	WithIdleOverlay@LIGHTS:
@@ -1850,10 +2063,6 @@ napost:
 		Adjacent: 6
 	IsometricSelectable:
 		DecorationHeight: 30
-	GrantConditionOnPowerState@LOWPOWER:
-		RequiresCondition: !charged
-	GrantCondition@IDISABLE:
-		RequiresCondition: lowpower || powerdown || emp || diskdrain
 	WithRangeCircle:
 		Range: 3c0
 		Type: teslacoil
@@ -1876,13 +2085,15 @@ napost:
 	Voiced:
 		VoiceSet: TeslaCoilVoice
 		Volume: 0.8
+	ActorStatValues:
+		Stats: Armor, Sight, Power, Damage, ReloadDelay, MaxRange
 
 nafnce:
 	Inherits: ^Wall
 	Tooltip:
-		Name: 特斯拉围栏
+		Name: actor-nafnce.name
 	Tooltip@NoRow:
-		Name: 特斯拉围栏
+		Name: actor-nafnce.name
 	LineBuild:
 		NodeTypes: teslafence
 	LineBuildNode:
@@ -1934,7 +2145,8 @@ nafnce:
 nasilo:
 	Inherits: ^Silo
 	Buildable:
-		Queue: Support.Soviets, Support.Baku
+		Queue: Support.Shared, Support.Soviets, Support.Baku
+		Prerequisites: ~building.sovietsorbaku, refinery, ~!global-megawealth, ~techlevel.1
 	GrantConditionOnFaction@Soviets:
 		Condition: soviets
 		Factions: russia, iraq, vietnam, cuba, libya, chile, mexico, mongolia
@@ -1957,23 +2169,18 @@ naprop:
 	Inherits@LOWPOWER: ^DisableOnLowPowerOrPowerDown
 	Inherits@MC: ^MindControllableBuilding
 	Buildable:
-		Queue: Support.Soviets, Support.Baku
+		Queue: Support.Shared, Support.Soviets
 		BuildPaletteOrder: 80
-		Prerequisites: natech, ~techlevel.4
-		Description: 激励友方单位并提供增益\n\n需要电力供应\n战地宣传光环能提升友方单位33%的攻击速度\n战地宣传光环能为友方单位提供治疗\n可以与指挥官能力的增益叠加\n\n·特殊能力：战地宣传光环
+		Prerequisites: ~building.soviets, natech, ~techlevel.4
+		Description: actor-naprop.description
 		BuildDuration: 125
 		BuildDurationModifier: 100
-	Building:
-		TerrainTypes: Clear, Rough, Road, DirtRoad
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: 战地宣传塔
+		Name: actor-naprop.name
 	Tooltip@NoRow:
-		Name: 战地宣传塔
-	Building:
-		Footprint: x
-		Dimensions: 1, 1
+		Name: actor-naprop.name
 	Health:
 		HP: 60000
 	Armor:
@@ -1990,21 +2197,31 @@ naprop:
 	WithRangeCircle:
 		Range: 8c0
 		Type: propaganda
-	GrantCondition@IDISABLE:
-		RequiresCondition: lowpower || powerdown || emp || diskdrain
 	Capturable:
 		Types: building
 		RequiresCondition: !build-incomplete && !invulnerability && !forceshield
 	CaptureNotification:
+	WithIdleOverlay@waves:
+		Sequence: idle-waves
+		RequiresCondition: in_water
 	Targetable:
 		TargetTypes: Ground, C4, DetonateAttack, Structure, NonGarrisonableStructure
+	Targetable@Water:
+		TargetTypes: Ground, Water, WaterStructure, C4
 	Power:
 		Amount: -25
 		RequiresCondition: !chronodisable
-	GpsDotAS:
+	GrantCondition@IDISABLE:
+		RequiresCondition: lowpower || powerdown || emp || diskdrain
+	RangedGpsDot:
 		Sequence: Structure
 	IsometricSelectable:
+		Class: naprop
 		DecorationHeight: 75
+	RenderSprites:
+		Image: naprop
+	ActorStatValues:
+		Stats: Armor, Sight, Power
 
 naexpn:
 	Inherits: ^ExpansionNode
@@ -2014,6 +2231,10 @@ naexpn:
 		Image: gaexpn
 	Voiced:
 		VoiceSet: SovietExpansionNodeVoice
+	ActorStatValues:
+		Icon: icon
+		IconPalette: chrome
+		TooltipActor: exps
 
 napowb:
 	Inherits: napowr
@@ -2023,6 +2244,10 @@ napowb:
 	Building:
 		Footprint: xx xx xx
 		Dimensions: 2,3
+	ActorStatValues:
+		Icon: icon
+		IconPalette: chrome
+		TooltipActor: napowr
 
 narefb:
 	Inherits: ^RefineryB
@@ -2035,7 +2260,12 @@ narefb:
 	SmokeParticleEmitter@refinerysmoke2:
 		Offset: -128,-1408,4096
 	IsometricSelectable:
+		Class: narefn
 		DecorationHeight: 90
+	ActorStatValues:
+		Icon: icon
+		IconPalette: chrome
+		TooltipActor: narefn
 
 narefc:
 	Inherits: ^RefineryC
@@ -2048,7 +2278,12 @@ narefc:
 	SmokeParticleEmitter@refinerysmoke2:
 		Offset: -128,1408,4096
 	IsometricSelectable:
+		Class: narefn
 		DecorationHeight: 90
+	ActorStatValues:
+		Icon: icon
+		IconPalette: chrome
+		TooltipActor: narefn
 
 narefd:
 	Inherits: ^RefineryD
@@ -2061,7 +2296,12 @@ narefd:
 	SmokeParticleEmitter@refinerysmoke2:
 		Offset: 128,1408,4096
 	IsometricSelectable:
+		Class: narefn
 		DecorationHeight: 90
+	ActorStatValues:
+		Icon: icon
+		IconPalette: chrome
+		TooltipActor: narefn
 
 naweab:
 	Inherits: naweap
@@ -2069,12 +2309,16 @@ naweab:
 	-Buildable:
 	-PlaceBuildingVariants:
 	Building:
-		Footprint: xxx xxx xxx xxx ===
+		Footprint: xxx xxx xxx xxx +++
 		Dimensions: 3,5
 	RallyPoint:
 		Path: 1,6
 	Exit@1:
 		ExitCell: 1,4
+	ActorStatValues:
+		Icon: icon
+		IconPalette: chrome
+		TooltipActor: naweap
 
 naweac:
 	Inherits: naweap
@@ -2087,11 +2331,15 @@ naweac:
 	WithIdleOverlay@lights:
 		Sequence: idle-flag
 	Building:
-		Footprint: =xxxx =xxxx =xxxx
+		Footprint: +xxxx +xxxx +xxxx
 	RallyPoint:
 		Path: -2,1
 	Exit@1:
 		ExitCell: 0,1
+	ActorStatValues:
+		Icon: icon
+		IconPalette: chrome
+		TooltipActor: naweap
 
 nawead:
 	Inherits: naweab
@@ -2102,7 +2350,7 @@ nawead:
 	WithIdleOverlay@lights:
 		Sequence: idle-flag
 	Building:
-		Footprint: === xxx xxx xxx xxx
+		Footprint: +++ xxx xxx xxx xxx
 	RallyPoint:
 		Path: 1,-2
 	Exit@1:
@@ -2120,3 +2368,20 @@ nadepb:
 		Dimensions: 3,4
 	RallyPoint:
 		Path: 1,4
+	SpawnNeighboringActors:
+		Locations: 0,1, 1,1, 2,1, 0,2, 1,2, 2,2, 0,3, 1,3, 2,3
+	ActorStatValues:
+		Icon: icon
+		IconPalette: chrome
+		TooltipActor: nadept
+
+nanrcb:
+	Inherits: nanrct
+	-Buildable:
+	-PlaceBuildingVariants:
+	Building:
+		Footprint: xxx_ xxxx xxxx xxx_
+	ActorStatValues:
+		Icon: icon
+		IconPalette: chrome
+		TooltipActor: nanrct
