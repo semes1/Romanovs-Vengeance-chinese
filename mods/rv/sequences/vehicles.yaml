@@ -1,0 +1,442 @@
+amcv:
+	icon: cameo|mcvicon
+
+aegis:
+	icon: cameo|agisicon
+
+bus:
+	icon: cameo|xxicon
+
+car:
+	icon: cameo|xxicon
+
+carrier:
+	icon: cameo|carricon
+
+cdest:
+	Inherits@MUZZLE: ^WithCannonMuzzle
+	icon: cameo|desticon
+
+cona:
+	icon: bits/cameos/conaicon
+
+cop:
+	icon: bits/cameos/copicon
+
+cmin:
+	harvest: conquer|oregath
+		Length: 15
+		Facings: 8
+	warpin: conquer|warpin
+	warpout: conquer|warpout
+		Length: 20
+	icon: cameo|ahrvicon
+
+cruise:
+	icon: cameo|xxicon
+
+dest:
+	Inherits@MUZZLE: ^WithCannonMuzzle
+	icon: cameo|desticon
+
+dred:
+	icon: cameo|dredicon
+
+dron:
+	stand:
+		Start: 48
+		ShadowStart: 136
+		Facings: -8
+	run:
+		Start: 0
+		ShadowStart: 88
+		Length: 6
+		Facings: -8
+		Tick: 80
+	jump:
+		Start: 56
+		ShadowStart: 144
+		Length: 4
+		Facings: -8
+	shoot: dronp
+		Length: 1
+		Facings: 32
+	icon: cameo|dronicon
+
+euroc:
+	icon: cameo|xxicon
+
+flata:
+	icon: cameo|xxicon
+
+fv:
+	muzzle:
+		Combine:
+			mgun-n:
+				Length: 3
+			mgun-nw:
+				Length: 3
+			mgun-w:
+				Length: 3
+			mgun-sw:
+				Length: 3
+			mgun-s:
+				Length: 3
+			mgun-se:
+				Length: 3
+			mgun-e:
+				Length: 3
+			mgun-ne:
+				Length: 3
+		Facings: 8
+		Length: 3
+	muzzle-1: gunfire
+		Length: *
+	muzzle-2: vtmuzzle
+		Length: *
+	icon: cameo|fvicon
+
+mgtk:
+	Inherits@MUZZLE: ^WithMirageMuzzle
+	idle: null # this is required because the WithSpriteBody constructor initializes before the Mirage trait is activated
+	icon: cameo|rtnkicon
+
+mtnk:
+	Inherits@MUZZLE: ^WithCannonMuzzle
+	icon: cameo|gtnkicon
+
+harv:
+	Inherits@MUZZLE: ^WithMachineGunMuzzle
+	harvest: conquer|oregath
+		Length: 15
+		Facings: 8
+	icon: cameo|harvicon
+
+htk:
+	Inherits@MUZZLE: ^WithFlakMuzzle
+	icon: cameo|htkicon
+
+htnk:
+	Inherits@MUZZLE: ^WithCannonMuzzle
+	icon: cameo|htnkicon
+
+howi:
+	Inherits@MUZZLE: ^WithCannonMuzzle
+	icon: cameo|xxicon
+
+hyd:
+	Inherits@MUZZLE: ^WithFlakMuzzle
+	icon: cameo|hovricon
+
+lcrf:
+	icon: cameo|landicon
+
+limo:
+	icon: cameo|xxicon
+
+oltnk:
+	icon: cameo|xxicon
+
+apoc:
+	Inherits@MUZZLE: ^WithApocMuzzle
+	icon: bits/cameos/mtnkicon
+
+pick:
+	icon: cameo|xxicon
+
+propa:
+	icon: cameo|xxicon
+
+ptruck:
+	icon: cameo|xxicon
+
+rtnk:
+	Inherits@MUZZLE: ^WithCannonMuzzle
+	icon: cameo|rtnkicon
+
+smcv:
+	icon: cameo|smcvicon
+
+sref:
+	icon: cameo|sreficon
+
+stang:
+	icon: cameo|xxicon
+
+sub:
+	icon: cameo|subicon
+
+suvb:
+	icon: cameo|xxicon
+
+suvw:
+	icon: cameo|xxicon
+
+taxi:
+	icon: cameo|xxicon
+
+tnkd:
+	Inherits@MUZZLE: ^WithCannonMuzzle
+	icon: cameo|tnkdicon
+
+tractor:
+	icon: cameo|xxicon
+
+sapc:
+	icon: cameo|sapcicon
+
+dtruck:
+	icon: cameo|trkaicon
+
+trucka:
+	icon: cameo|xxicon
+
+truckb:
+	icon: cameo|xxicon
+
+ttnk:
+	icon: cameo|ttnkicon
+
+tug:
+	icon: cameo|xxicon
+
+v3:
+	icon: cameo|v3icon
+
+vlad:
+	icon: cameo|dredicon
+
+wini:
+	icon: cameo|xxicon
+
+#Old TD/RA1 Vehicles
+1tnk:
+	icon: bits/cameos/oltnkicon
+
+2tnk:
+	icon: cameo|xxicon
+
+3tnk:
+	Inherits@MUZZLE: ^WithCannonMuzzle
+	icon: cameo|xxicon
+
+4tnk:
+	icon: cameo|xxicon
+
+arty:
+	icon: cameo|xxicon
+
+ftnktd:
+	icon: cameo|xxicon
+
+hmve:
+	icon: cameo|xxicon
+
+m113:
+	icon: bits/cameos/m113icon
+
+mlrs:
+	icon: cameo|xxicon
+
+mnly:
+	icon: bits/cameos/mlyricon
+
+mrj:
+	icon: bits/cameos/mrjicon
+
+#Yuri's Revenge Vehicles
+ambu:
+	icon: cameo|xxicon
+
+bcab:
+	icon: cameo|xxicon
+
+cblc:
+	icon: cameo|xxicon
+
+ddbx:
+	icon: cameo|xxicon
+
+doly:
+	icon: cameo|xxicon
+
+ftrk:
+	icon: cameo|xxicon
+
+jeep:
+	icon: cameo|xxicon
+
+ycab:
+	icon: cameo|xxicon
+
+civp:
+	icon: cameo|xxicon
+
+bfrt:
+	icon: cameomd|bfrticon
+
+robo:
+	Inherits@MUZZLE: ^WithMachineGunMuzzle
+	icon: cameomd|roboicon
+
+pcv:
+	icon: cameomd|ypcvicon
+
+yhvr:
+	icon: cameomd|yhvricon
+
+ltnk:
+	Inherits@MUZZLE: ^WithCannonMuzzle
+	icon: cameomd|ltnkicon
+
+mind:
+	icon: cameomd|mindicon
+
+tele:
+	icon: cameomd|teleicon
+
+ytnk:
+	Inherits@MUZZLE: ^WithGatlingMuzzle
+	icon: bits/cameos/ytnkicon
+
+caos:
+	icon: cameomd|caosicon
+
+bsub:
+	icon: cameomd|bsubicon
+
+smin:
+	Inherits@MUZZLE: ^WithMachineGunMuzzle
+	icon: cameomd|sminicon
+
+# Custom Vehicles
+deva:
+	Inherits@MUZZLE: ^WithApocMuzzle
+	icon: bits/cameos/devaicon
+
+ctnk:
+	icon: bits/cameos/ctnkicon
+
+expn:
+	icon: bits/cameos/expnicon
+
+ftnk:
+	icon: bits/cameos/ftnkicon
+
+yhtnk:
+	icon: bits/cameos/yhtnkicon.png
+		AddExtension: false
+
+kamaz:
+	icon: bits/cameos/kamazicon.png
+		AddExtension: false
+
+grtk:
+	icon: bits/cameos/grtkicon
+
+tric:
+	Inherits@MUZZLE: ^WithCannonMuzzle
+	icon: bits/cameos/tricicon
+
+gatsub:
+	Inherits@MUZZLE: ^WithGatlingMuzzle
+	icon: bits/cameos/gatsubicon.png
+		AddExtension: false
+
+gmin:
+	harvest: conquer|oregath
+		Length: 15
+		Facings: 8
+	icon: bits/cameos/gminicon
+
+mlyr:
+	icon: bits/cameos/mlyricon
+
+hwtz:
+	Inherits@MUZZLE: ^WithCannonMuzzle
+	icon: bits/cameos/hwtzicon
+
+#reapercab:
+#	Defaults: bits/vehicles/reapercab
+#	stand:
+#		Facings: -8
+#		ShadowStart: 117
+#	run:
+#		Start: 8
+#		Tick: 60
+#		Length: 12
+#		Facings: -8
+#		ShadowStart: 125
+#	die1:
+#		Start: 104
+#		Length: 13
+#		ShadowStart: 221
+#	shoot:
+#		Facings: -8
+#		ShadowStart: 117
+#	icon: bits/cameos/reapercabicon
+
+spider:
+	Defaults: bits/vehicles/spider
+	stand:
+		Facings: 8
+		ShadowStart: 194
+	run:
+		Start: 8
+		ShadowStart: 202
+		Length: 8
+		Facings: 8
+	spit:
+		Start: 72
+		ShadowStart: 266
+		Length: 7
+		Facings: 8
+	web:
+		Start: 128
+		ShadowStart: 322
+		Length: 5
+		Facings: 8
+	die1:
+		Start: 169
+		ShadowStart: 363
+		Length: 13
+	die2:
+		Start: 182
+		ShadowStart: 376
+		Length: 12
+	icon: bits/cameos/spidericon.png
+		AddExtension: false
+
+aambu:
+	icon: bits/cameos/aambicon
+
+buoy:
+	idle: conquer|wake1
+		Length: *
+		Tick: 180
+		ZOffset: -512
+		ZRamp: 1
+		Offset: 2, 0, 1
+
+piranha:
+	Inherits@MUZZLE: ^WithCannonMuzzle
+	icon: bits/cameos/piranhaicon.png
+		AddExtension: false
+
+truckc:
+	icon: cameo|xxicon
+
+car2:
+	icon: cameo|xxicon
+
+car3:
+	icon: cameo|xxicon
+
+mixer:
+	icon: cameo|xxicon
+
+qyzyl:
+	icon: cameo|xxicon
+
+smrj:
+	icon: bits/cameos/smrjicon

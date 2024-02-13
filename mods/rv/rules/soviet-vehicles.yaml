@@ -1,0 +1,1167 @@
+smcv:
+	Inherits: ^ConstructionVehicle
+	Buildable:
+		Queue: Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya, Vehicle.Baku
+	Transforms:
+		IntoActor: nacnst
+	Voiced:
+		VoiceSet: SovietConstructionVehicleVoice
+
+harv:
+	Inherits: ^Miner
+	Inherits@APBULLETS: ^AffectedByAPBullets
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@BUNKER: ^TankBunkerable
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@NOGUNNER: ^GunnerKillable
+	Buildable:
+		Queue: Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya, Vehicle.Baku
+		Description: 装备一挺机枪的采矿车\n\n免疫辐射\n移动时攻击\n\n·强势对抗：步兵\n·弱势对抗：载具、飞行器、建筑
+	Tooltip:
+		Name: 武装采矿车
+	Tooltip@NoRow:
+		Name: 武装采矿车
+	Armament@primary:
+		Weapon: 20mmrapid
+		LocalOffset: 384,0,1024
+		MuzzleSequence: muzzle
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Weapon: 20mmrapidE
+		LocalOffset: 384,0,1024
+		MuzzleSequence: muzzle
+		RequiresCondition: rank-elite
+	AttackTurreted:
+		Voice: Attack
+		PauseOnCondition: chronodisable || emp || nogunner || parachute
+	WithMuzzleOverlay:
+	Turreted:
+		TurnSpeed: 40
+		Offset: 196,0,-24
+	WithVoxelTurret:
+	Voiced:
+		VoiceSet: WarMinerVoice
+	ProducibleWithLevel:
+		Prerequisites: warfactory.infiltrated
+
+dron:
+	Inherits: ^Vehicle
+	Inherits@EXPERIENCE: ^GainsExperience
+	WithColoredOverlay@ChronoDisable:
+		Color: 0060C040
+	WithColoredOverlay@MagneFreeze:
+		Color: FF50F580
+	WithColoredOverlay@MagneSlow:
+		Color: FF50F540
+	Valued:
+		Cost: 500
+	DeliversCash:
+		Payload: 500
+		Voice: Move
+	Tooltip:
+		Name: 恐怖机器人
+	Tooltip@NoRow:
+		Name: 恐怖机器人
+	Buildable:
+		Queue: Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya, Vehicle.Baku
+		Prerequisites: ~techlevel.2
+		BuildPaletteOrder: 40
+		Description: 通过寄生敌方载具以从内部缓慢破坏之的反载具无人机\n\n免疫辐射\n恐怖机器人的寄生可以通过维修平台、紧急维修支援能力以及应急维修车解除\n能立刻杀死步兵\n可以进入步兵运输载具但占据2格空间\n无法攻击建筑\n\n·强势对抗：步兵、载具\n·弱势对抗：飞行器、建筑\n\n·特殊能力：寄生
+		BuildDuration: 175
+		BuildDurationModifier: 100
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Mobile:
+		Speed: 150
+		TurnSpeed: 1023
+		TerrainOrientationAdjustmentMargin: -1
+		RequiresCondition: !chronodisable && !emp && !magnefreeze
+	Health:
+		HP: 10000
+	Armor:
+		Type: Drone
+	RevealsShroud:
+		Range: 6c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Types: SatelliteScan
+	#	Range: 6c0
+	RevealOnDeath:
+		Radius: 3c0
+	Passenger:
+		CargoType: SmallVehicle
+		Weight: 2
+	RenderSprites:
+	-InfectableRV:
+	-Targetable@DRONE:
+	-SpeedMultiplier@DRONE:
+	-RevealsShroud@DRONE:
+	-ExplodeWeapon@dronesparks:
+	-RenderVoxels:
+	-Carryable:
+	-CaptureManager:
+	-Capturable:
+	WithInfantryBody:
+		StandSequences: stand
+		DefaultAttackSequence: jump
+		RequiresCondition: !jousting
+	WithFacingSpriteBody:
+		Sequence: shoot
+		RequiresCondition: jousting
+	GrantConditionOnTerrain@Water:
+		TerrainTypes: Water
+		Condition: in_water
+	KillsSelf@LowPowerOnWater:
+		DamageTypes: NonTemporal
+		RequiresCondition: in_water
+	Armament@primary:
+		Weapon: DroneJump
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Weapon: DroneJumpE
+		RequiresCondition: rank-elite
+	AttackInfectRV:
+		Voice: Attack
+		Damage: 5000
+		DamageInterval: 45
+		DamageTypes: DroneInfection, BulletDeath, NonTemporal
+		SuppressionDamageThreshold: 250
+		SuppressionCountThreshold: 1
+		SuppressionDamageType: SuppressTerrorDrone
+		JoustRange: 1c768
+		RequiresCondition: !chronodisable && !emp
+	RejectsOrders:
+		RequiresCondition: jousting
+	SpeedMultiplier@JOUSTING:
+		Modifier: 150
+		RequiresCondition: jousting
+	AttackMove:
+		Voice: Move
+	AutoTarget:
+		ScanRadius: 5
+		InitialStance: AttackAnything
+	AutoTargetPriority@DEFAULT:
+		ValidTargets: TerrorDronable
+	Targetable:
+		TargetTypes: Ground, TerrorDrone, DetonateAttack, ImmuneToRadiation
+		RequiresCondition: !parachute && !chronodisable && !jousting
+	-DelayedWeaponAttachable@TANYAC4:
+	-Targetable@TANYAC4:
+	-Targetable@TANYAC4CLEANER:
+	-WithDecoration@TANYAC4:
+	-AmbientSound@TANYAC4:
+	Explodes:
+		Weapon: InfantryExplode
+		EmptyWeapon: InfantryExplode
+	Voiced:
+		VoiceSet: TerrorDroneVoice
+	ExternalCondition@PRODUCED:
+		Condition: produced
+	VoiceAnnouncement:
+		RequiresCondition: produced
+		Voice: Build
+		ValidRelationships: None
+	AmbientSound@Walk:
+		SoundFiles: vterlo1a.wav, vterlo1b.wav, vterlo1c.wav, vterlo2a.wav, vterlo2b.wav, vterlo2c.wav
+		Volume: 0.35
+		RequiresCondition: walking
+	SoundAnnouncement@end:
+		SoundFiles: vterlo3.wav
+		Volume: 0.35
+		RequiresCondition: !walking
+	GrantConditionOnMovement:
+		Condition: walking
+	ProducibleWithLevel:
+		Prerequisites: warfactory.infiltrated
+	DeathSounds:
+		DeathTypes: NonTemporal
+	HitShape:
+
+htk:
+	Inherits: ^Vehicle
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@BUNKER: ^TankBunkerable
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@CHAOS: ^BerserkableVoxel
+	Inherits@IMPFLAKS: ^AffectedByImprovedFlaks
+	Inherits@MC: ^MindControllableDisabledWithIC
+	Inherits@NOGUNNER: ^GunnerKillable
+	Inherits@RADIATON: ^DamagedByRadiation50Percent
+	Valued:
+		Cost: 500
+	DeliversCash:
+		Payload: 500
+		Voice: Move
+	Tooltip:
+		Name: 防空步战车
+	Tooltip@NoRow:
+		Name: 防空步战车
+	Selectable:
+		Class: htk
+		Bounds: 1206, 1930, 0, -289
+	Buildable:
+		Queue: Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya, Vehicle.Baku
+		Prerequisites: ~techlevel.1
+		BuildPaletteOrder: 30
+		Description: 轻型反步兵防空运输车\n\n移动时攻击\n可以运输5名步兵\n乘员无法对外开火\n\n·强势对抗：步兵、飞行器\n·弱势对抗：载具、建筑
+		BuildDuration: 250
+		BuildDurationModifier: 100
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Mobile:
+		Speed: 120
+		TurnSpeed: 40
+		Locomotor: tracked
+		RequiresCondition: !notmobile && !chronodisable && !emp && !magnefreeze && !beingterrordroned && !being-captured
+	Health:
+		HP: 30000
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 9c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Types: SatelliteScan
+	#	Range: 8c0
+	RevealOnDeath:
+		Radius: 4c512
+	DetectCloaked:
+		Range: 5c0
+	RenderDetectionCircle:
+	Cargo:
+		Types: Infantry, Garrisoner, SmallVehicle
+		MaxWeight: 5
+		AfterLoadDelay: 0
+		BeforeUnloadDelay: 0
+		AfterUnloadDelay: 0
+		PassengerFacing: 0
+		UnloadVoice: Move
+		EjectOnDeath: true
+		LoadingCondition: notmobile
+	WithCargoSounds:
+		EnterSound: genter1a.wav
+		ExitSound: gexit1a.wav
+	AttackTurreted:
+		Voice: Attack
+		PauseOnCondition: chronodisable || emp || nogunner || parachute
+	AutoTarget:
+	Armament@primary:
+		Weapon: FlakTrackGun
+		LocalOffset: 256,0,1536
+		MuzzleSequence: muzzle
+		RequiresCondition: !impflaks && !rank-elite
+	Armament@primary-insta:
+		Weapon: FlakTrackGunInsta
+		LocalOffset: 256,0,1536
+		MuzzleSequence: muzzle
+		RequiresCondition: impflaks && !rank-elite
+	Armament@secondary:
+		Weapon: FlakTrackAAGun
+		LocalOffset: 256,0,1536
+		MuzzleSequence: muzzle
+		RequiresCondition: !rank-elite
+	Armament@primary-elite:
+		Weapon: FlakTrackGunE
+		LocalOffset: 256,0,1536
+		MuzzleSequence: muzzle
+		RequiresCondition: !impflaks && rank-elite
+	Armament@primary-insta-elite:
+		Weapon: FlakTrackGunInstaE
+		LocalOffset: 256,0,1536
+		MuzzleSequence: muzzle
+		RequiresCondition: impflaks && rank-elite
+	Armament@secondary-elite:
+		Weapon: FlakTrackAAGunE
+		LocalOffset: 256,0,1536
+		MuzzleSequence: muzzle
+		RequiresCondition: rank-elite
+	WithMuzzleOverlay:
+	Turreted:
+		TurnSpeed: 40
+		Offset: -280,-3,0
+	RenderSprites:
+	RenderVoxels:
+	WithVoxelTurret:
+	WithVoxelBody:
+	Voiced:
+		VoiceSet: FlakTrackVoice
+	ExternalCondition@PRODUCED:
+		Condition: produced
+	VoiceAnnouncement:
+		RequiresCondition: produced
+		Voice: Build
+		ValidRelationships: None
+	ProducibleWithLevel:
+		Prerequisites: warfactory.infiltrated
+	HitShape:
+	WithCargoPipsDecoration:
+		Margin: 4, 3
+		Palette: ra
+		Position: BottomLeft
+		RequiresSelection: true
+		CustomPipSequences:
+			gray: pip-gray
+			yellow: pip-yellow
+			blue: pip-blue
+			red: pip-red
+	# GrantConditionOnMovement@MoveStart:
+	#	Condition: moving
+	#	ValidMovementTypes: Horizontal, Turn
+	# SoundAnnouncement:
+	#	SoundFiles: vflastaa.wav, vflastab.wav, vflastac.wav, vflastad.wav
+	#	Volume: 0.35
+	#	RequiresCondition: moving
+
+htnk:
+	Inherits: ^MainBattleTank
+	Inherits@NUKEENGINES: ^AffectedByNuclearEngines
+	Valued:
+		Cost: 900
+	DeliversCash:
+		Payload: 900
+		Voice: Move
+	Tooltip:
+		Name: 犀牛主战坦克
+	Tooltip@NoRow:
+		Name: 犀牛主战坦克
+	Buildable:
+		Queue: Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya, Vehicle.Baku
+		Description: 苏联主战坦克\n\n移动时攻击\n\n·强势对抗：载具、建筑、舰艇\n·弱势对抗：步兵、飞行器
+		BuildDuration: 450
+		BuildDurationModifier: 100
+	Mobile:
+		Speed: 90
+	Health:
+		HP: 40000
+	Armament@primary:
+		Weapon: 120mm
+		Recoil: 87
+		RecoilRecovery: 12
+		LocalOffset: 896,0,640
+		MuzzleSequence: muzzle
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Weapon: 120mmE
+		Recoil: 87
+		RecoilRecovery: 12
+		LocalOffset: 896,0,640
+		MuzzleSequence: muzzle-2
+		RequiresCondition: rank-elite
+	WithVoxelBody:
+		RequiresCondition: !nuclear_engines
+	WithVoxelBody@NUCLEAR_ENGINES:
+		Sequence: idle-nuke
+		RequiresCondition: nuclear_engines
+	Selectable:
+		Bounds: 1544, 2509, 0, -289
+	RenderVoxels:
+	Voiced:
+		VoiceSet: SovietVehicleVoice
+	ExternalCondition@PRODUCED:
+		Condition: produced
+	VoiceAnnouncement:
+		RequiresCondition: produced
+		Voice: Build
+		ValidRelationships: None
+	# GrantConditionOnMovement@MoveStart:
+	#	Condition: moving
+	#	ValidMovementTypes: Horizontal, Turn
+	# SoundAnnouncement:
+	#	SoundFiles: vrhistaa.wav, vrhistab.wav, vrhistac.wav, vrhistad.wav
+	#	Volume: 0.3
+	#	RequiresCondition: moving
+
+apoc:
+	Inherits: ^Vehicle
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@BUNKER: ^TankBunkerable
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@CHAOS: ^BerserkableVoxel
+	Inherits@MC: ^MindControllableDisabledWithIC
+	Inherits@NOGUNNER: ^GunnerKillable
+	Inherits@NUKEENGINES: ^AffectedByNuclearEngines
+	Inherits@RADIATON: ^DamagedByRadiation10Percent
+	Valued:
+		Cost: 1750
+	DeliversCash:
+		Payload: 1750
+		Voice: Move
+	Tooltip:
+		Name: 天启坦克
+	Tooltip@NoRow:
+		Name: 天启坦克
+	Buildable:
+		Queue: Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya, Vehicle.Baku
+		BuildPaletteOrder: 120
+		Prerequisites: natech, ~techlevel.4
+		Description: 具备防空与自我修复能力的苏联超重型主战坦克\n\n可以碾压重型步兵和大部分载具\n移动时攻击\n\n·强势对抗：载具、建筑、飞行器\n·弱势对抗：步兵\n\n·特殊能力：自我回复至最大生命值的100%
+		BuildDuration: 875
+		BuildDurationModifier: 100
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Mobile:
+		Speed: 60
+		TurnSpeed: 32
+		Locomotor: omnicrusher
+	-Crushable:
+	ChangesHealth:
+		PercentageStep: 1
+		Step: 0
+		Delay: 100
+		DamageCooldown: 100
+		StartIfBelow: 100
+	Health:
+		HP: 80000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Types: SatelliteScan
+	#	Range: 6c0
+	RevealOnDeath:
+		Radius: 3c0
+	Turreted:
+		TurnSpeed: 16
+	Armament@primary:
+		Weapon: 120mmx
+		Recoil: 87
+		RecoilRecovery: 12
+		MuzzleSequence: muzzle
+		LocalOffset: 1280,-100,768
+		RequiresCondition: !rank-elite
+	Armament@primary2:
+		Name: primary2
+		Weapon: 120mmx
+		FireDelay: 5
+		Recoil: 87
+		RecoilRecovery: 12
+		MuzzleSequence: muzzle
+		LocalOffset: 1280,100,768
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Weapon: 120mmxE
+		Recoil: 87
+		RecoilRecovery: 12
+		MuzzleSequence: muzzle-2
+		LocalOffset: 1280,-100,768
+		RequiresCondition: rank-elite
+	Armament@elite2:
+		Name: primary2
+		Weapon: 120mmxE
+		FireDelay: 5
+		Recoil: 87
+		RecoilRecovery: 12
+		MuzzleSequence: muzzle-2
+		LocalOffset: 1280,100,768
+		RequiresCondition: rank-elite
+	Armament@antiair:
+		Weapon: MammothTusk
+		LocalOffset: 80,200,768, 80,-200,768
+		RequiresCondition: !rank-elite
+	Armament@antiairelite:
+		Weapon: MammothTuskE
+		LocalOffset: 80,200,768, 80,-200,768
+		RequiresCondition: rank-elite
+	AttackTurreted:
+		Voice: Attack
+		Armaments: primary, primary2
+		PauseOnCondition: chronodisable || emp || nogunner || parachute
+	WithMuzzleOverlay:
+	AutoTarget:
+	RenderSprites:
+	Selectable:
+		Bounds: 1544, 2509, 0, -289
+	RenderVoxels:
+		Scale: 10.5
+	WithVoxelBody:
+		RequiresCondition: !nuclear_engines
+	WithVoxelBody@NUCLEAR_ENGINES:
+		Sequence: idle-nuke
+		RequiresCondition: nuclear_engines
+	WithVoxelTurret:
+	WithVoxelBarrel:
+	WithVoxelBarrel@2:
+		Sequence: barrel2
+		Armament: primary2
+	Explodes:
+		Weapon: ApocExplode
+		EmptyWeapon: ApocExplode
+	Voiced:
+		VoiceSet: ApocalypseVoice
+	ExternalCondition@PRODUCED:
+		Condition: produced
+	VoiceAnnouncement:
+		RequiresCondition: produced
+		Voice: Build
+		ValidRelationships: None
+	ProducibleWithLevel:
+		Prerequisites: warfactory.infiltrated
+	HitShape:
+	# GrantConditionOnMovement@MoveStart:
+	#	Condition: moving
+	#	ValidMovementTypes: Horizontal, Turn
+	# SoundAnnouncement:
+	#	SoundFiles: vapostaa.wav, vapostab.wav, vapostac.wav
+	#	Volume: 0.5
+	#	RequiresCondition: moving
+
+ttnk:
+	Inherits: ^Vehicle
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@BUNKER: ^TankBunkerable
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@CHAOS: ^BerserkableVoxel
+	Inherits@MC: ^MindControllableDisabledWithIC
+	Inherits@NOGUNNER: ^GunnerKillable
+	Inherits@OVERCHARGE: ^AffectedByOvercharge
+	Inherits@RADIATON: ^DamagedByRadiation10Percent
+	Valued:
+		Cost: 1200
+	DeliversCash:
+		Payload: 1200
+		Voice: Move
+	Tooltip:
+		Name: 特斯拉坦克
+	Tooltip@NoRow:
+		Name: 特斯拉坦克
+	Buildable:
+		Queue: Vehicle.USSR
+		BuildPaletteOrder: 90
+		Prerequisites: naradr, ~techlevel.3
+		Description: 配备双联装特斯拉线圈的苏俄特种反装甲坦克\n\n移动时攻击\n攻击可以越过围墙、闸门和特斯拉围栏\n\n·强势对抗：步兵、载具、建筑\n·弱势对抗：飞行器
+		BuildDuration: 625
+		BuildDurationModifier: 100
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Mobile:
+		Speed: 90
+		TurnSpeed: 32
+		Locomotor: heavytracked
+	Health:
+		HP: 30000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Types: SatelliteScan
+	#	Range: 6c0
+	RevealOnDeath:
+		Radius: 3c0
+	Turreted:
+		TurnSpeed: 28
+	Armament@primary:
+		Weapon: TankBolt
+		LocalOffset: 280,196,640, 280,-196,640
+		RequiresCondition: !overcharge && !rank-elite
+	Armament@elite:
+		Weapon: TankBoltE
+		LocalOffset: 280,196,640, 280,-196,640
+		RequiresCondition: !overcharge && rank-elite
+	Armament@primary-overcharge:
+		Weapon: TankBoltCharged
+		LocalOffset: 280,196,640, 280,-196,640
+		RequiresCondition: overcharge && !rank-elite
+	Armament@elite-overcharge:
+		Weapon: TankBoltChargedE
+		LocalOffset: 280,196,640, 280,-196,640
+		RequiresCondition: overcharge && rank-elite
+	AttackTurreted:
+		Voice: Attack
+		PauseOnCondition: chronodisable || emp || nogunner || parachute
+	AutoTarget:
+	RenderSprites:
+	Selectable:
+		Bounds: 1544, 2509, 0, -289
+	RenderVoxels:
+	WithVoxelBody:
+	WithVoxelTurret:
+	Voiced:
+		VoiceSet: TeslaTankVoice
+	ExternalCondition@PRODUCED:
+		Condition: produced
+	VoiceAnnouncement:
+		RequiresCondition: produced
+		Voice: Build
+		ValidRelationships: None
+	ProducibleWithLevel:
+		Prerequisites: warfactory.infiltrated
+	HitShape:
+	# GrantConditionOnMovement@MoveStart:
+	#	Condition: moving
+	#	ValidMovementTypes: Horizontal, Turn
+	# SoundAnnouncement:
+	#	SoundFiles: vtesstaa.wav, vtesstab.wav
+	#	Volume: 0.35
+	#	RequiresCondition: moving
+
+dtruck:
+	Inherits: ^Vehicle
+	Inherits@CHAOS: ^BerserkableVoxel
+	Inherits@MC: ^MindControllableDisabledWithIC
+	Inherits@HIEXPLOSIVE: ^AffectedByHighExplosiveBombs
+	Inherits@RADIATON: ^DamagedByRadiation50Percent
+	Buildable:
+		Queue: Vehicle.Libya
+		BuildPaletteOrder: 90
+		Prerequisites: naradr, ~techlevel.3
+		Description: 载有大量核爆炸物的利比亚自杀式载具\n\n死亡时爆炸\n能造成范围伤害\n爆炸可以伤害友军\n爆炸后留下一片辐射区\n\n·强势对抗：步兵、载具、建筑\n·弱势对抗：飞行器\n\n·特殊能力：自爆
+		BuildDuration: 750
+		BuildDurationModifier: 100
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Valued:
+		Cost: 1500
+	DeliversCash:
+		Payload: 1500
+		Voice: Move
+	Tooltip:
+		Name: 自爆卡车
+	Tooltip@NoRow:
+		Name: 自爆卡车
+	Selectable:
+		Bounds: 1544, 2509, 0, -289
+	Health:
+		HP: 15000
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 75
+		TurnSpeed: 32
+		Locomotor: heavytracked
+	RevealsShroud:
+		Range: 6c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Types: SatelliteScan
+	#	Range: 6c0
+	RevealOnDeath:
+		Radius: 3c0
+	Explodes:
+		Weapon: demobomb
+		EmptyWeapon: demobomb
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 128
+		RequiresCondition: !chronodisable && !emp
+	Armament@PRIMARY:
+		Weapon: DemoTruckTargeting
+	GrantConditionOnAttack:
+		Condition: triggered
+	GrantConditionOnDeploy:
+		Voice: Attack
+		CanDeployOnRamps: True
+		DeployedCondition: triggered
+		PauseOnCondition: chronodisable || emp
+	KillsSelf:
+		DamageTypes: NonTemporal
+		RequiresCondition: triggered
+	RenderSprites:
+	RenderVoxels:
+	WithVoxelBody:
+	ExternalCondition@PRODUCED:
+		Condition: produced
+	VoiceAnnouncement:
+		RequiresCondition: produced
+		Voice: Build
+	Voiced:
+		VoiceSet: DemolitionTruckVoice
+	HitShape:
+	# GrantConditionOnMovement@MoveStart:
+	#	Condition: moving
+	#	ValidMovementTypes: Horizontal, Turn
+	# SoundAnnouncement:
+	#	SoundFiles: vdemstaa.wav, vdemstab.wav, vdemstac.wav
+	#	Volume: 0.4
+	#	RequiresCondition: moving
+
+v3:
+	Inherits: ^Vehicle
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@CHAOS: ^BerserkableVoxel
+	Inherits@HIEXPLOSIVE: ^AffectedByHighExplosiveBombs
+	Inherits@MC: ^MindControllableDisabledWithIC
+	Inherits@NOGUNNER: ^GunnerKillable
+	Inherits@RADIATON: ^DamagedByRadiation50Percent
+	Buildable:
+		Queue: Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya, Vehicle.Baku
+		BuildPaletteOrder: 100
+		Prerequisites: natech, ~techlevel.3
+		Description: 从阵线后方发射V3火箭的远程炮兵\n\n可以自动索敌\nV3火箭可以被拦截\n能造成范围伤害\n\n·强势对抗：步兵、建筑\n·弱势对抗：载具、飞行器
+		BuildDuration: 500
+		BuildDurationModifier: 100
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Valued:
+		Cost: 900
+	DeliversCash:
+		Payload: 900
+		Voice: Move
+	Tooltip:
+		Name: V3火箭发射车
+	Tooltip@NoRow:
+		Name: V3火箭发射车
+	Health:
+		HP: 15000
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 75
+		TurnSpeed: 32
+	RevealsShroud:
+		Range: 6c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Types: SatelliteScan
+	#	Range: 6c0
+	RevealOnDeath:
+		Radius: 3c0
+	Armament:
+		Weapon: V3Launcher
+	FirepowerMultiplier@RANK-1:
+		RequiresCondition: rank-veteran >= 1 && !rank-elite
+	FirepowerMultiplier@RANK-ELITE:
+		RequiresCondition: rank-elite
+		Modifier: 220
+	AttackFrontal:
+		Voice: Attack
+		TargetFrozenActors: True
+		PauseOnCondition: chronodisable || emp || nogunner
+	MissileSpawnerMaster:
+		Actors: v3rocket
+		RespawnTicks: 200
+		LoadedCondition: loaded
+		SpawnOffset: 0,640,300
+	WithSpawnerMasterPipsDecoration:
+		Margin: 4, 3
+		Palette: ra
+		Position: BottomLeft
+		RequiresSelection: true
+	GrantExternalConditionToSpawnedMissile:
+		Condition: rank-elite
+		RequiresCondition: rank-elite
+	RenderSprites:
+		Image: v3
+	RenderVoxels:
+		Image: v3
+	WithVoxelBody@FULL:
+		RequiresCondition: loaded
+	WithVoxelBody@EMPTY:
+		Sequence: empty
+		RequiresCondition: !loaded
+	HitShape:
+	Voiced:
+		VoiceSet: V3LauncherVoice
+	ExternalCondition@PRODUCED:
+		Condition: produced
+	VoiceAnnouncement:
+		RequiresCondition: produced
+		Voice: Build
+		ValidRelationships: None
+	ProducibleWithLevel:
+		Prerequisites: warfactory.infiltrated
+	# GrantConditionOnMovement@MoveStart:
+	#	Condition: moving
+	#	ValidMovementTypes: Horizontal
+	# SoundAnnouncement:
+	#	SoundFiles: vv3lstaa.wav, vv3lstab.wav, vv3lstac.wav
+	#	Volume: 0.35
+	#	RequiresCondition: moving
+
+m3:
+	Inherits: v3
+	Tooltip:
+		Name: Meme3 Launcher
+	Tooltip@NoRow:
+		Name: Meme3 Launcher
+	Buildable:
+		Queue: Vehicle.Unused
+	-MissileSpawnerMaster:
+	-GrantExternalConditionToSpawnedMissile:
+	MissileSpawnerOldMaster:
+		Actors: m3rocket
+		RespawnTicks: 200
+		LoadedCondition: loaded
+		SpawnOffset: 0,640,300
+
+v3rocket:
+	Inherits: ^ShootableMissile
+	Inherits@RADBOMBS: ^AffectedByRadioactiveBombs
+	Valued:
+		Cost: 50
+	Tooltip:
+		Name: V3火箭
+	Tooltip@NoRow:
+		Name: V3火箭
+	Health:
+		HP: 5000
+	Armor:
+		Type: Rocket
+	BallisticMissile:
+		CreateAngle: 64
+		PrepareTick: 25
+		LaunchAngle: 160
+		Speed: 250
+		LazyCurve: true
+		LaunchSounds: vv3latta.wav, vv3lattb.wav
+		SoundVolume: 0.7
+		AirborneCondition: airborne
+	LeavesTrails:
+		Image: smokey2
+		MovingInterval: 2
+		SpawnAtLastPosition: false
+		Type: CenterPosition
+	MissileSpawnerSlave:
+	SpawnedExplodes:
+		Weapon: V3Weapon
+		EmptyWeapon: V3Weapon
+		RequiresCondition: !airborne && !radbombs && !rank-elite
+	SpawnedExplodes@Elite:
+		Weapon: V3WeaponE
+		EmptyWeapon: V3WeaponE
+		RequiresCondition: !airborne && !radbombs && rank-elite
+	SpawnedExplodes@Rad:
+		Weapon: V3WeaponRad
+		EmptyWeapon: V3WeaponRad
+		RequiresCondition: !airborne && radbombs && !rank-elite
+	SpawnedExplodes@EliteRad:
+		Weapon: V3WeaponRadE
+		EmptyWeapon: V3WeaponRadE
+		RequiresCondition: !airborne && radbombs && rank-elite
+	SpawnedExplodes@Airborne:
+		Weapon: UnitExplode
+		EmptyWeapon: UnitExplode
+		RequiresCondition: airborne
+	ExternalCondition@RANK-ELITE:
+		Condition: rank-elite
+	RenderVoxels:
+		Image: v3rocket
+
+m3rocket:
+	Inherits: v3rocket
+	Tooltip:
+		Name: Meme3 Rocket
+	Tooltip@NoRow:
+		Name: Meme3 Rocket
+	-BallisticMissile:
+	BallisticMissileOld:
+		LaunchAngle: 160
+		Speed: 300
+		LaunchSounds: vv3latta.wav, vv3lattb.wav
+		SoundVolume: 0.7
+		AirborneCondition: airborne
+	-MissileSpawnerSlave:
+	MissileSpawnerOldSlave:
+	SpawnedExplodes:
+		RequiresCondition: !airborne
+	-SpawnedExplodes@Elite:
+	-ExternalCondition@RANK-ELITE:
+
+# Custom Soviet Vehicles
+tric:
+	Inherits: ^Vehicle
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@CHAOS: ^BerserkableVoxel
+	Inherits@HIEXPLOSIVE: ^AffectedByHighExplosiveBombs
+	Inherits@MC: ^MindControllableDisabledWithIC
+	Inherits@NOGUNNER: ^GunnerKillable
+	Inherits@RADIATON: ^DamagedByRadiation50Percent
+	Valued:
+		Cost: 500
+	DeliversCash:
+		Payload: 500
+		Voice: Move
+	Tooltip:
+		Name: 火炮摩托
+	Tooltip@NoRow:
+		Name: 火炮摩托
+	Selectable:
+		Bounds: 965, 1930, 0, -482
+	Buildable:
+		Queue: Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya, Vehicle.Baku
+		Prerequisites: naradr, ~techlevel.2
+		BuildPaletteOrder: 70
+		Description: 中程轻型高射速炮兵\n\n能造成范围伤害\n\n·强势对抗：步兵、建筑\n·弱势对抗：载具、飞行器
+		BuildDuration: 175
+		BuildDurationModifier: 100
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Mobile:
+		Speed: 150
+		TurnSpeed: 80
+	Health:
+		HP: 17500
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 8c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Types: SatelliteScan
+	#	Range: 8c0
+	RevealOnDeath:
+		Radius: 4c0
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 2
+		TargetFrozenActors: true
+		PauseOnCondition: chronodisable || emp || nogunner
+	Armament@primary:
+		Weapon: CycleMortar
+		LocalOffset: 128,128,768
+		MuzzleSequence: muzzle
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Weapon: CycleMortarE
+		LocalOffset: 128,128,768
+		MuzzleSequence: muzzle-2
+		RequiresCondition: rank-elite
+	WithMuzzleOverlay:
+	RenderSprites:
+	RenderVoxels:
+	WithVoxelBody:
+	Carryable:
+		CarriedCondition: being-carried
+	LeavesTrails:
+		Image: dust
+		MovingInterval: 2
+		Type: CenterPosition
+		Palette: player50alpha
+		TerrainTypes: Clear, Rough, Green, DirtRoad, Ore, Gems
+		RequiresCondition: !being-carried
+	Voiced:
+		VoiceSet: MortarTricycleVoice
+		Volume: 7
+	ExternalCondition@PRODUCED:
+		Condition: produced
+	VoiceAnnouncement:
+		RequiresCondition: produced
+		Voice: Build
+		ValidRelationships: None
+	ProducibleWithLevel:
+		Prerequisites: warfactory.infiltrated
+	HitShape:
+
+deva:
+	Inherits: ^Vehicle
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@CHAOS: ^BerserkableVoxel
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@MC: ^MindControllableDisabledWithIC
+	Inherits@NOGUNNER: ^GunnerKillable
+	Valued:
+		Cost: 2200
+	DeliversCash:
+		Payload: 2200
+		Voice: Move
+	Tooltip:
+		Name: 灭世战车
+	Tooltip@NoRow:
+		Name: 灭世战车
+	Buildable:
+		Queue: Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya
+		BuildPaletteOrder: 990
+		Prerequisites: natech, ~caslab, ~techlevel.4
+		Description: 装备核武弹头的苏联高科技重型坦克\n\n免疫辐射\n能造成范围伤害\n死亡时自爆\n使用自爆能力的毁伤效果更显著\n攻击和自爆能形成一片辐射区\n\n·强势对抗：步兵、载具、建筑\n·弱势对抗：飞行器\n\n·特殊能力：自爆
+		BuildDuration: 1125
+		BuildDurationModifier: 100
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Mobile:
+		Speed: 90
+		TurnSpeed: 32
+		Locomotor: omnicrusher
+		RequiresCondition: !chronodisable && !emp && !magnefreeze && !beingterrordroned && !being-captured && !overload
+	-Crushable:
+	ChangesHealth:
+		PercentageStep: 1
+		Step: 0
+		Delay: 100
+		DamageCooldown: 100
+		StartIfBelow: 100
+	Health:
+		HP: 100000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Types: SatelliteScan
+	#	Range: 6c0
+	RevealOnDeath:
+		Radius: 3c0
+	Targetable:
+		TargetTypes: Ground, Vehicle, DetonateAttack, DroneInfection, ImmuneToRadiation
+	Turreted:
+		TurnSpeed: 32
+	Armament@primary:
+		Weapon: 120mmxRad
+		LocalOffset: 896,100,768, 896,-100,768
+		MuzzleSequence: muzzle
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Weapon: 120mmxRadE
+		LocalOffset: 896,100,768, 896,-100,768
+		MuzzleSequence: muzzle-2
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 2
+		RequiresCondition: !overload
+		PauseOnCondition: chronodisable || emp || nogunner
+	WithMuzzleOverlay:
+	AutoTarget:
+	RenderSprites:
+	Selectable:
+		Bounds: 1544, 2509, 0, -289
+	RenderVoxels:
+		Scale: 13
+	WithVoxelBody:
+	WithVoxelTurret:
+	Explodes:
+		Weapon: DevastatorExplosion
+		EmptyWeapon: DevastatorExplosion
+		RequiresCondition: !meltdown
+	Explodes@OVERLOAD:
+		Weapon: demobomb
+		EmptyWeapon: demobomb
+		RequiresCondition: meltdown
+	GrantConditionOnDeploy@REACTOR:
+		Voice: Attack
+		DeployedCondition: overload
+		PauseOnCondition: overload || chronodisable || emp
+		CanDeployOnRamps: true
+	WithColoredOverlay@OVERLOAD:
+		Color: 00000080
+		RequiresCondition: overload
+	KillsSelf@MELTDOWN:
+		Delay: 75
+		DamageTypes: NonTemporal
+		RequiresCondition: overload && !chronodisable && !emp
+		GrantsCondition: meltdown
+	Voiced:
+		VoiceSet: DevastatorVoice
+	ExternalCondition@PRODUCED:
+		Condition: produced
+	VoiceAnnouncement:
+		RequiresCondition: produced
+		Voice: Build
+		ValidRelationships: None
+	ProducibleWithLevel:
+		Prerequisites: warfactory.infiltrated
+	HitShape:
+	# GrantConditionOnMovement@MoveStart:
+	#	Condition: moving
+	#	ValidMovementTypes: Horizontal
+	# SoundAnnouncement:
+	#	SoundFiles: vapostaa.wav, vapostab.wav, vapostac.wav
+	#	Volume: 0.5
+	#	RequiresCondition: moving
+
+exps:
+	Inherits: ^ExpansionVehicle
+	Buildable:
+		Queue: Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya, Vehicle.Baku
+	Selectable:
+		Bounds: 1641, 2702, 0, -337
+	Transforms:
+		IntoActor: naexpn
+	Voiced:
+		VoiceSet: SovietConstructionVehicleVoice
+	Hovers:
+		InitialHeight: 128
+	RenderSprites:
+		Image: expn
+	RenderVoxels:
+		Image: expn
+
+ftnk:
+	Inherits: ^Vehicle
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@BLACKNAPALM: ^AffectedByBlackNapalm
+	Inherits@BUNKER: ^TankBunkerable
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@CHAOS: ^BerserkableVoxel
+	Inherits@MC: ^MindControllableDisabledWithIC
+	Inherits@NOGUNNER: ^GunnerKillable
+	Inherits@RADIATON: ^DamagedByRadiation10Percent
+	Valued:
+		Cost: 900
+	DeliversCash:
+		Payload: 900
+		Voice: Move
+	Tooltip:
+		Name: 火焰坦克
+	Tooltip@NoRow:
+		Name: 火焰坦克
+	Buildable:
+		Queue: Vehicle.Soviets, Vehicle.USSR, Vehicle.Iraq, Vehicle.Cuba, Vehicle.Libya
+		BuildPaletteOrder: 80
+		Prerequisites: naradr, ~techlevel.3
+		Description: 配备双联装火焰喷射器的重型反步兵载具\n\n移动时攻击\n能造成范围伤害\n\n·强势对抗：步兵、建筑\n·弱势对抗：载具、飞行器\n\n·特殊能力：清除驻军
+		BuildDuration: 375
+		BuildDurationModifier: 100
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Mobile:
+		Speed: 90
+		TurnSpeed: 32
+		Locomotor: heavytracked
+	Health:
+		HP: 40000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Types: SatelliteScan
+	#	Range: 6c0
+	RevealOnDeath:
+		Radius: 3c0
+	Turreted:
+		TurnSpeed: 28
+	Armament@primary:
+		Weapon: TankFlamer
+		LocalOffset: 768,-384,640, 768,384,640
+		RequiresCondition: !rank-elite && !black_napalm
+	Armament@elite:
+		Weapon: TankFlamerE
+		LocalOffset: 768,-384,640, 768,384,640
+		RequiresCondition: rank-elite && !black_napalm
+	Armament@primary-black:
+		Weapon: TankFlamerBlack
+		LocalOffset: 768,-384,640, 768,384,640
+		RequiresCondition: !rank-elite && black_napalm
+	Armament@elite-black:
+		Weapon: TankFlamerBlackE
+		LocalOffset: 768,-384,640, 768,384,640
+		RequiresCondition: rank-elite && black_napalm
+	AttackTurreted:
+		Voice: Attack
+		PauseOnCondition: chronodisable || emp || nogunner || parachute
+	AutoTarget:
+	RenderSprites:
+	Selectable:
+		Bounds: 1544, 2509, 0, -289
+	RenderVoxels:
+	WithVoxelBody:
+	WithVoxelTurret:
+	Voiced:
+		VoiceSet: FlameTankVoice
+	ExternalCondition@PRODUCED:
+		Condition: produced
+	VoiceAnnouncement:
+		RequiresCondition: produced
+		Voice: Build
+		ValidRelationships: None
+	ProducibleWithLevel:
+		Prerequisites: warfactory.infiltrated
+	Explodes:
+		Weapon: FlameTankExplode
+		EmptyWeapon: FlameTankExplode
+	HitShape:
+	# GrantConditionOnMovement@MoveStart:
+	#	Condition: moving
+	#	ValidMovementTypes: Horizontal, Turn
+	# SoundAnnouncement:
+	#	SoundFiles: vrhistaa.wav, vrhistab.wav, vrhistac.wav, vrhistad.wav
+	#	Volume: 0.3
+	#	RequiresCondition: moving

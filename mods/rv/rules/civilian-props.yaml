@@ -1,0 +1,808 @@
+camisc01:
+	Inherits: ^CivBuilding
+	Tooltip:
+		Name: 油桶
+	Tooltip@NoRow:
+		Name: 油桶
+	Health:
+		HP: 500
+	Armor:
+		Type: Concrete
+	SoundOnDamageTransition:
+		DamagedSounds: bmetdama.wav, bmetdamb.wav, bmetdamc.wav
+	-Demolishable:
+	Targetable:
+		TargetTypes: Ground, C4, DetonateAttack, Barrel
+	MapEditorData:
+		Categories: Decoration
+	Explodes:
+		Weapon: LargeBarrelExplode
+
+camisc02:
+	Inherits: ^CivBuilding
+	Tooltip:
+		Name: 油桶
+	Tooltip@NoRow:
+		Name: 油桶
+	Health:
+		HP: 500
+	Armor:
+		Type: Concrete
+	SoundOnDamageTransition:
+		DamagedSounds: bmetdama.wav, bmetdamb.wav, bmetdamc.wav
+	-Demolishable:
+	Targetable:
+		TargetTypes: Ground, C4, DetonateAttack, Barrel
+	MapEditorData:
+		Categories: Decoration
+	Explodes:
+		Weapon: SmallBarrelExplode
+
+camisc03:
+	Inherits: ^CivBuilding
+	Tooltip:
+		Name: 垃圾桶
+	Tooltip@NoRow:
+		Name: 垃圾桶
+	Health:
+		HP: 10000
+	Armor:
+		Type: Concrete
+	-ShakeOnDeath:
+	SoundOnDamageTransition:
+		DamagedSounds: bmetdama.wav, bmetdamb.wav, bmetdamc.wav
+		DestroyedSounds: bmetdama.wav, bmetdamb.wav, bmetdamc.wav
+	MapEditorData:
+		Categories: Decoration
+
+camisc04:
+	Inherits: ^CivBuilding
+	Tooltip:
+		Name: 邮桶
+	Tooltip@NoRow:
+		Name: 邮桶
+	Health:
+		HP: 1000
+	Armor:
+		Type: Concrete
+	-ShakeOnDeath:
+	SoundOnDamageTransition:
+		DamagedSounds: bmetdama.wav, bmetdamb.wav, bmetdamc.wav
+		DestroyedSounds: bmetdama.wav, bmetdamb.wav, bmetdamc.wav
+	IsometricSelectable:
+		DecorationHeight: 15
+	MapEditorData:
+		Categories: Decoration
+
+camisc05:
+	Inherits: ^CivBuilding
+	Tooltip:
+		Name: 铜管
+	Tooltip@NoRow:
+		Name: 铜管
+	Health:
+		HP: 1000
+	Armor:
+		Type: Concrete
+	-ShakeOnDeath:
+	SoundOnDamageTransition:
+		DamagedSounds: bmetdama.wav, bmetdamb.wav, bmetdamc.wav
+		DestroyedSounds: bmetdama.wav, bmetdamb.wav, bmetdamc.wav
+	IsometricSelectable:
+		DecorationHeight: 15
+	MapEditorData:
+		Categories: Decoration
+
+camisc06:
+	Inherits: ^CivBuilding
+	Inherits@shape: ^2x1Shape
+	Building:
+		Footprint: xx
+		Dimensions: 2, 1
+	Tooltip:
+		Name: V3弹药架
+	Tooltip@NoRow:
+		Name: V3弹药架
+	Health:
+		HP: 1000
+	Armor:
+		Type: Concrete
+	Explodes:
+		Type: Footprint
+		Weapon: V3AmmunitionExplode
+	SoundOnDamageTransition:
+		DamagedSounds: bmetdama.wav, bmetdamb.wav, bmetdamc.wav
+	MapEditorData:
+		Categories: Decoration
+
+camsc11:
+	Inherits: ^CivBuilding
+	Tooltip:
+		Name: 轮胎
+	Tooltip@NoRow:
+		Name: 轮胎
+	Health:
+		HP: 1000
+	Armor:
+		Type: Concrete
+	-ShakeOnDeath:
+	MapEditorData:
+		Categories: Decoration
+	IsometricSelectable:
+		DecorationHeight: 15
+
+camsc12:
+	Inherits: ^CivBuilding
+	Tooltip:
+		Name: 训练靶
+	Tooltip@NoRow:
+		Name: 训练靶
+	Health:
+		HP: 1000
+	Armor:
+		Type: Concrete
+	-ShakeOnDeath:
+	MapEditorData:
+		Categories: Decoration
+	IsometricSelectable:
+		DecorationHeight: 30
+
+camsc13:
+	Inherits: ^CivBuilding
+	Inherits@shape: ^1x2Shape
+	Building:
+		Footprint: x x
+		Dimensions: 1, 2
+	Tooltip:
+		Name: 废弃坦克
+	Tooltip@NoRow:
+		Name: 废弃坦克
+	Health:
+		HP: 80000
+	Armor:
+		Type: Concrete
+	MapEditorData:
+		Categories: Decoration
+	IsometricSelectable:
+		DecorationHeight: 30
+
+ammocrat:
+	Inherits: ^CivBuilding
+	Tooltip:
+		Name: 弹药箱
+	Tooltip@NoRow:
+		Name: 弹药箱
+	Health:
+		HP: 100
+	RenderSprites:
+		Image: ammo01
+	MapEditorData:
+		Categories: Decoration
+
+camsc01:
+	Inherits: ^CivBuilding
+	Tooltip:
+		Name: 热狗摊
+	Tooltip@NoRow:
+		Name: 热狗摊
+	RevealsShroud:
+		Range: 6c0
+	Health:
+		HP: 40000
+	-ShakeOnDeath:
+	MapEditorData:
+		Categories: Decoration
+	IsometricSelectable:
+		DecorationHeight: 30
+
+camsc02:
+	Inherits: ^CivBuilding
+	Tooltip:
+		Name: 海滩遮阳伞
+	Tooltip@NoRow:
+		Name: 海滩遮阳伞
+	RevealsShroud:
+		Range: 6c0
+	Health:
+		HP: 5000
+	-ShakeOnDeath:
+	MapEditorData:
+		Categories: Decoration
+	IsometricSelectable:
+		DecorationHeight: 30
+
+camsc03:
+	Inherits: ^CivBuilding
+	Tooltip:
+		Name: 海滩遮阳伞
+	Tooltip@NoRow:
+		Name: 海滩遮阳伞
+	RevealsShroud:
+		Range: 6c0
+	Health:
+		HP: 100
+	-ShakeOnDeath:
+	MapEditorData:
+		Categories: Decoration
+	IsometricSelectable:
+		DecorationHeight: 30
+
+camsc04:
+	Inherits: ^CivBuilding
+	Tooltip:
+		Name: 沙滩浴巾
+	Tooltip@NoRow:
+		Name: 沙滩浴巾
+	RevealsShroud:
+		Range: 6c0
+	Health:
+		HP: 100
+	-ShakeOnDeath:
+	MapEditorData:
+		Categories: Decoration
+	IsometricSelectable:
+		DecorationHeight: 15
+
+camsc05:
+	Inherits: ^CivBuilding
+	Tooltip:
+		Name: 沙滩浴巾
+	Tooltip@NoRow:
+		Name: 沙滩浴巾
+	RevealsShroud:
+		Range: 6c0
+	Health:
+		HP: 100
+	-ShakeOnDeath:
+	MapEditorData:
+		Categories: Decoration
+	IsometricSelectable:
+		DecorationHeight: 15
+
+camsc06:
+	Inherits: ^CivBuilding
+	Tooltip:
+		Name: 营火
+	Tooltip@NoRow:
+		Name: 营火
+	RevealsShroud:
+		Range: 6c0
+	Health:
+		HP: 1000
+	-ShakeOnDeath:
+	WithIdleOverlay@fire:
+		Sequence: idle-fire
+		PauseOnCondition: chronodisable
+	MapEditorData:
+		Categories: Decoration
+	IsometricSelectable:
+		DecorationHeight: 15
+
+caeuro05:
+	Inherits: ^CivBuilding
+	Inherits@shape: ^2x2Shape
+	Tooltip:
+		Name: 雕像
+	Tooltip@NoRow:
+		Name: 雕像
+	Armor:
+		Type: concrete
+	RevealsShroud:
+		Range: 6c0
+	Health:
+		HP: 40000
+	Building:
+		Dimensions: 2,2
+		Footprint: xx xx
+	MapEditorData:
+		Categories: Decoration
+	IsometricSelectable:
+		DecorationHeight: 75
+
+capark01:
+	Inherits: ^CivBuilding
+	Tooltip:
+		Name: 长凳
+	Tooltip@NoRow:
+		Name: 长凳
+	RevealsShroud:
+		Range: 6c0
+	Health:
+		HP: 100
+	-ShakeOnDeath:
+	MapEditorData:
+		Categories: Decoration
+	IsometricSelectable:
+		DecorationHeight: 15
+
+capark02:
+	Inherits: ^CivBuilding
+	Inherits@shape: ^2x1Shape
+	Tooltip:
+		Name: 秋千
+	Tooltip@NoRow:
+		Name: 秋千
+	RevealsShroud:
+		Range: 6c0
+	Health:
+		HP: 100
+	Building:
+		Dimensions: 2,1
+		Footprint: xx
+	-ShakeOnDeath:
+	MapEditorData:
+		Categories: Decoration
+	IsometricSelectable:
+		DecorationHeight: 15
+
+capark03:
+	Inherits: ^CivBuilding
+	Inherits@shape: ^2x2Shape
+	Tooltip:
+		Name: 旋转木马
+	Tooltip@NoRow:
+		Name: 旋转木马
+	RevealsShroud:
+		Range: 6c0
+	Health:
+		HP: 100
+	Building:
+		Dimensions: 2,2
+		Footprint: xx xx
+	-ShakeOnDeath:
+	MapEditorData:
+		Categories: Decoration
+	IsometricSelectable:
+		DecorationHeight: 15
+
+castrt01:
+	Inherits: ^CivBuilding
+	Tooltip:
+		Name: 红绿灯
+	Armor:
+		Type: steel
+	RevealsShroud:
+		Range: 6c0
+	Health:
+		HP: 100000
+	-ShakeOnDeath:
+	MapEditorData:
+		Categories: Decoration
+	IsometricSelectable:
+		DecorationHeight: 60
+
+castrt02:
+	Inherits: ^CivBuilding
+	Tooltip:
+		Name: 红绿灯
+	Tooltip@NoRow:
+		Name: 红绿灯
+	Armor:
+		Type: steel
+	RevealsShroud:
+		Range: 6c0
+	Health:
+		HP: 100000
+	-ShakeOnDeath:
+	MapEditorData:
+		Categories: Decoration
+	IsometricSelectable:
+		DecorationHeight: 60
+
+castrt03:
+	Inherits: ^CivBuilding
+	Tooltip:
+		Name: 红绿灯
+	Tooltip@NoRow:
+		Name: 红绿灯
+	Armor:
+		Type: steel
+	RevealsShroud:
+		Range: 6c0
+	Health:
+		HP: 100000
+	-ShakeOnDeath:
+	MapEditorData:
+		Categories: Decoration
+	IsometricSelectable:
+		DecorationHeight: 60
+
+castrt04:
+	Inherits: ^CivBuilding
+	Tooltip:
+		Name: 红绿灯
+	Tooltip@NoRow:
+		Name: 红绿灯
+	Armor:
+		Type: steel
+	RevealsShroud:
+		Range: 6c0
+	Health:
+		HP: 100000
+	-ShakeOnDeath:
+	MapEditorData:
+		Categories: Decoration
+	IsometricSelectable:
+		DecorationHeight: 60
+
+castrt05:
+	Inherits: ^CivBuilding
+	Tooltip:
+		Name: 公交车站
+	Tooltip@NoRow:
+		Name: 公交车站
+	Armor:
+		Type: steel
+	RevealsShroud:
+		Range: 6c0
+	Health:
+		HP: 100000
+	-ShakeOnDeath:
+	MapEditorData:
+		Categories: Decoration
+	IsometricSelectable:
+		DecorationHeight: 30
+
+camov01:
+	Inherits: ^CivBuilding
+	Inherits@shape: ^1x4Shape
+	Tooltip:
+		Name: 汽车影院荧幕
+	Tooltip@NoRow:
+		Name: 汽车影院荧幕
+	Armor:
+		Type: steel
+	RevealsShroud:
+		Range: 6c0
+	Health:
+		HP: 50000
+	Building:
+		Dimensions: 1,4
+		Footprint: x x x x
+	WithIdleOverlay:
+		PauseOnCondition: chronodisable
+	IsometricSelectable:
+		DecorationHeight: 90
+
+camov02:
+	Inherits: ^GarrisonableBuilding
+	Inherits@shape: ^2x2Shape
+	Tooltip:
+		Name: 汽车影院小卖部
+	Building:
+		Dimensions: 2,2
+		Footprint: xx xx
+	WithIdleOverlay:
+		PauseOnCondition: chronodisable
+	Garrisonable:
+		MaxWeight: 5
+	SpawnActorOnDeath:
+		DeathType: NonTemporal
+		Actor: camov02.rubble
+	IsometricSelectable:
+		DecorationHeight: 60
+
+camov02.rubble:
+	Inherits: ^Rubble
+	Inherits@shape: ^2x2Shape
+	Building:
+		Dimensions: 2,2
+		Footprint: __ __
+	RenderSprites:
+		Image: camov02
+
+pole01:
+	Inherits: ^TelephonePole
+	Tooltip:
+		Name: 多用电线杆
+	Tooltip@NoRow:
+		Name: 多用电线杆
+
+pole02:
+	Inherits: ^TelephonePole
+	Tooltip:
+		Name: 多用电线杆
+	Tooltip@NoRow:
+		Name: 多用电线杆
+
+hdstn01:
+	Inherits: ^Tree
+	Tooltip:
+		Name: 露营烤炉
+	Tooltip@NoRow:
+		Name: 露营烤炉
+	MapEditorData:
+		Categories: Decoration
+	-MirageTarget:
+
+lt_gen01:
+	Inherits: ^StreetLight
+
+lt_gen02:
+	Inherits: ^StreetLight
+
+lt_gen03:
+	Inherits: ^StreetLight
+
+lt_gen04:
+	Inherits: ^StreetLight
+
+lt_sgn01:
+	Inherits: ^StreetLight
+
+lt_sgn02:
+	Inherits: ^StreetLight
+
+lt_sgn03:
+	Inherits: ^StreetLight
+
+lt_sgn04:
+	Inherits: ^StreetLight
+
+lt_eur01:
+	Inherits: ^StreetLight
+
+lt_eur02:
+	Inherits: ^StreetLight
+
+trff01:
+	Inherits: ^TrafficLight
+
+trff02:
+	Inherits: ^TrafficLight
+
+trff03:
+	Inherits: ^TrafficLight
+
+trff04:
+	Inherits: ^TrafficLight
+
+sign01:
+	Inherits: ^StreetSign
+
+sign02:
+	Inherits: ^StreetSign
+
+sign03:
+	Inherits: ^StreetSign
+
+sign04:
+	Inherits: ^StreetSign
+
+sign05:
+	Inherits: ^StreetSign
+
+sign06:
+	Inherits: ^StreetSign
+
+spkr01:
+	Inherits: ^Tree
+	Tooltip:
+		Name: 播音喇叭
+	Tooltip@NoRow:
+		Name: 播音喇叭
+	MapEditorData:
+		Categories: Decoration
+	-MirageTarget:
+
+carus02c:
+	Inherits: ^CivBuilding
+	Tooltip:
+		Name: 克里姆林宫墙
+	Tooltip@NoRow:
+		Name: 克里姆林宫墙
+	Armor:
+		Type: concrete
+	Health:
+		HP: 100000
+	MapEditorData:
+		Categories: Wall
+
+carus02d:
+	Inherits: ^CivBuilding
+	Tooltip:
+		Name: 克里姆林宫墙
+	Tooltip@NoRow:
+		Name: 克里姆林宫墙
+	Armor:
+		Type: concrete
+	Health:
+		HP: 100000
+	MapEditorData:
+		Categories: Wall
+
+carus02e:
+	Inherits: ^CivBuilding
+	Tooltip:
+		Name: 克里姆林宫墙
+	Tooltip@NoRow:
+		Name: 克里姆林宫墙
+	Armor:
+		Type: concrete
+	Health:
+		HP: 100000
+	MapEditorData:
+		Categories: Wall
+
+carus02f:
+	Inherits: ^CivBuilding
+	Tooltip:
+		Name: 克里姆林宫墙
+	Tooltip@NoRow:
+		Name: 克里姆林宫墙
+	Armor:
+		Type: concrete
+	Health:
+		HP: 100000
+	MapEditorData:
+		Categories: Wall
+
+carus07:
+	Inherits: ^CivBuilding
+	Armor:
+		Type: concrete
+	RevealsShroud:
+		Range: 6c0
+	Health:
+		HP: 100000
+	IsometricSelectable:
+		DecorationHeight: 15
+
+cakrmw:
+	Inherits: ^Wall
+	Buildable:
+		Queue: Support.Civilian
+	Tooltip:
+		Name: 克里姆林宫墙
+	Tooltip@NoRow:
+		Name: 克里姆林宫墙
+	Armor:
+		Type: Concrete
+	LineBuild:
+		NodeTypes: cakrmw
+	LineBuildNode:
+		Types: cakrmw
+	WithWallSpriteBody:
+		Type: cakrmw
+
+gagate_a:
+	Inherits: ^Gate_A
+	Buildable:
+		Queue: Support.Civilian
+	Tooltip:
+		Name: 边防检查站
+	Tooltip@NoRow:
+		Name: 边防检查站
+	IsometricSelectable:
+		DecorationHeight: 30
+
+# Yuri's Revenge Props
+cabarr01:
+	Inherits: ^CivBuilding
+	Tooltip:
+		Name: 拒马
+	Tooltip@NoRow:
+		Name: 拒马
+	Armor:
+		Type: concrete
+	Health:
+		HP: 100000
+	MapEditorData:
+		Categories: Decoration
+
+cabarr02:
+	Inherits: ^CivBuilding
+	Tooltip:
+		Name: 拒马
+	Tooltip@NoRow:
+		Name: 拒马
+	Armor:
+		Type: concrete
+	Health:
+		HP: 100000
+	MapEditorData:
+		Categories: Decoration
+
+capark04:
+	Inherits: capark01
+
+capark05:
+	Inherits: capark01
+
+capark06:
+	Inherits: capark01
+
+casin03e:
+	Inherits: ^CivBuilding
+	Tooltip:
+		Name: 施工铭牌
+	Tooltip@NoRow:
+		Name: 施工铭牌
+	Health:
+		HP: 500
+	-ShakeOnDeath:
+	MapEditorData:
+		Categories: Decoration
+
+casin03s:
+	Inherits: casin03e
+
+caurb01:
+	Inherits: ^CivBuilding
+	Tooltip:
+		Name: 电话亭
+	Tooltip@NoRow:
+		Name: 电话亭
+	Health:
+		HP: 500
+	-ShakeOnDeath:
+	MapEditorData:
+		Categories: Decoration
+
+caurb02:
+	Inherits: ^CivBuilding
+	Tooltip:
+		Name: 消防栓
+	Tooltip@NoRow:
+		Name: 消防栓
+	Health:
+		HP: 500
+	-ShakeOnDeath:
+	MapEditorData:
+		Categories: Decoration
+
+caurb03:
+	Inherits: ^CivBuilding
+	Tooltip:
+		Name: 聚光灯
+	Tooltip@NoRow:
+		Name: 聚光灯
+	Health:
+		HP: 500
+	-ShakeOnDeath:
+	MapEditorData:
+		Categories: Decoration
+
+# Custom Props:
+cagatene:
+	Inherits: ^Gate_B
+	Buildable:
+		Queue: Support.Civilian
+	Tooltip:
+		Name: 边防检查站
+	Tooltip@NoRow:
+		Name: 边防检查站
+
+cagatenw:
+	Inherits: ^Gate_A
+	Buildable:
+		Queue: Support.Civilian
+	Tooltip:
+		Name: 边防检查站
+	Tooltip@NoRow:
+		Name: 边防检查站
+
+cagatesw:
+	Inherits: ^Gate_B
+	Buildable:
+		Queue: Support.Civilian
+	Tooltip:
+		Name: 边防检查站
+	Tooltip@NoRow:
+		Name: 边防检查站
+
+capark07:
+	Inherits: ^CivBuilding
+	Tooltip:
+		Name: 野餐桌
+	Tooltip@NoRow:
+		Name: 野餐桌
+	RevealsShroud:
+		Range: 6c0
+	Health:
+		HP: 100
+	-ShakeOnDeath:
+	MapEditorData:
+		Categories: Decoration
+	IsometricSelectable:
+		DecorationHeight: 15

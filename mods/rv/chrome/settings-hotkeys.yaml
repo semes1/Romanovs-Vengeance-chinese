@@ -1,0 +1,169 @@
+Container@HOTKEYS_PANEL:
+	Logic: HotkeysSettingsLogic
+		HotkeyGroups:
+			游戏指令:
+				Template: TWO_COLUMN
+				Types: OrderGenerator, World, Menu
+			视角指令:
+				Template: TWO_COLUMN
+				Types: Viewport
+			观战 / 回放指令:
+				Template: TWO_COLUMN
+				Types: Observer, Replay
+			单位指令:
+				Template: THREE_COLUMN
+				Types: Unit
+			单位姿态指令:
+				Template: TWO_COLUMN
+				Types: Stance
+			生产指令:
+				Template: TWO_COLUMN
+				Types: Production, ProductionSlot
+			支援能力指令:
+				Template: THREE_COLUMN
+				Types: SupportPower
+			音乐指令:
+				Template: TWO_COLUMN
+				Types: Music
+			聊天频道指令:
+				Template: TWO_COLUMN
+				Types: Chat
+			深度调试指令:
+				Template: TWO_COLUMN
+				Types: DepthDebug
+	Width: PARENT_RIGHT - 10
+	Height: PARENT_BOTTOM
+	Children:
+		ScrollPanel@HOTKEY_LIST:
+			X: 15
+			Y: 40
+			Width: PARENT_RIGHT - 30
+			TopBottomSpacing: 4
+			ItemSpacing: 4
+			Height: 190
+			Children:
+				ScrollItem@HEADER:
+					BaseName: scrollheader
+					Width: 528
+					Height: 13
+					Visible: false
+					Children:
+						Label@LABEL:
+							Font: TinyBold
+							Width: PARENT_RIGHT
+							Height: 10
+							Align: Center
+						ScrollItem@HEADER:
+							Width: 528
+							Height: 13
+							Visible: false
+							Children:
+								Label@LABEL:
+									Font: TinyBold
+									Width: PARENT_RIGHT
+									Height: 10
+									Align: Center
+						Container@TEMPLATES:
+							Children:
+								Container@TWO_COLUMN:
+									Width: 262
+									Height: 25
+									Visible: false
+									Children:
+										Label@FUNCTION:
+											Y: 0 - 1
+											Width: PARENT_RIGHT - 85
+											Height: 25
+											Align: Right
+										Button@HOTKEY:
+											X: PARENT_RIGHT - WIDTH
+											Width: 80
+											Height: 25
+											Align: Left
+											TooltipContainer: SETTINGS_TOOLTIP_CONTAINER
+								Container@THREE_COLUMN:
+									Width: 173
+									Height: 25
+									Visible: false
+									Children:
+										Label@FUNCTION:
+											Y: 0 - 1
+											Width: PARENT_RIGHT - 84
+											Height: 25
+											Align: Right
+										Button@HOTKEY:
+											X: PARENT_RIGHT - WIDTH + 1
+											Width: 80
+											Height: 25
+											Align: Left
+											TooltipContainer: SETTINGS_TOOLTIP_CONTAINER
+		Background@HOTKEY_DIALOG_ROOT:
+			X: 15
+			Y: 230
+			Width: PARENT_RIGHT - 30
+			Height: 65
+			Background: dialog3
+			Children:
+				Label@HOTKEY_LABEL:
+					X: 15
+					Y: 19
+					Width: 219 - 15 - 10
+					Height: 25
+					Font: Bold
+					Align: Right
+				HotkeyEntry@HOTKEY_ENTRY:
+					X: 219
+					Y: 20
+					Width: 170
+					Height: 25
+				Container@NOTICES:
+					X: 219
+					Y: 42
+					Width: 170
+					Height: 25
+					Children:
+						Label@DEFAULT_NOTICE:
+							Width: PARENT_RIGHT
+							Height: PARENT_BOTTOM
+							Font: Tiny
+							Align: Left
+							Text: 这是默认快捷键
+						Label@ORIGINAL_NOTICE:
+							Width: PARENT_RIGHT
+							Height: PARENT_BOTTOM
+							Font: Tiny
+							Align: Left
+							Text: 默认快捷键是 "{0}"
+						Label@DUPLICATE_NOTICE:
+							Width: PARENT_RIGHT
+							Height: PARENT_BOTTOM
+							Font: Tiny
+							Align: Left
+							Text: 该按键已被设置于 "{0}"
+				Button@OVERRIDE_HOTKEY_BUTTON:
+					X: PARENT_RIGHT - 3 * WIDTH - 30
+					Y: 20
+					Width: 70
+					Height: 25
+					Text: 覆盖
+					Font: Bold
+				Button@CLEAR_HOTKEY_BUTTON:
+					X: PARENT_RIGHT - 2 * WIDTH - 30
+					Y: 20
+					Width: 65
+					Height: 25
+					Text: 清除
+					Font: Bold
+					TooltipText: 不设置快捷键
+					TooltipContainer: SETTINGS_TOOLTIP_CONTAINER
+					TooltipTemplate: SIMPLE_TOOLTIP
+				Button@RESET_HOTKEY_BUTTON:
+					X: PARENT_RIGHT - WIDTH - 20
+					Y: 20
+					Width: 65
+					Height: 25
+					Text: 重置
+					Font: Bold
+					TooltipText: 还原为默认快捷键
+					TooltipContainer: SETTINGS_TOOLTIP_CONTAINER
+					TooltipTemplate: SIMPLE_TOOLTIP

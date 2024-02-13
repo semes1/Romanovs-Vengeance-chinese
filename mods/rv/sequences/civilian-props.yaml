@@ -1,0 +1,364 @@
+hdstn01:
+	Defaults:
+		UseTilesetExtension: true
+	idle:
+		ShadowStart: 1
+
+lt_gen01:
+	Defaults:
+		UseTilesetExtension: true
+	idle:
+		ShadowStart: 1
+
+lt_gen02:
+	Defaults:
+		UseTilesetExtension: true
+	idle:
+		ShadowStart: 1
+
+lt_gen03:
+	Defaults:
+		UseTilesetExtension: true
+	idle:
+		ShadowStart: 1
+
+lt_gen04:
+	Defaults:
+		UseTilesetExtension: true
+	idle:
+		ShadowStart: 1
+
+lt_sgn01:
+	Defaults:
+		UseTilesetExtension: true
+	idle:
+		ShadowStart: 1
+
+lt_sgn02:
+	Defaults:
+		UseTilesetExtension: true
+	idle:
+		ShadowStart: 1
+
+lt_sgn03:
+	Defaults:
+		UseTilesetExtension: true
+	idle:
+		ShadowStart: 1
+
+lt_sgn04:
+	Defaults:
+		UseTilesetExtension: true
+	idle:
+
+lt_eur01:
+	Defaults:
+		UseTilesetExtension: true
+	idle:
+		ShadowStart: 1
+
+lt_eur02:
+	Defaults:
+		UseTilesetExtension: true
+	idle:
+		ShadowStart: 1
+
+pole01:
+	Defaults:
+		UseTilesetExtension: true
+	idle:
+		ShadowStart: 1
+
+pole02:
+	Defaults:
+		UseTilesetExtension: true
+	idle:
+		ShadowStart: 1
+
+sign01:
+	Defaults:
+		UseTilesetExtension: true
+	idle:
+		ShadowStart: 1
+
+sign02:
+	Defaults:
+		UseTilesetExtension: true
+	idle:
+		ShadowStart: 1
+
+sign03:
+	Defaults:
+		UseTilesetExtension: true
+	idle:
+
+sign04:
+	Defaults:
+		UseTilesetExtension: true
+	idle:
+		ShadowStart: 1
+
+sign05:
+	Defaults:
+		UseTilesetExtension: true
+	idle:
+		ShadowStart: 1
+
+sign06:
+	Defaults:
+		UseTilesetExtension: true
+	idle:
+		ShadowStart: 1
+
+trff01:
+	Defaults:
+		UseTilesetExtension: true
+	idle:
+		ShadowStart: 1
+
+camsc01:
+	Inherits: ^CivProp
+
+camsc02:
+	Inherits: ^CivProp
+
+camsc03:
+	Inherits: ^CivProp
+
+camsc04:
+	Inherits: ^CivProp
+
+camsc05:
+	Inherits: ^CivProp
+
+camsc06:
+	Inherits: ^CivProp
+	idle-fire: camsc06a
+		Length: 4
+		ShadowStart: 4
+		Tick: 80
+
+camsc11:
+	Inherits: ^CivProp
+
+camsc12:
+	Inherits: ^CivProp
+
+camsc13:
+	Inherits: ^CivProp
+	Defaults:
+		Offset: 15,-22
+
+trff02:
+	Defaults:
+		UseTilesetExtension: true
+	idle:
+		ShadowStart: 1
+
+trff03:
+	Defaults:
+		UseTilesetExtension: true
+	idle:
+		ShadowStart: 1
+
+trff04:
+	Defaults:
+		UseTilesetExtension: true
+	idle:
+		ShadowStart: 1
+
+camisc01:
+	Inherits: ^CivProp
+
+camisc02:
+	Inherits: ^CivProp
+
+camisc03:
+	Inherits: ^CivProp
+
+camisc04:
+	Inherits: ^CivProp
+
+camisc05:
+	Inherits: ^CivProp
+	Defaults:
+		Offset: 0,-15
+	idle:
+		ShadowStart: 2
+	damaged-idle:
+		Start: 1
+		ShadowStart: 3
+
+camisc06:
+	Inherits: ^CivProp
+	Defaults:
+		Offset: -15,-22
+
+caeuro05:
+	Inherits: ^CivBuildingNoRubble
+	Defaults:
+		Offset: 0,-30
+
+capark01:
+	Inherits: ^CivProp
+	Defaults:
+		TilesetOverrides:
+			NEWURBAN: TEMPERATE
+
+capark02:
+	Inherits: ^CivProp
+	Defaults:
+		TilesetOverrides:
+			NEWURBAN: TEMPERATE
+
+capark03:
+	Inherits: ^CivProp
+	Defaults:
+		Offset: 0,-30
+
+ammo01:
+	Inherits: ^CivProp
+	Defaults:
+		UseTilesetCode: false
+
+cabhut:
+	Inherits: ^CivProp
+	Defaults:
+		UseTilesetCode: false
+
+gagate_a:
+	Defaults:
+		UseTilesetCode: true
+		Offset: -30,-30
+	idle:
+		Length: 10
+		ShadowStart: 21
+	open:
+		Start: 9
+		ShadowStart: 30
+	icon: cameo|xxicon
+		Offset: 0,0
+		UseTilesetCode: false
+
+spkr01:
+	Defaults:
+		AddExtension: false
+	idle: spkr01.urb
+		ShadowStart: 1
+
+# Yuri's Revenge Props
+cabarr01:
+	Inherits: ^CivProp
+	Defaults:
+		UseTilesetCode: false
+
+cabarr02:
+	Inherits: ^CivProp
+	Defaults:
+		UseTilesetCode: false
+
+capark04:
+	Inherits: ^CivProp
+	Defaults: cgpark04
+		UseTilesetCode: false
+	idle:
+		ShadowStart: 1
+
+capark05:
+	Inherits: ^CivProp
+	Defaults: cgpark05
+		UseTilesetCode: false
+	idle:
+		ShadowStart: 1
+
+capark06:
+	Inherits: ^CivProp
+	Defaults: cgpark06
+		UseTilesetCode: false
+	idle:
+		ShadowStart: 1
+
+casin03e:
+	Inherits: ^CivProp
+	Defaults: cgsin03e
+		UseTilesetCode: false
+	idle:
+		ShadowStart: 1
+
+casin03s:
+	Inherits: ^CivProp
+	Defaults: cgsin03s
+		UseTilesetCode: false
+	idle:
+		ShadowStart: 1
+
+caurb01:
+	Inherits: ^CivProp
+	Defaults: cgurb01
+		UseTilesetCode: false
+	idle:
+		ShadowStart: 1
+
+caurb02:
+	Inherits: ^CivProp
+	Defaults: cgurb02
+		UseTilesetCode: false
+	idle:
+		ShadowStart: 1
+
+caurb03:
+	Inherits: ^CivProp
+	Defaults: cuurb03
+		UseTilesetCode: false
+	idle:
+		ShadowStart: 1
+
+# Custom Props
+cagatene:
+	Defaults: cggatene
+		Offset: 30,-30
+	idle:
+		Length: 10
+		ShadowStart: 23
+	open:
+		Start: 9
+		ShadowStart: 31
+	icon: cameo|xxicon
+		Offset: 0,0
+
+cagatenw:
+	Defaults: cggatenw
+		Offset: -30,-30
+	idle:
+		Length: 10
+		ShadowStart: 23
+	open:
+		Start: 9
+		ShadowStart: 31
+	icon: cameo|xxicon
+		Offset: 0,0
+
+cagatesw:
+	Defaults: cggatesw
+		Offset: 30,-30
+	idle:
+		Length: 10
+		ShadowStart: 23
+	open:
+		Start: 9
+		ShadowStart: 31
+	icon: cameo|xxicon
+		Offset: 0,0
+
+capark07:
+	Inherits: ^CivProp
+	Defaults:
+		TilesetOverrides:
+			TEMPERATE: GENERIC
+			URBAN: GENERIC
+			NEWURBAN: GENERIC
+			DESERT: GENERIC
+			LUNAR: GENERIC
+			DUNE: GENERIC
+	idle:
+		ShadowStart: 2

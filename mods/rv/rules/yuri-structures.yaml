@@ -1,0 +1,1997 @@
+yacnst:
+	Inherits: ^ConstructionYard
+	Buildable:
+		BuildPaletteOrder: 30
+	ProvidesPrerequisite@yuri:
+		Prerequisite: structures.yuri
+	Production:
+		Produces: Building.Yuri, Support.Yuri, Support.Antarctica
+	ProductionQueue@Building:
+		Type: Building.Yuri
+	ProductionQueue@Support:
+		Type: Support.Yuri
+		Factions: america, germany, england, france, korea, japan, belarus, poland, ukraine, aussie, china, turkey, canada, cuba, libya, iraq, russia, vietnam, chile, mexico, mongolia, psicorps, psinepal, psitrans, psimoon, transcaucus, turkmen, tuva, russianfed, serbia
+	ProductionQueue@SupportFrance:
+		Type: Support.Antarctica
+		Factions: psisouth
+		Group: Support
+		LowPowerModifier: 200
+		ReadyAudio: ConstructionComplete
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		QueuedAudio: Building
+		OnHoldAudio: OnHold
+	Transforms:
+		IntoActor: pcv
+	ProductionBar@Building:
+		ProductionType: Building.Yuri
+	ProductionBar@Support:
+		ProductionType: Support.Yuri
+	ProductionBar@SupportAntarctica:
+		ProductionType: Support.Antarctica
+	WithIdleOverlay@top:
+		Sequence: idle-top
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@normal:
+		Sequence: idle-normal
+		RequiresCondition: !build-incomplete
+	WithBuildingPlacedAnimation:
+		RequiresCondition: !build-incomplete
+	GrantConditionOnFaction@Yurigrad:
+		Condition: psicorps
+		Factions: psicorps
+	GrantConditionOnFaction@Lazarus:
+		Condition: psinepal
+		Factions: psinepal
+	GrantConditionOnFaction@Antarctica:
+		Condition: psisouth
+		Factions: psisouth
+	GrantConditionOnFaction@Transylvania:
+		Condition: psitrans
+		Factions: psitrans
+	GrantConditionOnFaction@Luna:
+		Condition: psimoon
+		Factions: psimoon
+	WithIdleOverlay@Yurigrad:
+		Sequence: flag-psicorps
+		RequiresCondition: !build-incomplete && psicorps
+	WithIdleOverlay@Lazarus:
+		Sequence: flag-psinepal
+		RequiresCondition: !build-incomplete && psinepal
+	WithIdleOverlay@Antarctica:
+		Sequence: flag-psisouth
+		RequiresCondition: !build-incomplete && psisouth
+	WithIdleOverlay@Transylvania:
+		Sequence: flag-psitrans
+		RequiresCondition: !build-incomplete && psitrans
+	WithIdleOverlay@Luna:
+		Sequence: flag-psimoon
+		RequiresCondition: !build-incomplete && psimoon
+	IsometricSelectable:
+		DecorationHeight: 60
+	Voiced:
+		VoiceSet: YuriConstructionYardVoice
+	RenderSprites:
+		Image: yacnst
+
+yapowr:
+	Inherits: ^PowerPlant
+	Inherits@SHAPE: ^2x2Shape
+	Buildable:
+		Queue: Building.Yuri
+		Description: 为基地其他建筑提供电力\n可以驻扎最多五名步兵\n每一名步兵将提供额外50电力产出
+	Tooltip:
+		Name: 生物发电厂
+	Tooltip@NoRow:
+		Name: 生物发电厂
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	WithIdleOverlay@empty:
+		Sequence: empty
+		PauseOnCondition: chronodisable
+		RequiresCondition: !loaded && !build-incomplete
+	WithIdleOverlay@loaded:
+		Sequence: loaded
+		PauseOnCondition: chronodisable
+		RequiresCondition: loaded && !build-incomplete
+	WithIdleOverlay@lights:
+		Sequence: idle-lights
+		PauseOnCondition: chronodisable
+		RequiresCondition: !build-incomplete
+	Power@1:
+		Amount: 50
+		RequiresCondition: !chronodisable && !forceshieldnopower && !diskdrain && !power-outage && loaded >= 1
+	Power@2:
+		Amount: 50
+		RequiresCondition: !chronodisable && !forceshieldnopower && !diskdrain && !power-outage && loaded >= 2
+	Power@3:
+		Amount: 50
+		RequiresCondition: !chronodisable && !forceshieldnopower && !diskdrain && !power-outage && loaded >= 3
+	Power@4:
+		Amount: 50
+		RequiresCondition: !chronodisable && !forceshieldnopower && !diskdrain && !power-outage && loaded >= 4
+	Power@5:
+		Amount: 50
+		RequiresCondition: !chronodisable && !forceshieldnopower && !diskdrain && !power-outage && loaded >= 5
+	Power@6:
+		Amount: 100
+		RequiresCondition: !chronodisable && !forceshieldnopower && !diskdrain && !power-outage && loadedvehicle
+	Cargo:
+		Types: Infantry, Garrisoner, NaturalVehicle
+		MaxWeight: 5
+		AfterLoadDelay: 0
+		BeforeUnloadDelay: 0
+		AfterUnloadDelay: 0
+		EjectOnDeath: true
+		LoadedCondition: loaded
+		PassengerConditions:
+			spider: loadedvehicle
+	WithCargoPipsDecoration:
+		FullSequence: pip-building-green
+		EmptySequence: pip-building-empty
+		Palette: ra
+		Margin: 8, 2
+		PipStride: 4, 2
+		Position: BottomLeft
+		RequiresSelection: true
+		CustomPipSequences:
+			gray: pip-building-gray
+			yellow: pip-building-yellow
+			blue: pip-building-blue
+			red: pip-building-red
+	EngineerRepairable:
+		RequiresCondition: !ivanbomb && !sealC4 && !commandoC4 && !teslabomb && !toxinbomb && damaged
+	GrantConditionOnDamageState@DAMAGED:
+		Condition: damaged
+		ValidDamageStates: Light, Medium, Heavy, Critical
+	IsometricSelectable:
+		Class: yapowr
+		DecorationHeight: 60
+	Voiced:
+		VoiceSet: PowerPlantVoice
+		Volume: 0.8
+	RenderSprites:
+		Image: yapowr
+
+yabrck:
+	Inherits: ^Barracks
+	Inherits@SHAPE: ^2x3Shape
+	Buildable:
+		Queue: Building.Yuri
+	Building:
+		Footprint: xx xx xx
+		Dimensions: 2,3
+	Exit@1:
+		SpawnOffset: 724,362,0
+		ExitCell: 2,2
+		Priority: 2
+	Exit@2:
+		SpawnOffset: 724,362,0
+		ExitCell: 2,1
+		Priority: 2
+	Exit@fallback1:
+		SpawnOffset: -362,1086,0
+		ExitCell: 2,3
+	Exit@fallback2:
+		SpawnOffset: -362,1086,0
+		ExitCell: 1,3
+	Exit@fallback3:
+		SpawnOffset: -1086,362,0
+		ExitCell: 0,3
+	Exit@fallback4:
+		SpawnOffset: -1086,362,0
+		ExitCell: -1,3
+	Exit@fallback5:
+		SpawnOffset: -1086,362,0
+		ExitCell: -1,2
+	Exit@fallback6:
+		SpawnOffset: -362,-362,0
+		ExitCell: -1,1
+	Exit@fallback7:
+		SpawnOffset: 362,-1086,0
+		ExitCell: -1,0
+	Exit@fallback8:
+		SpawnOffset: 362,-1086,0
+		ExitCell: -1,-1
+	Exit@fallback9:
+		SpawnOffset: 362,-1086,0
+		ExitCell: 0,-1
+	Exit@fallback10:
+		SpawnOffset: 1086,-362,0
+		ExitCell: 1,-1
+	Exit@fallback11:
+		SpawnOffset: 1086,-362,0
+		ExitCell: 2,-1
+	Exit@fallback12:
+		SpawnOffset: 724,362,0
+		ExitCell: 2,0
+	Production:
+		Produces: Infantry.Yuri, Infantry.Moon
+	ProductionQueue:
+		Type: Infantry.Yuri
+		Factions: america, germany, england, france, korea, japan, belarus, poland, ukraine, aussie, china, turkey, canada, cuba, iraq, libya, russia, vietnam, chile, mexico, mongolia, psicorps, psinepal, psisouth, psitrans, transcaucus, turkmen, tuva, russianfed, serbia
+	ProductionQueue@Moon:
+		Type: Infantry.Moon
+		Factions: psimoon
+		Group: Infantry
+		LowPowerModifier: 200
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		QueuedAudio: Training
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ProductionBar:
+		ProductionType: Infantry.Yuri
+	ProductionBar@Moon:
+		ProductionType: Infantry.Moon
+	WithIdleOverlay@lights:
+		Sequence: idle-lights
+		PauseOnCondition: chronodisable
+		RequiresCondition: !build-incomplete
+	RallyPoint:
+		Path: 2,1
+	ProvidesPrerequisite@yabrck:
+		Prerequisite: yabrck
+	ProvidesPrerequisite@mwfacref:
+		Prerequisite: psirefn
+	PlaceBuildingVariants:
+		Actors: yabrcb
+	IsometricSelectable:
+		DecorationHeight: 105
+
+yarefn:
+	Inherits: ^BaseBuilding
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@DISK: ^DiskStealable
+	Inherits@SHAPE: ^2x2Shape
+	Buildable:
+		Queue: Building.Unused # Building.Yuri
+		BuildPaletteOrder: 30
+		Prerequisites: power
+		Description: 训练并指挥奴隶采集矿物和宝石
+		BuildDuration: 750
+		BuildDurationModifier: 100
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: 奴隶采矿场
+	Tooltip@NoRow:
+		Name: 奴隶采矿场
+	Health:
+		HP: 150000
+	Armor:
+		Type: Medium
+	RevealsShroud:
+		Range: 6c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Types: SatelliteScan
+	#	Range: 6c0
+	RevealOnDeath:
+		Radius: 3c0
+	ProvidesPrerequisite@yarefn:
+		Prerequisite: yarefn
+	ProvidesPrerequisite@psirefn:
+		Prerequisite: psirefn
+	ProvidesPrerequisite@refinery:
+		Prerequisite: refinery
+	Building:
+		Footprint: xx x+
+		Dimensions: 2,2
+		TerrainTypes: Clear, Sand, Rough, Dune, Road, DirtRoad
+	Refinery:
+		DockOffset: 1,1
+		ShowTicks: True
+		TickLifetime: 30
+		TickVelocity: 1
+		TickRate: 10
+		DockAngle: 640
+		UseStorage: true
+	Production:
+		Produces: Infantry.Slave
+	ProductionQueue:
+		Type: Infantry.Slave
+		Group: Infantry
+		LowPowerModifier: 200
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		QueuedAudio: Training
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ProductionBar:
+		ProductionType: Infantry.Slave
+	Exit@1:
+		SpawnOffset: 0,512,0
+		ExitCell: 2, 1
+		Facing: 128
+	Exit@2:
+		SpawnOffset: 0,512,0
+		ExitCell: 1, 2
+		Facing: 128
+	-GivesBuildableArea:
+	Transforms:
+		Facing: 896
+		IntoActor: smin
+		DeployCursor: undeploy
+		Voice: Undeploy
+		PauseOnCondition: chronodisable
+		RequiresCondition: !build-incomplete
+	TransformsIntoMobile:
+		RequiresCondition: !build-incomplete && !chronodisable
+		Locomotor: tracked
+		Voice: Move
+		RequiresForceMove: true
+	TransformsIntoRepairable:
+		RequiresCondition: !build-incomplete && !chronodisable
+		RepairActors: gadept, nadept, nadepb, yadept, yadepb, caoutp
+		Voice: Move
+		RequiresForceMove: true
+	TransformsIntoPassenger:
+		RequiresCondition: !build-incomplete && !chronodisable
+		CargoType: Vehicle
+		Voice: Move
+		RequiresForceMove: true
+	TransferTimedExternalConditionOnTransform@INVULNERABILITY:
+		Condition: invulnerability
+	TransferTimedExternalConditionOnTransform@INVISIBILITY:
+		Condition: invisibility
+	ExternalCondition@INVISIBILITY:
+		Condition: invisibility
+	InfiltrateForCash:
+		Percentage: 50
+		InfiltratedNotification: CashStolen
+		InfiltrationNotification: BuildingInfiltratedCashStolen
+		Minimum: 500
+	WithIdleOverlay@processing:
+		Sequence: idle-processing
+		PauseOnCondition: chronodisable
+		RequiresCondition: !build-incomplete
+	Turreted:
+		TurnSpeed: 20
+		InitialFacing: 128
+		Offset: 640,0,0
+	Armament@primary:
+		Weapon: 20mmrapid
+		LocalOffset: 512,0,1132
+		MuzzleSequence: muzzle
+	#	RequiresCondition: !rank-elite
+	# Armament@elite:
+	#	Weapon: 20mmrapidE
+	#	LocalOffset: 512,0,1132
+	#	MuzzleSequence: muzzle
+	#	RequiresCondition: rank-elite
+	AttackTurreted:
+		Voice: Attack
+		PauseOnCondition: chronodisable
+		RequiresCondition: !build-incomplete
+	WithMuzzleOverlay:
+	RenderSprites:
+		Image: yarefn
+	RenderVoxels:
+		Image: smin
+		Scale: 11.7
+		LightYaw: 800
+		LightPitch: 150
+		LightAmbientColor: -0.5,-0.5,-0.5
+		LightDiffuseColor: 1.3,1.3,1.3
+	WithVoxelTurret:
+		RequiresCondition: !build-incomplete
+	Targetable:
+		TargetTypes: Ground, C4, DetonateAttack, Structure, Defense, NonGarrisonableStructure, SpyInfiltrate
+	-SpawnActorsOnSell@allies:
+	-SpawnActorsOnSell@soviets:
+	-SpawnActorsOnSell@psicorps:
+	Voiced:
+		VoiceSet: SlaveMinerVoice
+	StoresResources:
+		Capacity: 1000
+	Explodes:
+		RequiresCondition: !spawn-ore
+	Explodes@Ore:
+		Type: Footprint
+		Weapon: RefineryExplode
+		RequiresCondition: spawn-ore
+	GrantConditionOnPlayerResources:
+		Condition: spawn-ore
+	GpsDotAS:
+		Sequence: Harvester
+	WithResourceStoragePipsDecoration:
+		FullSequence: pip-building-yellow
+		EmptySequence: pip-building-empty
+		Palette: ra
+		Margin: 8, 2
+		PipStride: 4, 2
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 15
+	IsometricSelectable:
+		DecorationHeight: 45
+
+yarfn2:
+	Inherits: ^Refinery
+	Buildable:
+		Queue: Building.Yuri
+	ProvidesPrerequisite@psirefn:
+		Prerequisite: psirefn
+	FreeActor:
+		Actor: gmin
+	-WithDockedOverlay:
+	SmokeParticleEmitter@refinerysmoke1:
+		Offset: -416,-416,3648
+	SmokeParticleEmitter@refinerysmoke2:
+		Offset: -960,-960,3648
+	PlaceBuildingVariants:
+		Actors: yarfnb #, yarfnc, yarfnd
+	IsometricSelectable:
+		DecorationHeight: 105
+
+yaweap:
+	Inherits: ^WarFactory
+	Buildable:
+		Queue: Building.Yuri
+	ProvidesPrerequisite@yaweap:
+		Prerequisite: yaweap
+	Production:
+		Produces: Vehicle.Yuri, Vehicle.Psi, Vehicle.Trans
+	ProductionQueue:
+		Type: Vehicle.Yuri
+		Factions: america, germany, england, france, korea, japan, belarus, poland, ukraine, aussie, china, turkey, canada, cuba, iraq, libya, russia, vietnam, chile, mexico, mongolia, psinepal, psisouth, psimoon, transcaucus, turkmen, tuva, russianfed, serbia
+	ProductionQueue@Psi:
+		Type: Vehicle.Psi
+		Factions: psicorps
+		Group: Vehicle
+		LowPowerModifier: 200
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		QueuedAudio: Training
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ProductionQueue@Trans:
+		Type: Vehicle.Trans
+		Factions: psitrans
+		Group: Vehicle
+		LowPowerModifier: 200
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		QueuedAudio: Training
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ProductionBar:
+		ProductionType: Vehicle.Yuri
+	ProductionBar@Psi:
+		ProductionType: Vehicle.Psi
+	ProductionBar@Trans:
+		ProductionType: Vehicle.Trans
+	WithIdleOverlay@lights:
+		Sequence: idle-lights
+		PauseOnCondition: chronodisable
+		RequiresCondition: !build-incomplete
+	PlaceBuildingVariants:
+		Actors: yaweab #, yaweac, yawead
+	IsometricSelectable:
+		DecorationHeight: 75
+
+yayard:
+	Inherits: ^Shipyard
+	Tooltip:
+		Name: 潜艇母港
+	Tooltip@NoRow:
+		Name: 潜艇母港
+	Buildable:
+		Queue: Building.Yuri
+	Production:
+		Produces: Ship.Yuri
+	ProductionQueue:
+		Type: Ship.Yuri
+	ProductionBar:
+		ProductionType: Ship.Yuri
+	ParatroopersPower@sensorbuoy:
+		OrderName: PsiCorpsSensorBuoy
+		PauseOnCondition: chronodisable
+		Prerequisites:
+			1: yayard
+		Icons:
+			1: buoy
+		ChargeInterval: 9000
+		Descriptions:
+			1: 侦察浮筒
+		LongDescs:
+			1: 在任意水域空投一个可以侦测潜艇的浮筒
+		SelectTargetSpeechNotification: SelectTarget
+		EndChargeSpeechNotification: ParatroopersReady
+		DropItems:
+			1: buoy
+		SquadSizes:
+			1: 1
+		SquadOffset: -2048, 2048, 0
+		QuantizedFacings: 8
+		UnitTypes:
+			1: txbmbdrop
+		CameraActor: camera
+		DisplayBeacon: True
+		BeaconPosters:
+			1: buoyicon
+		ArrowSequence: arrow
+		ClockSequence: clock
+		UseDirectionalTarget: True
+		DirectionArrowAnimation: swdirection
+		DirectionArrowPalette: mouse
+	IsometricSelectable:
+		DecorationHeight: 120
+
+yadept:
+	Inherits: ^ServiceDepot
+	Inherits@SHAPE: ^4x3Shape
+	HitShape:
+		TargetableOffsets: 0,0,0, -360,360,0, 360,-360,0, -1080,1080,0, -360,1800,0, -1800,360,0, 360,1080,0, -360,-1080,0, 1080,360,0, -1080,-360,0
+	Buildable:
+		Queue: Building.Yuri
+		Prerequisites: yaweap, ~techlevel.1
+		Description: 消耗资金以高效修复各类载具\n\n·特殊能力：解除寄生（恐怖机器人）
+	ProvidesPrerequisite@default:
+		Prerequisite: yadept
+	Building:
+		Footprint: x+++ x+++ x+++
+		Dimensions: 4,3
+	RallyPoint:
+		Path: 4,1
+	WithIdleOverlay@normal:
+		Sequence: idle-normal
+		PauseOnCondition: chronodisable
+		RequiresCondition: !build-incomplete
+	PlaceBuildingVariants:
+		Actors: yadepb
+	IsometricSelectable:
+		DecorationHeight: 105
+
+yagrnd:
+	Inherits: ^BaseBuilding
+	Inherits@MC: ^MindControllableBuilding
+	Inherits@SHAPE: ^3x3Shape
+	Buildable:
+		Queue: Building.Yuri
+		BuildPaletteOrder: 110
+		Prerequisites: yaweap, ~prerequisite.grinder, ~techlevel.1
+		Description: 将绝大部分单位重新转换为资金
+		BuildDuration: 125
+		BuildDurationModifier: 100
+	Health:
+		HP: 90000
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 8c0
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: 粉碎机
+	Tooltip@NoRow:
+		Name: 粉碎机
+	Building:
+		Footprint: xxx xxx xxx
+		Dimensions: 3,3
+	RevealsShroud:
+		Range: 6c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Types: SatelliteScan
+	#	Range: 6c0
+	ProvidesPrerequisite@default:
+	ProvidesPrerequisite@repairpad:
+		Prerequisite: repairpad
+	AcceptsDeliveredCash:
+	WithAcceptDeliveredCashAnimation:
+		Sequence: grind
+	WithAcceptDeliveredCashSound:
+		Sound: bgrinda.wav
+	Power:
+		Amount: -50
+		RequiresCondition: !chronodisable
+	IsometricSelectable:
+		DecorationHeight: 75
+	Voiced:
+		VoiceSet: GrinderVoice
+		Volume: 0.8
+
+yadome:
+	Inherits: ^BaseBuilding
+	Inherits@LOWPOWER: ^DisableOnLowPowerOrPowerDown
+	Inherits@EMPULSE: ^DisabledByEMP
+	Inherits@MC: ^MindControllableBuilding
+	Inherits@SHAPE: ^2x2Shape
+	Buildable:
+		Queue: Building.Yuri
+		BuildPaletteOrder: 60
+		Prerequisites: power, psirefn, ~techlevel.2
+		Description: 灵能军团科技建筑\n\n提供战术地图\n解锁阵营独有支援能力\n解锁科技升级
+		BuildDuration: 750
+		BuildDurationModifier: 100
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: 灵能雷达站
+	Tooltip@NoRow:
+		Name: 灵能雷达站
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 100000
+	Armor:
+		Type: Wood
+	ProvidesPrerequisite:
+		Prerequisite: radar
+	ProvidesPrerequisite@default:
+	ProvidesPrerequisite@psicorps:
+		Prerequisite: radar.psicorps
+		Factions: psicorps
+	ProvidesPrerequisite@psinepal:
+		Prerequisite: radar.psinepal
+		Factions: psinepal
+	ProvidesPrerequisite@psisouth:
+		Prerequisite: radar.psisouth
+		Factions: psisouth
+	ProvidesPrerequisite@psitrans:
+		Prerequisite: radar.psitrans
+		Factions: psitrans
+	ProvidesPrerequisite@psimoon:
+		Prerequisite: radar.psimoon
+		Factions: psimoon
+	ProvidesPrerequisite@upgrade.psicorps:
+		Prerequisite: upgrade.psicorps
+		Factions: psicorps
+	ProvidesPrerequisite@upgrade.psinepal:
+		Prerequisite: upgrade.psinepal
+		Factions: psinepal
+	ProvidesPrerequisite@upgrade.psisouth:
+		Prerequisite: upgrade.psisouth
+		Factions: psisouth
+	ProvidesPrerequisite@upgrade.psitrans:
+		Prerequisite: upgrade.psitrans
+		Factions: psitrans
+	ProvidesPrerequisite@upgrade.psimoon:
+		Prerequisite: upgrade.psimoon
+		Factions: psimoon
+	ProvidesPrerequisite@upgrade.yuri:
+		Prerequisite: upgrade.yuri
+	ExternalCondition@disableradar:
+		Condition: disableradar
+	ProvidesRadar:
+		RequiresCondition: !disabled && !chronodisable && !disableradar
+	RevealsShroud:
+		Range: 10c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Types: SatelliteScan
+	#	Range: 10c0
+	SupportPowerChargeBar:
+	ParatroopersPower@psiops:
+		OrderName: YurigradPsiOps
+		PauseOnCondition: disabled || chronodisable
+		Prerequisites:
+			1: radar.psicorps
+		Icons:
+			1: psiops
+		ChargeInterval: 6000
+		Descriptions:
+			1: 克隆人军团
+		LongDescs:
+			1: 在选定位置投放至多3名尤里复制人
+		SelectTargetSpeechNotification: SelectTarget
+		EndChargeSpeechNotification: ParatroopersReady
+		DropItems:
+			1: yuripsi, yuripsi, yuripsi
+		SquadSizes:
+			1: 1
+		QuantizedFacings: 8
+		UnitTypes:
+			1: pcplane
+		CameraActor: camera
+		DisplayBeacon: True
+		BeaconPosters:
+			1: yclnicon
+		ArrowSequence: arrow
+		ClockSequence: clock
+		UseDirectionalTarget: True
+		DirectionArrowAnimation: swdirection
+		DirectionArrowPalette: mouse
+	AirstrikePower@chaosgas:
+		OrderName: YurigradChaosDrop
+		PauseOnCondition: disabled || chronodisable
+		Prerequisites:
+			1: disabled
+		Icons:
+			1: chdpicon
+		ChargeInterval: 7500
+		Descriptions:
+			1: 神经毒气空袭
+		LongDescs:
+			1: 在选定位置投放一列神经毒气
+		SelectTargetSpeechNotification: SelectTarget
+		UnitTypes:
+			1: pdplane.chaos
+		SquadSizes:
+			1: 1
+		QuantizedFacings: 8
+		CameraActor: CAMERA
+		CameraRemoveDelay: 100
+		DisplayBeacon: True
+		BeaconPosters:
+			1: chdpicon
+		ArrowSequence: arrow
+		ClockSequence: clock
+		UseDirectionalTarget: True
+		DirectionArrowAnimation: swdirection
+		DirectionArrowPalette: mouse
+	DetonateWeaponPower@hologram:
+		OrderName: LazarusHologramArmy
+		PauseOnCondition: disabled || chronodisable
+		Prerequisites:
+			1: radar.psinepal
+		Icons:
+			1: hologram
+		ChargeInterval: 4500
+		Descriptions:
+			1: 幻化成形
+		LongDescs:
+			1: 在选定位置生成一支持续20秒且不具备攻击力的全息影像军团
+		SelectTargetSpeechNotification: SelectTarget
+		Weapons:
+			1: HologramSpawner
+		ActivationSequence:
+	GrantExternalConditionPower@pointdefensedrones:
+		OrderName: AntarcticaPointDefenseDrones
+		PauseOnCondition: disabled || chronodisable
+		Prerequisites:
+			1: radar.psisouth
+		Icons:
+			1: pointdefense
+		ChargeInterval: 3000
+		Descriptions:
+			1: 纳米点防御无人机
+		LongDescs:
+			1: 为范围内的载具永久性部署可以代为承受伤害的纳米点防御无人机\n脱离战斗一段时间后无人机将会再生
+		SelectTargetSpeechNotification: SelectTarget
+		OnFireSound: ironcur9.aud
+		Durations:
+			1: -1
+		Conditions:
+			1: pointdefense
+		Dimensions:
+			1: 3,3
+		Footprints:
+			1: xxx xxx xxx
+	DetonateWeaponPower@lethocerusswarm:
+		OrderName: TransylvaniaLethocerusSwarm
+		PauseOnCondition: disabled || chronodisable
+		Prerequisites:
+			1: radar.psitrans
+		Icons:
+			1: lethocerus
+		ChargeInterval: 6000
+		Descriptions:
+			1: 虫潮降临
+		LongDescs:
+			1: 在选定位置生成3个负子蝽运输机
+		SelectTargetSpeechNotification: SelectTarget
+		Weapons:
+			1: LethocerusSpawnerSpawnerSpawner
+		ActivationSequence:
+	IonCannonPower@ioncanon:
+		OrderName: LunarIonCannon
+		# Cursor: ioncannon
+		PauseOnCondition: disabled || chronodisable
+		Prerequisites:
+			1: radar.psimoon
+		Icons:
+			1: ioncannon
+		Effect: dot
+		WeaponDelay: 0
+		ChargeInterval: 6000
+		Descriptions:
+			1: 离子炮轰炸
+		LongDescs:
+			1: 对选定区域造成小范围即时伤害
+		SelectTargetSpeechNotification: SelectTarget
+		DisplayRadarPing: True
+		CameraActor: camera
+		CameraRemoveDelay: 100
+		OnFireSound: ion1.aud
+	WithIdleOverlay@light:
+		Sequence: idle-light
+		PauseOnCondition: disabled || chronodisable
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@panels:
+		Sequence: idle-panels
+		PauseOnCondition: disabled || chronodisable
+		RequiresCondition: !build-incomplete
+	Targetable:
+		TargetTypes: Ground, C4, DetonateAttack, Structure, NonGarrisonableStructure, SpyInfiltrate
+	InfiltrateForSupportPowerReset:
+		Types: SpyInfiltrate
+	InfiltrateForExploration:
+		Types: SpyInfiltrate
+		InfiltratedNotification: RadarSabotaged
+		InfiltrationNotification: BuildingInfiltratedRadarSabotaged
+	Power:
+		Amount: -75
+		RequiresCondition: !chronodisable
+	IsometricSelectable:
+		DecorationHeight: 75
+	Voiced:
+		VoiceSet: RadarVoice
+		Volume: 0.8
+
+yadisk:
+	Inherits: ^BaseBuilding
+	Inherits@MC: ^MindControllableBuilding
+	Inherits@SPY: ^DisabledByInfiltration
+	Inherits@SHAPE: ^3x3Shape
+	Buildable:
+		Queue: Building.Yuri
+		BuildPaletteOrder: 100
+		Prerequisites: yadome, ~techlevel.2
+		Description: 制造飞碟\n\n提供一个灵能军团飞行器生产排程
+		BuildDuration: 125
+		BuildDurationModifier: 100
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: 飞碟制造厂
+	Tooltip@NoRow:
+		Name: 飞碟制造厂
+	ProvidesPrerequisite@default:
+	ProvidesPrerequisite@production:
+		Prerequisite: production
+	Building:
+		Dimensions: 3,3
+		Footprint: xxx xxx xxx
+	Health:
+		HP: 75000
+	RevealsShroud:
+		Range: 6c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Types: SatelliteScan
+	#	Range: 6c0
+	Armor:
+		Type: Wood
+	Reservable:
+	RallyPoint:
+		Path: 3,1
+		Palette: mouse
+		IsPlayerPalette: false
+	Exit@1:
+		Facing: 640
+		ExitCell: 1,1
+		SpawnOffset: 0,0,0
+	GrantExternalConditionToProduced:
+		Condition: produced
+	Production:
+		Produces: Aircraft.Yuri, Aircraft.Lazarus
+		PauseOnCondition: chronodisable || infiltrated
+	ProductionQueue:
+		Type: Aircraft.Yuri
+		Factions: america, germany, england, france, korea, japan, belarus, poland, ukraine, aussie, china, turkey, canada, cuba, iraq, libya, russia, vietnam, chile, mexico, mongolia, psicorps, psisouth, psitrans, psimoon, transcaucus, turkmen, tuva, russianfed, serbia
+		Group: Aircraft
+		LowPowerModifier: 200
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		QueuedAudio: Training
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ProductionQueue@Lazarus:
+		Type: Aircraft.Lazarus
+		Factions: psinepal
+		Group: Aircraft
+		LowPowerModifier: 200
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		QueuedAudio: Training
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ProductionBar:
+		ProductionType: Aircraft.Yuri
+	ProductionBar@Lazarus:
+		ProductionType: Aircraft.Lazarus
+	Power:
+		Amount: -50
+		RequiresCondition: !chronodisable
+	Targetable:
+		TargetTypes: Ground, C4, DetonateAttack, Structure, NonGarrisonableStructure, SpyInfiltrate
+	-WithMakeAnimation:
+	Capturable:
+		RequiresCondition: !invulnerability && !forceshield
+	Sellable:
+		RequiresCondition: !chronodisable
+	RenderSprites:
+		Image: yarock
+	IsometricSelectable:
+		DecorationHeight: 30
+	Voiced:
+		VoiceSet: AirfieldVoice
+		Volume: 0.8
+
+yatech:
+	Inherits: ^BattleLab
+	Inherits@SHAPE: ^3x2Shape
+	Buildable:
+		Queue: Building.Yuri
+		Prerequisites: production, yadome, ~techlevel.3, ~!ai.yatech
+	ProvidesPrerequisite@yatech:
+		Prerequisite: yatech
+	ProvidesPrerequisite@upgrade.yuri:
+		Prerequisite: upgrade.yuri
+	ProvidesPrerequisite@upgrade.psicorps:
+		Prerequisite: upgrade.psicorps
+		Factions: psicorps
+	ProvidesPrerequisite@upgrade.psinepal:
+		Prerequisite: upgrade.psinepal
+		Factions: psinepal
+	ProvidesPrerequisite@upgrade.psisouth:
+		Prerequisite: upgrade.psisouth
+		Factions: psisouth
+	ProvidesPrerequisite@upgrade.psitrans:
+		Prerequisite: upgrade.psitrans
+		Factions: psitrans
+	ProvidesPrerequisite@upgrade.psimoon:
+		Prerequisite: upgrade.psimoon
+		Factions: psimoon
+	ProvidesPrerequisite@AIbuildinglimit:
+		RequiresCondition: ai-control
+		Prerequisite: ai.yatech
+	Building:
+		Footprint: xxx xxx
+		Dimensions: 3,2
+	WithIdleOverlay@lift:
+		Sequence: idle-lift
+		PauseOnCondition: chronodisable
+		RequiresCondition: !build-incomplete
+	InfiltrateForSupportPower:
+		Proxy: yuri.tech.infiltrated
+	PlaceBuildingVariants:
+		Actors: yatecb
+	IsometricSelectable:
+		DecorationHeight: 180
+	Voiced:
+		VoiceSet: TechCenterVoice
+		Volume: 0.8
+
+yapsis:
+	Inherits: ^BaseBuilding
+	Inherits@LOWPOWER: ^DisableOnLowPowerOrPowerDown
+	Inherits@EMPULSE: ^DisabledByEMP
+	Inherits@MC: ^MindControllableBuilding
+	Inherits@SHAPE: ^2x2Shape
+	Buildable:
+		Queue: Building.Yuri
+		BuildPaletteOrder: 120
+		Prerequisites: yatech, ~techlevel.4
+		Description: 侦测范围内的敌方单位与建筑
+		BuildDuration: 1000
+		BuildDurationModifier: 100
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: 灵能感应塔
+	Tooltip@NoRow:
+		Name: 灵能感应塔
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 50000
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 10c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Types: SatelliteScan
+	#	Range: 6c0
+	GpsASProvider:
+		RequiresCondition: !disabled && !build-incomplete && !chronodisable
+	RenderDetectionCircle:
+	WithRangeCircle:
+		Range: 25c0
+		Type: sensor
+	DetectCloaked:
+		CloakTypes: Cloak, Underwater
+		Range: 25c0
+	WithIdleOverlay@spin:
+		Sequence: idle-spin
+		PauseOnCondition: disabled || chronodisable
+		RequiresCondition: !build-incomplete
+	Power:
+		Amount: -200
+		RequiresCondition: !chronodisable
+	IsometricSelectable:
+		DecorationHeight: 120
+	Voiced:
+		VoiceSet: PsychicSensorVoice
+		Volume: 0.8
+
+yaclon:
+	Inherits: ^BaseBuilding
+	Inherits@MC: ^MindControllableBuilding
+	Inherits@SHAPE: ^2x2Shape
+	Buildable:
+		Queue: Building.Yuri
+		BuildPaletteOrder: 130
+		Prerequisites: yatech, ~techlevel.4
+		Description: 克隆绝大部分步兵\n同一玩家同时仅能拥有一个
+		BuildLimit: 1
+		BuildDuration: 1250
+		BuildDurationModifier: 100
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: 克隆人中心
+	Tooltip@NoRow:
+		Name: 克隆人中心
+	Building:
+		Footprint: xx xx
+		Dimensions: 2, 2
+	Health:
+		HP: 75000
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 6c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Types: SatelliteScan
+	#	Range: 6c0
+	Power:
+		Amount: -200
+		RequiresCondition: !chronodisable
+	ExitsDebugOverlay:
+	Exit@1:
+		SpawnOffset: -640,640,0
+		ExitCell: 1,2
+		Priority: 2
+	Exit@2:
+		SpawnOffset: -640,640,0
+		ExitCell: 0,2
+		Priority: 2
+	Exit@fallback1:
+		SpawnOffset: 0,724,0
+		ExitCell: 2,2
+	Exit@fallback2:
+		SpawnOffset: 0,724,0
+		ExitCell: 2,1
+	Exit@fallback3:
+		SpawnOffset: 724,0,0
+		ExitCell: 2,0
+	Exit@fallback4:
+		SpawnOffset: 724,0,0
+		ExitCell: 2,-1
+	Exit@fallback5:
+		SpawnOffset: 724,0,0
+		ExitCell: 1,-1
+	Exit@fallback6:
+		SpawnOffset: 0,-724,0
+		ExitCell: 0,-1
+	Exit@fallback7:
+		SpawnOffset: 0,-724,0
+		ExitCell: -1,-1
+	Exit@fallback8:
+		SpawnOffset: 0,-724,0
+		ExitCell: -1,0
+	Exit@fallback9:
+		SpawnOffset: -724,0,0
+		ExitCell: -1,1
+	Exit@fallback10:
+		SpawnOffset: -724,0,0
+		ExitCell: -1,2
+	WithSpriteBody:
+		PauseOnCondition: chronodisable
+	Production:
+		Produces: Clone.Yuri
+	RallyPoint:
+		Path: 3,3
+		Palette: mouse
+		IsPlayerPalette: false
+	ClonesProducedUnits:
+		CloneableTypes: Infantry
+		ProductionType: Clone.Yuri
+	IsometricSelectable:
+		DecorationHeight: 90
+	Voiced:
+		VoiceSet: CloningVatsVoice
+		Volume: 0.8
+
+yawall:
+	Inherits: ^Wall
+	Buildable:
+		Queue: Support.Yuri, Support.Antarctica
+		Prerequisites: ~techlevel.1
+		BuildPaletteOrder: 10
+		Description: 阻止步兵与载具通过并阻挡枪炮类型的火力
+	Tooltip:
+		Name: 要塞城墙
+	Tooltip@NoRow:
+		Name: 要塞城墙
+	LineBuild:
+		NodeTypes: yawall
+	LineBuildNode:
+		Types: yawall
+	WithWallSpriteBody:
+		Type: yawall
+	Replaceable:
+		Types: YuriGate
+
+yaggun:
+	Inherits: ^VoxelLighting
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@CHAINGUNS: ^AffectedByChainguns
+	Inherits@DRAIN: ^DiskDrainable
+	Inherits@LOWPOWER: ^DisableOnLowPowerOrPowerDown
+	Inherits@EMPULSE: ^DisabledByEMP
+	Inherits@MC: ^MindControllableBuilding
+	Buildable:
+		Queue: Support.Yuri, Support.Antarctica
+		BuildPaletteOrder: 40
+		Prerequisites: yabrck, ~techlevel.1
+		Description: 全自动防空与反步兵防御塔\n需要电力供应\n侦测隐形\n可以放置在水域\n\n·强势对抗：步兵、飞行器\n·弱势对抗：载具\n\n·特殊能力：加特林武器（攻击频率随攻击时间逐步增加）
+		BuildDuration: 375
+		BuildDurationModifier: 100
+	Health:
+		HP: 60000
+	Armor:
+		Type: Steel
+	RevealsShroud:
+		Range: 8c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Types: SatelliteScan
+	#	Range: 8c0
+	Building:
+		Footprint: x
+		Dimensions: 1, 1
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: 加特林机关炮
+	Tooltip@NoRow:
+		Name: 加特林机关炮
+	Turreted:
+		TurnSpeed: 40
+		InitialFacing: 896
+		RealignDelay: -1
+	AttackTurreted:
+		PauseOnCondition: disabled || chronodisable
+		RequiresCondition: !build-incomplete
+	Armament@ag-0:
+		Weapon: AGGattCann
+		LocalOffset: 768,240,1024, 768,-240,1024
+		RequiresCondition: !gatling
+		MuzzleSequence: muzzle
+	Armament@ag-1:
+		Weapon: AGGattCann2
+		LocalOffset: 768,240,1024, 768,-240,1024
+		RequiresCondition: gatling == 1
+		MuzzleSequence: muzzle-1
+	Armament@ag-2:
+		Weapon: AGGattCann3
+		LocalOffset: 768,240,1024, 768,-240,1024
+		RequiresCondition: gatling >= 2
+		MuzzleSequence: muzzle-2
+	Armament@aa-0:
+		Weapon: AAGattCann
+		LocalOffset: 768,240,1024, 768,-240,1024
+		RequiresCondition: !gatling
+		MuzzleSequence: muzzle
+	Armament@aa-1:
+		Weapon: AAGattCann2
+		LocalOffset: 768,240,1024, 768,-240,1024
+		RequiresCondition: gatling == 1
+		MuzzleSequence: muzzle-1
+	Armament@aa-2:
+		Weapon: AAGattCann3
+		LocalOffset: 640,240,1024, 640,-240,1024
+		RequiresCondition: gatling >= 2
+		MuzzleSequence: muzzle-2
+	GrantConditionOnAttack:
+		Condition: gatling
+		RequiredShotsPerInstance: 12, 24
+		MaximumInstances: 2
+		RevokeDelay: 25
+		RevokeAll: true
+		IsCyclic: false
+		RevokeOnNewTarget: false
+	BodyOrientation:
+		QuantizedFacings: 16
+	RenderVoxels:
+		Scale: 18
+	WithMuzzleOverlay:
+	WithVoxelTurret:
+		RequiresCondition: !build-incomplete
+	GrantCondition@IDISABLE:
+		RequiresCondition: lowpower || powerdown || emp || diskdrain
+	WithRangeCircle:
+		Range: 5c0
+		Type: pillbox
+	WithRangeCircle@AA:
+		Range: 12c0
+		Type: aa
+	Power:
+		Amount: -40
+		RequiresCondition: !chronodisable
+	IsometricSelectable:
+		Class: yaggun
+		DecorationHeight: 45
+	DetectCloaked:
+		Range: 5c0
+		RequiresCondition: !disabled
+	RenderDetectionCircle:
+	WithIdleOverlay@waves:
+		Sequence: idle-waves
+		RequiresCondition: in_water
+	Voiced:
+		VoiceSet: GatlingCannonVoice
+		Volume: 0.8
+
+natbnk:
+	Inherits: ^SupportBuilding
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@MC: ^MindControllableBuilding
+	Inherits@SHAPE: ^2x2Shape
+	WithColoredOverlay@ChronoDisable:
+		Color: 00204040
+		RequiresCondition: chronodisable && loaded
+	WithColoredOverlay@ChronoDisableEmpty:
+		Color: 0060C040
+		RequiresCondition: chronodisable && !loaded
+	Buildable:
+		Queue: Support.Yuri, Support.Antarctica
+		BuildPaletteOrder: 50
+		Prerequisites: yaweap, ~techlevel.1
+		Description: 为坦克提供保护的坚固堡垒\n\n驻扎的载具将获得攻击力、攻击速度以及射程的提升
+		BuildDuration: 250
+		BuildDurationModifier: 100
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: 坦克碉堡
+	Tooltip@NoRow:
+		Name: 坦克碉堡
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		TerrainTypes: Clear, Rough, Road, DirtRoad
+	Health:
+		HP: 100000
+	Armor:
+		Type: Steel
+	Cargo:
+		Types: GarrisonerVehicle
+		MaxWeight: 3
+		AfterLoadDelay: 0
+		BeforeUnloadDelay: 0
+		AfterUnloadDelay: 0
+		EjectOnDeath: true
+		LoadedCondition: loaded
+	WithCargoSounds:
+		EnterSound: btanupa.wav
+		ExitSound: btandowa.wav
+	WithCargoBuilding:
+		Facing: 384
+		DisplayTypes: GarrisonerVehicle
+	-SpawnActorsOnSell@allies:
+	-SpawnActorsOnSell@soviets:
+	-SpawnActorsOnSell@psicorps:
+	WithSpriteBody:
+	WithIdleOverlay@Garrisoned:
+		Sequence: idle-garrisoned
+		RequiresCondition: !build-incomplete && loaded
+	WithIdleOverlay@GarrisonedFront:
+		Sequence: idle-garrisoned-front
+		RequiresCondition: !build-incomplete && loaded
+	Targetable@loaded:
+		TargetTypes: LoadedTankBunker
+		RequiresCondition: loaded
+	AttackGarrisoned:
+		Armaments: primary, secondary, gatling
+		PortOffsets: 768,0,1024, 448,-682,1024, -448,-682,1024, -768,0,1024, -448,682,1024, 448,682,1024
+		PortYaws: 0, 176, 341, 512, 682, 853
+		PortCones: 88, 88, 88, 88, 88, 88
+		PauseOnCondition: chronodisable
+		RequiresCondition: !build-incomplete
+	RevealsShroud:
+		Range: 6c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Types: SatelliteScan
+	#	Range: 6c0
+	IsometricSelectable:
+		Class: natbnk
+		DecorationHeight: 45
+	RenderSprites:
+		Image: natbnk
+	Voiced:
+		VoiceSet: TankBunkerVoice
+		Volume: 0.8
+
+yapsyt:
+	Inherits: ^SupportBuilding
+	Inherits@DRAIN: ^DiskDrainable
+	Inherits@EMPULSE: ^DisabledByEMP
+	Inherits@LOWPOWER: ^DisableOnLowPowerOrPowerDown
+	Buildable:
+		Queue: Support.Yuri, Support.Antarctica
+		BuildPaletteOrder: 60
+		Prerequisites: yadome, ~techlevel.3
+		Description: 放射出强大灵能的防御设施\n\n能够灵能控制最多三个地面目标\n侦测隐形\n需要电力供应\n可以放置在水域\n\n·强势对抗：步兵、载具、舰艇\n·弱势对抗：遥控坦克、飞行器
+		BuildDuration: 625
+		BuildDurationModifier: 100
+	Health:
+		HP: 60000
+	Armor:
+		Type: Steel
+	RevealsShroud:
+		Range: 8c0
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: 灵能控制塔
+	Tooltip@NoRow:
+		Name: 灵能控制塔
+	AttackTurreted:
+		PauseOnCondition: disabled || chronodisable
+		RequiresCondition: !build-incomplete
+	Turreted:
+		TurnSpeed: 1023
+	WithIdleOverlay@top:
+		Sequence: idle-top
+		PauseOnCondition: disabled || chronodisable
+		RequiresCondition: !build-incomplete
+	Power:
+		Amount: -100
+		RequiresCondition: !chronodisable
+	Armament:
+		Weapon: TowerMindControl
+		MuzzleSequence: muzzle
+		LocalOffset: 0,0,960
+	WithMuzzleOverlay:
+	MindController:
+		Capacity: 3
+		ControllingCondition: controlling
+		Sounds: iyurat1a.wav
+		RequiresCondition: !disabled && !chronodisable
+	WithMindControllerPipsDecoration:
+		FullSequence: pip-building-green
+		EmptySequence: pip-building-empty
+		Palette: ra
+		Margin: 8, 2
+		PipStride: 4, 2
+		Position: BottomLeft
+		RequiresSelection: true
+	WithMindControlArc:
+		UsePlayerColor: true
+		Offset: 0,0,960
+	AutoTarget:
+	AutoTargetPriority@DEFAULT:
+		ValidTargets: MindControl
+		RequiresCondition: controlling < 3
+	GrantCondition@IDISABLE:
+		RequiresCondition: lowpower || powerdown || emp || diskdrain
+	IsometricSelectable:
+		Class: yapsyt
+		DecorationHeight: 120
+	DetectCloaked:
+		Range: 6c0
+		RequiresCondition: !disabled
+	RenderDetectionCircle:
+	WithIdleOverlay@waves:
+		Sequence: idle-waves
+		RequiresCondition: in_water
+	Voiced:
+		VoiceSet: PsychicTowerVoice
+		Volume: 0.8
+
+yasgen:
+	Inherits: ^SupportBuilding
+	Inherits@DRAIN: ^DiskDrainable
+	Inherits@EMPULSE: ^DisabledByEMP
+	Inherits@LOWPOWER: ^DisableOnLowPowerOrPowerDown
+	Inherits@MC: ^MindControllableBuilding
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: 隐形力场发生器
+	Tooltip@NoRow:
+		Name: 隐形力场发生器
+	Buildable:
+		Queue: Support.Yuri, Support.Antarctica
+		BuildPaletteOrder: 80
+		Prerequisites: yatech, ~techlevel.3
+		Description: 周围的友方单位与建筑在停火时隐形\n需要电力供应\n自身不能隐形
+		BuildDuration: 250
+		BuildDurationModifier: 100
+	Building:
+		TerrainTypes: Clear, Rough, Road, DirtRoad
+	Health:
+		HP: 60000
+	Armor:
+		Type: Steel
+	RevealsShroud:
+		Range: 6c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Types: SatelliteScan
+	#	Range: 6c0
+	Capturable:
+		Types: building
+		RequiresCondition: !build-incomplete && !invulnerability && !forceshield
+	CaptureNotification:
+	ProximityExternalCondition@INVISIBILITY-GENERATOR:
+		Condition: invisibility-generator
+		Range: 9c0
+		RequiresCondition: !disabled
+	WithRangeCircle:
+		Range: 9c0
+		Type: invisibility
+		RequiresCondition: !disabled
+	Targetable:
+		TargetTypes: Ground, C4, DetonateAttack, Structure, NonGarrisonableStructure
+	WithSpriteBody:
+		PauseOnCondition: disabled || chronodisable
+	GrantCondition@IDISABLE:
+		RequiresCondition: lowpower || powerdown || emp || diskdrain
+	Power:
+		Amount: -100
+		RequiresCondition: !chronodisable
+	MustBeDestroyed:
+		RequiredForShortGame: false
+	-Cloak@stealth-generator:
+	-ExternalCondition@INVISIBILITY-GENERATOR:
+	GpsDotAS:
+		Sequence: Structure
+	IsometricSelectable:
+		DecorationHeight: 60
+	Voiced:
+		VoiceSet: StealthGeneratorVoice
+		Volume: 0.8
+
+yagntc:
+	Inherits: ^SecondarySuperWeapon
+	Buildable:
+		Queue: Support.Yuri, Support.Antarctica
+		Prerequisites: yatech, !enoughlazarus, ~techlevel.5
+		Description: 绝地护盾的产生原理在于彻底扭曲光影\n\n需要电力供应\n必定会被揭示给敌对玩家\n\n·提供 超级武器：绝地护盾
+	Tooltip:
+		Name: 绝地护盾产生器
+	Tooltip@NoRow:
+		Name: 绝地护盾产生器
+	GrantExternalConditionPower@LAZARUSSHIELD:
+		Icons:
+			1: invis
+		Prerequisites:
+			1: yagntc
+		# Cursor: iron-curtain
+		ChargeInterval: 6000
+		Descriptions:
+			1: 绝地护盾
+		LongDescs:
+			1: 使友方3x3范围内任意载具或舰艇停火时永久隐形\n\n立刻杀死范围内的步兵
+		AllowMultiple: true
+		Durations:
+			1: -1
+		Conditions:
+			1: invisibility
+		Dimensions:
+			1: 3,3
+		Footprints:
+			1: xxx xxx xxx
+		ValidRelationships: Ally, Neutral, Enemy
+		SelectTargetSpeechNotification: SelectTarget
+		EndChargeSpeechNotification: GeneticMutatorReady # LazarusShieldReady
+		LaunchSpeechNotification: GeneticMutatorActivated # LazarusShieldActivated
+		IncomingSpeechNotification: GeneticMutatorActivated # LazarusShieldActivated
+		EndChargeSound: sgenopen.wav
+		OnFireSound: slazarus.wav
+		EffectImage: explosion
+		EffectSequence: spherewave
+		EffectPalette: jascpurplealpha
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		DisplayRadarPing: True
+		PauseOnCondition: disabled || chronodisable
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: enoughlazarus
+	NotificationAnnouncement:
+		Notification: GeneticMutatorDetected # LazarusShieldDetected
+	WithIdleOverlay@top:
+		Sequence: idle-top
+		PauseOnCondition: chronodisable
+		RequiresCondition: !build-incomplete
+	IsometricSelectable:
+		DecorationHeight: 120
+	Voiced:
+		VoiceSet: LazarusGeneratorVoice
+		Volume: 0.8
+
+yappet:
+	Inherits: ^PrimarySuperWeapon
+	Buildable:
+		Queue: Support.Yuri, Support.Antarctica
+		Prerequisites: yatech, !enoughdominator, ~techlevel.5
+		Description: 收集并积攒灵能的设备\n\n需要电力供应\n必定会被揭示给敌对玩家\n\n·提供 超级武器：灵能爆发
+	Tooltip:
+		Name: 灵能汇集器
+	Tooltip@NoRow:
+		Name: 灵能汇集器
+	DetonateWeaponPower:
+		OrderName: PsiPsychicDomination
+		PauseOnCondition: disabled || chronodisable
+		CameraRange: 8c0
+		CameraRemoveDelay: 100
+		SpawnCameraAtGround: true
+		Prerequisites:
+			1: yappet
+		Icons:
+			1: domination
+		ChargeInterval: 9000
+		Descriptions:
+			1: 灵能爆发
+		LongDescs:
+			1: 释放灵能对大范围内的一切建筑造成重大破坏，对选定3x3范围内的单位进行永久灵能控制\n可以使友方单位永久免疫灵能控制（但灵能爆发仍会损伤友方建筑）
+		SelectTargetSpeechNotification: SelectTarget
+		EndChargeSpeechNotification: PsychicDominatorReady
+		# LaunchSpeechNotification: PsychicDominatorActivated
+		# IncomingSpeechNotification: PsychicDominatorActivated # doesn't exist
+		EndChargeSound: spsyopen.wav
+		Weapons:
+			1: PsychicDomination
+		ActivationSequence:
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		DisplayRadarPing: True
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: enoughdominator
+	NotificationAnnouncement:
+		Notification: PsychicDominatorDetected
+	IsometricSelectable:
+		DecorationHeight: 120
+	Voiced:
+		VoiceSet: PsychicDominatorVoice
+		Volume: 0.8
+
+yacomd:
+	Inherits: ^CivBuilding
+	Inherits@SHAPE: ^4x4Shape
+	Tooltip:
+		Name: 军团核心指挥所
+	Tooltip@NoRow:
+		Name: 军团核心指挥所
+	Armor:
+		Type: Concrete
+	RevealsShroud:
+		Range: 8c0
+	Health:
+		HP: 100000
+	Building:
+		Dimensions: 4,4
+		Footprint: xxxx xxxx xxxx xxxx
+	SpawnActorOnDeath:
+		Actor: yacomd.rubble
+	IsometricSelectable:
+		DecorationHeight: 180
+
+yacomd.rubble:
+	Inherits: ^Rubble
+	Building:
+		Dimensions: 4,4
+		Footprint: ____ ____ ____ ____
+	RenderSprites:
+		Image: yacomd
+
+yapppt:
+	Inherits: ^CivBuilding
+	Inherits@SHAPE: ^3x3Shape
+	Tooltip:
+		Name: 灵能汇集器
+	Tooltip@NoRow:
+		Name: 灵能汇集器
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 6c0
+	Health:
+		HP: 100000
+	Building:
+		Dimensions: 3,3
+		Footprint: xxx xxx xxx
+	IsometricSelectable:
+		DecorationHeight: 75
+
+yarock:
+	Inherits: ^CivBuilding
+	Inherits@SHAPE: ^3x3Shape
+	Tooltip:
+		Name: 航天火箭发射台
+	Tooltip@NoRow:
+		Name: 航天火箭发射台
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 6c0
+	Health:
+		HP: 70000
+	Building:
+		Dimensions: 3,3
+		Footprint: xxx xxx xxx
+	IsometricSelectable:
+		DecorationHeight: 120
+
+caeast02:
+	Inherits: ^CivBuilding
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@CAPACITORS: ^AffectedByLaserCapacitors
+	Inherits@DRAIN: ^DiskDrainable
+	Inherits@EMPULSE: ^DisabledByEMP
+	Inherits@LOWPOWER: ^DisableOnLowPowerOrPowerDown
+	Inherits@MC: ^MindControllableBuilding
+	Inherits@SHAPE: ^2x2Shape
+	Tooltip:
+		Name: 巨型尤里雕塑
+	Tooltip@NoRow:
+		Name: 巨型尤里雕塑
+	Armor:
+		Type: Steel
+	Health:
+		HP: 300000
+	Building:
+		Dimensions: 2,2
+		Footprint: xx xx
+		TerrainTypes: Clear, Rough, Road, DirtRoad
+	Armament:
+		Weapon: LaserShot
+		LocalOffset: 512,-256,1024, 512,256,1024
+		RequiresCondition: !capacitors
+	Armament@CAPACITORS:
+		Weapon: LaserShotUpg
+		LocalOffset: 512,-256,1024, 512,256,1024
+		RequiresCondition: capacitors
+	AttackTurreted:
+		PauseOnCondition: disabled || chronodisable
+	Turreted:
+		TurnSpeed: 12
+		Offset: 0,0,3096
+		InitialFacing: 640
+		RealignDelay: -1
+	GrantCondition@IDISABLE:
+		RequiresCondition: lowpower || powerdown || emp || diskdrain
+	GrantConditionOnDamageState@DAMAGED:
+		Condition: damaged
+		ValidDamageStates: Heavy, Critical
+	WithVoxelTurret:
+		RequiresCondition: !damaged
+	WithVoxelTurret@damaged:
+		Sequence: turret-damaged
+		RequiresCondition: damaged
+	RenderVoxels:
+		Image: cahead
+		Scale: 1.17
+		LightYaw: 800
+		LightPitch: 150
+		LightAmbientColor: -0.5,-0.5,-0.5
+		LightDiffuseColor: 1.3,1.3,1.3
+	Power:
+		Amount: -100
+		RequiresCondition: !chronodisable
+	SpawnActorOnDeath:
+		Actor: caeast02.rubble
+	IsometricSelectable:
+		DecorationHeight: 135
+	Voiced:
+		VoiceSet: YuriStatueVoice
+		Volume: 0.8
+
+caeast02.rubble:
+	Inherits: ^Rubble
+	Building:
+		Dimensions: 2,2
+		Footprint: __ __
+	RenderSprites:
+		Image: caeast02
+
+yaeast02:
+	Inherits: ^VoxelLighting
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@CAPACITORS: ^AffectedByLaserCapacitors
+	Inherits@DRAIN: ^DiskDrainable
+	Inherits@LOWPOWER: ^DisableOnLowPowerOrPowerDown
+	Inherits@EMPULSE: ^DisabledByEMP
+	Inherits@MC: ^MindControllableBuilding
+	Inherits@SHAPE: ^2x2Shape
+	Buildable:
+		Queue: Support.Antarctica
+		BuildPaletteOrder: 70
+		Prerequisites: yadome, ~techlevel.2
+		Description: 先进大型激光防御设施\n\n侦测隐形\n\n·强势对抗：地面单位\n·弱势对抗：飞行器
+		BuildDuration: 1000
+		BuildDurationModifier: 100
+	Health:
+		HP: 110000
+	Armor:
+		Type: Steel
+	RevealsShroud:
+		Range: 8c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Types: SatelliteScan
+	#	Range: 8c0
+	Building:
+		Dimensions: 2,2
+		Footprint: xx xx
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: 巨型尤里雕塑
+	Tooltip@NoRow:
+		Name: 巨型尤里雕塑
+	Turreted:
+		TurnSpeed: 12
+		Offset: 0,0,3096
+		InitialFacing: 640
+		RealignDelay: -1
+	AttackTurreted:
+		PauseOnCondition: disabled || chronodisable
+	Armament:
+		Weapon: LaserShot
+		LocalOffset: 512,-256,1024, 512,256,1024
+		RequiresCondition: !capacitors
+	Armament@CAPACITORS:
+		Weapon: LaserShotUpg
+		LocalOffset: 512,-256,1024, 512,256,1024
+		RequiresCondition: capacitors
+	RenderVoxels:
+		Image: cahead
+		Scale: 1.17
+	RenderSprites:
+		Image: caeast02
+	-WithMakeAnimation:
+	GrantConditionOnDamageState@DAMAGED:
+		Condition: damaged
+		ValidDamageStates: Heavy, Critical
+	WithVoxelTurret:
+		RequiresCondition: !damaged
+	WithVoxelTurret@damaged:
+		Sequence: turret-damaged
+		RequiresCondition: damaged
+	GrantCondition@IDISABLE:
+		RequiresCondition: lowpower || powerdown || emp || diskdrain
+	WithRangeCircle:
+		Range: 9c0
+		Type: yuristatue
+	Sellable:
+		RequiresCondition: !chronodisable
+	Power:
+		Amount: -100
+		RequiresCondition: !chronodisable
+	IsometricSelectable:
+		DecorationHeight: 135
+	DetectCloaked:
+		Range: 5c0
+		RequiresCondition: !disabled
+	RenderDetectionCircle:
+	Voiced:
+		VoiceSet: YuriStatueVoice
+		Volume: 0.8
+
+# Custom Structures
+yagatea:
+	Inherits: ^Gate_A
+	Buildable:
+		Queue: Support.Yuri, Support.Antarctica
+		Prerequisites: ~techlevel.1
+		BuildPaletteOrder: 20
+		BuildDuration: 125
+		BuildDurationModifier: 100
+	Tooltip:
+		Name: 要塞城门
+	Tooltip@NoRow:
+		Name: 要塞城门
+	LineBuildNode:
+		Types: yawall
+	WithGateSpriteBody:
+		Type: yawall
+	Replacement:
+		ReplaceableTypes: YuriGate
+	PlaceBuildingVariants:
+		Actors: yagateb
+
+yagateb:
+	Inherits: ^Gate_B
+	-Buildable:
+	Tooltip:
+		Name: 要塞城门
+	Tooltip@NoRow:
+		Name: 要塞城门
+	LineBuildNode:
+		Types: yawall
+	WithGateSpriteBody:
+		Type: yawall
+	Replacement:
+		ReplaceableTypes: YuriGate
+
+yasilo:
+	Inherits: ^Silo
+	Buildable:
+		Queue: Support.Yuri, Support.Antarctica
+
+yaexpn:
+	Inherits: ^ExpansionNode
+	# Transforms:
+	#	IntoActor: expy
+	RenderSprites:
+		Image: gaexpn
+	Voiced:
+		VoiceSet: YuriExpansionNodeVoice
+
+yabrcb:
+	Inherits: yabrck
+	Inherits@SHAPE: ^3x2Shape
+	-Buildable:
+	-PlaceBuildingVariants:
+	Building:
+		Footprint: xxx xxx
+		Dimensions: 3,2
+	RallyPoint:
+		Path: 1,2
+	Exit@1:
+		SpawnOffset: -724,362,0
+		ExitCell: 2,2
+		Priority: 2
+	Exit@2:
+		SpawnOffset: -724,362,0
+		ExitCell: 1,2
+		Priority: 2
+	Exit@fallback1:
+		SpawnOffset: -724,362,0
+		ExitCell: 0,2
+	Exit@fallback2:
+		SpawnOffset: 384,768,0
+		ExitCell: 3,1
+	Exit@fallback3:
+		SpawnOffset: 1086,362,0
+		ExitCell: 3,0
+	Exit@fallback4:
+		SpawnOffset: 1086,362,0
+		ExitCell: 3,-1
+	Exit@fallback5:
+		SpawnOffset: 1086,362,0
+		ExitCell: 2,-1
+	Exit@fallback6:
+		SpawnOffset: 362,-362,0
+		ExitCell: 1,-1
+	Exit@fallback7:
+		SpawnOffset: -362,-1086,0
+		ExitCell: 0,-1
+	Exit@fallback8:
+		SpawnOffset: -362,-1086,0
+		ExitCell: -1,-1
+	Exit@fallback9:
+		SpawnOffset: -362,-1086,0
+		ExitCell: -1,0
+	Exit@fallback10:
+		SpawnOffset: -1086,-362,0
+		ExitCell: -1,1
+	Exit@fallback11:
+		SpawnOffset: -1086,-362,0
+		ExitCell: -1,2
+	Exit@fallback12:
+		SpawnOffset: 362,1086,0
+		ExitCell: 3,2
+
+yarfnb:
+	Inherits: ^RefineryB
+	FreeActor:
+		Actor: gmin
+	-WithDockedOverlay:
+	ProvidesPrerequisite@yarfn2:
+		Prerequisite: yarfn2
+	ProvidesPrerequisite@psirefn:
+		Prerequisite: psirefn
+	SmokeParticleEmitter@refinerysmoke1:
+		Offset: 416,-416,3648
+	SmokeParticleEmitter@refinerysmoke2:
+		Offset: 960,-960,3648
+	IsometricSelectable:
+		DecorationHeight: 105
+
+yarfnc:
+	Inherits: ^RefineryC
+	FreeActor:
+		Actor: gmin
+	ProvidesPrerequisite@yarfn2:
+		Prerequisite: yarfn2
+	ProvidesPrerequisite@psirefn:
+		Prerequisite: psirefn
+	SmokeParticleEmitter@refinerysmoke1:
+		Offset: 416,416,3648
+	SmokeParticleEmitter@refinerysmoke2:
+		Offset: 960,960,3648
+	IsometricSelectable:
+		DecorationHeight: 105
+
+yarfnd:
+	Inherits: ^RefineryD
+	FreeActor:
+		Actor: gmin
+	ProvidesPrerequisite@yarfn2:
+		Prerequisite: yarfn2
+	ProvidesPrerequisite@psirefn:
+		Prerequisite: psirefn
+	SmokeParticleEmitter@refinerysmoke1:
+		Offset: -416,416,3648
+	SmokeParticleEmitter@refinerysmoke2:
+		Offset: -960,960,3648
+	IsometricSelectable:
+		DecorationHeight: 105
+
+yaweab:
+	Inherits: yaweap
+	Inherits@SHAPE: ^FlippedFactoryXShape
+	-Buildable:
+	-PlaceBuildingVariants:
+	Building:
+		Footprint: xxx xxx xxx xxx ===
+		Dimensions: 3,5
+	RallyPoint:
+		Path: 1,6
+	Exit@1:
+		ExitCell: 1,4
+
+yaweac:
+	Inherits: yaweap
+	Inherits@SHAPE: ^FlippedFactoryShape
+	-Buildable:
+	-PlaceBuildingVariants:
+	-WithExitOverlay@front:
+	-WithExitOverlay@top:
+	-WithIdleOverlay@lights:
+	Building:
+		Footprint: =xxxx =xxxx =xxxx
+	RallyPoint:
+		Path: -2,1
+	Exit@1:
+		ExitCell: 0,1
+
+yawead:
+	Inherits: yaweab
+	Inherits@SHAPE: ^FlippedFactoryYShape
+	-WithExitOverlay@front:
+	-WithExitOverlay@top:
+	-WithIdleOverlay@lights:
+	Building:
+		Footprint: === xxx xxx xxx xxx
+	RallyPoint:
+		Path: 1,-2
+	Exit@1:
+		ExitCell: 1,0
+
+yadepb:
+	Inherits: yadept
+	Inherits@SHAPE: ^3x4Shape
+	HitShape:
+		TargetableOffsets: 0,0,0, 360,360,0, -360,-360,0, -1080,-1080,0, -360,-1800,0, -1800,-360,0, 360,-1080,0, -360,1080,0, -1080,360,0, 1080,-360,0
+	-Buildable:
+	-PlaceBuildingVariants:
+	Building:
+		Footprint: xxx +++ +++ +++
+		Dimensions: 3,4
+	RallyPoint:
+		Path: 1,4
+
+yatecb:
+	Inherits: yatech
+	Inherits@SHAPE: ^2x3Shape
+	-Buildable:
+	-PlaceBuildingVariants:
+	Building:
+		Footprint: xx xx xx
+		Dimensions: 2,3
+
+psirefn:
+	AlwaysVisible:
+	Interactable:
+	Tooltip:
+		Name: 矿石精炼厂

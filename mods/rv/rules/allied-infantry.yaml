@@ -1,0 +1,1713 @@
+engineer:
+	Inherits: ^Infantry
+	Inherits@CHAOS: ^Berserkable
+	Inherits@MC: ^MindControllable
+	Inherits@VOICES: ^WithFeedbackVoicelines
+	Buildable:
+		Queue: Infantry.Allies, Infantry.USA, Infantry.UK, Infantry.Soviets, Infantry.Cuba, Infantry.Iraq, Infantry.Vietnam, Infantry.Yuri, Infantry.Moon, Infantry.Baku, Infantry.Tuva
+		Prerequisites: ~barracks, ~techlevel.1
+		BuildPaletteOrder: 30
+		Description: 功能型步兵\n\n占领中立或敌方建筑\n修复友方建筑\n\n·无武装\n\n·特殊能力：拆除定时炸弹
+		BuildDuration: 250
+		BuildDurationModifier: 100
+	Valued:
+		Cost: 500
+	DeliversCash:
+		Payload: 250
+		Voice: Move
+	Tooltip:
+		Name: 工程师
+	Tooltip@NoRow:
+		Name: 工程师
+	Selectable:
+		Bounds: 482, 1448, 0, -530
+	Health:
+		HP: 7500
+	Garrisoner:
+		Voice: Move
+		CustomPipType: yellow
+		GarrisonType: Garrisoner
+	Passenger:
+		CustomPipType: yellow
+	RevealsShroud:
+		Range: 5c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Range: 5c0
+	RevealOnDeath:
+		Radius: 2c512
+	EngineerRepair:
+		Types: building
+		RepairSound: urepair.wav
+	EngineerRepair@CIV:
+		Types: civilian
+		RepairSound: urepair.wav
+		ValidRelationships: Ally, Neutral
+	RepairsBridges:
+		RepairNotification: BridgeRepaired
+	Captures@INSTANT:
+		CaptureTypes: building, tech, husk
+		RequiresCondition: instantcapture
+	Captures@TIMED:
+		CaptureDelay: 75
+		CaptureTypes: building, husk
+		RequiresCondition: !instantcapture
+	Captures@TECH:
+		CaptureTypes: tech
+		CaptureDelay: 250
+		RequiresCondition: !instantcapture
+	GrantConditionOnPrerequisite@INSTANTCAPTURE:
+		Condition: instantcapture
+		Prerequisites: global-instantcapture
+	Armament:
+		Weapon: DefuseKit
+		Cursor: remove-bomb
+		OutsideRangeCursor: remove-bomb
+		TargetRelationships: Ally
+		ForceTargetRelationships: None
+		PauseOnCondition: chronodisable
+	AttackFrontal:
+		Voice: Action
+		FacingTolerance: 2
+	Voiced:
+		VoiceSet: EngineerVoice
+	Guard:
+		Voice: Action
+	AttackMove:
+		Voice: Action
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+	CaptureManager:
+	RenderSprites:
+		Image: engineer
+		FactionImages:
+			soviet: sengineer
+			cuba: sengineer
+			libya: sengineer
+			iraq: sengineer
+			russia: sengineer
+			vietnam: sengineer
+			chile: sengineer
+			mexico: sengineer
+			mongolia: sengineer
+			psicorps: yengineer
+			psinepal: yengineer
+			psisouth: yengineer
+			psitrans: yengineer
+			psimoon: yengineer
+			transcaucus: sengineer
+			turkmen: sengineer
+			tuva: sengineer
+			russianfed: sengineer
+			serbia: sengineer
+
+dog:
+	Inherits: ^Infantry
+	Inherits@2: ^Parachutable
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@VOICES: ^WithFeedbackVoicelines
+	Buildable:
+		Queue: Infantry.Allies, Infantry.USA, Infantry.UK, Infantry.Soviets, Infantry.Cuba, Infantry.Iraq, Infantry.Vietnam, Infantry.Yuri, Infantry.Moon, Infantry.Baku, Infantry.Tuva
+		Prerequisites: ~barracks, ~techlevel.1
+		BuildPaletteOrder: 40
+		Description: 反步兵军犬\n\n·强势对抗：步兵\n·弱势对抗：载具、飞行器、建筑\n\n·特殊能力：侦测隐形\n·特殊能力：侦测伪装
+		BuildDuration: 50
+		BuildDurationModifier: 100
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Valued:
+		Cost: 200
+	DeliversCash:
+		Payload: 100
+		Voice: Move
+	Tooltip:
+		Name: 军犬
+		GenericName: 狗
+		RequiresCondition: !allies && !soviet && !psicorps && showownername
+	Tooltip@NoRow:
+		Name: 军犬
+		GenericName: 狗
+		RequiresCondition: !allies && !soviet && !psicorps && !showownername
+	Tooltip@Allies:
+		Name: 德国牧羊犬
+		GenericName: 德牧
+		RequiresCondition: allies && showownername
+	Tooltip@Allies-NoRow:
+		Name: 德国牧羊犬
+		GenericName: 德牧
+		ShowOwnerRow: false
+		RequiresCondition: allies && !showownername
+	Tooltip@Soviet:
+		Name: 西伯利亚哈士奇
+		GenericName: 哈士奇
+		RequiresCondition: soviet && showownername
+	Tooltip@Soviet-NoRow:
+		Name: 西伯利亚哈士奇
+		GenericName: 哈士奇
+		ShowOwnerRow: false
+		RequiresCondition: soviet && !showownername
+	Tooltip@PsiCorps:
+		Name: 罗威纳犬
+		GenericName: 罗威纳
+		RequiresCondition: psicorps && showownername
+	Tooltip@PsiCorps-NoRow:
+		Name: 罗威纳犬
+		GenericName: 罗威纳
+		ShowOwnerRow: false
+		RequiresCondition: psicorps && !showownername
+	GrantConditionOnFaction@Allies:
+		Condition: allies
+		Factions: america, germany, england, france, korea, japan, belarus, poland, ukraine, aussie, china, turkey, canada
+	GrantConditionOnFaction@Soviet:
+		Condition: soviet
+		Factions: cuba, libya, iraq, russia, vietnam, chile, mexico, mongolia, transcaucus, turkmen, tuva, russianfed, serbia
+	GrantConditionOnFaction@PsiCorps:
+		Condition: psicorps
+		Factions: psicorps, psinepal, psisouth, psitrans, psimoon
+	Selectable:
+		Bounds: 724, 1158, 0, -241
+	Health:
+		HP: 9000
+	Mobile:
+		Speed: 105
+	Passenger:
+		CargoType: Infantry
+	RevealsShroud:
+		Range: 8c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Range: 8c0
+	RevealOnDeath:
+		Radius: 4c0
+	Armament:
+		Weapon: DogJaw
+	AttackLeap:
+		Voice: Attack
+		Speed: 105
+		PauseOnCondition: chronodisable || webdisable
+	AttackMove:
+		Voice: Move
+	AutoTarget:
+		ScanRadius: 5
+		InitialStance: AttackAnything
+	AutoTargetPriority@DEFAULT:
+		ValidTargets: Infantry
+	WithInfantryBody:
+		DefaultAttackSequence: jump
+		RequiresCondition: !parachute && !webdisable && !attacking
+	WithFacingSpriteBody:
+		Sequence: shoot
+		RequiresCondition: attacking
+	RenderSprites:
+		Image: adog
+		FactionImages:
+			soviet: dog
+			cuba: dog
+			libya: dog
+			iraq: dog
+			russia: dog
+			vietnam: dog
+			chile: dog
+			mexico: dog
+			mongolia: dog
+			psicorps: bdog
+			psinepal: bdog
+			psisouth: bdog
+			psitrans: bdog
+			psimoon: bdog
+			transcaucus: dog
+			serbia: dog
+			turkmen: dog
+			tuva: dog
+			russianfed: dog
+	IgnoresDisguise:
+	DetectCloaked:
+		Range: 5c0
+	Voiced:
+		VoiceSet: DogVoice
+	ProducibleWithLevel:
+		Prerequisites: barracks.infiltrated
+	-TakeCover:
+	-SpawnActorOnDeath@brute:
+	-SpawnActorOnDeath@flames:
+	-SpawnSmokeParticleOnDeath@virus:
+	-Explodes@Corpse:
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	WithDeathAnimation@normal:
+		DeathTypes:
+			ExplosionDeath: 1
+			BulletDeath: 2
+			FlameDeath: 1
+			RadiationDeath: 1
+			PsychicDeath: 1
+			ElectroDeath: 2
+			VirusDeath: 2
+			BruteDeath: 1
+	-WithDeathAnimation@effect:
+	DeathSounds@normal:
+		DeathTypes: ExplosionDeath, BulletDeath, RadiationDeath, PsychicDeath, ElectroDeath, FlameDeath, VirusDeath, BruteDeath
+	-DeathSounds@zapped:
+	-DeathSounds@radiation:
+	-DeathSounds@psycrush:
+	-DeathSounds@virus:
+
+e1:
+	Inherits@1: ^Infantry
+	Inherits@2: ^Parachutable
+	Inherits@ADVTRAINING: ^AffectedByAdvancedTraining
+	Inherits@AI: ^AIMicroManagable
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@ENDURANCE: ^AffectedByEnduranceTraining
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@CHAOS: ^Berserkable
+	Inherits@MC: ^MindControllable
+	Inherits@VOICES: ^WithFeedbackVoicelines
+	Buildable:
+		Queue: Infantry.Allies, Infantry.USA, Infantry.UK
+		Prerequisites: ~techlevel.1
+		BuildPaletteOrder: 10
+		Description: 泛用型步兵\n\n部署后射程更远且伤害更高但无法移动且无法匍匐\n\n·强势对抗：步兵\n·弱势对抗：载具、飞行器\n\n·特殊能力：切换模式（部署）
+		BuildDuration: 100
+		BuildDurationModifier: 100
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Valued:
+		Cost: 150
+	DeliversCash:
+		Payload: 75
+		Voice: Move
+	Tooltip:
+		Name: 盟军步兵
+	Tooltip@NoRow:
+		Name: 盟军步兵
+	Selectable:
+		Bounds: 482, 1448, 0, -530
+	Health:
+		HP: 12500
+	Mobile:
+		Speed: 60
+		RequireForceMoveCondition: !undeployed
+	Garrisoner:
+		Voice: Move
+		GarrisonType: Garrisoner
+	Passenger:
+		RequireForceMoveCondition: !undeployed
+	RevealsShroud:
+		Range: 6c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Range: 6c0
+	RevealOnDeath:
+		Radius: 3c0
+	Armament@primary:
+		Weapon: M60
+		PauseOnCondition: chronodisable
+		RequiresCondition: !rank-elite && !deployed
+	Armament@elite:
+		Weapon: M60E
+		PauseOnCondition: chronodisable
+		RequiresCondition: rank-elite && !deployed
+	Armament@deployed:
+		Weapon: para
+		Name: deployed
+		Turret: deploy
+		PauseOnCondition: chronodisable
+		RequiresCondition: !rank-elite && deployed
+	Armament@elite-deployed:
+		Weapon: paraE
+		Name: deployed
+		Turret: deploy
+		PauseOnCondition: chronodisable
+		RequiresCondition: rank-elite && deployed
+	Armament@opentopped:
+		Name: opentopped
+		Weapon: para
+		PauseOnCondition: chronodisable
+		RequiresCondition: !rank-elite
+	Armament@elite-opentopped:
+		Name: opentopped
+		Weapon: paraE
+		PauseOnCondition: chronodisable
+		RequiresCondition: rank-elite
+	Armament@garrisoned:
+		Weapon: UCpara
+		Name: garrisoned
+		PauseOnCondition: chronodisable
+		RequiresCondition: !rank-elite
+	Armament@elite-garrisoned:
+		Weapon: UCparaE
+		Name: garrisoned
+		PauseOnCondition: chronodisable
+		RequiresCondition: rank-elite
+	GrantConditionOnDeploy:
+		DeployedCondition: deployed
+		UndeployedCondition: undeployed
+		CanDeployOnRamps: True
+		SmartDeploy: True
+		Facing: 384
+		Voice: Deploy
+		UndeployOnMove: true
+		DeploySounds: igidepa.wav
+		UndeploySounds: igidepb.wav
+		PauseOnCondition: chronodisable
+		RequiresCondition: !parachute && !webdisable
+	GrantCondition:
+		Condition: editorhack
+	WithInfantryBody@Editor: # HACK: negative conditions don't count in EnabledByDefault, we can use this duplicate WIB to render it on map editor
+		DefaultAttackSequence: shoot
+		RequiresCondition: !editorhack
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+		RequiresCondition: undeployed && !parachute && !webdisable
+	WithMakeAnimation:
+		Sequence: deploy
+		BodyNames: dot
+	Turreted:
+		Turret: deploy
+		RealignDelay: -1
+		TurnSpeed: 1023
+		InitialFacing: 368
+	WithSpriteTurret@idle:
+		Turret: deploy
+		Sequence: deployed
+		RequiresCondition: deployed && !animate-turret && !parachute && !webdisable
+	WithSpriteTurret@animated:
+		Turret: deploy
+		Sequence: shoot-deployed
+		RequiresCondition: deployed && animate-turret && !parachute && !webdisable
+	WithSpriteBody:
+		Sequence: dot
+		Name: dot
+		RequiresCondition: !undeployed
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 2
+		RequiresCondition: undeployed
+	AttackTurreted@deployed:
+		Armaments: deployed
+		Turrets: deploy
+		Voice: Attack
+		RequiresCondition: deployed
+		OutsideRangeRequiresForceFire: True
+	GrantConditionOnAttack:
+		Condition: animate-turret
+		RevokeDelay: 10
+		ArmamentNames: deployed
+	RejectsOrders@deployment:
+		Reject: AttackMove, AssaultMove
+		RequiresCondition: !ai-control && deployed && !chaos
+	RejectsMoveToAttack:
+		RequiresCondition: !ai-control && deployed && !chaos
+	TakeCover:
+		RequiresCondition: undeployed
+	Voiced:
+		VoiceSet: GIVoice
+	ProducibleWithLevel:
+		Prerequisites: barracks.infiltrated
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	AutoDeployer@AI:
+		RequiresCondition: ai-control && !deployed
+		DeployTrigger: Attack
+		DeployChance: 100
+		DeployTicks: 5
+		UndeployTicks: 50
+
+ggi:
+	Inherits@1: ^Infantry
+	Inherits@2: ^Parachutable
+	Inherits@ADVTRAINING: ^AffectedByAdvancedTraining
+	Inherits@AI: ^AIMicroManagable
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@BOOSTGLIDING: ^AffectedByBoostGlidingSystems
+	Inherits@ENDURANCE: ^AffectedByEnduranceTraining
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@CHAOS: ^Berserkable
+	Inherits@MC: ^MindControllable
+	Inherits@VOICES: ^WithFeedbackVoicelines
+	AutoTargetPriority@DEFAULT:
+		RequiresCondition: !stance-attackanything && !assault-move && undeployed && !ai-control
+	AutoTargetPriority@ATTACKANYTHING:
+		RequiresCondition: (stance-attackanything || assault-move) && undeployed && !ai-control
+	AutoTargetPriority@AI:
+		RequiresCondition: ai-control && undeployed
+		ValidTargets: Infantry, Vehicle, TerrorDrone, Water, Underwater, Air, Structure, Defense
+		InvalidTargets: NoAutoTarget
+	AutoTargetPriority@DEFAULT_ALL:
+		RequiresCondition: (!stance-attackanything && !assault-move) && deployed
+		ValidTargets: Infantry, Vehicle, TerrorDrone, Water, Underwater, Air, Defense
+		InvalidTargets: NoAutoTarget, WaterStructure
+	AutoTargetPriority@ATTACKANYTHING_ALL:
+		RequiresCondition: (stance-attackanything || assault-move) && deployed
+		ValidTargets: Infantry, Vehicle, TerrorDrone, Water, Underwater, Air, Structure, Defense
+		InvalidTargets: NoAutoTarget
+	Buildable:
+		Queue: Infantry.Allies, Infantry.USA, Infantry.UK
+		Prerequisites: ~techlevel.1
+		BuildPaletteOrder: 20
+		Description: 重型反装甲防空步兵\n\n部署后变更武器且无法被一般载具碾压但无法移动且无法匍匐\n\n机枪模式：\n·强势对抗：步兵\n·弱势对抗：载具、飞行器\n\n守卫模式：\n·强势对抗：载具、飞行器\n·弱势对抗：步兵\n\n·特殊能力：切换模式（部署）
+		BuildDuration: 175
+		BuildDurationModifier: 100
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Valued:
+		Cost: 300
+	DeliversCash:
+		Payload: 150
+		Voice: Move
+	Tooltip:
+		Name: 重型步兵
+	Tooltip@NoRow:
+		Name: 重型步兵
+	Selectable:
+		Bounds: 482, 1448, 0, -530
+	Health:
+		HP: 10000
+	Mobile:
+		Speed: 60
+		RequireForceMoveCondition: !undeployed
+	Garrisoner:
+		Voice: Move
+		CustomPipType: blue
+		GarrisonType: Garrisoner
+	Passenger:
+		CustomPipType: blue
+		RequireForceMoveCondition: !undeployed
+	RevealsShroud:
+		Range: 6c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Range: 6c0
+	RevealOnDeath:
+		Radius: 3c0
+	Crushable:
+		RequiresCondition: !cheater-ai && !vengeful-ai && undeployed
+	Crushable@Cheater:
+		RequiresCondition: cheater-ai && undeployed
+	Crushable@Vengeful:
+		RequiresCondition: vengeful-ai && undeployed
+	Crushable@deployed:
+		WarnProbability: 0
+		CrushClasses: vehicle
+		CrushSound: igensqua.wav
+		RequiresCondition: !undeployed
+	Armament@primary:
+		Weapon: M60
+		PauseOnCondition: chronodisable
+		RequiresCondition: !rank-elite && !deployed
+	Armament@elite:
+		Weapon: M60E
+		PauseOnCondition: chronodisable
+		RequiresCondition: rank-elite && !deployed
+	Armament@deployed:
+		Weapon: MissileLauncher
+		Name: deployed
+		Turret: deploy
+		LocalOffset: 480,63,992
+		ReloadingCondition: reload-ground
+		PauseOnCondition: chronodisable || reload-air
+		RequiresCondition: !rank-elite && deployed && !boostgliding
+	Armament@elite-deployed:
+		Weapon: MissileLauncherE
+		Name: deployed
+		Turret: deploy
+		LocalOffset: 480,64,992
+		ReloadingCondition: reload-ground
+		PauseOnCondition: chronodisable || reload-air
+		RequiresCondition: rank-elite && deployed && !boostgliding
+	Armament@deployed-aa:
+		Weapon: MissileLauncherAA
+		Name: deployed
+		Turret: deploy
+		LocalOffset: 480,63,992
+		ReloadingCondition: reload-air
+		PauseOnCondition: chronodisable || reload-ground
+		RequiresCondition: !rank-elite && deployed && !boostgliding
+	Armament@elite-deployed-aa:
+		Weapon: MissileLauncherAAE
+		Name: deployed
+		Turret: deploy
+		LocalOffset: 480,64,992
+		ReloadingCondition: reload-air
+		PauseOnCondition: chronodisable || reload-ground
+		RequiresCondition: rank-elite && deployed && !boostgliding
+	Armament@deployed-boost:
+		Weapon: MissileLauncherBoosted
+		Name: deployed
+		Turret: deploy
+		LocalOffset: 480,63,992
+		ReloadingCondition: reload-ground
+		PauseOnCondition: chronodisable || reload-air
+		RequiresCondition: !rank-elite && deployed && boostgliding
+	Armament@elite-deployed-boost:
+		Weapon: MissileLauncherBoostedE
+		Name: deployed
+		Turret: deploy
+		LocalOffset: 480,64,992
+		ReloadingCondition: reload-ground
+		PauseOnCondition: chronodisable || reload-air
+		RequiresCondition: rank-elite && deployed && boostgliding
+	Armament@deployed-aa-boost:
+		Weapon: MissileLauncherAABoosted
+		Name: deployed
+		Turret: deploy
+		LocalOffset: 480,63,992
+		ReloadingCondition: reload-air
+		PauseOnCondition: chronodisable || reload-ground
+		RequiresCondition: !rank-elite && deployed && boostgliding
+	Armament@elite-deployed-aa-boost:
+		Weapon: MissileLauncherAABoostedE
+		Name: deployed
+		Turret: deploy
+		LocalOffset: 480,64,992
+		ReloadingCondition: reload-air
+		PauseOnCondition: chronodisable || reload-ground
+		RequiresCondition: rank-elite && deployed && boostgliding
+	Armament@opentopped:
+		Weapon: MissileLauncher
+		Name: opentopped
+		LocalOffset: 480,63,992
+		ReloadingCondition: reload-ground
+		PauseOnCondition: chronodisable || reload-air
+		RequiresCondition: !rank-elite && !boostgliding
+	Armament@elite-opentopped:
+		Weapon: MissileLauncherE
+		Name: opentopped
+		LocalOffset: 480,64,992
+		ReloadingCondition: reload-ground
+		PauseOnCondition: chronodisable || reload-air
+		RequiresCondition: rank-elite && !boostgliding
+	Armament@opentopped-aa:
+		Weapon: MissileLauncherAA
+		Name: opentopped
+		LocalOffset: 480,63,992
+		ReloadingCondition: reload-air
+		PauseOnCondition: chronodisable || reload-ground
+		RequiresCondition: !rank-elite && !boostgliding
+	Armament@elite-opentopped-aa:
+		Weapon: MissileLauncherAAE
+		Name: opentopped
+		LocalOffset: 480,64,992
+		ReloadingCondition: reload-air
+		PauseOnCondition: chronodisable || reload-ground
+		RequiresCondition: rank-elite && !boostgliding
+	Armament@opentopped-boost:
+		Weapon: MissileLauncherBoosted
+		Name: opentopped
+		LocalOffset: 480,63,992
+		ReloadingCondition: reload-ground
+		PauseOnCondition: chronodisable || reload-air
+		RequiresCondition: !rank-elite && boostgliding
+	Armament@elite-opentopped-boost:
+		Weapon: MissileLauncherBoostedE
+		Name: opentopped
+		LocalOffset: 480,64,992
+		ReloadingCondition: reload-ground
+		PauseOnCondition: chronodisable || reload-air
+		RequiresCondition: rank-elite && boostgliding
+	Armament@opentopped-aa-boost:
+		Weapon: MissileLauncherAABoosted
+		Name: opentopped
+		LocalOffset: 480,63,992
+		ReloadingCondition: reload-air
+		PauseOnCondition: chronodisable || reload-ground
+		RequiresCondition: !rank-elite && boostgliding
+	Armament@elite-opentopped-aa-boost:
+		Weapon: MissileLauncherAABoostedE
+		Name: opentopped
+		LocalOffset: 480,64,992
+		ReloadingCondition: reload-air
+		PauseOnCondition: chronodisable || reload-ground
+		RequiresCondition: rank-elite && boostgliding
+	Armament@garrisoned:
+		Name: garrisoned
+		Weapon: UCMissileLauncher
+		ReloadingCondition: reload-ground
+		PauseOnCondition: chronodisable || reload-air
+		RequiresCondition: !rank-elite && !boostgliding
+	Armament@elite-garrisoned:
+		Name: garrisoned
+		Weapon: UCMissileLauncherE
+		ReloadingCondition: reload-ground
+		PauseOnCondition: chronodisable || reload-air
+		RequiresCondition: rank-elite && !boostgliding
+	Armament@garrisoned-aa:
+		Name: garrisoned
+		Weapon: UCMissileLauncherAA
+		ReloadingCondition: reload-air
+		PauseOnCondition: chronodisable || reload-ground
+		RequiresCondition: !rank-elite && !boostgliding
+	Armament@elite-garrisoned-aa:
+		Name: garrisoned
+		Weapon: UCMissileLauncherAAE
+		ReloadingCondition: reload-air
+		PauseOnCondition: chronodisable || reload-ground
+		RequiresCondition: rank-elite && !boostgliding
+	Armament@garrisoned-boost:
+		Name: garrisoned
+		Weapon: UCMissileLauncherBoosted
+		ReloadingCondition: reload-ground
+		PauseOnCondition: chronodisable || reload-air
+		RequiresCondition: !rank-elite && boostgliding
+	Armament@elite-garrisoned-boost:
+		Name: garrisoned
+		Weapon: UCMissileLauncherBoostedE
+		ReloadingCondition: reload-ground
+		PauseOnCondition: chronodisable || reload-air
+		RequiresCondition: rank-elite && boostgliding
+	Armament@garrisoned-aa-boost:
+		Name: garrisoned
+		Weapon: UCMissileLauncherAABoosted
+		ReloadingCondition: reload-air
+		PauseOnCondition: chronodisable || reload-ground
+		RequiresCondition: !rank-elite && boostgliding
+	Armament@elite-garrisoned-aa-boost:
+		Name: garrisoned
+		Weapon: UCMissileLauncherAABoostedE
+		ReloadingCondition: reload-air
+		PauseOnCondition: chronodisable || reload-ground
+		RequiresCondition: rank-elite && boostgliding
+	Armament@AIDummyAiming: ## Hack: Make AI GGI deploy to attack air
+		PauseOnCondition: chronodisable
+		RequiresCondition: ai-control && !deployed
+		Weapon: AirDummyAim
+	GrantConditionOnDeploy:
+		DeployedCondition: deployed
+		UndeployedCondition: undeployed
+		CanDeployOnRamps: True
+		SmartDeploy: True
+		Facing: 384
+		Voice: Deploy
+		UndeployOnMove: true
+		DeploySounds: iggidepa.wav
+		UndeploySounds: iggidepa.wav
+		PauseOnCondition: chronodisable
+		RequiresCondition: !parachute && !webdisable
+	GrantCondition:
+		Condition: editorhack
+	WithInfantryBody@Editor: # HACK: negative conditions don't count in EnabledByDefault, we can use this duplicate WIB to render it on map editor
+		DefaultAttackSequence: shoot
+		RequiresCondition: !editorhack
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+		RequiresCondition: undeployed && !parachute && !webdisable
+	WithMakeAnimation:
+		Sequence: deploy
+		BodyNames: dot
+	Turreted:
+		Turret: deploy
+		RealignDelay: -1
+		TurnSpeed: 1023
+		InitialFacing: 368
+	WithSpriteTurret@idle:
+		Turret: deploy
+		Sequence: deployed
+		RequiresCondition: deployed && !animate-turret && !parachute && !webdisable
+	WithSpriteTurret@animated:
+		Turret: deploy
+		Sequence: shoot-deployed
+		RequiresCondition: deployed && animate-turret && !parachute && !webdisable
+	WithSpriteBody:
+		Sequence: dot
+		Name: dot
+		RequiresCondition: !undeployed
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 2
+		RequiresCondition: undeployed
+	AttackTurreted@deployed:
+		Armaments: deployed
+		Turrets: deploy
+		Voice: Attack
+		RequiresCondition: deployed
+		OutsideRangeRequiresForceFire: True
+	GrantConditionOnAttack:
+		Condition: animate-turret
+		RevokeDelay: 5
+		ArmamentNames: deployed
+	RejectsOrders@deployment:
+		Reject: AttackMove, AssaultMove
+		RequiresCondition: !ai-control && deployed && !chaos
+	RejectsMoveToAttack:
+		RequiresCondition: !ai-control && deployed && !chaos
+	TakeCover:
+		RequiresCondition: undeployed
+	Voiced:
+		VoiceSet: GGIVoice
+	ProducibleWithLevel:
+		Prerequisites: barracks.infiltrated
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	AutoDeployer@AI:
+		RequiresCondition: ai-control && !deployed
+		DeployChance: 100
+		DeployTrigger: Attack
+		DeployTicks: 5
+		UndeployTicks: 50
+
+snipe:
+	Inherits: ^Infantry
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@CHAOS: ^Berserkable
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@HIGHCALIBER: ^AffectedByHighCaliberRounds
+	Inherits@MC: ^MindControllable
+	Inherits@VOICES: ^WithFeedbackVoicelines
+	Valued:
+		Cost: 800
+	DeliversCash:
+		Payload: 400
+		Voice: Move
+	Tooltip:
+		Name: 狙击手
+	Tooltip@NoRow:
+		Name: 狙击手
+	Buildable:
+		Queue: Infantry.UK
+		BuildPaletteOrder: 100
+		Prerequisites: gaairc, ~techlevel.3
+		Description: 英国的长程反步兵特种部队\n\n·强势对抗：步兵\n·弱势对抗：载具、飞行器、建筑\n\n·特殊能力：清除驻军
+		BuildDuration: 375
+		BuildDurationModifier: 100
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Selectable:
+		Bounds: 482, 1448, 0, -530
+	Health:
+		HP: 7500
+	Garrisoner:
+		Voice: Move
+		CustomPipType: gray
+		GarrisonType: Garrisoner
+	Passenger:
+		CustomPipType: gray
+	RevealsShroud:
+		Range: 6c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Range: 6c0
+	RevealOnDeath:
+		Radius: 3c0
+	Armor:
+		Type: None
+	Armament@primary:
+		Weapon: awp
+		ReloadingCondition: reload-ap
+		PauseOnCondition: chronodisable || reload-at
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Weapon: AWPE
+		ReloadingCondition: reload-ap
+		PauseOnCondition: chronodisable || reload-at
+		RequiresCondition: rank-elite
+	Armament@secondary:
+		Weapon: awpat
+		ReloadingCondition: reload-at
+		PauseOnCondition: chronodisable || reload-ap
+		RequiresCondition: !rank-elite && highcaliber
+	Armament@secondary-elite:
+		Weapon: awpatE
+		ReloadingCondition: reload-at
+		PauseOnCondition: chronodisable || reload-ap
+		RequiresCondition: rank-elite && highcaliber
+	Armament@opentopped:
+		Name: opentopped
+		Weapon: awp
+		ReloadingCondition: reload-ap
+		PauseOnCondition: chronodisable || reload-at
+		RequiresCondition: !rank-elite
+	Armament@elite-opentopped:
+		Name: opentopped
+		Weapon: AWPE
+		ReloadingCondition: reload-ap
+		PauseOnCondition: chronodisable || reload-at
+		RequiresCondition: rank-elite
+	Armament@secondary-opentopped:
+		Name: opentopped
+		Weapon: awpat
+		ReloadingCondition: reload-at
+		PauseOnCondition: chronodisable || reload-ap
+		RequiresCondition: !rank-elite && highcaliber
+	Armament@secondary-elite-opentopped:
+		Name: opentopped
+		Weapon: awpatE
+		ReloadingCondition: reload-at
+		PauseOnCondition: chronodisable || reload-ap
+		RequiresCondition: rank-elite && highcaliber
+	Armament@garrisoned:
+		Name: garrisoned
+		Weapon: UCawp
+		ReloadingCondition: reload-ap
+		PauseOnCondition: chronodisable || reload-at
+		RequiresCondition: !rank-elite
+	Armament@elite-garrisoned:
+		Name: garrisoned
+		Weapon: UCAWPE
+		ReloadingCondition: reload-ap
+		PauseOnCondition: chronodisable || reload-at
+		RequiresCondition: rank-elite
+	Armament@secondary-garrisoned:
+		Name: garrisoned
+		Weapon: UCawpat
+		ReloadingCondition: reload-at
+		PauseOnCondition: chronodisable || reload-ap
+		RequiresCondition: !rank-elite && highcaliber
+	Armament@secondary-elite-garrisoned:
+		Name: garrisoned
+		Weapon: UCawpatE
+		ReloadingCondition: reload-at
+		PauseOnCondition: chronodisable || reload-ap
+		RequiresCondition: rank-elite && highcaliber
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 2
+		TargetFrozenActors: true
+	Voiced:
+		VoiceSet: SniperVoice
+	ProducibleWithLevel:
+		Prerequisites: barracks.infiltrated
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+
+spy:
+	Inherits: ^Infantry
+	Inherits@2: ^Parachutable
+	Inherits@VOICES: ^WithFeedbackVoicelines
+	Buildable:
+		Queue: Infantry.Allies, Infantry.USA, Infantry.UK
+		BuildPaletteOrder: 80
+		Prerequisites: gaairc, ~techlevel.3
+		Description: 渗透敌方建筑以获取资讯或策动破坏\n\n具体效果取决于所渗透的建筑种类\n\n·无武装\n\n·特殊能力：伪装
+		BuildDuration: 250
+		BuildDurationModifier: 100
+	Valued:
+		Cost: 500
+	DeliversCash:
+		Payload: 250
+		Voice: Move
+	-Tooltip:
+	-Tooltip@NoRow:
+	DisguiseTooltip:
+		Name: 间谍
+		GenericName: Soldier
+		RequiresCondition: showownername
+	DisguiseTooltip@NoRow:
+		Name: 间谍
+		GenericName: Soldier
+		ShowOwnerRow: false
+		RequiresCondition: !showownername
+	Selectable:
+		Bounds: 579, 1351, -24, -386
+	Health:
+		HP: 10000
+	Garrisoner:
+		Voice: Move
+		CustomPipType: yellow
+		GarrisonType: Garrisoner
+	Passenger:
+		CustomPipType: yellow
+	RevealsShroud:
+		Range: 6c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Range: 6c0
+	RevealOnDeath:
+		Radius: 3c0
+	TakeCover:
+	Disguise:
+		DisguisedCondition: disguise
+	Infiltrates:
+		Types: SpyInfiltrate
+	-WithInfantryBody:
+	WithDisguisingInfantryBody:
+		IdleSequences: idle1,idle2
+		StandSequences: stand
+		RequiresCondition: !parachute && !webdisable
+	WithDecoration@disguise:
+		Image: pips
+		Sequence: pip-disguise
+		Palette: pips
+		Position: TopRight
+		RequiresCondition: disguise
+	Voiced:
+		VoiceSet: SpyVoice
+	Guard:
+		Voice: Action
+	AttackMove:
+		Voice: Action
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+
+ghost:
+	Inherits: ^Infantry
+	Inherits@ADVTRAINING: ^AffectedByAdvancedTraining
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@CHAOS: ^Berserkable
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@MC: ^MindControllable
+	Inherits@SWIMSUIT: ^WithSwimSuit
+	Buildable:
+		Queue: Infantry.USA
+		BuildPaletteOrder: 100
+		Prerequisites: gaairc, ~techlevel.3
+		Description: 装备冲锋枪和C4炸弹的美国两栖特种部队\n\n无法一击杀死步兵\nC4炸弹无法一击摧毁建筑\n\n·强势对抗：步兵、建筑\n·弱势对抗：飞行器\n\n·特殊能力：两栖\n·特殊能力：爆破建筑\n·特殊能力：爆破舰艇
+		BuildDuration: 375
+		BuildDurationModifier: 100
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Valued:
+		Cost: 1000
+	DeliversCash:
+		Payload: 500
+		Voice: Move
+	Tooltip:
+		Name: 海豹突击队
+	Tooltip@NoRow:
+		Name: 海豹突击队
+	Selectable:
+		Bounds: 482, 1448, 0, -530
+	Health:
+		HP: 12500
+	Garrisoner:
+		Voice: Move
+		CustomPipType: gray
+		GarrisonType: Garrisoner
+	Passenger:
+		CustomPipType: gray
+	Mobile:
+		Speed: 75
+		Locomotor: swimsuit
+	RevealsShroud:
+		Range: 8c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Range: 6c0
+	RevealOnDeath:
+		Radius: 4c0
+	Armor:
+		Type: Flak
+	Armament@primary:
+		Weapon: MP5
+		PauseOnCondition: chronodisable
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Weapon: MP5E
+		PauseOnCondition: chronodisable
+		RequiresCondition: rank-elite
+	Armament@opentopped:
+		Name: opentopped
+		Weapon: MP5
+		PauseOnCondition: chronodisable
+		RequiresCondition: !rank-elite
+	Armament@elite-opentopped:
+		Name: opentopped
+		Weapon: MP5E
+		PauseOnCondition: chronodisable
+		RequiresCondition: rank-elite
+	Armament@sapper:
+		Weapon: SealC4Attacher
+		Cursor: c4
+		OutsideRangeCursor: c4
+		PauseOnCondition: chronodisable
+		RequiresCondition: !rank-elite
+	Armament@sapper-elite:
+		Weapon: SealC4AttacherE
+		Cursor: c4
+		OutsideRangeCursor: c4
+		PauseOnCondition: chronodisable
+		RequiresCondition: rank-elite
+	Armament@garrisoned:
+		Name: garrisoned
+		Weapon: UCMP5
+		PauseOnCondition: chronodisable
+		RequiresCondition: !rank-elite
+	Armament@elite-garrisoned:
+		Name: garrisoned
+		Weapon: UCMP5E
+		PauseOnCondition: chronodisable
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 2
+		PauseOnCondition: chronodisable
+	RenderSprites:
+		Image: seal
+	Voiced:
+		VoiceSet: SealVoice
+	ProducibleWithLevel:
+		Prerequisites: barracks.infiltrated
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+		RequiresCondition: !swimming && !webdisable && !snow
+	WithInfantryBody@SNOW:
+		IdleSequences: snow-idle1, snow-idle2
+		StandSequences: snow-stand
+		MoveSequence: snow-run
+		DefaultAttackSequence: snow-shoot
+		RequiresCondition: !swimming && !webdisable && snow
+	WithDeathAnimation@normal:
+		RequiresCondition: !swimming && !snow
+	WithDeathAnimation@SNOW:
+		DeathSequence: snow-die
+		DeathSequencePalette: infantry
+		DeathTypes:
+			ExplosionDeath: 1
+			BulletDeath: 2
+		RequiresCondition: !swimming && snow
+	GrantConditionOnTileSet@SNOW:
+		Condition: snow
+		TileSets: SNOW
+	TakeCover:
+		RequiresCondition: !swimming
+
+ccomand:
+	Inherits: ghost
+	Buildable:
+		Queue: Infantry.Allies, Infantry.USA, Infantry.UK
+		BuildPaletteOrder: 960
+		Prerequisites: ~allies.tech.infiltrated, ~techlevel.4
+		Description: 装备冲锋枪和C4炸弹的超时空特种部队\n\n无法一击杀死步兵\nC4炸弹无法一击摧毁建筑\n射程比海豹突击队更远\n不会死于“超级武器：超时空传送”\n无法被一般载具碾压\n\n·强势对抗：步兵、建筑\n·弱势对抗：飞行器\n\n·特殊能力：超时空传送\n·特殊能力：爆破建筑
+		BuildDuration: 375
+		BuildDurationModifier: 100
+	Tooltip:
+		Name: 超时空海豹突击队
+	Tooltip@NoRow:
+		Name: 超时空海豹突击队
+	Valued:
+		Cost: 1500
+	DeliversCash:
+		Payload: 750
+	Health:
+		HP: 12500
+	Mobile:
+		Locomotor: foot
+	Crushable:
+		CrushClasses: vehicle
+	Crushable@Cheater:
+		CrushClasses: vehicle
+	Crushable@Vengeful:
+		CrushClasses: vehicle
+	Armament@sapper:
+		Weapon: CommandoC4Attacher
+	Armament@sapper-elite:
+		Weapon: CommandoC4AttacherE
+	PortableChronoRA2:
+		ChronoshiftSound: ichrmova.wav
+		DeployCursor: chronosphere
+		DeployBlockedCursor: chronosphere
+		Voice: Move
+		ChargeDelay: 120
+		HasDistanceLimit: false
+		TargetCursor: chronosphere
+		TeleportCondition: chronoed
+		ConditionDuration: 120
+		RequiresCondition: !affectedbytemporal
+	Contrail@Teleport: ##HACK: add a trace for teleport. 
+		Offset: 0, 0, 700
+		Color: 00F0F8AA
+		ZOffset: -1024
+		UsePlayerColor: false
+		TrailWidth: 36
+		TrailLength: 2
+	GrantCondition@ChronoDisable:
+		RequiresCondition: affectedbytemporal || chronoed
+	Chronoshiftable:
+		ExplodeInstead: false
+	WithInfantryBody:
+		RequiresCondition: !webdisable
+	WithDeathAnimation@normal:
+		-RequiresCondition:
+	WithDeathAnimation@effect:
+		-RequiresCondition:
+	TakeCover:
+		-RequiresCondition:
+	-GrantConditionOnTerrain@Water:
+	-WithInfantryBody@Water:
+	-WithInfantryBody@SNOW:
+	-WithDeathAnimation@Water:
+	-WithDeathAnimation@SNOW:
+	-Targetable@WaterBorne:
+	-GrantConditionOnTileSet@SNOW:
+	RenderSprites:
+		Image: ccomand
+
+ptroop:
+	Inherits: yuri
+	Buildable:
+		Queue: Infantry.Allies, Infantry.USA, Infantry.UK
+		BuildPaletteOrder: 990
+		Prerequisites: ~yuri.tech.infiltrated, ~techlevel.4
+		Description: 具有灵能控制能力的特种部队\n\nC4炸弹无法一击摧毁建筑\n可以释放出冲击波快速消灭步兵\n\n·强势对抗：步兵、载具、建筑\n·弱势对抗：军犬、遥控坦克、恐怖机器人、飞行器\n\n·特殊能力：爆破建筑\n·特殊能力：心灵震爆
+		BuildDuration: 375
+		BuildDurationModifier: 100
+	Valued:
+		Cost: 1500
+	DeliversCash:
+		Payload: 750
+	Tooltip:
+		Name: 灵能突击队
+	Tooltip@NoRow:
+		Name: 灵能突击队
+	Armament@sapper:
+		Name: sapper
+		Weapon: CommandoC4Attacher
+		Cursor: c4
+		OutsideRangeCursor: c4
+		PauseOnCondition: chronodisable
+		RequiresCondition: !rank-elite
+	Armament@sapper-elite:
+		Name: sapper
+		Weapon: CommandoC4AttacherE
+		Cursor: c4
+		OutsideRangeCursor: c4
+		PauseOnCondition: chronodisable
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		Armaments: primary, sapper
+	Selectable:
+		Class: ptroop
+	RenderSprites:
+		Image: ptroop
+
+civan.allied:
+	Inherits: civan
+	Buildable:
+		Queue: Infantry.Allies, Infantry.USA, Infantry.UK
+		BuildPaletteOrder: 980
+		Prerequisites: ~soviets.tech.infiltrated, ~techlevel.4
+	-MapEditorData:
+
+tany:
+	Inherits: ^Infantry
+	Inherits@ADVTRAINING: ^AffectedByAdvancedTraining
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@SWIMSUIT: ^WithSwimSuit
+	Inherits@VOICES: ^WithFeedbackVoicelines
+	Buildable:
+		Queue: Infantry.Allies, Infantry.USA, Infantry.UK
+		BuildPaletteOrder: 160
+		Prerequisites: gatech, ~techlevel.4
+		BuildLimit: 1
+		Description: 手持双枪的两栖特种兵精英\n\n可以一击杀死大部分步兵\nC4炸弹可以一击爆破建筑\n同一玩家最多只能同时拥有一个（不计算复制工厂）\n无法被一般载具辗压\n\n·强势对抗：步兵、载具、建筑\n·弱势对抗：飞行器\n\n·特殊能力：两栖\n·特殊能力：爆破建筑\n·特殊能力：爆破舰艇
+		BuildDuration: 1125
+		BuildDurationModifier: 100
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Valued:
+		Cost: 2000
+	DeliversCash:
+		Payload: 1000
+		Voice: Move
+	Tooltip:
+		Name: 谭雅·亚当斯
+	Tooltip@NoRow:
+		Name: 谭雅·亚当斯
+	Selectable:
+		Bounds: 482, 1448, 0, -530
+	Health:
+		HP: 15000
+	Garrisoner:
+		Voice: Move
+		CustomPipType: red
+		GarrisonType: Garrisoner
+	Passenger:
+		CustomPipType: red
+	Mobile:
+		Speed: 75
+		Locomotor: swimsuit
+	RevealsShroud:
+		Range: 8c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Range: 8c0
+	RevealOnDeath:
+		Radius: 4c0
+	Demolition:
+		TargetRelationships: Enemy
+		Voice: Demolish
+		DamageTypes: NonTemporal
+	Armor:
+		Type: Flak
+	Crushable:
+		CrushClasses: vehicle
+	Crushable@Cheater:
+		CrushClasses: vehicle
+	Crushable@Vengeful:
+		CrushClasses: vehicle
+	ChangesHealth:
+		PercentageStep: 1
+		Step: 0
+		Delay: 100
+		DamageCooldown: 100
+		StartIfBelow: 100
+	ProvidesPrerequisite@default:
+	Armament@primary:
+		Weapon: DoublePistols
+		PauseOnCondition: chronodisable
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Weapon: DoublePistolsE
+		PauseOnCondition: chronodisable
+		RequiresCondition: rank-elite
+	Armament@opentopped:
+		Name: opentopped
+		Weapon: DoublePistols
+		PauseOnCondition: chronodisable
+		RequiresCondition: !rank-elite
+	Armament@elite-opentopped:
+		Name: opentopped
+		Weapon: DoublePistolsE
+		PauseOnCondition: chronodisable
+		RequiresCondition: rank-elite
+	Armament@sapper:
+		Weapon: TanyaC4Attacher
+		Cursor: c4
+		OutsideRangeCursor: c4
+		PauseOnCondition: chronodisable
+	Armament@garrisoned:
+		Name: garrisoned
+		Weapon: UCDoublePistols
+		PauseOnCondition: chronodisable
+		RequiresCondition: !rank-elite
+	Armament@elite-garrisoned:
+		Name: garrisoned
+		Weapon: UCDoublePistolsE
+		PauseOnCondition: chronodisable
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 2
+	ExternalCondition@PRODUCED:
+		Condition: produced
+	VoiceAnnouncement:
+		RequiresCondition: produced
+		Voice: Build
+	Voiced:
+		VoiceSet: TanyaVoice
+	ProducibleWithLevel:
+		Prerequisites: barracks.infiltrated
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+		RequiresCondition: !swimming && !webdisable && !snow
+	WithInfantryBody@SNOW:
+		IdleSequences: snow-idle1, snow-idle2
+		StandSequences: snow-stand
+		MoveSequence: snow-run
+		DefaultAttackSequence: snow-shoot
+		RequiresCondition: !swimming && !webdisable && snow
+	WithDeathAnimation@normal:
+		RequiresCondition: !swimming && !snow
+	WithDeathAnimation@SNOW:
+		DeathSequence: snow-die
+		DeathSequencePalette: infantry
+		DeathTypes:
+			ExplosionDeath: 1
+			BulletDeath: 2
+		RequiresCondition: !swimming && snow
+	GrantConditionOnTileSet@SNOW:
+		Condition: snow
+		TileSets: SNOW
+	TakeCover:
+		RequiresCondition: !swimming
+
+jumpjet:
+	Inherits: ^Infantry
+	Inherits@ADVTRAINING: ^AffectedByAdvancedTraining
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@VOICES: ^WithFeedbackVoicelines
+	HiddenUnderFog:
+		Type: CenterPosition
+	Buildable:
+		Queue: Infantry.Allies, Infantry.USA, Infantry.UK
+		BuildPaletteOrder: 60
+		Prerequisites: gaairc, ~techlevel.2
+		Description: 飞行在天空中的步兵\n\n·强势对抗：步兵、飞行器\n·弱势对抗：载具
+		BuildDuration: 250
+		BuildDurationModifier: 100
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: 火箭飞行兵
+	Tooltip@NoRow:
+		Name: 火箭飞行兵
+	Selectable:
+		Bounds: 482, 1448, 0, -530
+	Health:
+		HP: 15000
+	-Mobile:
+	RevealsShroud:
+		Range: 8c0
+		Type: GroundPosition
+		RequiresCondition: !airborne
+	RevealsShroud@Ground:
+		Range: 8c0
+		Type: GroundPosition
+		RequiresCondition: airborne
+	# RevealsShroudToIntelligenceOwner:
+	#	Range: 8c0
+	#	Type: GroundPosition
+	Armor:
+		Type: Light
+	Armament@primary:
+		Weapon: 20mm
+		ReloadingCondition: reload-ground
+		PauseOnCondition: chronodisable || reload-air
+		RequiresCondition: !rank-elite
+	Armament@primary-aa:
+		Weapon: 20mmAA
+		ReloadingCondition: reload-air
+		PauseOnCondition: chronodisable || reload-ground
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Weapon: 20mmE
+		ReloadingCondition: reload-ground
+		PauseOnCondition: chronodisable || reload-air
+		RequiresCondition: rank-elite
+	Armament@elite-aa:
+		Weapon: 20mmAAE
+		ReloadingCondition: reload-air
+		PauseOnCondition: chronodisable || reload-ground
+		RequiresCondition: rank-elite
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 2
+		AttackType: Hover
+	Aircraft:
+		CruiseAltitude: 3c852
+		InitialFacing: 80
+		TurnSpeed: 1023
+		Speed: 180
+		AltitudeVelocity: 240
+		MaximumPitch: 128
+		Voice: Move
+		AirborneCondition: airborne
+		IdealSeparation: 512
+		VTOL: true
+		CanSlide: true
+		CanHover: true
+	WithInfantryBody:
+		RequiresCondition: !airborne
+	WithInfantryBody@Air:
+		StandSequences: fly
+		MoveSequence: fly
+		DefaultAttackSequence: shoot-air
+		IdleSequences: idle-air
+		RequiresCondition: airborne
+	Hovers:
+		BobDistance: -45
+	-TimedConditionBar@WebDisable:
+	-SpeedMultiplier@WebDisable:
+	-WithIdleOverlay@web:
+	-Targetable@webdisable:
+	-ExternalCondition@webdisable:
+	-InfectableRV:
+	-Targetable@DRONE:
+	-SpeedMultiplier@DRONE:
+	-RevealsShroud@DRONE:
+	-ExplodeWeapon@dronesparks:
+	-Crushable:
+	-Crushable@Cheater:
+	-Crushable@Vengeful:
+	-TakeCover:
+	-Targetable:
+	-TurnOnIdle:
+	-WithDeathAnimation@normal:
+	-WithDeathAnimation@effect:
+	-DamagedByTintedCells:
+	DeathSounds@normal:
+		DeathTypes: ExplosionDeath, BulletDeath, RadiationDeath, PsychicDeath, ElectroDeath, FlameDeath, VirusDeath, BruteDeath
+	-DeathSounds@zapped:
+	-DeathSounds@radiation:
+	-DeathSounds@psycrush:
+	-DeathSounds@virus:
+	Targetable@airborne:
+		TargetTypes: Air, Disguise
+		RequiresCondition: airborne
+	Targetable@ground:
+		TargetTypes: Ground, Infantry, DetonateAttack, Disguise
+		RequiresCondition: !airborne
+	WithSpriteBody@shadow:
+		Name: shadow
+		Sequence: shadow
+		ForceToGround: true
+	Voiced:
+		VoiceSet: RocketeerVoice
+	AmbientSound:
+		SoundFiles: iroclo2a.wav, iroclo2b.wav, iroclo2c.wav
+		Volume: 0.25
+		RequiresCondition: moving
+	GrantConditionOnMovement:
+		Condition: moving
+	ProducibleWithLevel:
+		Prerequisites: barracks.infiltrated
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	-Passenger:
+	-ChangesHealth@HOSPITAL:
+	SpawnActorOnDeath:
+		Actor: jumpjet.husk
+
+jumpjet.husk:
+	Inherits: ^HelicopterHusk
+	Inherits@1: ^SpriteActor
+	WithFacingSpriteBody:
+	-RenderVoxels:
+	-WithVoxelBody:
+	Tooltip:
+		Name: Rocketeer
+	Tooltip@NoRow:
+		Name: Rocketeer
+	Aircraft:
+		TurnSpeed: 40
+		Speed: 180
+	FallsToEarth:
+		Explosion: InfantryExplode
+	RevealsShroud:
+		Range: 8c0
+		Type: GroundPosition
+	# RevealsShroudToIntelligenceOwner:
+	#	Range: 8c0
+	#	Types: SatelliteScan
+	#	Type: GroundPosition
+	RevealOnDeath:
+		Radius: 4c0
+		Duration: 50
+	WithSpriteBody@shadow:
+		Name: shadow
+		Sequence: shadow
+		ForceToGround: true
+
+jumpjet.spawner:
+	Inherits: ^Infantry
+	FreeActor:
+		Actor: jumpjet
+		Facing: 640
+	KillsSelf:
+		RemoveInstead: true
+	-MapEditorData:
+	RenderSprites:
+		Image: jumpjet
+
+cleg:
+	Inherits: ^Infantry
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@CHAOS: ^Berserkable
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@MC: ^MindControllable
+	Inherits@VOICES: ^WithFeedbackVoicelines
+	Selectable:
+		Bounds: 482, 1448, 0, -530
+	Tooltip:
+		Name: 超时空军团
+	Tooltip@NoRow:
+		Name: 超时空军团
+	Buildable:
+		Queue: Infantry.Allies, Infantry.USA, Infantry.UK
+		BuildPaletteOrder: 140
+		Prerequisites: gatech, ~techlevel.4
+		Description: 配备了超时空武器的特种兵\n\n被锁定的目标将在一段时间内处于“时间冻结”状态而无法正常作用\n“时间冻结”状态的时长取决于目标的当前生命值\n多个超时空军团兵可以加速“时间冻结”的进度\n目标将在“时间冻结”状态期满后被移除\n不会死于“超级武器：超时空传送”\n\n·强势对抗：地面目标\n·弱势对抗：飞行器\n\n·特殊能力：超时空传送
+		BuildDuration: 500
+		BuildDurationModifier: 100
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	ProducibleWithLevel:
+		Prerequisites: barracks.infiltrated
+	Valued:
+		Cost: 1200
+	DeliversCash:
+		Payload: 600
+		Voice: Move
+	Health:
+		HP: 12500
+	Garrisoner:
+		Voice: Move
+		GarrisonType: Garrisoner
+	RevealsShroud:
+		Range: 6c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Range: 6c0
+	RevealOnDeath:
+		Radius: 3c0
+	Passenger:
+	-TakeCover:
+	PortableChronoRA2:
+		ChronoshiftSound: ichrmova.wav
+		DeployCursor: chronosphere
+		DeployBlockedCursor: chronosphere
+		Voice: Move
+		ChargeDelay: 120
+		HasDistanceLimit: false
+		TargetCursor: chronosphere
+		TeleportCondition: chronoed
+		ConditionDuration: 120
+		RequiresCondition: !affectedbytemporal
+	Contrail@Teleport: ##HACK: add a trace for teleport. 
+		Offset: 0, 0, 700
+		Color: 00F0F8AA
+		ZOffset: -1024
+		UsePlayerColor: false
+		TrailWidth: 36
+		TrailLength: 2
+	Chronoshiftable:
+		ExplodeInstead: false
+	Voiced:
+		VoiceSet: ChronoLegionnaireVoice
+	Armament@primary:
+		Weapon: NeutronRifle
+		LocalOffset: 512,0,384
+		PauseOnCondition: chronodisable
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Weapon: NeutronRifleE
+		LocalOffset: 512,0,384
+		PauseOnCondition: chronodisable
+		RequiresCondition: rank-elite
+	Armament@sound:
+		Weapon: NeutronRifleSound
+		LocalOffset: 512,0,384
+		PauseOnCondition: chronodisable
+	Armament@opentopped:
+		Name: opentopped
+		Weapon: NeutronRifle
+		PauseOnCondition: chronodisable
+		RequiresCondition: !rank-elite
+	Armament@elite-opentopped:
+		Name: opentopped
+		Weapon: NeutronRifleE
+		PauseOnCondition: chronodisable
+		RequiresCondition: rank-elite
+	Armament@sound-opentopped:
+		Name: opentopped
+		Weapon: NeutronRifleSound
+		PauseOnCondition: chronodisable
+	Armament@garrisoned:
+		Name: garrisoned
+		Weapon: UCNeutronRifle
+		PauseOnCondition: chronodisable
+		RequiresCondition: !rank-elite
+	Armament@elite-garrisoned:
+		Name: garrisoned
+		Weapon: UCNeutronRifleE
+		PauseOnCondition: chronodisable
+		RequiresCondition: rank-elite
+	Armament@sound-garrisoned:
+		Name: garrisoned
+		Weapon: UCNeutronRifleSound
+		PauseOnCondition: chronodisable
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 2
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+	GrantCondition@ChronoDisable:
+		RequiresCondition: affectedbytemporal || chronoed
+
+# Custom Allied Infantry:
+gren:
+	Inherits@1: ^Infantry
+	Inherits@2: ^Parachutable
+	Inherits@ADVTRAINING: ^AffectedByAdvancedTraining
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@CHAOS: ^Berserkable
+	Inherits@EMPAMMO: ^AffectedByEMPMunitions
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@MC: ^MindControllable
+	Buildable:
+		Queue: Infantry.Allies, Infantry.USA, Infantry.UK
+		Prerequisites: gaairc, ~techlevel.2
+		BuildPaletteOrder: 70
+		Description: 装备高爆手榴弹的盟军步兵\n\n能造成范围伤害\n英雄级单位的攻击可以短暂瘫痪目标点的载具\n\n·强势对抗：步兵、建筑\n·弱势对抗：载具、飞行器\n\n·特殊能力：清除驻军
+		BuildDuration: 175
+		BuildDurationModifier: 100
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Valued:
+		Cost: 250
+	DeliversCash:
+		Payload: 125
+		Voice: Move
+	Tooltip:
+		Name: 掷弹兵
+	Tooltip@NoRow:
+		Name: 掷弹兵
+	Selectable:
+		Bounds: 482, 1448, 0, -530
+	Health:
+		HP: 12500
+	Armor:
+		Type: Flak
+	Mobile:
+		Speed: 75
+	Garrisoner:
+		Voice: Move
+		GarrisonType: Garrisoner
+	RevealsShroud:
+		Range: 6c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Range: 6c0
+	RevealOnDeath:
+		Radius: 3c0
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 2
+	Armament@primary:
+		Weapon: Grenade
+		FireDelay: 5
+		LocalOffset: 64,0,512
+		PauseOnCondition: chronodisable
+		RequiresCondition: !empammo && !rank-elite
+	Armament@primary-emp:
+		Weapon: GrenadeEMP
+		FireDelay: 5
+		LocalOffset: 64,0,512
+		PauseOnCondition: chronodisable
+		RequiresCondition: empammo && !rank-elite
+	Armament@elite:
+		Weapon: GrenadeE
+		FireDelay: 5
+		LocalOffset: 64,0,512
+		PauseOnCondition: chronodisable
+		RequiresCondition: rank-elite
+	Armament@opentopped:
+		Name: opentopped
+		Weapon: Grenade
+		PauseOnCondition: chronodisable
+		RequiresCondition: !empammo && !rank-elite
+	Armament@opentopped-emp:
+		Name: opentopped
+		Weapon: GrenadeEMP
+		PauseOnCondition: chronodisable
+		RequiresCondition: empammo && !rank-elite
+	Armament@elite-opentopped:
+		Name: opentopped
+		Weapon: GrenadeE
+		PauseOnCondition: chronodisable
+		RequiresCondition: rank-elite
+	Armament@garrisoned:
+		Name: garrisoned
+		Weapon: UCGrenade
+		PauseOnCondition: chronodisable
+		RequiresCondition: !empammo && !rank-elite
+	Armament@garrisoned-emp:
+		Name: garrisoned
+		Weapon: UCGrenadeEMP
+		PauseOnCondition: chronodisable
+		RequiresCondition: empammo && !rank-elite
+	Armament@elite-garrisoned:
+		Name: garrisoned
+		Weapon: UCGrenadeE
+		PauseOnCondition: chronodisable
+		RequiresCondition: rank-elite
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+		RequiresCondition: !parachute && !webdisable
+	Voiced:
+		VoiceSet: GrenadierVoice
+		Volume: 6
+	ProducibleWithLevel:
+		Prerequisites: barracks.infiltrated
+	QuantizeFacingsFromSequence:
+		Sequence: stand

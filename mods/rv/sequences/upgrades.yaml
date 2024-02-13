@@ -1,0 +1,114 @@
+upgrade.a2a_missiles:
+	icon: bits/cameos/a2amicon
+
+upgrade.endurance_training:
+	icon: bits/cameos/etraicon
+
+upgrade.advanced_coolants:
+	icon: bits/cameos/gpwruico
+
+upgrade.advanced_training:
+	icon: bits/cameos/advticon
+
+upgrade.composite_armor:
+	icon: bits/cameos/carmicon
+
+upgrade.boost_gliding_systems:
+	icon: bits/cameos/bgldicon
+
+upgrade.high_caliber_rounds:
+	icon: bits/cameos/hicbicon
+
+upgrade.advanced_gun_systems:
+	icon: bits/cameos/advgicon
+
+upgrade.grand_cannon_protocols:
+	icon: cameo|gcanicon
+
+upgrade.emp_munitions:
+	icon: bits/cameos/empaicon.png
+		AddExtension: false
+
+upgrade.increased_payload:
+	icon: bits/cameos/incpicon
+
+upgrade.improved_flaks:
+	icon: bits/cameos/impficon
+
+upgrade.bullet_proof_coats:
+	icon: bits/cameos/blpcicon
+
+upgrade.molotov_cocktails:
+	icon: bits/cameos/mltvicon
+
+upgrade.smoke_grenades:
+	icon: bits/cameos/smkgicon
+
+upgrade.black_napalm:
+	icon: bits/cameos/bnplicon
+
+upgrade.propaganda_effort:
+	icon: bits/cameos/pefficon
+
+upgrade.ap_bullets:
+	icon: bits/cameos/apblicon
+
+upgrade.nuclear_engines:
+	icon: bits/cameos/nkenicon
+
+upgrade.overcharge:
+	icon: bits/cameos/ovchicon
+
+upgrade.radioactive_bombs:
+	icon: bits/cameos/rdbmicon
+
+upgrade.aerial_propaganda:
+	icon: bits/cameos/aerpicon.png
+		AddExtension: false
+
+upgrade.targeted_explosives:
+	icon: bits/cameos/texpicon
+
+upgrade.high_explosive_bombs:
+	icon: bits/cameos/hexpicon
+
+upgrade.grinder_treads:
+	icon: bits/cameos/grnticon.png
+		AddExtension: false
+
+upgrade.toxin_sprayer:
+	icon: bits/cameos/txspicon.png
+		AddExtension: false
+
+upgrade.autoloaders:
+	icon: bits/cameos/autlicon.png
+		AddExtension: false
+
+upgrade.camouflage:
+	icon: bits/cameos/camoicon
+
+upgrade.advanced_magnetics:
+	icon: bits/cameos/advmicon.png
+		AddExtension: false
+
+upgrade.chaos_tank_compensators:
+	icon: bits/cameos/chtcicon.png
+		AddExtension: false
+
+upgrade.laser_capacitors:
+	icon: bits/cameos/lsrcicon.png
+		AddExtension: false
+
+upgrade.mastery_of_mind:
+	icon: bits/cameos/maomicon.png
+		AddExtension: false
+
+upgrade.dna_boosters:
+	icon: bits/cameos/dnabicon
+
+upgrade.disc_armor:
+	icon: bits/cameos/dscaicon.png
+		AddExtension: false
+
+upgrade.chainguns:
+	icon: bits/cameos/chngicon

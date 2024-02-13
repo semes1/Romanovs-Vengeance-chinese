@@ -1,0 +1,1763 @@
+# Black Fence
+cafncb:
+	Inherits: ^Fence
+	Defaults:
+		UseTilesetCode: true
+
+# White Fence
+cafncw:
+	Inherits: ^Fence
+	Defaults:
+		UseTilesetCode: true
+
+# Brown Fence
+cafnck:
+	Inherits: ^Fence
+	Defaults: bits/structures/fences/cgfnck
+
+# Yellow Fence
+cafncy:
+	Inherits: ^Fence
+	Defaults: bits/structures/fences/cgfncy
+
+# Green Fence
+cafncg:
+	Inherits: ^Fence
+	Defaults: bits/structures/fences/cgfncg
+
+# Purple Fence
+cafncm:
+	Inherits: ^Fence
+	Defaults: bits/structures/fences/cgfncm
+
+gasand:
+	Defaults:
+		Offset: 0,-15
+		UseTilesetCode: true
+	idle: gtsand
+		Length: 16
+		ShadowStart: 32
+	damaged-idle: gtsand
+		Start: 16
+		Length: 16
+		ShadowStart: 48
+	icon: bits/cameos/sbagicon
+		Offset: 0,0
+		UseTilesetCode: false
+
+cafncp:
+	Defaults:
+		Offset: 0,-15
+		UseTilesetCode: true
+	idle: ctfncp
+		Length: 16
+		ShadowStart: 32
+	damaged-idle: ctfncp
+		Start: 16
+		Length: 16
+		ShadowStart: 48
+	icon: cameo|wallicon
+		Offset: 0,0
+		UseTilesetCode: false
+
+cakrmw:
+	Defaults:
+		Offset: 0, -12
+		UseTilesetCode: true
+	idle: ctkrmw
+		Length: 16
+		ShadowStart: 48
+	damaged-idle: ctkrmw
+		Start: 16
+		Length: 16
+		ShadowStart: 64
+	critical-idle: ctkrmw
+		Start: 32
+		Length: 16
+		ShadowStart: 80
+	icon: bits/cameos/kwllicon
+		Offset: 0,0
+		UseTilesetCode: false
+
+cawash01:
+	Inherits: ^CivBuilding
+	Defaults: cgwash01
+		UseTilesetCode: false
+		Offset: 0,-60
+
+cawash03:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults: ctwash03
+		UseTilesetCode: false
+		Offset: -15,-52
+
+cawash04:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-60
+
+cawash05:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: -30,-45
+
+cawash06:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-60
+	idle: cgwash06_a # Custom artwork, original lacked shadow.
+		UseTilesetCode: false
+		ShadowStart: 1
+
+cawash07:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-45
+
+cawash08:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 15,-52
+
+cawash09:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-45
+
+cawash10:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-60
+
+cawash11:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-60
+
+cawsh12:
+	Inherits: ^CivBuilding
+	Defaults: cgwsh12
+		Offset: 0,-45
+		UseTilesetCode: false
+
+cawash13:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 15,-52
+
+cawash14:
+	Inherits: ^CivBuilding
+	Defaults: cgwash14
+		Offset: 0,-45
+		UseTilesetCode: false
+
+cawash15:
+	Inherits: ^CivBuilding
+	Defaults: cgwash15
+		Offset: 15,-52
+		UseTilesetCode: false
+
+cawash16:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: -30,-60
+
+cawash17:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: -30,-75
+
+cawash18:
+	Inherits: ^CivProp
+	Defaults:
+		Offset: 0,-30
+	idle-water: cawsh18a
+		Length: 10
+		ShadowStart: 10
+		Tick: 80
+
+cawash19:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-60
+	idle-flag: cawa19_a
+		Length: 16
+	damaged-idle-flag: cawa19_a
+		Start: 16
+		Length: 16
+
+canewy01:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-60
+
+canewy04:
+	Inherits: ^CivBuilding
+	Defaults: cgnewy04
+		Offset: 0,-45
+		UseTilesetCode: false
+
+canewy05:
+	Inherits: ^CivProp
+	Defaults:
+		Offset: -5,-75
+
+canewy06:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-45
+
+canewy07:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-45
+
+canewy08:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-45
+
+canewy10:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: -15,-37
+
+canewy11:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: -15,-37
+
+canewy12:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 15,-37
+
+canewy13:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-45
+
+canewy14:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-45
+
+canewy15:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-45
+
+canewy16:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-30
+
+canewy17:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-30
+
+canewy18:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-30
+
+canewy20:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 30,-60
+
+canewy21:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: -30,-60
+
+caarmy01:
+	Inherits: ^CivBuildingNoRubble
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: -15,-37
+	garrisoned:
+		ShadowStart: 5
+
+caarmy02:
+	Inherits: ^CivBuildingNoRubble
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-15
+	garrisoned:
+		ShadowStart: 5
+
+caarmy03:
+	Inherits: ^CivBuildingNoRubble
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-15
+	garrisoned:
+		ShadowStart: 5
+
+caarmy04:
+	Inherits: ^CivBuildingNoRubble
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-15
+	garrisoned:
+		ShadowStart: 5
+
+cawa2a:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-60
+
+cawa2b:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-60
+
+cawa2c:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-60
+
+cawa2d:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-60
+
+cafarm01:
+	Inherits: ^CivBuildingNoRubble
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-30
+	garrisoned:
+		ShadowStart: 5
+	icon: bits/cameos/farmicon.png
+		AddExtension: false
+
+cafarm02:
+	Inherits: ^CivBuilding
+	Defaults:
+		Offset: 0,-15
+
+cafarm06:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-30
+
+cafrma:
+	Inherits: ^CivBuildingNoRubble
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-30
+	garrisoned:
+		ShadowStart: 5
+
+cafrmb:
+	Inherits: ^CivBuildingNoRubble
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-15
+	garrisoned:
+		ShadowStart: 5
+
+cabarn02:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-30
+
+camsc07:
+	Inherits: ^CivBuildingNoRubble
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-30
+	garrisoned:
+		ShadowStart: 5
+
+camsc08:
+	Inherits: ^CivBuildingNoRubble
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-15
+	garrisoned:
+		ShadowStart: 5
+
+camsc09:
+	Inherits: ^CivBuildingNoRubble
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-15
+	garrisoned:
+		ShadowStart: 5
+
+camsc10:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-60
+
+camiam01:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: -30,-45
+
+camiam02:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: -30,-45
+
+camiam03:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 15,-37
+
+camiam04:
+	Inherits: ^CivBuildingNoRubble
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-15
+	garrisoned:
+		ShadowStart: 5
+
+camiam05:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 15,-52
+
+camiam06:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-60
+
+camiam07:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-60
+
+camiam08:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: -30,-30
+
+castrt01:
+	Inherits: ^CivProp
+
+castrt02:
+	Inherits: ^CivProp
+	Defaults:
+		UseTilesetCode: false
+
+castrt03:
+	Inherits: ^CivProp
+	Defaults:
+		UseTilesetCode: false
+
+castrt04:
+	Inherits: ^CivProp
+	Defaults:
+		UseTilesetCode: false
+
+castrt05:
+	Inherits: ^CivProp
+
+camex01:
+	Inherits: ^CivBuilding
+	Defaults:
+		Offset: -15,-37
+
+camex02:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: -30,-75
+
+camex03:
+	Inherits: ^CivBuilding
+	Defaults:
+		Offset: 0,-45
+
+camex04:
+	Inherits: ^CivBuilding
+	Defaults:
+		Offset: 0,-60
+
+camex05:
+	Inherits: ^CivBuilding
+	Defaults:
+		Offset: 0,-30
+
+castl01:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-60
+		TilesetOverrides:
+			SNOW: TEMPERATE
+
+castl02:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-60
+
+castl03:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-60
+
+castl04:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults: cgstl04
+		Offset: 60,-60
+		UseTilesetCode: false
+
+castl05a:
+	Inherits: ^CivBuilding
+	Defaults:
+		Offset: 0,-60
+
+castl05b:
+	Inherits: ^CivBuilding
+	Defaults:
+		Offset: 0,-60
+
+castl05c:
+	Inherits: ^CivBuilding
+	Defaults:
+		Offset: 0,-60
+
+castl05d:
+	Inherits: ^CivBuilding
+	Defaults:
+		Offset: 0,-60
+
+castl05e:
+	Inherits: ^CivBuilding
+	Defaults:
+		Offset: 0,-60
+
+castl05f:
+	Inherits: ^CivBuilding
+	Defaults:
+		Offset: 0,-60
+
+castl05g:
+	Inherits: ^CivBuilding
+	Defaults:
+		Offset: 0,-60
+
+castl05h:
+	Inherits: ^CivBuilding
+	Defaults:
+		Offset: 0,-60
+
+cacolo01:
+	Inherits: ^CivBuilding
+	Defaults:
+		Offset: -30,-60
+
+caind01:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-60
+
+calab:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 15,-52
+
+cagas01:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-45
+
+cahse01:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: -15,-37
+
+cahse02:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: -15,-37
+
+cahse03:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 15,-52
+
+cahse04:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: -15,-37
+
+cahse05:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 15,-22
+
+cahse06:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: -15,-22
+
+cahse07:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 15,-37
+
+cawt01:
+	Inherits: ^CivBuildingNoRubble
+	Defaults:
+		Offset: 0,-15
+		TilesetOverrides:
+			TEMPERATE: GENERIC
+			URBAN: GENERIC
+			NEWURBAN: GENERIC
+			DESERT: GENERIC
+			LUNAR: GENERIC
+			DUNE: GENERIC
+	idle:
+		ShadowStart: 2
+	damaged-idle:
+		ShadowStart: 3
+
+cabunk01:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-30
+
+cabunk02:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-30
+
+carus01:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults: cgrus01
+		Offset: 0,-60
+		UseTilesetCode: false
+
+carus02a:
+	Inherits: ^CivBuilding
+	Defaults:
+		Offset: 0,-15
+		TilesetOverrides:
+			TEMPERATE: GENERIC
+			URBAN: GENERIC
+			NEWURBAN: GENERIC
+			DESERT: GENERIC
+			LUNAR: GENERIC
+			DUNE: GENERIC
+	rubble:
+		UseTilesetCode: false
+
+carus02b:
+	Inherits: ^CivBuilding
+	Defaults:
+		Offset: 0,-15
+		TilesetOverrides:
+			TEMPERATE: GENERIC
+			URBAN: GENERIC
+			NEWURBAN: GENERIC
+			DESERT: GENERIC
+			LUNAR: GENERIC
+			DUNE: GENERIC
+	rubble:
+		UseTilesetCode: false
+
+carus02c:
+	Inherits: ^CivBuildingNoRubble
+	Defaults:
+		Offset: 0,-15
+
+carus02d:
+	Inherits: ^CivBuildingNoRubble
+	Defaults:
+		Offset: 0,-15
+
+carus02e:
+	Inherits: ^CivBuildingNoRubble
+	Defaults:
+		Offset: 0,-15
+
+carus02f:
+	Inherits: ^CivBuildingNoRubble
+	Defaults:
+		Offset: 0,-15
+
+carus02g:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-15
+		TilesetOverrides:
+			TEMPERATE: GENERIC
+			URBAN: GENERIC
+			NEWURBAN: GENERIC
+			DESERT: GENERIC
+			LUNAR: GENERIC
+			DUNE: GENERIC
+	rubble:
+		UseTilesetCode: false
+
+carus03:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 45,-52
+
+carus04:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-60
+
+carus05:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-60
+
+carus06:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-60
+
+carus07:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-15
+
+carus08:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-15
+
+carus09:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: -15,-22
+
+carus10:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 15,-23
+
+carus11:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: -15,-22
+
+cachig01:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: -15,-37
+
+cachig02:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 15,-37
+
+cachig03:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: -15,-37
+
+cachig04:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults: cgchig04
+		Offset: 0,-30
+		UseTilesetCode: false
+
+cachig05:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-60
+
+cachig06:
+	Inherits: ^CivBuilding
+	Defaults: cgchig06
+		Offset: 0,-30
+		UseTilesetCode: false
+
+catech01:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-45
+
+catexs01:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-30
+
+catexs02:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-60
+
+catexs03:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-45
+
+catexs04:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-45
+
+catexs05:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-45
+
+catexs06:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-45
+
+catexs07:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-45
+
+catexs08:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 15,-37
+
+canwy05:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-60
+
+canwy09:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 15,-37
+
+canwy22:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-45
+
+canwy23:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: -15,-37
+
+canwy24:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-45
+
+canwy25:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-45
+
+canwy26:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: -30,-60
+
+camov01:
+	Inherits: ^CivBuildingNoRubble
+	Defaults:
+		Offset: 45,-37
+	idle-overlay: camov01_a
+		Length: 30
+		Tick: 200
+	damaged-idle-overlay: camov01_a
+		Start: 30
+		Length: 30
+		Tick: 200
+
+camov02:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-30
+	idle-overlay: camov02_a
+		Length: 2
+		Tick: 200
+	damaged-idle-overlay: camov02_a
+		Start: 2
+		Length: 2
+		Tick: 200
+
+capars01:
+	Inherits: ^CivBuilding
+	Defaults: cgpars01
+		Offset: 0,-60
+		UseTilesetCode: false
+
+capars02:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: -30,-75
+
+capars04:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-45
+
+capars05:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-45
+
+capars06:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-45
+
+capars07:
+	Inherits: ^CivProp
+
+capars08:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: -30,-75
+
+capars09:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: -30,-75
+
+capars10:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: -15,-52
+
+capars11:
+	Inherits: ^CivBuilding
+	Defaults: cgpars11
+		Offset: 15,-52
+		UseTilesetCode: false
+
+capars12:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 30,-60
+
+capars13:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 15,-52
+
+capars14:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: -15,-52
+
+cats01:
+	Inherits: ^CivBuildingNoRubble
+	Defaults:
+		Offset: 0,-30
+
+cagard01:
+	Inherits: ^CivProp
+	idle-flag: cagrd1_a
+		Length: 9
+		ShadowStart: 9
+		Tick: 80
+
+cagard02:
+	Inherits: ^CivProp
+	Defaults:
+		TilesetOverrides:
+			TEMPERATE: GENERIC
+			URBAN: GENERIC
+			NEWURBAN: GENERIC
+			DESERT: GENERIC
+			LUNAR: GENERIC
+			DUNE: GENERIC
+	idle-flag: cagrd2_a
+		Length: 9
+		ShadowStart: 9
+		Tick: 80
+
+caeur1:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-30
+
+caeur2:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-30
+
+caeur04:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: -15,-52
+
+caprs03:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: -30,-75
+
+caswst01:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 15,-37
+
+galite:
+	idle:
+		ShadowStart: 2
+	damaged-idle:
+		Start: 1
+		ShadowStart: 3
+	icon: liteicon
+
+cacity01:
+	Inherits: ^CivProp
+	Defaults:
+		Offset: 0,-60
+	idle:
+		ShadowStart: 3
+
+cacity02:
+	Inherits: ^CivProp
+	Defaults:
+		Offset: -15,-67
+	idle:
+		ShadowStart: 3
+
+cacity03:
+	Inherits: ^CivProp
+	Defaults:
+		Offset: 0,-45
+	idle:
+		ShadowStart: 3
+
+cacity04:
+	Inherits: ^CivProp
+	Defaults:
+		Offset: 0,-60
+	idle:
+		ShadowStart: 3
+
+city01:
+	Inherits: ^CivProp
+	Defaults:
+		Offset: 0,-45
+		UseTilesetCode: false
+	idle:
+		ShadowStart: 2
+
+city02:
+	Inherits: ^CivProp
+	Defaults:
+		Offset: -15,-52
+		UseTilesetCode: false
+	idle:
+		ShadowStart: 2
+
+city03:
+	Inherits: ^CivProp
+	Defaults:
+		Offset: 0,-45
+		UseTilesetCode: false
+	idle:
+		ShadowStart: 2
+
+city04:
+	Inherits: ^CivProp
+	Defaults:
+		Offset: 0,-60
+		UseTilesetCode: false
+	idle:
+		ShadowStart: 2
+
+city05:
+	Inherits: ^CivProp
+	Defaults:
+		Offset: 0,-60
+		UseTilesetCode: false
+	idle:
+		ShadowStart: 2
+
+#Yuri's Revenge Buildings
+cabunk03:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-30
+		TilesetOverrides:
+			LUNAR: TEMPERATE
+
+cabunk04:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-30
+		TilesetOverrides:
+			LUNAR: TEMPERATE
+
+camorr01:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults: cgmorr01
+		Offset: 0,-45
+		UseTilesetCode: false
+
+camorr02:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults: cgmorr02
+		Offset: 0,-45
+		UseTilesetCode: false
+
+camorr03:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults: cgmorr03
+		Offset: 0,-45
+		UseTilesetCode: false
+
+camorr04:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults: cgmorr04
+		Offset: 0,-45
+		UseTilesetCode: false
+
+camorr05:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults: cgmorr05
+		Offset: 0,-45
+		UseTilesetCode: false
+
+camorr06:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults: cgmorr06
+		Offset: 0,-45
+		UseTilesetCode: false
+
+camorr07:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults: cgmorr07
+		Offset: 0,-45
+		UseTilesetCode: false
+
+camorr08:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults: cgmorr08
+		Offset: 0,-45
+		UseTilesetCode: false
+
+camorr09:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults: cgmorr09
+		Offset: 0,-45
+		UseTilesetCode: false
+
+camorr10:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults: cgmorr10
+		Offset: 0,-30
+		UseTilesetCode: false
+
+cala01:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-45
+		TilesetOverrides:
+			TEMPERATE: GENERIC
+			URBAN: GENERIC
+			DESERT: GENERIC
+			LUNAR: GENERIC
+			DUNE: GENERIC
+
+cala03:
+	Inherits: ^CivBuilding
+	Defaults:
+		Offset: -30,-30
+		TilesetOverrides:
+			SNOW: GENERIC
+			TEMPERATE: GENERIC
+			URBAN: GENERIC
+			DESERT: GENERIC
+			LUNAR: GENERIC
+			DUNE: GENERIC
+
+cala04:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-60
+		TilesetOverrides:
+			TEMPERATE: GENERIC
+			URBAN: GENERIC
+			DESERT: GENERIC
+			LUNAR: GENERIC
+			DUNE: GENERIC
+
+cala05:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-60
+		TilesetOverrides:
+			TEMPERATE: GENERIC
+			URBAN: GENERIC
+			DESERT: GENERIC
+			LUNAR: GENERIC
+			DUNE: GENERIC
+
+cala06:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 15,-37
+		TilesetOverrides:
+			TEMPERATE: GENERIC
+			URBAN: GENERIC
+			NEWURBAN: GENERIC
+			DESERT: GENERIC
+			LUNAR: GENERIC
+			DUNE: GENERIC
+
+cala07:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-45
+		TilesetOverrides:
+			TEMPERATE: GENERIC
+			URBAN: GENERIC
+			NEWURBAN: GENERIC
+			DESERT: GENERIC
+			LUNAR: GENERIC
+			DUNE: GENERIC
+
+cala08:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: -30,-37
+		TilesetOverrides:
+			TEMPERATE: GENERIC
+			URBAN: GENERIC
+			NEWURBAN: GENERIC
+			DESERT: GENERIC
+			LUNAR: GENERIC
+			DUNE: GENERIC
+
+cala09:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-45
+		UseTilesetCode: true
+		TilesetOverrides:
+			TEMPERATE: GENERIC
+			URBAN: GENERIC
+			DESERT: GENERIC
+			LUNAR: GENERIC
+			DUNE: GENERIC
+
+cala10:
+	Inherits: ^CivBuilding
+	Defaults:
+		Offset: 30,-30
+		TilesetOverrides:
+			TEMPERATE: GENERIC
+			URBAN: GENERIC
+			NEWURBAN: GENERIC
+			DESERT: GENERIC
+			LUNAR: GENERIC
+			DUNE: GENERIC
+	idle: cgla10_a
+		Length: 45
+		ShadowStart: 45
+		Ticks: 80
+
+cala11:
+	Inherits: ^CivBuilding
+	Defaults:
+		Offset: 15,-52
+		TilesetOverrides:
+			TEMPERATE: GENERIC
+			URBAN: GENERIC
+			DESERT: GENERIC
+			LUNAR: GENERIC
+			DUNE: GENERIC
+
+cala12:
+	Inherits: ^CivBuilding
+	Defaults:
+		Offset: 15,-52
+		TilesetOverrides:
+			TEMPERATE: GENERIC
+			URBAN: GENERIC
+			DESERT: GENERIC
+			LUNAR: GENERIC
+			DUNE: GENERIC
+
+cala13:
+	Inherits: ^CivBuilding
+	Defaults:
+		Offset: -30,-30
+		TilesetOverrides:
+			SNOW: GENERIC
+			TEMPERATE: GENERIC
+			URBAN: GENERIC
+			DESERT: GENERIC
+			LUNAR: GENERIC
+			DUNE: GENERIC
+
+cala14:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-45
+		TilesetOverrides:
+			TEMPERATE: NEWURBAN
+			URBAN: NEWURBAN
+			DESERT: NEWURBAN
+			LUNAR: NEWURBAN
+
+cala15:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-45
+		TilesetOverrides:
+			TEMPERATE: NEWURBAN
+			URBAN: NEWURBAN
+			DESERT: NEWURBAN
+			LUNAR: NEWURBAN
+
+caegyp01:
+	Inherits: ^CivBuilding
+	Defaults: cgegyp01
+		Offset: 0,-60
+		UseTilesetCode: false
+
+caegyp02:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults: cgegyp02
+		Offset: 0,-60
+		UseTilesetCode: false
+
+caegyp03:
+	Inherits: ^CivBuilding
+	Defaults: cgegyp03
+		Offset: -30,-45
+		UseTilesetCode: false
+
+caegyp04:
+	Inherits: ^CivBuilding
+	Defaults: cgegyp04
+		Offset: 0,-60
+		UseTilesetCode: false
+
+caegyp05:
+	Inherits: ^CivBuilding
+	Defaults: cgegyp05
+		Offset: 0,-60
+		UseTilesetCode: false
+
+caegyp06:
+	Inherits: ^CivBuilding
+	Defaults: cgegyp06
+		Offset: 0,-60
+		UseTilesetCode: false
+
+calond01:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults: cglond01
+		Offset: 15,-37
+		UseTilesetCode: false
+
+calond03:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults: cglond03
+		Offset: 15,-37
+		UseTilesetCode: false
+
+calond04:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults: cglond04
+		Offset: -30,-75
+		UseTilesetCode: false
+
+calond05:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults: cnlond05
+		Offset: 0,-15
+		UseTilesetCode: false
+
+calond06:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults: cglond06
+		Offset: 0,-60
+		UseTilesetCode: false
+	idle-flag: cglnd6_a
+		Length: 17
+		ShadowStart: 34
+	damaged-idle-flag: cglnd6_a
+		Length: 17
+		Start: 17
+		ShadowStart: 51
+
+casanf01:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults: cgsanf01
+		Offset: 15,-37
+		UseTilesetCode: false
+
+casanf02:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults: cgsanf02
+		Offset: 0,-45
+		UseTilesetCode: false
+
+casanf03:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults: cgsanf03
+		Offset: 15,-37
+		UseTilesetCode: false
+
+casanf04:
+	Inherits: ^CivBuildingNoRubble
+	Defaults: cgsanf04
+		Offset: 30,-60
+		UseTilesetCode: false
+
+casanf05:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: -30,-75
+		TilesetOverrides:
+			DESERT: TEMPERATE
+			LUNAR: TEMPERATE
+			DUNE: TEMPERATE
+
+casanf06:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults: cgsanf06
+		Offset: -15,-37
+		UseTilesetCode: false
+
+casanf07:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults: cgsanf07
+		Offset: -15,-37
+		UseTilesetCode: false
+
+casanf08:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults: cgsanf08
+		Offset: 0,-45
+		UseTilesetCode: false
+
+casanf09:
+	Inherits: ^CivBuildingNoRubble
+	Defaults: cgsanf09
+		Offset: 30,-60
+		UseTilesetCode: false
+
+casanf10:
+	Inherits: ^CivBuildingNoRubble
+	Defaults: cgsanf10
+		Offset: 30,-60
+		UseTilesetCode: false
+	damaged-idle:
+		Start: 2
+		ShadowStart: 5
+
+casanf11:
+	Inherits: ^CivBuildingNoRubble
+	Defaults: cgsanf11
+		Offset: 30,-60
+		UseTilesetCode: false
+
+casanf12:
+	Inherits: ^CivBuildingNoRubble
+	Defaults: cgsanf12
+		Offset: 30,-60
+		UseTilesetCode: false
+
+casanf13:
+	Inherits: ^CivBuildingNoRubble
+	Defaults: cgsanf13
+		Offset: 30,-60
+		UseTilesetCode: false
+
+casanf14:
+	Inherits: ^CivBuildingNoRubble
+	Defaults: cgsanf14
+		Offset: 30,-60
+		UseTilesetCode: false
+
+casanf15:
+	Inherits: ^CivBuilding
+	Defaults:
+		Offset: 0,-15
+		TilesetOverrides:
+			TEMPERATE: NEWURBAN
+			SNOW: NEWURBAN
+			URBAN: NEWURBAN
+			DESERT: NEWURBAN
+			LUNAR: NEWURBAN
+
+casanf16:
+	Inherits: ^CivBuilding
+	Defaults:
+		Offset: 0,-15
+		TilesetOverrides:
+			TEMPERATE: NEWURBAN
+			SNOW: NEWURBAN
+			URBAN: NEWURBAN
+			DESERT: NEWURBAN
+			LUNAR: NEWURBAN
+
+casanf17:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-45
+		TilesetOverrides:
+			TEMPERATE: NEWURBAN
+			URBAN: NEWURBAN
+			DESERT: NEWURBAN
+			LUNAR: NEWURBAN
+
+casanf18:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 45,-52
+		TilesetOverrides:
+			TEMPERATE: NEWURBAN
+			URBAN: NEWURBAN
+			DESERT: NEWURBAN
+			LUNAR: NEWURBAN
+
+casydn02:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-45
+		TilesetOverrides:
+			SNOW: NEWURBAN
+			URBAN: NEWURBAN
+			DESERT: NEWURBAN
+			LUNAR: NEWURBAN
+
+casydn03:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: -30,-75
+		TilesetOverrides:
+			SNOW: NEWURBAN
+			URBAN: NEWURBAN
+			DESERT: NEWURBAN
+			LUNAR: NEWURBAN
+
+calunr01:
+	Inherits: ^CivProp
+	Defaults: cllunr01
+		Offset: 0,-30
+		UseTilesetCode: false
+
+calunr02:
+	Inherits: ^CivProp
+	Defaults: cllunr02
+		UseTilesetCode: false
+
+caseat01:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-30
+		TilesetOverrides:
+			SNOW: NEWURBAN
+			DESERT: NEWURBAN
+			LUNAR: NEWURBAN
+
+caseat02:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-60
+		TilesetOverrides:
+			SNOW: NEWURBAN
+			URBAN: NEWURBAN
+			DESERT: NEWURBAN
+			LUNAR: NEWURBAN
+	idle-globe: cnseat02_a
+		Length: 20
+		ShadowStart: 40
+	damaged-idle-globe: cnseat02_a
+		Start: 20
+		Length: 20
+		ShadowStart: 60
+
+catran01:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-30
+		TilesetOverrides:
+			URBAN: TEMPERATE
+			DESERT: TEMPERATE
+			LUNAR: TEMPERATE
+
+catran02:
+	Inherits: ^CivBuilding
+	Inherits@GARRISON: ^GarrisonableBuilding
+	Defaults:
+		Offset: 0,-30
+		TilesetOverrides:
+			URBAN: TEMPERATE
+			DESERT: TEMPERATE
+			LUNAR: TEMPERATE
+
+catran03:
+	Inherits: ^CivBuilding
+	Defaults:
+		Offset: 0,-60
+		TilesetOverrides:
+			URBAN: TEMPERATE
+			DESERT: TEMPERATE
+			LUNAR: TEMPERATE
+
+catime01:
+	Inherits: ^CivBuildingNoRubble
+	Defaults: cgtime01
+		Offset: -15,-52
+		UseTilesetCode: false
+
+catime02:
+	Inherits: ^CivBuildingNoRubble
+	Defaults: cgtime02
+		Offset: -15,-52
+		UseTilesetCode: false
+
+caeast01:
+	Inherits: ^CivBuilding
+	Defaults:
+		Offset: 0,-30

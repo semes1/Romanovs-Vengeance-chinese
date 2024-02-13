@@ -1,0 +1,102 @@
+asw:
+	icon: cameo|xxicon
+
+beag:
+	icon: cameo|beagicon
+
+cargoplane:
+	icon: cameo|xxicon
+
+falc:
+	icon: cameo|falcicon
+
+hornet:
+	icon: cameo|xxicon
+
+pdplane:
+	icon: cameo|xxicon
+
+shad:
+	Inherits@MUZZLE: ^WithMachineGunMuzzle
+	shadow: bits/vehicles/aircraftshadows/shadshadow
+		Facings: 32
+	icon: cameo|shadicon
+
+zep:
+	shadow: bits/vehicles/aircraftshadows/zepshadow
+		Facings: 32
+	icon: cameo|zepicon
+
+# Yuri's Revenge Aircraft
+spyp:
+	icon: cameomd|spypicon
+
+schp:
+	Inherits@MUZZLE: ^WithCannonMuzzle
+	dot: bits/dot
+		ZOffset: -9999
+	deploy: conqmd|schpdepl
+		Length: 11
+		ShadowStart: 11
+		Tick: 136
+	shadow: bits/vehicles/aircraftshadows/schpshadow
+		Facings: 32
+	icon: cameomd|schpicon
+
+bpln:
+	icon: cameomd|bplnicon
+
+disk:
+	muzzle: conqmd|diskray
+		Length: 4
+		Tick: 100
+	icon: bits/cameos/diskicon
+
+# Custom Aircraft
+hind:
+	shadow: bits/vehicles/aircraftshadows/hindshadow
+		Facings: 32
+		Scale: 1.15
+	icon: bits/cameos/hindicon
+
+alplane:
+	icon: cameo|xxicon
+
+civplane:
+	icon: cameo|xxicon
+
+pcplane:
+	icon: cameo|xxicon
+
+fortress:
+	icon: bits/cameos/sprticon
+
+sdrn:
+	icon: bits/cameos/sdrnicon
+
+a10:
+	icon: cameo|a101icon
+
+txdx:
+	icon: bits/cameos/txdxicon
+
+txbmb:
+	icon: cameo|xxicon
+
+kite:
+	shadow: bits/vehicles/aircraftshadows/kiteshadow
+		Facings: 32
+	icon: bits/cameos/kiteicon
+
+magnedisk:
+	icon: bits/cameos/mdskicon.png
+		AddExtension: false
+
+havoc:
+	shadow: bits/vehicles/aircraftshadows/havocshadow
+		Facings: 32
+	icon: bits/cameos/havocicon.png
+		AddExtension: false
+
+b52:
+	icon: cameo|xxicon
